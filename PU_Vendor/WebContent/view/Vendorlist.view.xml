@@ -1,0 +1,80 @@
+<mvc:View
+	controllerName="z_vr.controller.Vendorlist"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:semantic="sap.m.semantic">
+
+	<semantic:FullscreenPage
+		id="page"
+		navButtonPress="onNavBack"
+		title="{i18n>Vendor}">
+		<fb:FilterBar  id="filterBar" reset="onReset" search="onSearch" clear="onClear" showRestoreButton="true" showClearButton="true">
+			<fb:filterItems>
+				<fb:FilterItem name="A0" label="ID">
+					<fb:control>
+						<Input type="Text" change="onChange"/>
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="B0" label="Name">
+					<fb:control>
+						<Input type="Text" change="onChange"/>
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="C0" label="Type">
+					<fb:control>
+						<ComboBox type="Text">
+						     <items>
+						        <core:Item key="001" text="Regular Vendor"/>
+						        <core:Item key="002" text="Freelancer"/>
+						     </items>
+						</ComboBox>
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="D0" label="Country">
+					<fb:control>
+						<Input type="Text" change="onChange"/>
+					</fb:control>				
+				</fb:FilterItem>
+				
+			</fb:filterItems>
+		</fb:FilterBar>
+		<Table id="idProductsTable"
+			inset="false"
+			items="{/zvendr_LFA1Set}">
+			<headerToolbar>
+				<Toolbar>
+					<content>
+						<Title text="Vendors" level="H2"/>
+						<ToolbarSpacer />
+					</content>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column	width="12em"><Text text="ID" />	</Column>
+				<Column	minScreenWidth="Tablet" demandPopin="true"><Text text="Type" /></Column>
+				<Column	minScreenWidth="Tablet"	demandPopin="true"><Text text="Name" /></Column>
+				<Column	minScreenWidth="Tablet" demandPopin="true"><Text text="Country"/></Column>
+				<Column	minScreenWidth="Tablet" demandPopin="true"><Text text="Contact Number" /></Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Navigation" press="onPress">
+					<cells>
+						<Text text="{Lifnr}" />
+						<Text text="{Anred}" />
+						<Text text="{Name1}" />
+						<Text text="{Land1}" />
+						<Text text="{Telf1}" />
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<semantic:addAction>
+			<semantic:AddAction press="onAddButtonPress"/>
+		</semantic:addAction>
+	</semantic:FullscreenPage>
+</mvc:View>

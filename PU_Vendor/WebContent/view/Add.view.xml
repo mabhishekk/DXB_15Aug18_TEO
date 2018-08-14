@@ -1,0 +1,71 @@
+<mvc:View
+	controllerName="z_vr.controller.Add"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<semantic:FullscreenPage
+		id="page"
+		title="{i18n>addPageTitle}"
+		showNavButton="true"
+		navButtonPress="onNavBack">
+		<semantic:content>
+				<f:SimpleForm id="SimpleFormChangeColumn_threeGroups234"
+					editable="true"
+					layout="ResponsiveGridLayout"
+					labelSpanXL="3"
+					labelSpanL="3"
+					labelSpanM="3"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="0"
+					emptySpanL="0"
+					emptySpanM="0"
+					emptySpanS="0"
+					columnsXL="3"
+					columnsL="3"
+					columnsM="3"
+					singleContainerFullSize="false" 
+					>
+					<f:content>
+						<core:Title text="Name" />
+						<Label text="Title" />
+						<Select id="title" selectedKey="0001" width='7rem'>
+							<items>
+								<core:Item text="Mr." key="0001"/>
+								<core:Item text="Mrs." key="0002"/>
+								<core:Item text="Company" key="0003"/>
+							</items>
+						</Select>
+						<Label text="First Name" />
+						<Input value=""/>
+						<Label text="Last Name" />
+						<Input value=""/>
+						<core:Title text="Address" />
+						<Label text="Twitter" />
+						<Input value="Twitter" />
+						<Label text="Email" />
+						<Input value="Email" type="Email"/>
+						<Label text="Tel." />
+						<Input value="Tel" type="Tel"/>
+						<core:Title text="Other" />
+						<Label text="SMS" />
+						<Input value="Sms" type="Tel"/>
+						<Label text="Mobile" />
+						<Input value="Mobile" type="Tel"/>
+						<Label text="Pager" />
+						<Input value="Pager" type="Tel"/>
+						<Label text="Fax" />
+						<Input value="Fax" type="Tel"/>
+					</f:content>
+				</f:SimpleForm>
+		</semantic:content>
+		<semantic:saveAction>
+			<semantic:SaveAction id="save" press="onSave"/>
+		</semantic:saveAction>
+		<semantic:cancelAction>
+			<semantic:CancelAction id="cancel" press="onCancel"/>
+		</semantic:cancelAction>
+	</semantic:FullscreenPage>
+</mvc:View>
