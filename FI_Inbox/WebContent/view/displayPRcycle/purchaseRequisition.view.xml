@@ -1,0 +1,35 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	controllerName="z_inbox.controller.displayPRcycle.purchaseRequisition">
+	<Page title="{i18n>Title} - {lModel>/mainSet/Banfn}"
+		navButtonPress="onNavBack" 
+		showNavButton="{device>/isPhone}"
+		applyContentPadding="false">
+		<content>
+			<IconTabBar id="id_iconTB" select="handlePRIconTabBar" selectedKey='PR'	class="">
+				<items>
+					<IconTabFilter icon="sap-icon://request" iconColor="Positive"
+						design="Vertical" key="PR" visible="{lModel>/PR}" expanded="false"
+						text="{i18n>PurReq}">
+						<core:Fragment fragmentName="z_inbox.view.fragments.PRCreateEdit" type="XML" />
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://order-status"
+						iconColor="Negative" design="Vertical" key="QC" visible="{lModel>/QC}"	text="{i18n>QuotComp}" />
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<Button  press="onPRBackPress" id="arrLeft" visible="false" text="{i18n>Back}" type="Reject"/>
+				<ToolbarSpacer visible="{device>/isNoPhone}" />
+				<ToolbarSpacer visible="{device>/isNoPhone}" />
+				<Button id="prPrint" icon="sap-icon://print" text="{i18n>Print}" press="onPrintPR" />
+				<Button  press="onPRNextPress"  id="arrRght"  text="{i18n>Next}"  type="Reject" />
+
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

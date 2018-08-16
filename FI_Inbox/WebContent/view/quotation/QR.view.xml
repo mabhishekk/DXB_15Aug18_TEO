@@ -1,0 +1,235 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form" 
+	xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core" 
+	controllerName="z_inbox.controller.quotation.QR">
+	<Page 
+		title="{i18n>QuotReq} - {/Banfn}" 
+		navButtonPress="onNavBack"
+		showNavButton="{device>/isPhone}" 
+		applyContentPadding="false">
+		<content>
+			<!-- <IconTabBar id="id_iconTB" select="handleIconTabBarSelect" class="">
+				<items>
+					<IconTabFilter icon="sap-icon://request" iconColor="Positive"
+						design="Vertical" key="QR" expanded="false" text="{i18n>QuotReq}">
+						<content> -->
+							<f:SimpleForm id="QR_Information" editable="false"
+								layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+								labelSpanM="4" labelSpanS="12" adjustLabelSpan="false"
+								emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+								columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+								<f:content>
+									<core:Title />
+									<Label text='{i18n>Title}'/>
+									<Link  text='{/PreqNo}' press='onPRnumber'/>
+									<Label text="{i18n>QuotationDate}"/>
+									<Text text="{path: '/DocDate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'short'}}" />
+									<core:Title />
+									<Label text='{i18n>VendorName}'/>
+									<Text  text='{/Vendorname}'/>
+									<Label text="{i18n>QuotationDeadline}" />
+									<Text  text="{path: '/QuotDead',type: 'sap.ui.model.type.Date',formatOptions: {style: 'short'}}" />
+								</f:content>
+							</f:SimpleForm>
+
+							<Table class="cl_vendorComparisionTbl" id="qr_items"
+								items="{/qrnavig/results}" showSeparators="true"
+								enableCellFilter="true">
+								<headerToolbar>
+									<OverflowToolbar>
+										<Title text="{i18n>Item}" level="H2" />
+										<ToolbarSpacer />
+										<!-- <Button icon="sap-icon://undo" text="{i18n>Reset}"
+											press="onItemsReset"></Button> -->
+
+									</OverflowToolbar>
+								</headerToolbar>
+								<columns>
+									<Column>
+										<header><Text text="{i18n>Description}" /></header>
+									</Column>
+									<Column width="80px" minScreenWidth="Tablet"	demandPopin="true" >
+										<header><Text text="{i18n>Quantity}" /></header>
+									</Column>
+									<Column width="80px" minScreenWidth="Tablet"	demandPopin="true" >
+										<header><Text text="{i18n>Value}" /></header>
+									</Column>
+									<Column width="80px" minScreenWidth="Tablet"	demandPopin="true" >
+										<header><Text text="{i18n>Disvalue}" /></header>
+									</Column>
+									<Column width="80px" minScreenWidth="Tablet"	demandPopin="true" >
+										<header><Text text="{i18n>DiscountValue}" /></header>
+									</Column>
+									<Column width="80px" minScreenWidth="Tablet"	demandPopin="true" >
+										<header><Text text="{i18n>SubTotal}" /></header>
+									</Column>
+									<Column width="80px" minScreenWidth="Tablet"	demandPopin="true" >
+										<header><Text text="{i18n>Vval}" /></header>
+									</Column>
+									<Column width="80px" minScreenWidth="Tablet"	demandPopin="true" >
+										<header><Text text="{i18n>NetPrice}" /></header>
+									</Column>
+									<!-- <Column>
+										<header><Text text="{i18n>StartDate}" /></header>
+									</Column>
+									<Column>
+										<header><Text text="{i18n>EndDate}" /></header>
+									</Column>
+									<Column>
+										<header><Text text="{i18n>Dedate}" /></header>
+									</Column> -->
+								</columns>
+								<items>
+									<ColumnListItem vAlign="Middle">
+										<cells>
+
+											<Text text="{ShortText}" />
+											<Text text="{TargetQty}-{Unit}" />
+											<!-- <ComboBox xmlns="sap.m" items="{/unitsSet}" selectedKey="{Unit}"> 
+												<items> <Item xmlns="sap.ui.core" text="{Msehl}" key="{Msehi}" /> </items> 
+												</ComboBox> -->
+											<!-- <Select id="matrnUnit" selectedKey="EA" items="{/unitsSet}"> 
+												<core:ListItem text="{Msehl}" key="{Msehi}"> </core:ListItem> </Select> -->
+											<Text text="{NetPrice}" />
+											<Text text="{Discountval} %" />
+											<Text text="{ parts : ['NetPrice', 'Discountval'], formatter: '.formatter.discountValue' }" />
+											<Text text="{Subtotal}" />
+											<Text text="{Valvalue} %" />
+											<Text text="{Finaltotal}" />
+											<!-- <Text text="{path: 'Begda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'short'}}" />
+											<Text text="{path: 'Endda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'short'}}" />
+											<Text text="{path: 'DelivDate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'short'}}" /> -->
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+							<!-- <VBox> <HBox> -->
+							<Panel headerText="{i18n>RsnForRecom}" class="sapUiLargeMarginTop">
+								<CheckBox id="RB1-1" text="{i18n>Delivery}" editable='false'
+									selected="{/navigprtoqrfinal/results/0/Delivery}" />
+								<CheckBox id="RB1-2" text="{i18n>Quality}" editable='false'
+									selected="{/navigprtoqrfinal/results/0/Quality}" />
+								<CheckBox id="RB1-3" text="{i18n>Price}" editable='false'
+									selected="{/navigprtoqrfinal/results/0/Price}" />
+								<CheckBox id="RB1-4" text="{i18n>Experience}" editable='false'
+									selected="{/navigprtoqrfinal/results/0/Experience}" />
+								<CheckBox id="RB1-6" text="{i18n>TechnicalFeedback}" editable='false'
+									selected="{/navigprtoqrfinal/results/0/Techfd}" />
+								<CheckBox id="RB1-5" text="{i18n>Others}" editable='false'
+									selected="{/navigprtoqrfinal/results/0/Othersbol}" />
+
+								<HBox>
+									<Label text="{i18n>ReasonforOthers} :" labelFor="qc_Others" />
+
+									<Text id="qc_Others" text=" {/navigprtoqrfinal/results/0/Others}"></Text>
+								</HBox>
+							</Panel>
+							<!-- </VBox> -->
+							<Panel expandable="true" headerText="{i18n>splAppr}">
+								<Table items="{/navigtoqrsplapproval/results}">
+									<columns>
+										<Column width="30px" vAlign="Center">
+											<header>
+												<!-- <Text text="{i18n>TypeofApproval}" /> -->
+											</header>
+										</Column>
+
+
+										<Column vAlign="Middle">
+											<header>
+												<Text text="{i18n>TypeofApproval}" />
+											</header>
+										</Column>
+										<Column vAlign="Middle">
+											<header>
+												<Text text="{i18n>Reason}" />
+											</header>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem xmlns="sap.m">
+
+											<cells>
+												<CheckBox xmlns="sap.m" selected="{Boolean}" editable='false'/>
+												<Text text="{Description}" />
+
+												<Text placeholder="{i18n>Reason}" text="{Reason}"
+													maxLength="100" />
+											</cells>
+										</ColumnListItem>
+
+									</items>
+								</Table>
+
+
+							</Panel>
+
+						<Table xmlns="sap.m" id="id_docMnts" items="{/navigqrtodocuments}"
+				mode="Delete" delete="onFileDelete">
+				<!-- <headerToolbar>
+				<OverflowToolbar xmlns="sap.m">
+						<ToolbarSpacer />
+
+						<u:FileUploader name="myFileUpload"  style="Emphasized" id="matrnFile" 	
+							uploadComplete="handleUploadComplete" />
+						<Button xmlns="sap.m" icon="sap-icon://upload" press="onFileUpload" />
+						<Button xmlns="sap.m" icon="sap-icon://minus" press="onFileDelete" />
+						<Title text="{i18n>Item}" level="H2" />
+					</OverflowToolbar>
+				</headerToolbar> -->
+				<columns> <!-- sap.m.Column -->
+					<Column xmlns="sap.m">
+						<Text text="{i18n>FileName}" />
+					</Column>
+					<Column xmlns="sap.m">
+						<Text text="{i18n>FileType}" />
+					</Column>
+				</columns>
+				<ColumnListItem xmlns="sap.m" type="Active" press="onOpenFile">
+
+					<cells>
+						<Text xmlns="sap.m" text="{Docfile}" />
+						<Text xmlns="sap.m" text="{Mimetype}" />
+
+					</cells>
+				</ColumnListItem>
+			</Table>
+						<!-- </content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>-->
+		</content>
+		<footer>
+			<OverflowToolbar>
+
+				<!-- <Button id="prSave" icon="sap-icon://save" text="{i18n>Save}" type="Accept" 
+					press="onSavePr" /> -->
+				<Button id="prEdit" icon="sap-icon://edit" text="{i18n>Edit}" press="onEditQR" />
+				<!-- <Button id="prSaveSubmit" icon="sap-icon://hr-approval" type="Reject" 
+					text="{i18n>sendapprovl}" press="onSavePrWorkFlow" /> -->
+				<ToolbarSpacer visible="{device>/isNoPhone}" />
+				<Button text="{i18n>Approve}" icon="sap-icon://paid-leave" type="Accept" press="handleApprove" />
+				<Button text="{i18n>Reject}" icon="sap-icon://unpaid-leave" type="Reject" press="handleReject" />
+				<!-- *************Below 2 lines are commented on 4-Jan-2018******************* -->
+				<!-- <Button id="prApprove" icon="sap-icon://accept" text="{i18n>approve}" 
+					press="onPRApprove" /> <Button id="prReject" icon="sap-icon://decline" text="{i18n>reject}" 
+					press="onPRReject" /> -->
+				<!-- <Button id="prCancel" icon="sap-icon://sys-cancel" text="{i18n>Cancel}" 
+					press="onPRDetailCancel" /> -->
+				<ToolbarSpacer visible="{device>/isNoPhone}" />
+				<Button id="prPrint" icon="sap-icon://print" text="{i18n>Print}"
+					press="onPrintQR" />
+				<!-- <Button press="onPRNextPress" icon="sap-icon://arrow-right" visible="{device>/isNoPhone}" 
+					/> -->
+			</OverflowToolbar>
+		</footer>
+
+
+
+
+	</Page>
+
+</View>

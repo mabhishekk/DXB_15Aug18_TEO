@@ -1,0 +1,152 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	xmlns:semantic="sap.m.semantic"
+	controllerName="z_inbox.controller.rewardsApprn.RewardsApprnEdit">
+	<Page
+		id="page"
+		title="{i18n>RAEditDetailPageTitle} {Postingnumber}"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/isPhone}">
+		<content>
+			<f:SimpleForm id="idERewards_form1"
+				editable="true"
+				layout="ResponsiveGridLayout"
+				labelSpanXL="3"	labelSpanL="3"  labelSpanM="5"  labelSpanS="12"
+				emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+				columnsXL="2"	columnsL="2"	columnsM="2"
+				adjustLabelSpan="false" class="noTitle"
+				singleContainerFullSize="false" >
+				<f:content>
+					<core:Title text="" />
+					<Label text="{i18n>RADeptProj}"/>
+					<Select showSecondaryValues="true"  id="idERA_dept" selectedKey="{lModel>/Kostl}"/>
+					<Label text="{i18n>RABeneficiary}"/>
+					<Select id="idERA_benificiaryName" items="{/vendorSet}" selectedKey='{lModel>/Beneficiary}'  showSecondaryValues="true">
+						<core:ListItem text="{Fullname}" key="{Partner}" additionalText = "{Partner}"/>
+					</Select>
+					<core:Title text="" />
+					<Label text="{i18n>PCDate}"/>
+					<DatePicker id="idERA_date" width="9rem" dateValue="{lModel>/Documentdate}" change='onDateChange'/>
+					<Label text="{i18n>RAValue}"/>
+					<Text  id="idEditECtotalAmt" text="{lModel>/Hnetamount} {lModel>/Currency}"/>
+				</f:content>
+			</f:SimpleForm>
+			<ScrollContainer horizontal="true">
+				<Table items="{/navtoitem_rewards/results}" id="id_EditECexpTbl">
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="{i18n>RATableTitle}" level="H2" />
+							<ToolbarSpacer />
+							<Button icon="sap-icon://add"    text="{i18n>Add}"  type="Reject"   press="handleECaddButtonPressed" />
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="12rem">
+							<header><Text text="{i18n>ECExpType}"/></header>
+						</Column>
+						<Column width='12rem' minScreenWidth="Tablet"	demandPopin="true" >
+							<header><Text text="{i18n>ECDescription}"/></header>
+						</Column>
+						<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true">
+							<header><Text text="{i18n>ECInvRefNo}"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true">
+							<header><Text text="{i18n>ECAmtinFC}"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true">
+							<header><Text text="{i18n>ECExchRate}"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true">
+							<header><Text text="{i18n>VAT}"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true">
+							<header><Text text="{i18n>ECAmtAED}"/></header>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem type="Active"	press="onSelection">
+							<cells>
+								<ObjectIdentifier title="{Glaccount}" text="{Ltext}" />	
+								<Text text="{Positiontext}"/>
+								<Text text="{Matnr}"/>
+								<Text text="{Fgnamount} {Currency}"/>
+								<Text text="{Exrate}"/>
+								<Text text="{Taxvalue} %"/>
+								<Text text="{Ppayments} AED"/>
+							</cells> 
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+			<!-- <Panel expandable="true" expanded="true" headerText="{i18n>Reason}" width="auto" class="sapUiResponsiveMargin"> -->
+				<f:SimpleForm id="idERewards_form3"
+					editable="true"
+					layout="ResponsiveGridLayout"
+					labelSpanXL="4"	labelSpanL="4" labelSpanM="4" labelSpanS="12"
+					emptySpanXL="1"	emptySpanL="1" emptySpanM="1" emptySpanS="0"
+					columnsXL="1"	columnsL="1"   columnsM="1"
+					adjustLabelSpan="false"
+					singleContainerFullSize="false" >
+					<f:content>
+						<Label text="{i18n>RAPurposeReward}"/>
+						<TextArea id="idERA_purpose" value="{lModel>/Char3}" placeholder='{i18n>PCJusPlaceholder}' liveChange="handleLiveInput" maxLength='1000'/>
+						<Label text="{i18n>RAExemptionReason}"/>
+						<TextArea id="idERA_reason" value="{lModel>/Reason}" placeholder='{i18n>PCJusPlaceholder}' liveChange="handleLiveInput" maxLength='1000'/>
+					</f:content>
+				</f:SimpleForm>
+			<!-- </Panel> -->
+			
+			<Table 
+				id="idEditPettyCashDoc" 
+				items="{/navigrewardstodocuments}"
+				mode="Delete" 
+				delete="onFileDelete">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>Attachment}"/>
+						<ToolbarSpacer />
+						<u:FileUploader 
+							name="myFileUpload" 
+							style="Emphasized"
+							id="matrnFile" 
+							tooltip="Upload your file to the local server" 	
+							typeMissmatch="handleTypeMissmatch"
+							uploadComplete="handleUploadComplete" />
+						<Button icon="sap-icon://upload" press="onFileUpload" />
+					</OverflowToolbar>
+				</headerToolbar>
+				<infoToolbar class='infoToolBarColor'>
+					<OverflowToolbar>
+						<Label text="{i18n>AttachSupplierReceipts}" />
+						<ToolbarSpacer visible="{device>/isNoPhone}"/>
+						<Label text='{i18n>SelectFileUpload}'/>
+					</OverflowToolbar>
+				</infoToolbar>
+				<columns> <!-- sap.m.Column -->
+					<Column><Text text="File Name" /></Column>
+					<Column><Text text="File Type" /></Column>
+				</columns>
+				<ColumnListItem type="Active">
+					<cells>
+						<Text text="{Docfile}" />
+						<Text text="{Mimetype}" />
+					</cells>
+				</ColumnListItem>
+			</Table>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+					<Button text="{i18n>RASave}" icon="sap-icon://save" type="Accept" press="handleERewardsSaveAndSubmit" />
+					<Button text="{i18n>RACancel}" icon="sap-icon://sys-cancel" press="handleERewardsCancel" />
+					<!-- <Button text="{i18n>SaveSubmit}" icon="sap-icon://hr-approval" type="Reject" press="handleERewardsSaveAndSubmit" /> -->
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

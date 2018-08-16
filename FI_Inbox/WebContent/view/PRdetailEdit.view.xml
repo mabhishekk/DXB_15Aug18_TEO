@@ -1,0 +1,84 @@
+<!-- User EDIT after Save  -->
+
+<View
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	controllerName="z_inbox.controller.PRdetailEdit">
+	<Page
+		title="{i18n>Title} - {lModel>/mainSet/Banfn}"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/isPhone}" applyContentPadding="false">
+		<content>
+			<core:Fragment  fragmentName="z_inbox.view.fragments.PRCreateEdit" type="XML"/>
+			<!-- <IconTabBar id="id_iconTB"
+				select="handleIconTabBarSelect"
+				class="">
+				<items>
+					<IconTabFilter
+						icon="sap-icon://request"
+						iconColor="Positive"
+						design="Vertical"
+						key="PR_IT_01"
+						expanded="false"
+						text="{i18n>PurReq}">
+						<content>
+							<core:Fragment  fragmentName="z_inbox.view.fragments.PRCreateEdit" type="XML"/>
+						</content>
+					</IconTabFilter>
+					
+					
+					<IconTabFilter
+						icon="sap-icon://survey"
+						iconColor="Positive"
+						design="Vertical"
+						key="PR_feedBck"
+						expanded="false"
+						text="{i18n>FeedBck}">
+						<content>
+							
+						</content>
+					</IconTabFilter>
+					
+				
+				</items>
+			</IconTabBar> -->
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<!-- <Button  text="{i18n>Back}" press="onPRBackPress"  />
+				<ToolbarSpacer/>
+				<Button   text="{i18n>Save}" press="onSavePr"/>
+				<Button id="prEdit" text="{i18n>Edit}" press="onEditPr"/>
+				<Button  text="{i18n>sendapprovl}" />				
+				<Button  text="{i18n>Cancel}" press="onPRDetailCancel"/>
+				<ToolbarSpacer/>
+				<Button  text="{i18n>Next}" press="onPRNextPress"/> -->
+				
+				
+				<!-- <Button icon="sap-icon://arrow-left" press="onPRBackPress"  visible="{device>/isNoPhone}" /> -->
+					
+				<Button id="prSave" icon="sap-icon://save" text="{i18n>Save}" type="Accept"  press="onSavePr" />				
+				<Button id="prEdit" icon="sap-icon://edit" text="{i18n>Edit}" press="onEditPr" />
+				<!-- <Button id="prSaveSubmit" icon="sap-icon://hr-approval" type="Reject" text="{i18n>sendapprovl}" press="onSavePrWorkFlow" /> -->
+				
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>	
+				<Button text="{i18n>Approve}" icon="sap-icon://paid-leave"  type="Accept"   press="handleApprove" />
+				<Button text="{i18n>Reject}"  icon="sap-icon://unpaid-leave" type="Reject"  press="handleReject" />
+				<!-- *************Below 2 lines are commented on 4-Jan-2018******************* -->	
+				<!-- <Button id="prApprove" icon="sap-icon://accept" text="{i18n>approve}" press="onPRApprove" />
+				<Button id="prReject" icon="sap-icon://decline" text="{i18n>reject}" press="onPRReject" /> -->
+				<!-- <Button id="prCancel" icon="sap-icon://sys-cancel" text="{i18n>Cancel}" press="onPRDetailCancel" /> -->
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<Button id="prPrint" icon="sap-icon://print" text="{i18n>Print}" press="onPrintPR" />
+				<!-- <Button  press="onPRNextPress" icon="sap-icon://arrow-right" visible="{device>/isNoPhone}" /> -->
+			
+			
+				
+				
+				
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

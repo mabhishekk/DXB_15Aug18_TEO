@@ -1,0 +1,32 @@
+<core:View 
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" 
+	displayBlock="true" 
+	controllerName="z_inbox.controller.displayPRcycle.purchaseOrder"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page 
+		title="{i18n>PurchaseOrderNo} : {lModel>/mainSet/PoNumber}"
+		showNavButton="{device>/isPhone}" 
+		navButtonPress="onNavButtonPress"
+		applyContentPadding="false">
+		<content>
+			<IconTabBar id="id_iconTB" select="handleIconTabBarSelect" 	class="">
+				<items>
+					<IconTabFilter icon="sap-icon://order-status" iconColor="Negative" design="Vertical" expanded="true" key="PO" text="{i18n>PurOrd}" >
+						<content>
+							<core:Fragment fragmentName="z_inbox.view.fragments.poEdit" type="XML" />
+						</content>
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://shipping-status" iconColor="Negative" design="Vertical" key="GR" text="{i18n>Gdsrcp}" visible="{lModel>/GR}"/>
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button id = "idPrintBtn"  text="{i18n>Print}"    visible = "{= ${lModel>/POEdit}? false : true }"  press= "onPDFSavePress"  icon= "sap-icon://print"  />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

@@ -1,0 +1,326 @@
+{
+	
+	"sap.app": {
+		"id": "z_inbox",
+		"type": "application",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/ZPR_APPL_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+					}
+				},
+			"fiService": {
+                "uri": "/sap/opu/odata/sap/ZPETTYCASH_SRV/",
+                "type": "OData",
+                "settings": {
+	                "odataVersion": "2.0"
+	                }
+                },
+             "poService": {
+             	"uri": "/sap/opu/odata/sap/ZPO_APPLC_SRV/",
+                "type": "OData",
+                "settings": {
+	                "odataVersion": "2.0"
+	                }
+             }   
+		}
+		
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+		
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "z_inbox.view.app",
+			"type": "XML"
+		},
+		"dependencies": {
+			
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {},
+				"sap.ui.unified": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "z_inbox.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true
+			},
+			"fiService": {
+				"dataSource": "fiService",
+				"preload": true
+			},
+			"poService": {
+				"dataSource": "poService",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "z_inbox.view",
+				"controlId": "rootControl",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": [
+						"home",
+						"notFound"
+					]
+				}
+			},
+			"routes": [	{
+						"name": "master",
+						"pattern": "",
+						"target": ["master"]
+					},
+					{
+						"name": "welcome",
+						"pattern": "welcome",
+						"target": ["master", "welcome"]
+					},
+					{
+						"name": "workFlow",
+						"pattern": "workflow-{wfId}/origin-{origin}",
+						"target": ["master", "workIdDetails"]
+					},
+					{
+						"name": "PurchaseReq",
+						"pattern": "PurchaseRequestion-{id}/{instId}",
+						"target": ["master", "PRdetailEdit"]
+					},
+					{
+						"name"   : "Pettycash",
+						"pattern": "PettyCash-{id}/{instId}",
+						"target" : ["master", "PettyCash"]
+					},
+					{
+						"name"   : "pettyCashDetailsEdit",
+						"pattern": "PettyCash-{id}/{instId}/Edit",
+						"target" : ["master", "PettyCashEdit"]
+					},
+					{
+						"name"   : "ExpenseClaim",
+						"pattern": "ExpenseClaim-{id}/{instId}",
+						"target" : ["master", "ExpenseClaim"]
+					},
+					{
+						"name"   : "ExpenseClaimEdit",
+						"pattern": "ExpenseClaim-{id}/{instId}/Edit",
+						"target" : ["master", "ExpenseClaimEdit"]
+					},
+					{
+						"name"   : "CreditCard",
+						"pattern": "CreditCard-{id}/{instId}",
+						"target" : ["master", "CreditCard"]
+					},
+					{
+						"name"   : "CreditCardEdit",
+						"pattern": "CreditCard-{id}/{instId}/Edit",
+						"target" : ["master", "CreditCardEdit"]
+					},
+					{
+						"name"   : "RewardsApprn",
+						"pattern": "RewardsApprn-{id}/{instId}",
+						"target" : ["master", "RewardsApprn"]
+					},
+					{
+						"name"   : "RewardsApprnEdit",
+						"pattern": "RewardsApprn-{id}/{instId}/Edit",
+						"target" : ["master", "RewardsApprnEdit"]
+					},
+					{
+						"name"   : "QR",
+						"pattern": "QC-{id}/{instId}",
+						"target" : ["master", "QR"]
+					},
+					{
+						"name"   : "QRedit",
+						"pattern": "QC-{id}/{instId}/Edit",
+						"target" : ["master", "QRedit"]
+					},
+					{
+						"name"   : "Invoice",
+						"pattern": "Invoice-{id}/{instId}",
+						"target" : ["master", "Invoice"]
+					},
+					{
+						"name"   : "InvoiceEdit",
+						"pattern": "Invoice-{id}/Edit/{instId}/{witem}",
+						"target" : ["master", "InvoiceEdit"]
+					},
+					{
+						"name"   : "PRdisplay",
+						"pattern": "PR-{id}/{instId}",
+						"target" : ["master", "PRdisplay"]
+					},
+					{
+						"name"   : "QRdisplay",
+						"pattern": "QR-{id}/{instId}",
+						"target" : ["master", "QRdisplay"]
+					},
+					{
+						"name"   : "POdisplay",
+						"pattern": "PO-{id}/{instId}",
+						"target" : ["master", "POdisplay"]
+					},
+					{
+						"name"   : "GRdisplay",
+						"pattern": "GR-{id}/{instId}",
+						"target" : ["master", "GRdisplay"]
+					}
+					],
+			"targets": {
+					"QR":{
+						"viewName"          : "quotation.QR",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 2					
+					},
+					"QRedit":{
+						"viewName"          : "quotation.QRedit",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 3					
+					},			
+					"master": {
+						"viewName"          : "Master",
+						"controlAggregation": "masterPages",
+						"viewLevel"         : 0
+					},
+					"workIdDetails": {
+						"viewName"          : "Detail1",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 1
+					},
+					"welcome": {
+						"viewName"          : "welcome",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 1
+					},
+					"PRdetailEdit":{
+						"viewName"          : "PRdetailEdit",
+						"controlAggregation": "detailPages"
+					
+					},
+					"PettyCash":{
+						"viewName"          : "pettyCash.pettyCashDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 2
+					},
+					"PettyCashEdit":{
+						"viewName"          : "pettyCash.pettyCashEdit",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 3
+					},
+					"ExpenseClaim":{
+						"viewName"          : "expenseClaim.expenseClaimDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 2
+					},
+					"ExpenseClaimEdit":{
+						"viewName"          : "expenseClaim.expenseClaimEdit",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 3
+					},
+					"CreditCard":{
+						"viewName"          : "creditCard.creditCardDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 2
+					},
+					"CreditCardEdit":{
+						"viewName"          : "creditCard.creditCardEdit",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 3
+					},
+					"RewardsApprn":{
+						"viewName"          : "rewardsApprn.RewardsApprnDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 2
+					},
+					"RewardsApprnEdit":{
+						"viewName"          : "rewardsApprn.RewardsApprnEdit",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 3
+					},
+					"Invoice":{
+						"viewName"          : "invoice.invoiceDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 2
+					},
+					"InvoiceEdit":{
+						"viewName"          : "invoice.invoiceEdit",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 3
+					},
+					"PRdisplay":{
+						"viewName"          : "displayPRcycle.purchaseRequisition",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 3
+					},
+					"QRdisplay":{
+						"viewName"          : "displayPRcycle.quotationComparision",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 4
+					},
+					"POdisplay":{
+						"viewName"          : "displayPRcycle.purchaseOrder",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 3
+					},
+					"GRdisplay":{
+						"viewName"          : "displayPRcycle.goodsReceipt",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 4
+					}
+			}
+		}
+		
+	}
+	
+}

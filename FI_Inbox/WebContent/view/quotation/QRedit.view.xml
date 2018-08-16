@@ -1,0 +1,140 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form" 
+	xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core"
+	controllerName="z_inbox.controller.quotation.QRedit">
+	<Page 
+		title="{i18n>QuotReq} - {lModel>/Banfn}" 
+		navButtonPress="onNavBack"
+		showNavButton="{device>/isPhone}">
+		<f:SimpleForm id="QReditInformation" editable="false" class="noTitle"
+			layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+			labelSpanM="4" labelSpanS="12" adjustLabelSpan="false"
+			emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+			columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+			<f:content>
+				<core:Title />
+				<Label text='{i18n>Title}'/>
+				<Link  text='{lModel>/PreqNo}' press='onPRnumber'/>
+				<Label text="{i18n>QuotationDate}"/>
+				<Text text="{path: 'lModel>/DocDate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'short'}}" />
+				<core:Title />
+				<Label text='{i18n>VendorName}'/>
+				<Text  text='{lModel>/Vendorname}'/>
+				<Label text="{i18n>QuotationDeadline}" />
+				<Text  text="{path: 'lModel>/QuotDead',type: 'sap.ui.model.type.Date',formatOptions: {style: 'short'}}" />
+			</f:content>
+		</f:SimpleForm>
+		<ScrollContainer horizontal="true">
+			<Table items="{lModel>/qrnavig/results}" id="idtable">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>Item}" level="H2" />
+						<ToolbarSpacer />
+						<Label text='{i18n>Currency}'/>
+						<Text text ="{lModel>/Currency}" id='idCurrency'/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="10rem"><header> <Text text="{i18n>Description}" /> </header></Column>
+					<Column width="5rem"><header> <Text text="{i18n>Quantity}"    /> </header></Column>
+					<Column width="7rem"><header> <Text text="{i18n>Unit}"        /> </header></Column>
+					<Column width="5rem"><header> <Text text="{i18n>Value}"       /> </header></Column>
+					<Column width="5rem"><header> <Text text="{i18n>QCDisvalue}"  /> </header></Column>
+					<Column width="5rem"><header> <Text text="{i18n>Discount}"    /> </header></Column>
+					<Column width="5rem"><header> <Text text="{i18n>SubTotal}"    /> </header></Column>
+					<Column width="5rem"><header> <Text text="{i18n>Vval}"        /> </header></Column>
+					<Column width="5rem"><header> <Text text="{i18n>NetPrice}"    /> </header></Column>
+					<Column width="1rem"/>
+					<Column width="1rem"/>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Input value="{lModel>ShortText}" width="10rem"/>
+							<Input value="{lModel>TargetQty}" liveChange="subTotalCalc" width="5rem"/>
+							<Select items="{path:'/unitsSet', templateShareable:'true'}" selectedKey="{lModel>Unit}" width="7rem">
+								<items><core:ListItem text="{Msehl}" key="{Msehi}" /></items>
+							</Select>
+							<Input value="{lModel>NetPrice}" type='Number' liveChange="liveValueChange" width="5rem"/>
+							<Input value="{lModel>Discountval}" type='Number' liveChange="liveDiscPerChange" width="5rem"/>
+							<Input value="{ parts : ['lModel>NetPrice', 'lModel>Discountval'], formatter: '.formatter.discountValue' }" type='Number' liveChange="liveDiscValChange" width="5rem"/>
+							<Text text="{lModel>Subtotal}" />
+							<Select selectedKey="{lModel>Valvalue}"  change="subTotalCalc" width="5rem" >
+								<items><core:Item text="0 %" key='0.00'/><core:Item text="5 %" key='5.00'/></items>
+							</Select>
+							<Text text="{lModel>Finaltotal}" />
+							<core:Icon src="sap-icon://add"    press="onItemAdd"    color='white' backgroundColor ='#bf0900' hoverColor='#bf0900' hoverBackgroundColor='white'/>
+							<core:Icon src="sap-icon://delete" press="onItemDelete" color='white' backgroundColor ='black'   hoverColor='black'   hoverBackgroundColor='white'/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</ScrollContainer>
+		<Panel headerText="{i18n>RsnForRecom}">
+			<CheckBox id="RB1-1" text="{i18n>Delivery}"          selected="{lModel>/navigprtoqrfinal/results/0/Delivery}" />
+			<CheckBox id="RB1-2" text="{i18n>Quality}" 	         selected="{lModel>/navigprtoqrfinal/results/0/Quality}" />
+			<CheckBox id="RB1-3" text="{i18n>Price}" 	         selected="{lModel>/navigprtoqrfinal/results/0/Price}" />
+			<CheckBox id="RB1-4" text="{i18n>Experience}"        selected="{lModel>/navigprtoqrfinal/results/0/Experience}" />
+			<CheckBox id="RB1-5" text="{i18n>TechnicalFeedback}" selected="{lModel>/navigprtoqrfinal/results/0/Techfd}" />
+			<CheckBox id="RB1-6" text="{i18n>Others}"            selected="{lModel>/navigprtoqrfinal/results/0/Othersbol}" />
+			<HBox>
+				<Label text="{i18n>ReasonforOthers} :" labelFor="qc_Others" class="sapUiTinyMarginTop" visible="{lModel>/navigprtoqrfinal/results/0/Othersbol}" />
+				<Input id="qc_Others" value=" {lModel>/navigprtoqrfinal/results/0/Others}" width='300%' visible="{lModel>/navigprtoqrfinal/results/0/Othersbol}" 
+					class="sapUiTinyMarginBegin" maxLength="255" liveChange="handleLiveQRInput" placeholder="{i18n>RecommendReasonPlaceholder}"/>
+			</HBox>
+		</Panel>
+		<Panel headerText="{i18n>splAppr}">
+			<Table items="{lModel>/navigtoqrsplapproval/results}">
+				<columns>
+					<Column width="30px" vAlign="Center"/>
+					<Column vAlign="Middle"><header><Text text="{i18n>TypeofApproval}" /></header></Column>
+					<Column vAlign="Middle"><header><Text text="{i18n>Reason}" />   	 </header></Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<CheckBox selected   ="{lModel>Boolean}"/>
+							<Text     text       ="{lModel>Description}" />
+							<TextArea value="{lModel>Reason}" maxLength="1000" width='100%' liveChange="handleLiveQRInput" placeholder="{i18n>QRReasonPlaceholder}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</Panel>
+		<Table id="id_docMnts" items="{lModel>/navigqrtodocuments}" mode="Delete" delete="onFileDelete">
+			<headerToolbar>
+				<OverflowToolbar xmlns="sap.m">
+					<ToolbarSpacer />
+					<u:FileUploader name="myFileUpload"  style="Emphasized" id="matrnFile" tooltip="Upload your file to the local server"  uploadComplete="handleUploadComplete" />
+					<Button icon="sap-icon://upload" press="onFileUpload" />
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column>
+					<Text text="{i18n>FileName}" />
+				</Column>
+				<Column>
+					<Text text="{i18n>FileType}" />
+				</Column>
+			</columns>
+			<ColumnListItem type="Active" press="onOpenFile">
+
+				<cells>
+					<Text text="{lModel>Docfile}" />
+					<Text text="{lModel>Mimetype}" />
+				</cells>
+			</ColumnListItem>
+		</Table>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button id="prSave" icon="sap-icon://save" text="{i18n>Save}" type="Accept" press="onSaveQR" />
+				<Button id="idCancel" icon="sap-icon://sys-cancel" text="{i18n>CCCancel}" press="onCancelQR" />
+				<ToolbarSpacer />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

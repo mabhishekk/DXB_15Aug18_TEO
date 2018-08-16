@@ -1,0 +1,65 @@
+<core:FragmentDefinition
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified" 
+	xmlns:f="sap.ui.layout.form" 
+	xmlns:core="sap.ui.core">
+	<Dialog id="idPCeditItemsDialog" 
+		stretchOnPhone="true"
+		title="{i18n>PCDialogueTitle}"
+		afterOpen="onOpenDetailDialItem"
+		>
+		<buttons>
+			<Button text="{i18n>PCSave}" icon="sap-icon://save" press="onPCeditItemsSave">
+			</Button>
+			<Button text="{i18n>PCDelete}" icon="sap-icon://reset" press="onPCeditItemsReset">
+			</Button>
+			<Button text="{i18n>PCClose}" icon="sap-icon://decline" press="onPCitemsClose">
+			</Button>
+		</buttons>
+		<content>
+			<f:SimpleForm 
+				editable="true" 
+				layout="ResponsiveGridLayout"
+				labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+				emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+				columnsXL="2"   columnsL="1"   columnsM="1" 
+				adjustLabelSpan="false"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="{i18n>PCGl}" />
+					<Select 
+						id="id_editexpSet" value="{GlAccount}"
+						>
+						<!-- <core:ListItem 
+							text="{Txt50}" 
+							additionalText = "Gl code - {GlAccount}"
+							key="{GlAccount}">
+						</core:ListItem> -->
+					</Select>
+					<Label text="{i18n>PCDesc}" />
+					<Input id="id_editdesc" value="{Positiontext}" placeholder='{i18n>PCDecPlaceholder}' liveChange="handleLiveInput"  maxLength="50"/>
+					<Label text="{i18n>CCVenSup}" />
+					<Input id="id_editVendor" value="{Vendor}"     placeholder='{i18n>PCDecPlaceholder}' liveChange="handleLiveInput"  maxLength='50'/>
+					<Label text="{i18n>PCInvRef}" />
+					<Input id="id_editeiRno"  value="{Matnr}"      placeholder='{i18n>PCInvPlaceholder}' liveChange="handleLiveInput" maxLength='16'/>
+					<Label text="{i18n>PCVATval}" />
+					<Select id='id_enAmntVAT' change='onEditVal' selectedKey="{Taxvalue}">
+						<items>
+							<core:Item text="0 %" key='0'/>
+							<core:Item text="5 %" key='5'/>
+						</items>
+					</Select>
+					<!-- <Input id="id_enAmntVAT" placeHolder="Enter Amount" type="Number" value="{Exrate}"/> -->
+					<Label text="{i18n>PCAmtAED}" />
+					<Input id="id_editenAmnt" placeHolder="Enter Amount" type="Number" value="{Ppayments}" liveChange="onEditVal"/>
+					<Label text="{i18n>NetValue}" />
+					<Input id="id_editNetValue" editable='false' type="Number" value="{Netvalue}"/>
+					<Label text="{i18n>PCJustification}" />
+					<TextArea id="id_editJustification" value="{Justification}" placeholder='{i18n>PCJusPlaceholder}' liveChange="handleLiveInput" maxLength='1000'/>
+				</f:content>
+			</f:SimpleForm> 
+		</content>
+	</Dialog>
+</core:FragmentDefinition>
+
