@@ -1,0 +1,17 @@
+<View
+	xmlns="sap.m" 
+	controllerName="zpo_userapp.controller.welcome">
+	<Page
+		title="{i18n>Welcome}" 
+		navButtonPress="onNavBack" 
+		showNavButton="{device>/system/phone}">
+		<content>
+			<IconTabBar id="idIconTabBar" select="handleIconTabBarSelect" >
+				<items>
+				<IconTabFilter icon="sap-icon://request" iconColor="Positive" design="Vertical" key="PR"   text="{i18n>PurReq}"/>						
+				<IconTabFilter icon="sap-icon://order-status" iconColor="Negative" design="Vertical" key="QC"  text="{i18n>QuotComp}" visible="{lModel>/QC}" />
+			</items>
+			</IconTabBar>
+		</content>
+	</Page>
+</View>
