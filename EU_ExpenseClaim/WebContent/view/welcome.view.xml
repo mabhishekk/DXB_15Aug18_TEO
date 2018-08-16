@@ -1,0 +1,128 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	controllerName="z_expense_claim.controller.welcome">
+	<Page title="Petty Cash" 
+		navButtonPress="onNavBack" 
+		showNavButton="{device>/system/phone}">
+		<content>
+			<f:SimpleForm 
+				id="VR_GeneralInformation" 
+				editable="true"
+				layout="ResponsiveGridLayout" 
+				title="General Information"
+				labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+				emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" 
+				columnsXL="2"   columnsL="2"   columnsM="2"
+				adjustLabelSpan="false"
+				singleContainerFullSize="false">
+				<f:content>
+					<core:Title text="" />
+					<Label text="Name" />
+					<ComboBox xmlns="sap.m" id="usr_List" items="{/USERLISTSet}">
+						<core:ListItem xmlns="sap.ui.core" text="{NameText}" key="{Bname}">
+						</core:ListItem>
+					</ComboBox>
+					<!-- <ComboBox showSecondaryValues="true" items="{ path: '/USERLISTSet', 
+						sorter: { path: 'Bname' } }"> <core:ListItem key="{Bname}" text="{NameText}" 
+						/> </ComboBox> -->
+					<Label text="Department/ Poject" />
+					<ComboBox showSecondaryValues="true"  id="ccDP">
+					</ComboBox>
+					<core:Title text="" />
+					<Label text="Date" />
+					<DatePicker id="dtPick" width="9rem" />
+					<Label text="Total Amount" />
+					<Input id="eAmnt" placeholder="Enter Amount" type="Number" />
+					<!-- <Input placeholder="Currency" /> -->
+					<ComboBox showSecondaryValues="true" id="curr" items="{path: '/currencySet'}">
+						<core:ListItem key="{Waers}" text="{Waers}"
+							additionalText="{Landx50}" />
+
+					</ComboBox>
+
+				</f:content>
+			</f:SimpleForm>
+			<Table items="{/cashtoitems}" id="id_expTbl">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="Expense Details" level="H2" />
+						<ToolbarSpacer />
+						<Button icon="sap-icon://add" text="Add"
+							press="handlePCaddButtonPressed" />
+						<Button icon="sap-icon://copy" text="Copy"
+							press="handlePCaddButtonPressed" />
+						<Button icon="sap-icon://delete" text="Delete"
+							press="handlePCaddButtonPressed" />
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<header>
+							<Text text="Expense Type" />
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Text text="Description of Goods/ Services" />
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Text text="Invoice/Refer No." />
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Text text="Amount(AED)" />
+						</header>
+					</Column>
+				</columns>
+
+				<items>
+
+					<ColumnListItem xmlns="sap.m">
+
+						<cells>
+							<Text text="{Glaccount}"/>
+							<Text text="{Positiontext}" />
+							<Text text="{Matnr}" />
+							<Text text="{Ppayments}" />
+
+							<!-- <Input value="{Glaccount}"/>
+							<Input value="{Positiontext}" />
+							<Input value="{Matnr}" />
+							<Input value="{Ppayments}" /> -->
+
+						</cells> <!-- sap.ui.core.Control -->
+					</ColumnListItem>
+
+				</items>
+
+			</Table>
+
+			<!-- <Text text="The above expenses have been incurred in the course of 
+				TEO's business." class="sapUiLargeMarginTop"/> <Text text="No other claim 
+				in respect of the above is being or will be made to TEO, either by myself 
+				or by any other person."/> <Label/><CheckBox text="I accept."></CheckBox> -->
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<Button text="{i18n>Save}" icon="sap-icon://save" type="Accept" press="handlePCsave" />
+				<Button text="{i18n>Cancel}" icon="sap-icon://sys-cancel" press="handlePCCancel" />
+				<Button text="{i18n>SaveSubmit}" icon="sap-icon://hr-approval" type="Reject" press="handlePCsaveAndSubmit" />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				
+				<!-- <Button text="Submit" type="Emphasized" press="handlePCsave" />
+				<Button text="Save and Submit" type="Accept" press="handlePCsaveAndSubmit" />
+				<Button text="Cancel" type="Reject" press="handlePCCancel" /> -->
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>
