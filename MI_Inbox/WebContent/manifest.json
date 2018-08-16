@@ -1,0 +1,225 @@
+{
+	
+	"sap.app": {
+		"id": "z_manager_inbox",
+		"type": "application",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/ZPR_APPL_SRV",
+				"type": "OData",
+				"settings": {
+						"odataVersion": "2.0"
+					}
+				},
+			"fiService": {
+                "uri": "/sap/opu/odata/sap/ZPETTYCASH_SRV/",
+                "type": "OData",
+                "settings": {
+	                	"odataVersion": "2.0"
+	                }
+                },
+             "poService": {
+             	"uri": "/sap/opu/odata/sap/ZPO_APPLC_SRV/",
+                "type": "OData",
+                "settings": {
+	                "odataVersion": "2.0"
+	                }
+             } 
+		}
+		
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+		
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "z_manager_inbox.view.app",
+			"type": "XML"
+		},
+		"dependencies": {
+			
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {},
+				"sap.ui.unified": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "z_manager_inbox.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true
+			},
+			"fiService": {
+				"dataSource": "fiService",
+				"preload": true
+			},
+			"poService": {
+				"dataSource": "poService",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "z_manager_inbox.view",
+				"controlId": "rootControl",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": [
+						"home",
+						"notFound"
+					]
+				}
+			},
+			"routes": [	{
+						"name": "master",
+						
+						"pattern": "",
+						"target": ["master"]
+					},
+					{
+						"name": "welcome",
+						"pattern": "welcome",
+						"target": ["master", "welcome"]
+					},
+					{
+						"name": "workFlow",
+						"pattern": "workflow-{wfId}/origin-{origin}",
+						"target": ["master", "workIdDetails"]
+					},
+					{
+						"name": "PurchaseReq",
+						"pattern": "PurchaseRequestion-{id}/{instId}",
+						"target": ["master", "PRdetailEdit"]
+					},
+					{
+						"name": "Pettycash",
+						"pattern": "PettyCash-{id}/{instId}",
+						"target": ["master", "PettyCash"]
+					},
+					{
+						"name": "ExpenseClaim",
+						"pattern": "ExpenseClaim-{id}/{instId}",
+						"target": ["master", "ExpenseClaim"]
+					},
+					{
+						"name": "CreditCard",
+						"pattern": "CreditCard-{id}/{instId}",
+						"target": ["master", "CreditCard"]
+					},
+					{
+						"name": "RewardsApprn",
+						"pattern": "RewardsApprn-{id}/{instId}",
+						"target": ["master", "RewardsApprn"]
+					},{
+						"name"   : "QR",
+						"pattern": "QC-{id}/{instId}",
+						"target" : ["master", "QR"]
+					},
+					{
+						"name"   : "Invoice",
+						"pattern": "Invoice-{id}/{instId}",
+						"target" : ["master", "Invoice"]
+					}
+					],
+			"targets": {
+					"QR":{
+						"viewName"          : "QR",
+						"controlAggregation": "detailPages"
+					},			
+					"master": {
+						"viewName": "Master",
+						"controlAggregation": "masterPages",
+						"viewLevel": 0
+					},
+					"workIdDetails": {
+						"viewName" : "Detail1",
+						"controlAggregation": "detailPages",
+						"viewLevel": 1
+					},
+					"welcome": {
+						"viewName" : "welcome",
+						"controlAggregation": "detailPages",
+						"viewLevel": 1
+					},
+					"PRdetailEdit":{
+						"viewName" : "PRdetailEdit",
+						"controlAggregation": "detailPages",
+						"viewLevel": 2
+					},
+					"PettyCash":{
+						"viewName" : "pettyCashDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel": 2
+					},
+					"ExpenseClaim":{
+						"viewName" : "expenseClaimDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel": 2
+					},
+					"CreditCard":{
+						"viewName" : "creditCardDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel": 2
+					},
+					"RewardsApprn":{
+						"viewName" : "RewardsApprnDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel": 2
+					},
+					"Invoice":{
+						"viewName"          : "invoiceDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 2
+					}
+			}
+		}
+		
+	}
+	
+}

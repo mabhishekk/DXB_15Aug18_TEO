@@ -1,0 +1,26 @@
+<core:View 
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m" 
+	displayBlock="true"
+	controllerName="z_manager_inbox.controller.welcome" 
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page
+		title="{i18n>WelcomeTitle}"
+		navButtonPress="onNavBack" 
+		showNavButton="{device>/isPhone}">
+		<content>
+		   
+		</content>
+		<footer>
+			<OverflowToolbar>
+			<!-- 	<ToolbarSpacer/>
+				<Button  text="Save" />
+				<Button  text="Save and Submit" />
+				<Button  text="Cancel" /> -->
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>
+
+

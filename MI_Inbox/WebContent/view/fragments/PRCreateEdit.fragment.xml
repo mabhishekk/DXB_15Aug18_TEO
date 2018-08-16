@@ -1,0 +1,358 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core">
+	<IconTabBar expanded="true" id="idIconTabBar" select="handleIconTabBarSelect"
+		applyContentPadding="false" class="cl_custIconTab">
+		<items>
+			<IconTabFilter icon="sap-icon://hint" text="{i18n>PRgeneral}"
+				key="pr_edit">
+				<content>
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+						labelSpanXL="4" columnsXL="2" emptySpanXL="0" labelSpanL="4"
+						columnsL="2" emptySpanL="0" labelSpanM="4" columnsM="2"
+						emptySpanM="0" labelSpanS="12" columnsS="12" emptySpanS="0"
+						breakpointM="750" adjustLabelSpan="false">
+						<f:content>
+							<core:Title text="" />
+							<Label text="{i18n>PRGrequestDate}" labelFor="DP1"
+								required="true" />
+							<DatePicker id="DP1" placeholder="Enter Date ..." editable='false'
+								dateValue="{lModel>/mainSet/Zrequestdate}" width="9rem" />
+							<Label text="{i18n>Requestor}" labelFor="L1" required="true" />
+							<Select id="idRequester" editable="false" enabled='false' selectedKey="{lModel>/mainSet/Zrequestor}"/>
+							<Label text="{i18n>RequestFor}" required="true" visible="false" />
+							<CheckBox id="idRFM" text="{i18n>Material}" visible="false"
+								selected="{lModel>/mainSet/Zrequestmat}">
+								<!-- <layoutData> <layout:GridData indentL="1" indentM="1" /> </layoutData> -->
+							</CheckBox>
+							<CheckBox id="idRFS" text="{i18n>Service}" visible="false"
+								selected="{lModel>/mainSet/Zrequestsrv}">
+								<layoutData>
+									<layout:GridData indentL="4" indentM="4" />
+								</layoutData>
+							</CheckBox>
+							<CheckBox id="idRFO" text="{i18n>Others}" select="onRFOthers"
+								visible="false" selected="{lModel>/mainSet/Zrequestoth}">
+								<layoutData>
+									<layout:GridData indentL="4" indentM="4" />
+								</layoutData>
+							</CheckBox>
+							<Label id="LRFOInputOthers" labelFor="LRFO" visible="false" />
+							<Input id="LRFO" value="{lModel>/mainSet/Zrequestothers}"
+								editable="{lModel>/lSet/editable}" placeholder="{i18n>ReasonforOthers}"
+								visible="false" />
+							<Label text="{i18n>RequestType}" labelFor="L4" />
+							<RadioButtonGroup id="L4" columns="3"
+								selectedIndex="{path:'lModel>/mainSet/Zrequesttype',formatter:'.formatter.requestType'}"
+								editable="{lModel>/lSet/editable}" select="onRequestType">
+								<buttons>
+									<RadioButton text="{i18n>PRGurgent}" />
+									<RadioButton text="{i18n>PRGroutine}" />
+									<RadioButton text="{i18n>PRGexcVenAgen}" />
+								</buttons>
+							</RadioButtonGroup>
+							<core:Title text="" />
+							<!-- <Label text="{i18n>PRGdeptProject}" labelFor="L2" /> <ComboBox 
+								showSecondaryValues="true" id="idDeptProject" selectedKey="{lModel>/KOSTL}"> 
+								items="{path:'/DEPARTMENTSet'}"> <core:ListItem xmlns="sap.ui.core" text="{Department}" 
+								additionalText="{Dpflag}" key="{Deptid}"> </core:ListItem> </ComboBox> -->
+							<Label text="{i18n>BriefofRequest}" labelFor="L6" />
+							<Input id="L6" value="{lModel>/mainSet/Zrequestbreif}"
+								editable="{lModel>/lSet/editable}" />
+							<Label id="idUVR" text="{i18n>VendorName}" visible="false" />
+							<ComboBox id="idUVRS" selectedKey="{lModel>/mainSet/Lifnr}"
+								editable="{lModel>/lSet/editable}" visible="false" />
+							<Label id="idUPM" text="{i18n>procMethod}"  />
+							
+							
+							<CheckBox id="idUPMC1" text="{i18n>SingleSource}" editable="{lModel>/lSet/editable}" 
+								selected="{path:'lModel>/mainSet/Zprocurmethod',formatter:'.formatter.ZTrueFalse'}" />
+								
+							<CheckBox id="idUPMC2" text="{i18n>Agency}" editable="{lModel>/lSet/editable}"
+								selected="{path:'lModel>/mainSet/Zprocurmethods',formatter:'.formatter.ZTrueFalse'}" />
+								 
+							<Label id="idJText" text="{i18n>Justification}" visible="false" />
+							<Text id="idUJText"
+								text="{path:'lModel>/mainSet/Zjusdelivery',formatter:'.formatter.ZjusdeliveryT'}"
+								visible="false"></Text>
+
+							<Label id="idUJ" text="{i18n>Justification}" visible="false" />
+
+
+							<MultiComboBox id="idUJC" selectionChange="onJustificationSelection"
+								selectedKeys="{path:'lModel>/mainSet/Zjusdelivery',formatter:'.formatter.Zjusdelivery'}"
+								editable="{lModel>/lSet/editable}" selectionFinish="onJustSelcFinish"
+								visible="false">
+								<items>
+									<core:Item text="{i18n>Delivery}" key="del" />
+									<core:Item text="{i18n>Quality}" key="qua" />
+									<core:Item text="{i18n>Price}" key="pri" />
+									<core:Item text="{i18n>TechnicalFeedback}" key="Tf" />
+									<core:Item text="{i18n>Others}" key="othr" />
+								</items>
+							</MultiComboBox>
+
+
+
+
+							<Label id="L8Text" text="{i18n>Others}" />
+							<Input id="L8" visible="false" value="{lModel>/mainSet/Zjustification}"
+								editable="{lModel>/lSet/editable}" placeholder="Justification Reason for others" />
+						</f:content>
+					</f:SimpleForm>
+				</content>
+			</IconTabFilter>
+			<IconTabFilter icon="sap-icon://activity-items" text="{i18n>PRcommercial}">
+				<content>
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+						visible="false" labelSpanXL="4" columnsXL="2" emptySpanXL="0"
+						labelSpanL="4" columnsL="2" emptySpanL="0" labelSpanM="4"
+						columnsM="2" emptySpanM="0" labelSpanS="12" columnsS="12"
+						emptySpanS="0" breakpointM="750" adjustLabelSpan="false">
+						<f:content>
+							<core:Title text="" />
+							<Label text="{i18n>TotalValue}" />
+							<Input id="idCTV1" placeholder="Amount..." type="Number"
+								editable="{lModel>/lSet/editable}" value="{lModel>/mainSet/Ztotalvalue}" />
+							<ComboBox id="cc_com_currency" selectedKey="{lModel>/mainSet/Ztotalcurrency}"
+								editable="{lModel>/lSet/editable}">
+
+							</ComboBox>
+
+							<core:Title text="" />
+							<Label text="{i18n>TotalDiscountValue}" />
+							<Input id="idCDV1" placeholder="Amount..." type="Number"
+								editable="{lModel>/lSet/editable}" value="{lModel>/mainSet/Ztotaldiscount}" />
+
+							<ComboBox id="cc_dscount_currency" selectedKey="{lModel>/mainSet/Zdiscountcurrency}"
+								editable="{lModel>/lSet/editable}">
+
+							</ComboBox>
+
+						</f:content>
+					</f:SimpleForm>
+					<Table items="{/mainSet/navigtoitems/results}" id="pr_cr_item">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="{i18n>Item}" />
+								<ToolbarSpacer />
+								<Button icon="sap-icon://add" text="{i18n>Add}" press="onPRaddPress"
+									visible="{lModel>/lSet/editable}" />
+								<!-- <Button icon="sap-icon://copy" text="Copy" /> -->
+								<!-- <Button icon="sap-icon://edit" text="Edit" /> <Button tooltip="View 
+									Settings" text="Remove" icon="sap-icon://delete" press="" /> -->
+								<!-- <Button tooltip="View Settings" icon="sap-icon://bar-chart" 
+									press="graphOpen" /> -->
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column>
+								<header>
+									<Text text="{i18n>Description}" />
+								</header>
+							</Column>
+							<Column width="80px">
+								<header>
+									<Text text="{i18n>Quantity}" />
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="{i18n>Cocen}" />
+								</header>
+							</Column>
+
+							<!-- <Column width="80px"> <header> <Text text="Value" /> </header> 
+								</Column> -->
+							<Column demandPopin="true" minScreenWidth="Medium">
+								<header>
+									<Text text="{i18n>StartDate}" />
+								</header>
+							</Column>
+							<Column demandPopin="true" minScreenWidth="Medium">
+								<header>
+									<Text text="{i18n>EndDate}" />
+								</header>
+							</Column>
+
+							<Column demandPopin="true" minScreenWidth="Medium">
+								<header>
+									<Text text="{i18n>Dedate}" />
+								</header>
+							</Column>
+							<!-- <Column> <header> <Text text="End Date" /> </header> </Column> -->
+
+							<!-- <Column> <header> <Text text="Cost Center" /> </header> </Column> -->
+						</columns>
+						<items>
+							<ColumnListItem xmlns="sap.m" type="Active"
+								press="onDetailItemPress">
+
+								<cells>
+
+									<!-- <TextArea value="{ShortText}" /> <Input value="{Quantity}" 
+										/> <Input value="{PreqPrice}" /> <DatePicker dateValue="{Begda}" /> <DatePicker 
+										dateValue="{Endda}" /> <Text text="{Glaccont}" /> <Text text="{Kostl}" /> -->
+									<Text text="{ShortText}" />
+									<Text text="{Quantity} - {Unit}" />
+									<Text text="{Costtext}" />
+
+									<Text
+										text="{path: 'Begda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+
+									<Text
+										text="{path: 'Endda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+
+									<Text
+										text="{path: 'DelivDate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+
+
+									<!-- <DatePicker dateValue="{Begda}" /> <DatePicker dateValue="{Endda}" 
+										/> -->
+
+									<!-- <Text text="{Kostl}" /> -->
+
+
+								</cells>
+							</ColumnListItem>
+
+
+
+
+						</items>
+
+
+					</Table>
+
+				</content>
+			</IconTabFilter>
+			<IconTabFilter id="idApproval" icon="sap-icon://payment-approval"
+				text="{i18n>PRapproval}">
+				<content>
+					<!-- <Label id="idApprovalType" text="Types of Approvals" /> <MultiComboBox> 
+						<items> <core:Item text="Name Request to increase the price difference between 
+						the minimum offer and the offer chosen for AED 100,000" /> <core:Item text="Request 
+						for exemption from the Bank gurantee of the total contract value" /> <core:Item 
+						text="Request for exempetion from bank gurantee of the advance payemnt" /> 
+						<core:Item text="Request a down payment increase of 10% " /> <core:Item text="Request 
+						for payment to the consultant or expert" /> </items> </MultiComboBox> <Label 
+						text="Reasons" /> <Input /> -->
+
+
+					<!-- Pr Create added on 7th Nov -->
+
+
+					<Table id="tbl_spl_apprvls" headerText="{i18n>splAppr}"
+						items="{/mainSet/navigtoapproval/results}">
+
+						<columns>
+							<Column>
+								<header>
+									<Text text="{i18n>TypeofApproval}" />
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="{i18n>Reason}" />
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<!-- <ColumnListItem xmlns="sap.m"> <cells> <Text text="Name Request 
+								to increase the price difference between the minimum offer and the offer 
+								chosen for AED 100,000" /> <Input placeholder="Reason" value="{lModel>/lSet/appRs1}"></Input> 
+								</cells> </ColumnListItem> <ColumnListItem xmlns="sap.m"> <cells> <Text text="Request 
+								for exemption from the Bank gurantee of the total contract value" /> <Input 
+								placeholder="Reason" value="{lModel>/lSet/appRs2}"></Input> </cells> </ColumnListItem> 
+								<ColumnListItem xmlns="sap.m"> <cells> <Text text="Request for exempetion 
+								from bank gurantee of the advance payemnt" /> <Input placeholder="Reason" 
+								value="{lModel>/lSet/appRs3}"></Input> </cells> </ColumnListItem> <ColumnListItem 
+								xmlns="sap.m"> <cells> <Text text="Request a down payment increase of 10%" 
+								/> <Input placeholder="Reason" value="{lModel>/lSet/appRs4}"></Input> </cells> 
+								</ColumnListItem> -->
+							<ColumnListItem xmlns="sap.m">
+
+								<cells>
+									<Text text="{Description}" />
+
+									<Input placeholder="{i18n>Reason}" value="{Reason}"
+										editable="{lModel>/lSet/editable}"></Input>
+								</cells>
+							</ColumnListItem>
+
+
+
+						</items>
+					</Table>
+				</content>
+			</IconTabFilter>
+			<IconTabFilter icon="sap-icon://expense-report" text="{i18n>Others}">
+				<content>
+					<!-- <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" 
+						labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1" 
+						emptySpanL="1" emptySpanM="1" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"> 
+						<f:content> <Label text="Terms and Conditions"/> <TextArea growing="true"/> 
+						<Label text="Payment Terms"/> <TextArea growing="true"/> <Label text="Additional 
+						Information"/> <TextArea growing="true"/> </f:content> </f:SimpleForm> -->
+					<List xmlns="sap.m" headerText="" id="id_payTerms"
+						items="{/mainSet/navigtoterms/results}">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="{i18n>TermsandCond}" />
+								<Button icon="sap-icon://add" press="onAddpayTerms" text="{i18n>Add}"
+									visible="{lModel>/lSet/editable}" />
+								<Button icon="sap-icon://decline" press="onRemoveTerms"
+									visible="{lModel>/lSet/editable}" text="{i18n>Remove}" />
+							</Toolbar>
+						</headerToolbar>
+						<CustomListItem xmlns="sap.m">
+							<Input placeholder="{i18n>TermsandCond}" xmlns="sap.m"
+								width="100%" value="{Reason}" editable="{lModel>/lSet/editable}">
+
+							</Input>
+						</CustomListItem>
+					</List>
+					<List xmlns="sap.m" headerText="" id="id_payment"
+						items="{/mainSet/navigtopayment/results}">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="{i18n>PaymentTerms}" class="" />
+								<Button icon="sap-icon://add" press="onAddpayment" text="{i18n>Add}"
+									visible="{lModel>/lSet/editable}" />
+								<Button icon="sap-icon://decline" press="onRemoveTerms"
+									visible="{lModel>/lSet/editable}" text="{i18n>Remove}" />
+							</Toolbar>
+						</headerToolbar>
+
+
+						<CustomListItem xmlns="sap.m">
+							<Input placeholder="{i18n>PaymentTerms}" xmlns="sap.m"
+								width="100%" value="{Reason}" editable="{lModel>/lSet/editable}">
+
+							</Input>
+						</CustomListItem>
+
+					</List>
+					<List xmlns="sap.m" headerText="" id="id_addInfo"
+						items="{/mainSet/navigtoothers/results}">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="{i18n>AddInfo}" />
+								<Button icon="sap-icon://add" press="onAddaddInfo" text="{i18n>Add}"
+									visible="{lModel>/lSet/editable}" />
+								<Button icon="sap-icon://decline" press="onRemoveTerms"
+									visible="{lModel>/lSet/editable}" text="{i18n>Remove}" />
+							</Toolbar>
+						</headerToolbar>
+						<CustomListItem xmlns="sap.m">
+							<Input placeholder="{i18n>AddInfo}" xmlns="sap.m" width="100%"
+								value="{Reason}" editable="{lModel>/lSet/editable}">
+
+							</Input>
+						</CustomListItem>
+					</List>
+				</content>
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
+</core:FragmentDefinition>

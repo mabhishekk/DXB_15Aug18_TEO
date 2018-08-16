@@ -1,0 +1,33 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:layout="sap.ui.layout"
+	controllerName="z_manager_inbox.controller.Master">
+	<Page 
+		title="" 
+		navButtonPress="onNavButtonPress">
+		<subHeader>
+			<Toolbar xmlns="sap.m">
+				<SearchField width="100%" />
+			</Toolbar>
+		</subHeader>
+		<List id="inbox_app" items="{/WORKITEMSSet}">
+			<items>
+				<ObjectListItem 
+					title="{Instid}" 
+					type="Active"
+					press="onWorkItemSelection" >
+					<attributes >
+						<ObjectAttribute title="{WiText}" />
+						<ObjectAttribute title="{i18n>Date}" text="{ path : 'Requestdate',formatter: '.formatter.formatDate' }" />
+						<ObjectAttribute text ="{Requestorname}" />
+						<ObjectAttribute text ="{Vendorname}" />
+					</attributes>
+				</ObjectListItem>
+			</items>
+		</List>
+		<footer>
+			<OverflowToolbar />
+		</footer>
+	</Page>
+</View>

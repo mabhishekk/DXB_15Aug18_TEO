@@ -1,0 +1,23 @@
+<View
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	controllerName="z_manager_inbox.controller.Detail1">
+	<Page
+		title="{TaskTitle}"
+		navButtonPress="onNavButtonPress" 
+		applyContentPadding="false">
+		<content>
+		
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button  text="Approve" press="onApprove" />
+				<Button  text="Reject" />
+				<Button  text="Forward" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

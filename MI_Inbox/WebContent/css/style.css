@@ -1,0 +1,13 @@
+.sapMIBar-CTX .sapMTitle {
+    color: #000000;
+    font-size: large;
+},
+
+.cl_vendorComparisionTbl .sapMListTblCell {
+    border-left: 1px solid #ccc;
+}
+
+.cl_vendorComparisionTbl .sapMListTbl{
+	border-left: 1px solid #ccc;
+  	border-right: 1px solid #ccc;
+}

@@ -1,0 +1,94 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	controllerName="z_manager_inbox.controller.pettyCashDisplay">
+	<Page 
+		title="{i18n>PCDetailtitle}" 
+		navButtonPress="onNavBack" 
+		showNavButton="{device>/isPhone}">
+		<content>
+			<ObjectHeader
+				title="{Postingnumber}"
+				number="{
+					parts:[{path:'Hnetamount'},{path:'Currency'}],
+					type: 'sap.ui.model.type.Currency',
+					formatOptions: {showMeasure: false}
+				}"
+				numberUnit="{Currency}">
+				<statuses>
+					<ObjectStatus text="{Char4}" state="{ path: 'Flag1', formatter: '.formatter.fStatus' }"  />
+				</statuses>
+				<attributes>
+					<ObjectAttribute text="{i18n>PCCreatedBy}: {Fullname}" />
+					<ObjectAttribute text="{i18n>PCDeptProj}: {Kostl} {Ltext} " />
+				</attributes>
+			</ObjectHeader>
+			<ScrollContainer horizontal="true">
+				<Table items="{cashtoitems}" id="idItemTable">
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="{i18n>PCTableTitle}" level="H2" />
+							<ToolbarSpacer />
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="12rem">
+							<header> <Text text="{i18n>PCGl}" /> </header>
+						</Column>
+						<Column minScreenWidth="Tablet"	demandPopin="true" width="10rem">
+							<header><Text text="{i18n>PCDesc}" /></header>
+						</Column>
+						<Column minScreenWidth="Tablet"	demandPopin="true" width="10rem">
+							<header><Text text="{i18n>CCVenSup}" /></header>
+						</Column>
+						<Column minScreenWidth="Tablet"	demandPopin="true" width="10rem">
+							<header><Text text="{i18n>PCInvRef}" />	</header>
+						</Column>
+						<Column minScreenWidth="Tablet"	demandPopin="true" width="5rem">
+							<header> <Text text="{i18n>PCVATval}" /> </header>
+						</Column>
+						<Column minScreenWidth="Tablet"	demandPopin="true" width="5rem">
+							<header><Text text="{i18n>PCAmtAED}" />	</header>
+						</Column>
+						<Column minScreenWidth="Tablet"	demandPopin="true" width="5rem">
+							<header><Text text="{i18n>NetValue}" />	</header>
+						</Column>
+						<Column minScreenWidth="Tablet"	demandPopin="true" width="25rem">
+							<header><Text text="{i18n>Justification}" /></header>
+						</Column>
+					</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<ObjectIdentifier title="{Glaccount}" text="{Ltext}" />
+									<Text text="{Positiontext}"/>
+									<Text text="{Vendor}"/>
+									<Text text="{Matnr}"/>
+									<Text text="{Taxvalue} %" />
+									<Text text="{Ppayments}"/>
+									<Text text="{Netvalue}"/>
+									<Text text="{Justification}"/>
+								</cells> 
+							</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+			<List id ="idPettyCashDoc" mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" selectionChange="onDocSelectionChange" headerText="Attachment">
+			</List>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<Button text="{i18n>PCApprove}" icon="sap-icon://paid-leave" press="onPCApprove" type="Accept"/>
+				<Button text="{i18n>PCReject}" icon="sap-icon://unpaid-leave" press="onPCReject" type="Reject" />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<Button icon="sap-icon://print" text="{i18n>PCPrint}" press="handlePCPrint" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>
