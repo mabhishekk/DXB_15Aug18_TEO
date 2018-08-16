@@ -1,0 +1,12 @@
+.noTitle .sapUiFormTitleH5 {
+  display: none
+}
+
+.columnBold{
+	font-weight: bold;
+}
+
+.sapMIBar-CTX .sapMTitle {
+    color: #000000;
+    font-size: large;
+}

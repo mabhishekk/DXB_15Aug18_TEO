@@ -1,0 +1,9 @@
+<View
+	xmlns="sap.m" 
+	controllerName="z_usergr.controller.Detail">
+	<Page
+		title="Welcome" 
+		navButtonPress="onNavBack" 
+		showNavButton="{device>/system/phone}">
+	</Page>
+</View>
