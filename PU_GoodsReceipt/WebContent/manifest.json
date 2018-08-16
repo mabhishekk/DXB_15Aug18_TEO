@@ -1,0 +1,160 @@
+{
+	
+	"sap.app": {
+		"id": "z_goods_receipt",
+		"type": "application",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/ZPO_APPLC_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+					
+				}
+			}
+		}
+		
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+		
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "z_goods_receipt.view.app",
+			"type": "XML"
+		},
+		"dependencies": {
+			
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {},
+				"sap.ui.unified": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "z_goods_receipt.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"settings": {
+					"defaultBindingMode": "TwoWay",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					}
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "z_goods_receipt.view",
+				"controlId": "rootControl",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": [
+						"home",
+						"notFound"
+					]
+				}
+			},
+			"routes": [	{
+							"name": "master",
+							"pattern": "",
+							"target": ["master"]
+						},
+						{
+							"name": "goodsReceiptHome",
+							"pattern": "GoodsReceipt/Home",
+							"target": ["master","detail"]
+						},						
+						{
+							"name": "goodsReceiptDetailsDisplay",
+							"pattern": "GoodsReceipt/:sId:",
+							"target": ["master","detailDisplay"]
+						},
+						{
+							"name": "goodsReceiptDetailsEdit",
+							"pattern": "GoodsReceipt/Edit/:sId:",
+							"target": ["master","detailEdit"]
+						},
+						{
+							"name": "goodsReceiptDetailsCreate",
+							"pattern": "GoodsReceipt/Create/:sId:",
+							"target": ["master","detailCreate"]
+						}
+						],
+			"targets": {
+					"master": {
+						"viewName": "Master",
+						"controlAggregation": "masterPages",
+						"viewLevel": 0
+					},
+					"detail": {
+						"viewName": "Detail",
+						"controlAggregation": "detailPages",
+						"viewLevel": 1
+					},
+					"detailDisplay": {
+						"viewName": "DetailDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel": 2
+					},
+					"detailEdit": {
+						"viewName": "DetailEdit",
+						"controlAggregation": "detailPages",
+						"viewLevel": 3
+					},
+					"detailCreate": {
+						"viewName": "DetailCreate",
+						"controlAggregation": "detailPages",
+						"viewLevel": 3
+					}
+			}
+		}
+		
+	}
+	
+}

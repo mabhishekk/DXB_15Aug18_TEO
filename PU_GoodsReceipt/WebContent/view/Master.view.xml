@@ -1,0 +1,60 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:layout="sap.ui.layout"
+	controllerName="z_goods_receipt.controller.Master">
+	<Page 
+		title="{i18n>MasterPageTitle}" 
+		navButtonPress="onNavBack">
+		<subHeader>
+			<Toolbar id="idPRMasterSearchBar">
+				<SearchField
+					id="idPRMastersearchField"
+					liveChange="onSearchField1"
+					search="onSearchField"
+					width="100%">
+				</SearchField>
+			</Toolbar>
+		</subHeader>
+		<List 
+			id="list" 
+			items="{/PRTOPOSet}"
+			includeItemInSelection = "false" 
+			mode="SingleSelectMaster"
+			selectionChange="onSelectionChange">
+			<headerToolbar>
+				<Toolbar>
+					<SegmentedButton 
+						xmlns="sap.m" 
+						width="100%"
+						class="sapUiNoContentPadding" id="idsgbtn">
+						<items>
+							<SegmentedButtonItem text="PR" key="PR"/>
+							<SegmentedButtonItem text="PO" key="PO"/>
+						</items>
+					</SegmentedButton>
+				</Toolbar>
+			</headerToolbar>
+			<items>
+				<ObjectListItem 
+					title="PO:{PoNumber}" 
+					type="Active"
+					press="onSelectionChange" >
+					<firstStatus>
+						<ObjectStatus text="{Postatus}"	/>
+					</firstStatus> 
+					<attributes >	
+						<ObjectAttribute  text="PR:{Preqno}" />									
+						<ObjectAttribute  text="{Podesc}" />
+						<ObjectAttribute title="{i18n>Createdon}" text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}"/>
+					</attributes>
+				</ObjectListItem>
+			</items>
+		</List>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>
