@@ -1,0 +1,9 @@
+<View
+	xmlns="sap.m" 
+	controllerName="z_user_invoice.controller.Detail">
+	<Page
+		title="Welcome" 
+		navButtonPress="onNavBack" 
+		showNavButton="{device>/system/phone}">
+	</Page>
+</View>

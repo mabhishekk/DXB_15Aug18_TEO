@@ -1,0 +1,15 @@
+.noTitle .sapUiFormTitleH5 {
+  display: none
+}
+
+.sapMListTblRow.sapMListTblRowMiddle>td {
+    vertical-align: middle;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border: 1px solid #cccccc !important;
+}
+
+.sapMIBar-CTX .sapMTitle {
+    color: #000000;
+    font-size: large;
+}

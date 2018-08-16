@@ -1,0 +1,180 @@
+<core:FragmentDefinition
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified">		
+	<f:SimpleForm
+		id="idInvoiceHeader"
+		editable='true'
+		layout="ResponsiveGridLayout"
+		title="{PoNumber}"
+		adjustLabelSpan="false"
+		labelSpanXL="4"	labelSpanL="4"	labelSpanM="5"	labelSpanS="12"
+		emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+		columnsXL="2"	columnsL="2"	columnsM="2"
+		singleContainerFullSize="false" 
+		class="noTitle">
+		<f:content>
+			<core:Title text="" />
+			<Label text="{i18n>Vendor}"/> <Text text='{Vendor} {Vendor_name}'/>
+			<Label text="{i18n>PostDate}"/> <DatePicker id='idInvPostDate' width='9rem' change='onDateChange'/>
+			<Label required='true' text="{i18n>InvDate}"/> <DatePicker id='idInvDate' width='9rem' change='onDateChange'/>
+			<Label text="{i18n>PayTerm}"/>
+			<Select id="idInvPaymentTerm" items="{/PAYMENTTERMSSet}" showSecondaryValues= "true" 
+				change='onPayTermSelect'>
+				<core:ListItem text="{Zterm} - {Vtext}" key="{Zterm}" additionalText= "{Vtext}"/>
+			</Select>
+			<Label /> <Text id="idInvPaymentTermText"/>
+			
+			<core:Title text="" />
+			<Label text="{i18n>TotalPoAmt}"/> <Text id='idTotalPoAmt' text='{Totalpoamt} {Currency}'/>
+			<Label text="{i18n>TotalGrAmt}"/> <Text id='idTotalGrAmt' text='{GRAmt} {Currency}'/>
+			<Label text="{i18n>BalInvAmt}" /> <Text text="{Balanceivamt} {Currency}"/>
+			<Label required='true' text="{i18n>BillNo}"/> <Input id='idInvBillNo' value=''/>
+			<Label required='true' text="{i18n>InvAmt}" visible='false'/> <Input id='idInvAmt' value='' type='Number' visible='false'/>
+			<Select id="idInvAmtCurr" showSecondaryValues='true' items="{/CURRENCYSet}" selectedKey='AED' visible='false'>
+				<core:ListItem text="{Waers}" key="{Waers}" additionalText='{Landx50}'/>
+			</Select>
+		</f:content>
+	</f:SimpleForm>
+	<ScrollContainer horizontal="true" visible="{= ${DocType} !== '9' }">
+		<Table id="idInvMaterial" items="{/navtoinvitem/results}" inset="false" class='columnBold' mode="Delete" delete="handleDelete">
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title text="{i18n>TableTitle}" level="H2" />
+					<ToolbarSpacer />
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="5rem" hAlign="Center">
+					<header><Text text="{i18n>GrNumber}"/></header>
+				</Column>
+				<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>MatSerDesc}"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>GrQuantity}"/></header>
+				</Column>
+				<Column width="3rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>Unit}"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>GrAmount}"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>InvQuantity}"/></header>
+				</Column>
+				<Column width="7rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>InvAmt}"/></header>
+				</Column>
+				<Column width="7rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>TaxCode}"/></header>
+				</Column>
+				<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>CostCenter}"/></header>
+				</Column>
+				<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>Glaccount}"/></header>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem vAlign="Middle">
+					<cells>
+						<Text text='{MatDocNo}'/>
+						<Text text="{ShortText}"/>
+						<Text text="{Grquantity}"/>
+						<Text text="{Orderunit}"/>
+						<Text text="{GRAmount}"/>
+						<Input value='{InvQty}'/>
+						<Input value='{InvoiceAmount}'/>
+						<Select items="{path:'/LocalTaxData', templateShareable:'true'}" selectedKey='{Tax_Code}'>
+	                           <items>
+	                               <core:ListItem key="{Mwskz}" text="{Text1}" />
+	                           </items><!-- /TAXCODESSet/results -->
+                       </Select>
+					   <ObjectIdentifier title="{Costcenter}" text="{CCDesc}" />
+					   <ObjectIdentifier title="{Glaccount}" text="{GLDesc}" />
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</ScrollContainer>
+	<ScrollContainer horizontal="true" visible="{= ${DocType} === '9' }">
+		<Table id="idInvService" items="{/navtoinvitem/results}" inset="false" class='columnBold' mode="Delete" delete="handleDelete">
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title text="{i18n>Service Table}" level="H2" />
+					<ToolbarSpacer />
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="5rem" hAlign="Center">
+					<header><Text text="{i18n>ServiceEntryNumber}"/></header>
+				</Column>
+				<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>ServiceDesc}"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>Amount}"/></header>
+				</Column>
+				<Column width="7rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>TaxCode}"/></header>
+				</Column>
+				<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>CostCenter}"/></header>
+				</Column>
+				<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+					<header><Text text="{i18n>Glaccount}"/></header>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem vAlign="Middle" type="Active" press="onItemPress">
+					<cells>
+						<Text text='{MatDocNo}'/>
+						<Text text="{ShortText}"/>
+						<Text text="{GRAmount}"/>
+						<Select items="{path:'/LocalTaxData', templateShareable:'true'}" selectedKey='{Tax_Code}'>
+	                           <items>
+	                               <core:ListItem key="{Mwskz}" text="{Text1}" />
+	                           </items><!-- /TAXCODESSet/results -->
+                       </Select>
+					   <ObjectIdentifier title="{Costcenter}" text="{CCDesc}" />
+					   <ObjectIdentifier title="{Glaccount}" text="{GLDesc}" />
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</ScrollContainer>
+	<Table 
+		id="idInvDoc" 
+		items="{/naviginvtodms}"
+		mode="Delete" 
+		delete="onFileDelete">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="{i18n>Cheque}"/>
+				<ToolbarSpacer />
+				<u:FileUploader 
+					name="myFileUpload"  
+					style="Emphasized"
+					id="idInvFileUpload" 
+					tooltip="Upload your file to the local server" 	
+					typeMissmatch="handleTypeMissmatch"
+					uploadComplete="handleUploadComplete" />
+				<Button icon="sap-icon://upload" press="onFileUpload" />
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column><Text text="{i18n>FileType}" /></Column>
+			<Column><Text text="{i18n>FileName}" /></Column>
+		</columns>
+		<ColumnListItem type="Active">
+			<cells>
+				<Text text="{Docfile}" />
+				<Text text="{Mimetype}" />
+			</cells>
+		</ColumnListItem>
+	</Table>
+</core:FragmentDefinition>		

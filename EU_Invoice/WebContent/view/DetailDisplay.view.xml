@@ -1,0 +1,37 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	controllerName="z_user_invoice.controller.DetailDisplay">
+	<Page
+		title="{i18n>DetailPageTitle}"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/isPhone}">
+		<content>
+			<IconTabBar id="id_iconTB" select="handleIconTabBarSelect" class="" selectedKey="IN">
+				<items>
+				<IconTabFilter icon="sap-icon://request" iconColor="Positive" design="Vertical" key="PR" visible="{lModel>/PR}" expanded="false" text="{i18n>PurReq}"/>
+				<IconTabFilter icon="sap-icon://order-status" iconColor="Negative" design="Vertical" key="QC" visible="{= ${Zrequesttype} === '1' }" text="{i18n>QuotComp}"/>
+				<IconTabFilter icon="sap-icon://order-status" iconColor="Negative" design="Vertical" key="PO" text="{i18n>PO}" visible="{lModel>/PO}"/>
+				<IconTabFilter icon="sap-icon://shipping-status" iconColor="Negative" design="Vertical" key="GR" text="{i18n>GR}" visible="{lModel>/GR}"/>
+				<IconTabFilter icon="sap-icon://sales-quote" iconColor="Negative" design="Vertical" key="IN" text="{i18n>IN}" visible="{lModel>/IN}">
+					<content><core:Fragment fragmentName="z_user_invoice.view.fragment.invDisplay" type="XML"/></content>
+				</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<Button icon="sap-icon://write-new" text="{i18n>Create}" press="handleCreate" />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<Button text="{i18n>Cancel}" icon="sap-icon://delete" press="handleDelete" />
+				<Button	id="idEdit" text="{i18n>Edit}"   icon="sap-icon://edit" press="handleEdit" />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<Button icon="sap-icon://print" text="{i18n>Print}" press="handleECprint" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

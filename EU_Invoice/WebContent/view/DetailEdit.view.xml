@@ -1,0 +1,40 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	controllerName="z_user_invoice.controller.DetailEdit">
+	<Page 
+		title="{i18n>EditDetailPageTitle}: {lModel>/InvInfo/Invno}"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/isPhone}">
+		<content>
+			<IconTabBar id="id_iconTB" select="handleIconTabBarSelect" class="" selectedKey="IN">
+				<items>
+				<IconTabFilter icon="sap-icon://request" iconColor="Positive" design="Vertical" key="PR" visible="{lModel>/PR}" expanded="false" text="{i18n>PurReq}"/>
+				<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/QR}" iconColor="Accept "/> -->
+				<IconTabFilter id="qr_req" icon="sap-icon://sales-quote" visible="{= ${Zrequesttype} === '1' }" iconColor="Negative" design="Vertical" key="QR" text="{i18n>QuotReq}" />
+				<IconTabFilter icon="sap-icon://order-status" iconColor="Negative" design="Vertical" key="QC" visible="{= ${Zrequesttype} === '1' }" text="{i18n>QuotComp}"/>
+				<!-- <IconTabSeparator icon="sap-icon://step" visible="{= ${Zrequesttype} === '1' }" iconColor="Accept "/> -->
+				<IconTabFilter icon="sap-icon://order-status" iconColor="Negative" design="Vertical" key="PO" text="{i18n>PO}" visible="{lModel>/PO}"/>
+				<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/GR}" iconColor="Accept "/> -->
+				<IconTabFilter icon="sap-icon://shipping-status" iconColor="Negative" design="Vertical" key="GR" text="{i18n>GR}" visible="{lModel>/GR}"/>
+				<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/IN}" iconColor="Accept "/> -->
+				<IconTabFilter icon="sap-icon://sales-quote" iconColor="Negative" design="Vertical" key="IN" text="{i18n>IN}" visible="{lModel>/IN}">
+					<content><core:Fragment fragmentName="z_user_invoice.view.fragment.invEdit" type="XML"/></content>
+				</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<Button text="{i18n>Submit}" icon="sap-icon://hr-approval" type="Reject" press="handleSubmit" />
+				<Button text="{i18n>Cancel}" icon="sap-icon://sys-cancel" press="handleCancel" />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>
