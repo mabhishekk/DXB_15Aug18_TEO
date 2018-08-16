@@ -1,0 +1,260 @@
+<!-- /***********Icon tab Bar Quotation Comparision fragment ****************/ -->
+
+
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+
+<Table class="cl_vendorComparisionTbl"  mode="MultiSelect"
+showSeparators="true" enableColumnFreeze="true" enableCellFilter="true">
+<headerToolbar>
+<OverflowToolbar>
+<Title text="Vendor Comparison" level="H2" />
+<ToolbarSpacer />
+<Button icon="sap-icon://favorite" text="Recommend" press="onRecommend"></Button>
+<Button icon="sap-icon://add" text="Add" press="handleaddButtonPressed" />
+<Button icon="sap-icon://copy" text="Copy" press="handleaddButtonPressed" />
+<Button icon="sap-icon://business-objects-experience"  press="handleAnalytics" />
+<Button icon="sap-icon://edit" text="Edit" press="handleaddButtonPressed" />
+<Button tooltip="View Settings" text="Remove" icon="sap-icon://delete"
+press="" />
+<!-- <Button tooltip="View Settings" icon="sap-icon://bar-chart" press="graphOpen"
+/> -->
+
+
+</OverflowToolbar>
+
+
+</headerToolbar>
+<columns>
+<Column hAlign="Center" width="110px">
+<Text text="Vendor" />
+</Column>
+<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true"
+popinDisplay="Inline">
+<Text text="Material" />
+</Column>
+<Column hAlign="Center" width="60px">
+<Text text="Quantity" />
+</Column>
+<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+width="60px" TextAlign="Center" demandPopin="true">
+<Text text="Price" />
+</Column>
+<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+width="60px" demandPopin="true">
+<Text text="VAT Value" />
+</Column>
+<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+width="60px" demandPopin="true">
+<Text text="Discount Value" />
+</Column>
+<Column hAlign="Center" width="80px">
+<Text text="Total Value" />
+</Column>
+<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+demandPopin="true">
+<Text text="Rating" />
+</Column>
+
+</columns>
+<items>
+<ColumnListItem vAlign="Middle" type="Active">
+<cells>
+<HBox class="cl_padding" width="100%" justifyContent="Center">
+<Text text="0000100000" class="sapUiTinyMarginEnd" />
+<core:Icon color="red" src="sap-icon://message-information"
+press="onVendorInformaiton"></core:Icon>
+</HBox>
+
+<Text text="Advertisement and Promotion Expenses Subsciption " />
+<Input value="10" />
+<!-- <Text text="12345" /> <Text text="121%" /> <Text text="121%" />
+<Text text="121%" /> -->
+<Input value="10" />
+<Input value="12" />
+<Input value="10" />
+<Text text="1231" />
+<RatingIndicator maxValue="5" value="2"
+tooltip="Rating Tooltip" enabled="false" />
+<!-- <core:Icon src="sap-icon://add-favorite" color="Gray"></core:Icon> -->
+
+</cells>
+</ColumnListItem>
+<ColumnListItem vAlign="Middle" type="Active">
+<cells>
+
+<HBox class="cl_padding" width="100%" justifyContent="Center">
+<Text text="0000100011" class="sapUiTinyMarginEnd" />
+<core:Icon color="red" src="sap-icon://message-information"
+press="onVendorInformaiton"></core:Icon>
+</HBox>
+<Text text="Expenses for Subsciption IT Systems Development Projects" />
+<Input value="20" />
+<!-- <Text text="12345" /> <Text text="121%" /> <Text text="121%" />
+<Text text="121%" /> -->
+<Input value="11" />
+<Input value="14" />
+<Input value="13" />
+<Text text="12245004" />
+<RatingIndicator maxValue="5" value=""
+tooltip="Rating Tooltip" enabled="false" />
+
+</cells>
+</ColumnListItem>
+</items>
+</Table>
+
+
+
+<Table class="sapUiLargeMarginTopBottom cl_vendorComparisionTbl"
+mode="Delete" showSeparators="true" handleDelete="handleDelete"
+enableColumnFreeze="true" enableCellFilter="true">
+
+<headerToolbar>
+<Toolbar>
+<Title text="Selected Vendor/s" level="H2" />
+
+
+</Toolbar>
+</headerToolbar>
+<columns>
+<Column hAlign="Center" width="5rem">
+<Text text="Vendor" />
+</Column>
+
+<Column hAlign="Center">
+<Text text="Delivery" />
+</Column>
+<Column hAlign="Center">
+<Text text="Quality" />
+</Column>
+<Column hAlign="Center">
+<Text text="Price" />
+</Column>
+<Column hAlign="Center">
+<Text text="Experience" />
+</Column>
+<Column hAlign="Center">
+<Text text="Technical Feedback" />
+</Column>
+<Column width="40%">
+<Text text="Remarks" />
+</Column>
+
+</columns>
+<items>
+<ColumnListItem vAlign="Middle" type="Active"
+press="handleaddButtonPressed">
+<cells>
+<Text text="0000100000" />
+<CheckBox xmlns="sap.m" />
+<CheckBox xmlns="sap.m" />
+<CheckBox xmlns="sap.m" />
+<CheckBox xmlns="sap.m" />
+<CheckBox xmlns="sap.m" />
+
+<Input text="Reasons For Recommendation" />
+</cells>
+</ColumnListItem>
+
+
+</items>
+
+
+
+</Table>
+
+<!-- <Panel headerText ="Selected Vendor/s" id="slctd_vendor" class='sapUiResponsiveMargin'
+visible="false"> <Tokenizer width="100%" tokens=""> <Token key="Hello" text="ABC
+Corp/0000100000" /> </Tokenizer> </Panel> -->
+
+
+
+<Table headerText="Types of Approvals">
+
+<columns>
+<Column>
+<header>
+<Text text="Type of Approval" />
+</header>
+</Column>
+<Column>
+<header>
+<Text text="Reason" />
+</header>
+</Column>
+</columns>
+<items>
+<ColumnListItem xmlns="sap.m">
+
+<cells>
+<Text
+text="Name Request to increase the price difference between the minimum offer and the offer chosen for AED 100,000" />
+
+<Input placeholder="Reason"></Input>
+</cells>
+</ColumnListItem>
+
+<ColumnListItem xmlns="sap.m">
+
+<cells>
+<Text
+text="Request for exemption from the Bank gurantee of the total contract value" />
+
+<Input placeholder="Reason"></Input>
+</cells>
+</ColumnListItem>
+
+<ColumnListItem xmlns="sap.m">
+
+<cells>
+<Text
+text="Request for exempetion from bank gurantee of the advance payemnt" />
+
+<Input placeholder="Reason"></Input>
+</cells>
+</ColumnListItem>
+<ColumnListItem xmlns="sap.m">
+
+<cells>
+<Text
+text="Request a down payment increase of 10%" />
+
+<Input placeholder="Reason"></Input>
+</cells>
+</ColumnListItem>
+<ColumnListItem xmlns="sap.m">
+
+<cells>
+<Text
+text="Request for payment to the consultant or expert" />
+
+<Input placeholder="Reason"></Input>
+</cells>
+</ColumnListItem>
+
+
+
+</items>
+</Table>
+
+
+
+
+
+
+
+<Panel headerText="Comments" class=''>
+<TextArea id="textAreaWithoutBinding" value=""
+placeholder="Please enter remarks. . " showExceededText="true" width="100%" />
+
+</Panel>
+
+
+
+
+<!-- <HBox width="100%" justifyContent="Center"> <Button text="Submit" press='onSubmitCompareQtn'></Button></HBox> -->
+
+
+
+</core:FragmentDefinition>

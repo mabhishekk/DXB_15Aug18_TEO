@@ -1,0 +1,65 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<ResponsivePopover
+		title="Vendor Details"
+		class="sapUiPopupWithPadding"
+		resizable="true"
+		placement="Top" >
+		
+		<content>
+		
+			<f:SimpleForm id=""
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="6"
+			labelSpanM="6"
+			labelSpanS="6"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="2"
+			columnsM="2"
+			columnsS="2"
+			singleContainerFullSize="false" >			
+			<f:content>		
+			<core:Title text="Company Details" />		
+				<Label text="Vendor Name" />
+				<Text text="ABC Corp" />
+		
+				<Label text="Vendor Type" />
+				<Text text="Company"/>
+				
+				<Label text="Company Code" />
+				<Text text="BBD"/>
+				
+				<Label text="Date Of Establishment" />
+				<Text text="18/04/1991"></Text>
+				
+				<core:Title text="Contact Information" />
+				
+				
+					<Label text="Tel.No" />
+				<Text text="123456"/>
+				<Label text="Mobile No" />
+				<Text text="35373839"/>
+				<Label text="Email" />
+				<Text text="35373839"/>
+				<Label text="Website" />
+				<Text text="www.google.com"/>
+			</f:content>
+		</f:SimpleForm>
+	
+		
+		
+		
+			
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

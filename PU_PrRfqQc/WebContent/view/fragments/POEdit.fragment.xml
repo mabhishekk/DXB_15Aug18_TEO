@@ -1,0 +1,186 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Panel expandable="true" expanded="false" headerText="Delivery/ Invoice"
+		width="auto" class="sapUiResponsiveMargin">
+		<content>
+			<f:SimpleForm 
+				editable="true" 
+				layout="ResponsiveGridLayout"
+				labelSpanXL="3" 
+				columnsXL="2" 
+				emptySpanXL="0" 
+				labelSpanL="3"
+				columnsL="2" 
+				emptySpanL="0" 
+				labelSpanM="3" 
+				columnsM="2" 
+				emptySpanM="0"
+				labelSpanS="12" 
+				columnsS="12" 
+				emptySpanS="0" 
+				adjustLabelSpan="false">
+				<f:content>
+					<Label text="Payment terms" />
+					<Input />
+					<Label text="Payment in" />
+					<Input>
+						<layoutData>
+							<l:GridData span="XL1 L1 M2 S3" />
+						</layoutData>
+					</Input>
+					<Text text="days">
+						<layoutData>
+							<l:GridData span="XL1 L1 M2 S2" />
+						</layoutData>
+					</Text>
+					<Input>
+						<layoutData>
+							<l:GridData span="XL1 L1 M2 S3" />
+						</layoutData>
+					</Input>
+					<Text text="%">
+						<layoutData>
+							<l:GridData span="XL1 L1 M2 S1" />
+						</layoutData>
+					</Text>
+					<Label text="Payment in" />
+					<Input>
+						<layoutData>
+							<l:GridData span="XL1 L1 M2 S3" />
+						</layoutData>
+					</Input>
+					<Text text="days">
+						<layoutData>
+							<l:GridData span="XL1 L1 M2 S2" />
+						</layoutData>
+					</Text>
+					<Input>
+						<layoutData>
+							<l:GridData span="XL1 L1 M2 S3" />
+						</layoutData>
+					</Input>
+					<Text text="%">
+						<layoutData>
+							<l:GridData span="XL1 L1 M2 S1" />
+						</layoutData>
+					</Text>
+					<Label text="Payment in" />
+					<Input>
+						<layoutData>
+							<l:GridData span="XL1 L1 M2 S3" />
+						</layoutData>
+					</Input>
+					<Text text="days net">
+						<layoutData>
+							<l:GridData span="XL1 L1 M2 S3" />
+						</layoutData>
+					</Text>
+					<core:Title text="" />
+					<Label text="Currency" />
+					<Input />
+					<Select width="5.75rem">
+						<items>
+							<core:Item text="AED" />
+							<core:Item text="USD" />
+							<core:Item text="INR" />
+						</items>
+					</Select>
+					<Label />
+					<CheckBox text="Exchange rate Fixed" />
+				</f:content>
+			</f:SimpleForm>
+		</content>
+	</Panel>
+	<Table headerText="Item Overview">
+		<columns>
+			<Column>
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Item" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Account Assignment" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Material" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Service Description" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Quantity" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Delivery Date" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Start Date" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="End Date" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Net Price" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Currency" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Discount Value" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Quotation No." />
+				</header>
+			</Column>
+		</columns>
+	</Table>
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+		labelSpanXL="3" columnsXL="2" emptySpanXL="0" labelSpanL="3" columnsL="2"
+		emptySpanL="0" labelSpanM="3" columnsM="2" emptySpanM="0" labelSpanS="12"
+		columnsS="12" emptySpanS="0" adjustLabelSpan="false">
+		<f:content>
+			<core:Title text="Account Assignment" />
+			<Label text="GL Account" />
+			<Input />
+			<core:Title text="" />
+			<Label text="Currency" />
+			<Input />
+			<Select width="5.75rem">
+				<items>
+					<core:Item text="AED" />
+					<core:Item text="USD" />
+					<core:Item text="INR" />
+				</items>
+			</Select>
+			<Label />
+		</f:content>
+	</f:SimpleForm>
+	<Label text="Conditions" />
+	<Input />
+</core:FragmentDefinition>

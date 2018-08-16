@@ -1,0 +1,192 @@
+<View 
+	xmlns          ="sap.m" 
+	xmlns:layout   ="sap.ui.layout" 
+	xmlns:f        ="sap.ui.layout.form"
+	xmlns:u        ="sap.ui.unified"
+	xmlns:tbl      ="sap.ui.table" 
+	xmlns:core     ="sap.ui.core" 
+	xmlns:l        ="sap.ui.layout"
+	xmlns:commons  ="sap.ui.commons"
+	controllerName ="providentia.pr.controller.quot_comparision">
+	<Page id="QCPage" title="{i18n>quotCompare} - {lModel>/Banfn}" 
+		navButtonPress="onNavBack" showNavButton="{device>/isPhone}" applyContentPadding="false">
+		<content>
+			<IconTabBar id="id_iconTB" select="handleIconTabBarSelect"
+				selectedKey="QC" class="">
+				<items>
+					<IconTabFilter icon="sap-icon://request" iconColor="Positive"
+						design="Vertical" key="PR" expanded="false" text="{i18n>PurReq}" />
+
+					<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/QR}"
+						iconColor="Accept " /> -->
+
+					<IconTabFilter id="qr_req" icon="sap-icon://sales-quote"
+						iconColor="Negative" design="Vertical" key="QR" text="{i18n>QuotReq}" />
+
+					<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/QC}"
+						iconColor="Accept " /> -->
+
+					<IconTabFilter id="idPR_IT_03" icon="sap-icon://order-status"
+						iconColor="Negative" design="Vertical" key="QC" text="{i18n>QuotComp}">
+						<IconTabBar select="handleQuotComp" id="quotComp">
+							<items>
+								<IconTabFilter text="{i18n>Quotations}" key="Quote">
+									<content>
+										<f:SimpleForm
+											editable="true"
+											layout="ResponsiveGridLayout"
+											labelSpanXL="3"	labelSpanL="3"	labelSpanM="5"	labelSpanS="12"
+											emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+											columnsXL="2"	columnsL="2"	columnsM="2"
+											adjustLabelSpan="false" class="noTitle"
+											singleContainerFullSize="false" >
+											<f:content>
+												<core:Title text="" />
+													<Label text="{i18n>PlsSlctQuot}"/>
+													<ComboBox id="vendorSet" items="{lModel>/quotations}" selectionChange="onQRChangeDial">
+														<core:ListItem key="{Ebeln}" text="{lModel>Vendorname} - {lModel>Ebeln}"	additionalText="{Landx50}" />
+													</ComboBox>
+													<Label text="{i18n>vendor}"/>
+													<Text id="vendor_detail"/>
+												<core:Title text="" />
+													<Label text="{i18n>Currency}"/>
+													<Text id="idCurrency" text='{Currency}'/>
+													<!-- <Select id="idCurrency" items="{/currencySet}" value="{Fullname}" selectedKey="{Currency}" width='5rem'>
+														<core:ListItem key="{Waers}" text="{Waers}"	additionalText="{Landx50}" />
+													</Select> -->
+											</f:content>
+										</f:SimpleForm>
+										<!-- <l:Grid  >
+											<Label xmlns="sap.m" text="{i18n>PlsSlctQuot}" class="sapUiSmallMarginTop"/>
+											<ComboBox id="vendorSet" xmlns="sap.m"
+												selectionChange="onQRChangeDial">
+
+											</ComboBox>
+										</l:Grid>
+
+										<l:Grid id="venGrid" class="sapUiResponsiveMargin">
+
+											<l:content>
+												<Label text="{i18n>vendor}"></Label>
+												<Text id="vendor_detail" text="{Vendorname}"></Text>
+											</l:content>
+										</l:Grid> -->
+										<ScrollContainer horizontal="true">
+											<Table items="{lModel>/qrItem/results}" id="idtable">
+												<headerToolbar>
+													<OverflowToolbar>
+														<Title text="{i18n>Item}" level="H2" />
+													</OverflowToolbar>
+												</headerToolbar>
+												<columns>
+													<Column width="10rem"><header> <Text text="{i18n>Description}" /> </header></Column>
+													<Column width="5rem"><header> <Text text="{i18n>Quantity}"    /> </header></Column>
+													<Column width="7rem"><header> <Text text="{i18n>Unit}"        /> </header></Column>
+													<Column width="5rem"><header> <Text text="{i18n>Value}"       /> </header></Column>
+													<Column width="5rem"><header> <Text text="{i18n>QCDisvalue}"  /> </header></Column>
+													<Column width="5rem"><header> <Text text="{i18n>Discount}"    /> </header></Column>
+													<Column width="5rem"><header> <Text text="{i18n>SubTotal}"    /> </header></Column>
+													<Column width="5rem"><header> <Text text="{i18n>Vval}"        /> </header></Column>
+													<Column width="5rem"><header> <Text text="{i18n>NetPrice}"    /> </header></Column>
+													<Column width="7rem"><header> <Text text="{i18n>StartDate}"    /> </header></Column>
+													<Column width="7rem"><header> <Text text="{i18n>EndDate}"        /> </header></Column>
+													<Column width="7rem"><header> <Text text="{i18n>Dedate}"    /> </header></Column>
+													<Column width="5rem"><header> <Text text="{i18n>Add}"         /> </header></Column>
+													<Column width="5rem"><header> <Text text="{i18n>Delete}"      /> </header></Column>
+												</columns>
+												<items>
+													<ColumnListItem>
+														<cells>
+															<commons:TextField value="{lModel>ShortText}" width="10rem"/>
+															<commons:TextField value="{lModel>TargetQty}" liveChange="subTotalCalc" width="5rem" editable="{= ${lModel>BaseUnit} !== 'AU'}"/>
+															<Select items="{path:'/unitsSet', templateShareable:'true'}" selectedKey="{lModel>Unit}" width="7rem" enabled="{= ${lModel>BaseUnit} !== 'AU'}">
+																<items><core:ListItem text="{Msehl}" key="{Msehi}" /></items>
+															</Select>
+															<commons:TextField value="{lModel>NetPrice}" type='Number' liveChange="liveValueChange" width="5rem"/>
+															<commons:TextField value="{lModel>Discountval}" type='Number' liveChange="liveDiscPerChange" width="5rem"/>
+															<commons:TextField value="{ parts : ['lModel>NetPrice', 'lModel>Discountval'], formatter: '.formatter.discountValue' }" type='Number' liveChange="liveDiscValChange" width="5rem"/>
+															<Text text="{lModel>Subtotal}" />
+															<Select selectedKey="{lModel>Valvalue}"  change="subTotalCalc" width="5rem" >
+																<items><core:Item text="0 %" key='0.00'/><core:Item text="5 %" key='5.00'/></items>
+															</Select>
+															<Text text="{lModel>Finaltotal}" />
+															<commons:DatePicker value="{path: 'lModel>Begda',	type: 'sap.ui.model.type.Date', formatOptions:{strictParsing: true, UTC:true}}"  width="6rem"/>
+															<commons:DatePicker value="{path: 'lModel>Endda',	type: 'sap.ui.model.type.Date', formatOptions:{strictParsing: true, UTC:true}}"  width="6rem"/>
+															<commons:DatePicker value="{path: 'lModel>DelDate',	type: 'sap.ui.model.type.Date', formatOptions:{strictParsing: true, UTC:true}}"  width="6rem"/>
+															<core:Icon src="sap-icon://add"    press="onItemAdd"/>
+															<core:Icon src="sap-icon://delete" press="onItemDelete"/>
+														</cells>
+													</ColumnListItem>
+												</items>
+											</Table>
+			</ScrollContainer>
+		<Table xmlns="sap.m" id="id_docMnts" items="{/navigqrtodocuments}"
+				mode="Delete" delete="onFileDelete">
+				<headerToolbar>
+					<OverflowToolbar xmlns="sap.m">
+						<ToolbarSpacer />
+
+						<u:FileUploader name="myFileUpload"  style="Emphasized" id="matrnFile" tooltip="Upload your file to the local server"  uploadComplete="handleUploadComplete" />
+						<Button xmlns="sap.m" icon="sap-icon://upload" press="onFileUpload" />
+						<!-- <Button xmlns="sap.m" icon="sap-icon://minus" press="onFileDelete" /> -->
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns> <!-- sap.m.Column -->
+					<Column xmlns="sap.m">
+						<Text text="{i18n>FileName}" />
+					</Column>
+					<Column xmlns="sap.m">
+						<Text text="{i18n>FileType}" />
+					</Column>
+				</columns>
+				<ColumnListItem xmlns="sap.m" type="Active" press="onOpenFile">
+
+					<cells>
+						<Text xmlns="sap.m" text="{Docfile}" />
+						<Text xmlns="sap.m" text="{Mimetype}" />
+
+					</cells>
+				</ColumnListItem>
+			</Table>
+										
+										
+										
+									</content>
+								</IconTabFilter>
+								<IconTabFilter id="comVbox" text="{i18n>Comparision}" key="com"/>
+							</items>
+						</IconTabBar>
+					</IconTabFilter>
+					<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/PO}"
+						iconColor="Accept " /> -->
+
+					<IconTabFilter icon="sap-icon://order-status"
+						iconColor="Negative" design="Vertical" key="PO" text="{i18n>PurOrd}"
+						visible="{lModel>/PO}" />
+					<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/GR}" iconColor="Accept " /> -->
+
+					<IconTabFilter icon="sap-icon://shipping-status" iconColor="Negative" design="Vertical" key="GR" text="{i18n>Gdsrcp}" visible="{lModel>/GR}"/>
+					
+					<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/IN}" iconColor="Accept " /> -->
+
+					<IconTabFilter icon="sap-icon://sales-quote" iconColor="Negative" design="Vertical" key="IN" text="{i18n>Invoice}" visible="{lModel>/IN}"/>
+						
+						
+						
+
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button id="prSave" icon="sap-icon://save" text="{i18n>Save}" type="Accept" press="onSaveQR" />
+				<Button id="prCancel" icon="sap-icon://sys-cancel" text="{i18n>Cancel}"  visible="false"	press="onQRReset" />
+				<Button id="qrSubmit" icon="sap-icon://save" text="{i18n>Submit}" visible='false' type="Accept" press="onSFnlQR" />	
+				<ToolbarSpacer />
+				<Button id="prPrint" icon="sap-icon://print" text="{i18n>Print}" press="onPrintQR" />
+
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

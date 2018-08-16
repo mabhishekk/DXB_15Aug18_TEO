@@ -1,0 +1,26 @@
+<core:FragmentDefinition
+xmlns="sap.m"
+xmlns:core="sap.ui.core">
+<ViewSettingsDialog
+confirm="handleConfirm">
+<filterItems>
+<ViewSettingsFilterItem text="Status" key="1">
+<items>
+<ViewSettingsItem text="Open" key="1a" />
+<ViewSettingsItem text="Close" key="1b" />
+<ViewSettingsItem text="Approved" key="1c" />
+</items>
+</ViewSettingsFilterItem>
+<ViewSettingsFilterItem text="Cost Center" key="2">
+<items>
+<ViewSettingsItem text="Cost Center 1" key="2a" />
+<ViewSettingsItem text="Cost Center 2" key="2b" />
+<ViewSettingsItem text="Cost Center 3" key="2c" />
+<ViewSettingsItem text="CostoCenter 1" key="2d" />
+<ViewSettingsItem text="CostoCenter 2" key="2e" />
+<ViewSettingsItem text="CostoCenter 3" key="2f" />
+</items>
+</ViewSettingsFilterItem>
+</filterItems>
+</ViewSettingsDialog>
+</core:FragmentDefinition>

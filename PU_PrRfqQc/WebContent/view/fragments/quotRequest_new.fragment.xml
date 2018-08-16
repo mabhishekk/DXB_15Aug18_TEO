@@ -1,0 +1,139 @@
+<core:FragmentDefinition 
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<!-- <Toolbar> <Title text="Vendor Quotations" /> <ToolbarSpacer /> <Button 
+		text="External Vendor" icon="sap-icon://add" press="onExternalVendor" /> 
+		</Toolbar> </headerToolbar> </Panel> <MultiInput id="multiInput2" width="100%" 
+		enableMultiLineMode="true" placeholder="Search Vendor" showSuggestion="true" 
+		showValueHelp="true" valueHelpRequest="onValueHelp" suggestionRows="{/VendorData}"> 
+		<suggestionColumns> <Column hAlign="Begin" popinDisplay="Inline" demandPopin="true"> 
+		<Label text="Vendor Name" /> </Column> <Column hAlign="Center" popinDisplay="Inline" 
+		demandPopin="true" minScreenWidth="Tablet"> <Label text="Vendor Number" /> 
+		</Column> <Column hAlign="Center" popinDisplay="Inline" demandPopin="false" 
+		minScreenWidth="Tablet"> <Label text="Email" /> </Column> <Column hAlign="End" 
+		popinDisplay="Inline" demandPopin="true"> <Label text="Contact Number" /> 
+		</Column> </suggestionColumns> <suggestionRows> <ColumnListItem> <cells> 
+		<Label text="{VendorName}" /> <Label text="{VendorNumber}" /> <Label text="{Email}" 
+		/> <Label text="{Contact}" /> </cells> </ColumnListItem> </suggestionRows> 
+		</MultiInput> <Button type="segment" text="Send For Quotation" press='onRecommend'></Button> -->
+
+
+	<f:SimpleForm id="QR_Information"
+		editable="true"
+		layout="ResponsiveGridLayout"
+		labelSpanXL="4"
+		labelSpanL="4"
+		labelSpanM="4"
+		labelSpanS="12"
+		adjustLabelSpan="false"
+		emptySpanXL="0"
+		emptySpanL="0"
+		emptySpanM="0"
+		emptySpanS="0"
+		columnsXL="2"
+		columnsL="2"
+		columnsM="2"
+		singleContainerFullSize="false" >
+		<f:content>
+			<core:Title text="" />
+			<Label text="Quotation Date"/>
+			<DatePicker width="9rem"/>
+			
+			<core:Title text="" />
+			<Label text="Quotation Deadline" />
+			<DatePicker width="9rem"/>
+		</f:content>
+	</f:SimpleForm>
+
+	<Table class="cl_vendorComparisionTbl"  mode="MultiSelect" contentWidth="80%" contentHeight="80%"
+		showSeparators="true" enableColumnFreeze="true" enableCellFilter="true">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="Items" level="H2" />
+				<ToolbarSpacer />
+				<!--<Button icon="sap-icon://add" text="Add" press="onQRSelectVendor" />
+				<Button icon="sap-icon://edit" text="Edit" press="handleaddButtonPressed" />
+				<Button tooltip="View Settings" icon="sap-icon://bar-chart" press="graphOpen" /> -->
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column hAlign="Center">
+				<Text text="Material" />
+			</Column>
+			<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true"
+				popinDisplay="Inline">
+				<Text text="Quotation Quantity" />
+			</Column>
+			<Column hAlign="Center" >
+				<Text text="Unit" />
+			</Column>
+			<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+				TextAlign="Center" demandPopin="true">
+				<Text text="Delievery Date" />
+			</Column>
+			
+			
+
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle" 
+				>
+				<cells>
+					<!-- <HBox class="cl_padding" width="100%" justifyContent="Center"> 
+						<Text text="0000100000" class="sapUiTinyMarginEnd"/> <core:Icon color="red" 
+						src="sap-icon://message-information" press="onVendorInformaiton"></core:Icon> 
+						</HBox> <Text text="Advertisement and Promotion Expenses Subsciption " /> 
+						<Input value="10" /> <Text text="12345" /> <Text text="121%" /> <Text text="121%" 
+						/> <Text text="121%" /> <Input value="10" /> <Input value="12" /> <Input 
+						value="10" /> <Text text="1231" /> <RatingIndicator maxValue="5" value="2" 
+						tooltip="Rating Tooltip" enabled="false" /> -->
+						
+						<Text></Text>
+						<Text></Text>
+						<Text></Text>
+						<Text></Text>
+
+				</cells>
+			</ColumnListItem>
+			<ColumnListItem vAlign="Middle" 
+				>
+				<cells>
+
+					<!-- <HBox class="cl_padding" width="100%" justifyContent="Center"> 
+						<Text text="0000100011" class="sapUiTinyMarginEnd" /> <core:Icon color="red" 
+						src="sap-icon://message-information" press="onVendorInformaiton"></core:Icon> 
+						</HBox> <Text text="Expenses for Subsciption IT Systems Development Projects" 
+						/> <Input value="20" /> <Text text="12345" /> <Text text="121%" /> <Text 
+						text="121%" /> <Text text="121%" /> <Input value="11" /> <Input value="14" 
+						/> <Input value="13" /> <Text text="12245004" /> <RatingIndicator maxValue="5" 
+						value="" tooltip="Rating Tooltip" enabled="false" /> -->
+						
+						<Text></Text>
+						<Text></Text>
+						<Text></Text>
+						<Text></Text>
+
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+
+	<Panel class="sapUiLargeMarginTop">
+		<headerToolbar>
+			<Toolbar>
+				<Label text=" Select Vendor"/>
+				<Select name="Vendor" width="15rem"/>
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<!--  TODO Display Vendor Details - Name  -->
+			<!--  TODO Display Vendor Details - Address-->
+			<!--  TODO Display Vendor Details - eMail -->
+			<!--  TODO Display Vendor Details - Additional Information -->
+		</content>
+	</Panel>
+
+
+</core:FragmentDefinition>

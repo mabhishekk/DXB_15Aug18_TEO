@@ -1,0 +1,36 @@
+<core:FragmentDefinition
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified" 
+	xmlns:f="sap.ui.layout.form" 
+	xmlns:core="sap.ui.core">
+	<Dialog
+		title="{i18n>Selectapprovals}"
+		stretchOnPhone= "true"
+		afterOpen="onOpenApprove"
+		>
+		<buttons>
+			<Button text="{i18n>Forward}" icon="sap-icon://forward" press="handleApproveSave"/>
+			<Button text="{i18n>Close}" icon="sap-icon://decline" press="onApproveClose"/> 
+		</buttons>
+		<content>
+			<f:SimpleForm 
+				editable="true" 
+				layout="ResponsiveGridLayout"
+				labelSpanXL="4" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+				emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+				columnsXL="2"   columnsL="1"   columnsM="1" 
+				adjustLabelSpan="false"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="{i18n>Level1Approver}" /> <Select id="l1usr_List"/>
+					<Label text="{i18n>Level2Approver}" /> <Select id="l2usr_List"/>
+					<Label text="{i18n>Level3Approver}" /> <Select id="l3usr_List"/>
+					<Label text="{i18n>Level4Approver}" /> <Select id="l4usr_List"/>
+					<Label text="{i18n>Level5Approver}" /> <Select id="l5usr_List"/>
+				</f:content>
+			</f:SimpleForm> 
+		</content>
+	</Dialog>
+</core:FragmentDefinition>
+

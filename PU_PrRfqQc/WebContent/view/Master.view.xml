@@ -1,0 +1,78 @@
+<!-- Procurement Master page -->
+
+<View 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:layout="sap.ui.layout"
+	controllerName="providentia.pr.controller.Master">
+<Page 
+		title="{i18n>Title}" 		
+		navButtonPress="onNavBack">
+		<!-- <Panel> <content> <Label text="Search by" labelFor="L4"/> <RadioButtonGroup 
+			id="L4" columns="3" select="onRequestType"> <buttons> <RadioButton text="PR 
+			Number"/> <RadioButton text="PO Number"/> </buttons> </RadioButtonGroup> 
+			<SearchField width="100%" /> </content> </Panel> -->
+
+		<subHeader>
+			<Toolbar id="idPRMasterSearchBar">
+				<SearchField
+					id="idPRMastersearchField"
+					liveChange="onSearchField"
+					placeholder="{i18n>homeSearchPlaceholder}"
+					tooltip="{i18n>homeSearchTooltip}"
+					width="100%">
+				</SearchField>
+			</Toolbar>
+		</subHeader>
+
+		<List 
+			id="list" 
+			items="{/PR_HEADERSet}"
+			includeItemInSelection = "false" 
+			mode="SingleSelectMaster"
+			selectionChange="onSelectionChange">
+			<!-- <headerToolbar>
+				<Toolbar>
+					<SegmentedButton 
+						xmlns="sap.m" 
+						width="100%"
+						class="sapUiNoContentPadding">
+						<items>
+							<SegmentedButtonItem text="PR" />
+							<SegmentedButtonItem text="PO" />
+						</items>
+					</SegmentedButton>
+				</Toolbar>
+			</headerToolbar> -->
+			<items>
+				<!-- <StandardListItem title="{orderName}" info= "{status}" infoState= 
+					"{state}" type="Active" press="onSelectionChange"/> -->
+				<ObjectListItem 
+					title="{Banfn}" 
+					type="Active"
+					press="onSelectionChange" >
+				 	<firstStatus>
+						<ObjectStatus 
+							text="{ path: 'Frgzu' ,formatter:'.formatter.formatStatus'}"
+							state="{ path: 'Frgzu' ,formatter:'.formatter.PRstatusState'}"
+							/>
+					</firstStatus> 
+					<attributes >						
+						<ObjectAttribute  text="{ path: 'Zrequestbreif' }" />
+						<ObjectAttribute  text="{ path: 'Zrequesttype' ,formatter:'.formatter.PRmasterRequestType'}" />
+						<ObjectAttribute title="{i18n>Createdon}" text="{path: 'Badat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}"/>
+						<ObjectAttribute title="" text="{Ltext}"/>
+					</attributes>
+				</ObjectListItem>
+			</items>
+		</List>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+
+				<Button icon="sap-icon://create" tooltip="Create New" text="{i18n>createnew}" type="Reject"
+					press="handlePRMCreateFormPress" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

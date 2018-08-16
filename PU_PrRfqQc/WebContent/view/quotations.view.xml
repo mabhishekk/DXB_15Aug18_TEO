@@ -1,0 +1,34 @@
+<View
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout" 
+	xmlns:layout="sap.ui.layout"
+	controllerName="providentia.pr.controller.quotations">
+	<Page
+		title="Quotation"
+		showNavButton="true"
+		navButtonPress="onNavButtonPress">
+		
+		<List 
+		
+			
+			mode="SingleSelectMaster"
+			selectionChange="onSelectionChange">
+			<items>
+				<StandardListItem 
+					title="Quotation"
+					info= "{status}"
+					infoState= "{state}"
+					type="Active"
+					press="onSelectionChange"/>
+			</items>
+		</List>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button  icon="sap-icon://filter" tooltip="Filter By" press="handlePRMFilterPress"/>
+				<Button  icon="sap-icon://group-2" tooltip="Group By" press="handlePRMGroupPress"/>
+				<Button  icon="sap-icon://create-form" tooltip="Create New" press="handlePRMCreateFormPress"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

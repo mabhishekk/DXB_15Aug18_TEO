@@ -1,0 +1,356 @@
+<core:FragmentDefinition 
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core">
+	<IconTabBar 
+		expanded="true"
+		id="idIconTabBar" 
+		select="handleIconTabBarSelect"
+		applyContentPadding="false" 
+		class="cl_custIconTab">
+		<items>
+			<IconTabFilter 
+				icon="sap-icon://hint" 
+				text="{i18n>PRgeneral}">
+				<content>
+					<f:SimpleForm 
+						id="idPRgeneralDisplayForm"
+						editable="true" 
+						layout="ResponsiveGridLayout"
+						labelSpanXL="4" 
+						columnsXL="2" 
+						emptySpanXL="0" 
+						labelSpanL="4"
+						columnsL="2" 
+						emptySpanL="0" 
+						labelSpanM="4" 
+						columnsM="2" 
+						emptySpanM="0"
+						labelSpanS="12" 
+						columnsS="12" 
+						emptySpanS="0" 
+						breakpointM="750"
+						adjustLabelSpan="false">
+						<f:content>
+							<core:Title text="" />
+							<Label text="{i18n>PRGrequestDate}" labelFor="DP1" />
+							<DatePicker id="DP1" placeholder="Enter Date ..." width="9rem" />
+							<Label text="{i18n>PRGrequestor}" />
+							<ComboBox 
+								id= "idRequester"
+								showSecondaryValues= "true"
+								loadItems= "onRequesterHelp">
+							</ComboBox> 
+							
+						
+							
+							<Label text="{i18n>PRGrequestFor}" />
+							<layout:VerticalLayout>
+								<CheckBox id="idRFM" text="{i18n>PRGmaterial}" />
+								<CheckBox id="idRFS" text="{i18n>PRGservice}"/>
+								<CheckBox id="idRFO" text="{i18n>PRGother}" select="onRFOthers"/>
+							</layout:VerticalLayout>
+							<Label id="LRFOInputOthers" labelFor="LRFO" visible="false" />
+							<Text text="{Zrequestothers}" id="LRFO" visible="false"/>
+							<Label text="{i18n>PRGrequestType}" labelFor="L4" />
+							<RadioButtonGroup id="L4" columns="3" selectedIndex="{ path: 'Zrequesttype', formatter: '.formatter.PRrequestType'}"
+								select="onRequestType">
+								<buttons>
+									<RadioButton text="{i18n>PRGurgent}"     editable="false"/>
+									<RadioButton text="{i18n>PRGroutine}"    editable="false"/>
+									<RadioButton text="{i18n>PRGexcVenAgen}" editable="false"/>
+								</buttons>
+							</RadioButtonGroup>
+							
+							<core:Title text="" />
+							<Label text="{i18n>PRGdeptProject}" labelFor="L2" />
+							<Text text="{Zdepartment}"/>
+							<Label text="{i18n>PRGBriefOfRequest}" labelFor="L6" />
+							<Text text="{Zrequestbreif}"/>
+							<Label id="idUVR" text="{i18n>PRGvendor}" visible="{ path: 'Zrequesttype', formatter: '.formatter.PRrequestTypeVisible'	}"/>
+							<Text text="" visible="{ path: 'Zrequesttype', formatter: '.formatter.PRrequestTypeVisible'	}"/>
+							<Label id="idUPM" text="{i18n>PRGprocMethod}" visible="{ path: 'Zrequesttype', formatter: '.formatter.PRrequestTypeVisible'	}"/>
+							<CheckBox id="idUPMC1" key="1"  text="{i18n>PRGSingleSource}" visible="{ path: 'Zrequesttype', formatter: '.formatter.PRrequestTypeVisible'	}"
+									selected="{
+									path: 'Zprocurmethod',
+							formatter: '.procMethodSS'
+									}"/> 
+								<!-- <CheckBox id="idUPMC1" key="1"  text="Single Source" 
+								selected=" "/> -->
+							<CheckBox id="idUPMC2" key="2" text="{i18n>PRGagency}" visible="{ path: 'Zrequesttype', formatter: '.formatter.PRrequestTypeVisible'	}" selected="{= (${Zrequesttype} === 1 ? false : true)}" />
+							<Label id="idUJ" text="{i18n>PRGjustification}" visible="{ path: 'Zrequesttype', formatter: '.formatter.PRrequestTypeVisible'	}"/>
+							<MultiComboBox id="idUJC" selectionChange="onJustificationSelection" selectedKeys="{Zjustification}" visible="{ path: 'Zrequesttype', formatter: '.formatter.PRrequestTypeVisible'	}">
+								<items>
+									<core:Item key="1" text="Delivery" />
+									<core:Item key="2" text="Quality" />
+									<core:Item key="3" text="Price" />
+									<core:Item key="4" text="Technical Feedback" />
+									<core:Item key="5" text="Others" />
+								</items>
+							</MultiComboBox>
+							<!-- <CheckBox text="Delivery"/> <CheckBox text="Quality"/> <CheckBox 
+								text="Price"/> <CheckBox text="Experience"/> <CheckBox text="Technical Feedback"/> 
+								<CheckBox text="Others"/> -->
+							<!-- <layout:HorizontalLayout id="L7"> <layout:content> <CheckBox 
+								text="Delivery"/> <CheckBox text="Quality"/> <CheckBox text="Price"/> <CheckBox 
+								text="Experience"/> <CheckBox text="Technical Feedback"/> <CheckBox text="Others"/> 
+								</layout:content> </layout:HorizontalLayout> -->
+							<Label id="InputOthers" labelFor="L8" visible="false" />
+							<Input id="L8" visible="false" />
+						</f:content>
+					</f:SimpleForm>
+					<Bar>
+						<contentRight>
+							<Button text="Next" type="Emphasized" press="onGeneralNext"/>
+						</contentRight>
+					</Bar>
+				</content>
+			</IconTabFilter>
+			<IconTabFilter icon="sap-icon://activity-items" text="{i18n>PRcommercial}">
+				<content>
+					<f:SimpleForm 
+						editable="true" 
+						layout="ResponsiveGridLayout"
+						labelSpanXL="4" 
+						columnsXL="2" 
+						emptySpanXL="0" 
+						labelSpanL="4"
+						columnsL="2" 
+						emptySpanL="0" 
+						labelSpanM="4" 
+						columnsM="2" 
+						emptySpanM="0"
+						labelSpanS="12" 
+						columnsS="12" 
+						emptySpanS="0" 
+						breakpointM="750"
+						adjustLabelSpan="false">
+						<f:content>
+							<core:Title text="" />
+							<Label id="idCTV" text="Total Value" />
+							<Input id="idCTV1" placeholder="Amount..." />
+							<ComboBox 
+								id= "idPRGtotalValue"
+								showSecondaryValues= "true"
+								loadItems= "onPRGtotalValue">
+							</ComboBox>
+							<Label text="Delivery Prd. From" />
+							<DatePicker  value="{Zdeliverystart}" valueFormat="yyyyMMdd"  width="9rem" />
+							<Label id="idCFU" text="Attach. for Budget" />
+							<u:FileUploader id="idCFU1" name="myFileUpload"
+								uploadUrl="upload/" tooltip="Upload your file to the local server"
+								uploadComplete="handleUploadComplete" />
+							<core:Title text="" />
+							<Label id="idCDV" text="Total Discount Value" />
+							<Input id="idCDV1" placeholder="Amount..." />
+							<ComboBox 
+								id= "idPRGDiscountValue"
+								showSecondaryValues= "true"
+								loadItems= "onPRGtotalValue">
+							</ComboBox>
+							<Label text="Delivery Prd. To" />
+							<DatePicker value="{Zdeliveryend}" valueFormat="dd.mm.yyyy" width="9rem" />
+						</f:content>
+					</f:SimpleForm>
+					<Table>
+						<headerToolbar>
+							<Toolbar>
+								<Title text="Items" level="H2" />
+								<ToolbarSpacer />
+								<Button icon="sap-icon://add" press="onPRaddPress" />
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column>
+								<header>
+									<Text text="Status" />
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="Item Seq. No." />
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="Account Assignment Category" />
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="Material" />
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="Material/Service Description" />
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="Quantity" />
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="Value" />
+								</header>
+							</Column>
+						</columns>
+					</Table>
+					<Bar>
+						<contentLeft>
+							<Button text="Back" type="Emphasized" />
+						</contentLeft>
+						<contentRight>
+							<Button text="Next" type="Emphasized" />
+						</contentRight>
+					</Bar>
+				</content>
+			</IconTabFilter>
+			<IconTabFilter id="idApproval" icon="sap-icon://payment-approval" visible="{ path: 'Zrequesttype', formatter: '.formatter.PRrequestTypeVisible'	}"
+				text="{i18n>PRapproval}">
+				<content>
+					<!-- <Label id="idApprovalType" text="Types of Approvals" /> <MultiComboBox> 
+						<items> <core:Item text="Name Request to increase the price difference between 
+						the minimum offer and the offer chosen for AED 100,000" /> <core:Item text="Request 
+						for exemption from the Bank gurantee of the total contract value" /> <core:Item 
+						text="Request for exempetion from bank gurantee of the advance payemnt" /> 
+						<core:Item text="Request a down payment increase of 10% " /> <core:Item text="Request 
+						for payment to the consultant or expert" /> </items> </MultiComboBox> <Label 
+						text="Reasons" /> <Input /> -->
+
+
+					<!-- Pr Create added on 7th Nov -->
+
+
+					<Table headerText="Types of Approvals">
+
+						<columns>
+							<Column>
+								<header>
+									<Text text="Type of Approval" />
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="Reason" />
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem xmlns="sap.m">
+
+								<cells>
+									<Text
+										text="Name Request to increase the price difference between the minimum offer and the offer chosen for AED 100,000" />
+
+									<Input placeholder="Reason"></Input>
+								</cells>
+							</ColumnListItem>
+
+							<ColumnListItem xmlns="sap.m">
+
+								<cells>
+									<Text
+										text="Request for exemption from the Bank gurantee of the total contract value" />
+
+									<Input placeholder="Reason"></Input>
+								</cells>
+							</ColumnListItem>
+
+							<ColumnListItem xmlns="sap.m">
+
+								<cells>
+									<Text
+										text="Request for exempetion from bank gurantee of the advance payemnt" />
+
+									<Input placeholder="Reason"></Input>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+
+								<cells>
+									<Text text="Request a down payment increase of 10%" />
+
+									<Input placeholder="Reason"></Input>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+
+								<cells>
+									<Text text="Request for payment to the consultant or expert" />
+
+									<Input placeholder="Reason"></Input>
+								</cells>
+							</ColumnListItem>
+
+
+
+						</items>
+					</Table>
+				</content>
+			</IconTabFilter>
+			<IconTabFilter icon="sap-icon://expense-report" text="{i18n>PRother}">
+				<content>
+					<!-- <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" 
+						labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1" 
+						emptySpanL="1" emptySpanM="1" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"> 
+						<f:content> <Label text="Terms and Conditions"/> <TextArea growing="true"/> 
+						<Label text="Payment Terms"/> <TextArea growing="true"/> <Label text="Additional 
+						Information"/> <TextArea growing="true"/> </f:content> </f:SimpleForm> -->
+					<Panel xmlns="sap.m" headerText="">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="Terms and Conditions" />
+								<Button icon="sap-icon://add" press="onAddTerms" text="Add" />
+								<Button icon="sap-icon://decline" press="onRemoveTerms"
+									text="Remove" />
+							</Toolbar>
+						</headerToolbar>
+						<content>
+							<Input xmlns="sap.m" width="100%">
+
+							</Input>
+
+						</content>
+					</Panel>
+					<Panel xmlns="sap.m" headerText="">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="Payment Terms" class="sapUiLargeMarginBegin" />
+								<Button icon="sap-icon://add" press="onAddTerms" text="Add" />
+								<Button icon="sap-icon://decline" press="onRemoveTerms"
+									text="Remove" />
+							</Toolbar>
+						</headerToolbar>
+						<content>
+							<Input xmlns="sap.m" width="100%">
+
+							</Input>
+
+						</content>
+					</Panel>
+					<Panel xmlns="sap.m" headerText="">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="Additional Information" />
+								<Button icon="sap-icon://add" press="onAddTerms" text="Add" />
+								<Button icon="sap-icon://decline" press="onRemoveTerms"
+									text="Remove" />
+							</Toolbar>
+						</headerToolbar>
+						<content>
+							<Input xmlns="sap.m" width="100%">
+
+							</Input>
+
+						</content>
+					</Panel>
+				</content>
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
+</core:FragmentDefinition>

@@ -1,0 +1,245 @@
+<!-- /***********Icon tab Bar Quotation Comparision fragment ****************/ -->
+<!-- TODO have a edit page for entering the data per Quoataion and Vendor wise
+ and the panel should come dyanimically as per the number of Quotations-->
+
+<core:FragmentDefinition 
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.uxap"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	
+	<IconTabBar>
+		<items>
+			<IconTabFilter text="Quotations">
+				<content>
+					<f:SimpleForm id="QC_Information"
+						editable="true"
+						layout="ResponsiveGridLayout"
+						labelSpanXL="4"
+						labelSpanL="4"
+						labelSpanM="4"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="0"
+						emptySpanL="0"
+						emptySpanM="0"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="2"
+						columnsM="2"
+						singleContainerFullSize="false" >
+						<f:content>
+							<core:Title text="" />
+							<Label text="Select Quotation No."/>
+							<Select/>
+							<Label text="Vendor"/>
+							<Text/>
+							<Label text="Address"/>
+							<Text/>
+							
+						</f:content>
+					</f:SimpleForm>
+					<Table class="cl_vendorComparisionTbl"  mode="MultiSelect" contentWidth="80%" contentHeight="80%"
+								showSeparators="true" enableColumnFreeze="true" enableCellFilter="true">
+								<headerToolbar>
+									<OverflowToolbar>
+										<Title text="Vendor: Vendor1" level="H2" />
+										<ToolbarSpacer />
+									</OverflowToolbar>
+								</headerToolbar>
+								<columns>
+									<Column hAlign="Center">
+										<Text text="Material" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true"
+										popinDisplay="Inline">
+										<Text text="Quotation Quantity" />
+									</Column>
+									<Column hAlign="Center" >
+										<Text text="Unit" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Delievery Date" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Net Price" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Price/Unit" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Unit" />
+									</Column>
+								</columns>
+							</Table>
+					<Panel headerText="Quotation No: Quotation1">
+						<content>
+							<Table class="cl_vendorComparisionTbl"  mode="MultiSelect" contentWidth="80%" contentHeight="80%"
+								showSeparators="true" enableColumnFreeze="true" enableCellFilter="true">
+								<headerToolbar>
+									<OverflowToolbar>
+										<Title text="Vendor: Vendor1" level="H2" />
+										<ToolbarSpacer />
+									</OverflowToolbar>
+								</headerToolbar>
+								<columns>
+									<Column hAlign="Center">
+										<Text text="Material" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true"
+										popinDisplay="Inline">
+										<Text text="Quotation Quantity" />
+									</Column>
+									<Column hAlign="Center" >
+										<Text text="Unit" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Delievery Date" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Net Price" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Price/Unit" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Unit" />
+									</Column>
+								</columns>
+							</Table>
+						</content>
+					</Panel>
+					<Panel headerText="Quotation No: Quotation2" expandable="true" expanded="false">
+						<content>
+							<Table class="cl_vendorComparisionTbl"  mode="MultiSelect" contentWidth="80%" contentHeight="80%"
+								showSeparators="true" enableColumnFreeze="true" enableCellFilter="true">
+								<headerToolbar>
+									<OverflowToolbar>
+										<Title text="Vendor: Vendor2" level="H2" />
+										<ToolbarSpacer />
+									</OverflowToolbar>
+								</headerToolbar>
+								<columns>
+									<Column hAlign="Center">
+										<Text text="Material" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true"
+										popinDisplay="Inline">
+										<Text text="Quotation Quantity" />
+									</Column>
+									<Column hAlign="Center" >
+										<Text text="Unit" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Delievery Date" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Net Price" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Price/Unit" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Unit" />
+									</Column>
+								</columns>
+							</Table>
+						</content>
+					</Panel>
+					<Panel headerText="Quotation No: Quotation3" expandable="true" expanded="false">
+						<content>
+							<Table class="cl_vendorComparisionTbl"  mode="MultiSelect" contentWidth="80%" contentHeight="80%"
+								showSeparators="true" enableColumnFreeze="true" enableCellFilter="true">
+								<headerToolbar>
+									<OverflowToolbar>
+										<Title text="Vendor: Vendor3" level="H2" />
+										<ToolbarSpacer />
+									</OverflowToolbar>
+								</headerToolbar>
+								<columns>
+									<Column hAlign="Center">
+										<Text text="Material" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true"
+										popinDisplay="Inline">
+										<Text text="Quotation Quantity" />
+									</Column>
+									<Column hAlign="Center" >
+										<Text text="Unit" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Delievery Date" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Net Price" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Price/Unit" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Unit" />
+									</Column>
+								</columns>
+							</Table>
+						</content>
+					</Panel>
+				</content>
+			</IconTabFilter>
+			<IconTabFilter text="Comparision">
+				<content>
+					<Panel >
+						<content>
+							<Table class="cl_vendorComparisionTbl"  mode="MultiSelect" contentWidth="80%" contentHeight="80%"
+								showSeparators="true" enableColumnFreeze="true" enableCellFilter="true">
+								<!-- <headerToolbar>
+									<OverflowToolbar>
+										<Title text="Vendor: Vendor1" level="H2" />
+										<ToolbarSpacer />
+									</OverflowToolbar>
+								</headerToolbar> -->
+								<columns>
+									<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true"
+										popinDisplay="Inline">
+										<Text text="Items" />
+									</Column>
+									<Column hAlign="Center" >
+										<Text text="Vendor1" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Vendor2" />
+									</Column>
+									<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+										TextAlign="Center" demandPopin="true">
+										<Text text="Vendor3" />
+									</Column>
+									<!-- TODO dyanamic display of vendors in column  -->
+								</columns>
+							</Table>
+						</content>
+					</Panel>
+				</content>
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
+	
+</core:FragmentDefinition>
+
+	

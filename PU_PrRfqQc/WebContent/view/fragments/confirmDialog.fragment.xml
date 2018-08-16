@@ -1,0 +1,94 @@
+<core:FragmentDefinition
+	xmlns       ="sap.m" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f     ="sap.ui.layout.form"
+	xmlns:core  ="sap.ui.core">
+	<Dialog title="{i18n>RsnForRecom}"  class="sapUiContentPadding">
+		<buttons>
+			<Button text="{i18n>Submit}" press="onSubmitFnlQR" type="Reject"/>
+			<Button text="{i18n>Close}" press="onCloseQR" type="Reject"/>
+		</buttons>
+		<content>				
+			<CheckBox id="RB1-1" text="{i18n>Delivery}" />
+			<CheckBox id="RB1-2" text="{i18n>Quality}"/>
+			<CheckBox id="RB1-3" text="{i18n>Price}" />
+			<CheckBox id="RB1-4" text="{i18n>Experience}"/>
+			<CheckBox id="RB1-5" text="{i18n>TechnicalFeedback}"/>
+			<CheckBox id="RB1-6" text="{i18n>Others}" select="onRecOthersReason"/>
+			<Input id="qc_Others" visible="false" maxLength="255" liveChange="handleLiveInput" placeholder="{i18n>RecommendReasonPlaceholder}"/>
+			
+			<Panel expandable="true" headerText="{i18n>splAppr}">
+			<Table >
+				<columns>
+					<Column width="30px" vAlign="Center">
+						<header>
+							<!-- <Text text="{i18n>TypeofApproval}" /> -->
+						</header>
+					</Column>
+					<Column vAlign="Middle">
+						<header>
+							<Text text="{i18n>TypeofApproval}" />
+						</header>
+					</Column>
+					<Column vAlign="Middle">
+						<header>
+							<Text text="{i18n>Reason}" />
+						</header>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem xmlns="sap.m">
+						<cells>
+							<CheckBox selected="{lModel>/lSet/0/Boolean}" />
+							<Text text="{i18n>Name}" />
+							<Input  value="{lModel>/lSet/0/Reason}"	maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"></Input>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem xmlns="sap.m">
+						<cells>
+							<CheckBox  selected="{lModel>/lSet/1/Boolean}" />
+							<Text text="{i18n>Requestexemption}" />
+							<Input value="{lModel>/lSet/1/Reason}"  maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem xmlns="sap.m">
+						<cells>
+							<CheckBox selected="{lModel>/lSet/2/Boolean}" />
+							<Text text="{i18n>Requestadvancepayemnt}" />
+							<Input value="{lModel>/lSet/2/Reason}"  maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem xmlns="sap.m">
+						<cells>
+							<CheckBox xmlns="sap.m" selected="{lModel>/lSet/3/Boolean}" />
+							<Text text="{i18n>Request10%}" />
+							<Input value="{lModel>/lSet/3/Reason}" maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem xmlns="sap.m">
+						<cells>
+							<CheckBox  selected="{lModel>/lSet/4/Boolean}" />
+							<Text text="{i18n>Requestexpert}" />
+							<Input value="{lModel>/lSet/4/Reason}" maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem xmlns="sap.m">
+						<cells>
+							<CheckBox  selected="{lModel>/lSet/5/Boolean}" />
+							<Text text="{i18n>RequestAdopt}" />
+							<Input value="{lModel>/lSet/5/Reason}" maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem xmlns="sap.m">
+						<cells>
+							<CheckBox xmlns="sap.m" selected="{lModel>/lSet/6/Boolean}" />
+							<Text text="{i18n>RequestRecom}" />
+							<Input value="{lModel>/lSet/6/Reason}" maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</Panel>				
+	</content>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,249 @@
+<core:FragmentDefinition 
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form" 
+	xmlns:core="sap.ui.core">
+	<IconTabBar
+		expanded="{device>/isNoPhone}"
+		class="sapUiResponsiveContentPadding">
+		<items>
+			<IconTabFilter
+				text="Goods Receipt">
+				<f:SimpleForm id="Goods_Receipt_Info"
+					editable="true"
+					layout="ResponsiveGridLayout"
+					adjustLabelSpan="false"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+					emptySpanXL="0"	emptySpanL="0" emptySpanM="0"  emptySpanS="0"
+					columnsXL="2"	columnsL="2"   columnsM="2"
+					singleContainerFullSize="false" >
+					<f:content>
+						<core:Title text="" />
+						<Label text="Purchase Order No."/>
+						<Select/>
+						<Label text="Payment Date"/>
+						<DatePicker/>
+						
+						<core:Title text="" />
+						<Label text="Vendor" />
+						<Select/>
+					</f:content>
+				</f:SimpleForm>
+				<Table>
+					<!-- <headerToolbar>
+						<OverflowToolbar>
+							<Title text="Expense Details" level="H2" />
+							<ToolbarSpacer />
+							<Button icon="sap-icon://add"    text="Add"     press="handlePCaddButtonPressed" />
+							<Button icon="sap-icon://copy"   text="Copy"    press="handlePCaddButtonPressed" />
+							<Button icon="sap-icon://delete" text="Delete"	press="handlePCaddButtonPressed" />
+						</OverflowToolbar>
+					</headerToolbar> -->
+					<columns>
+						<Column width="1.8rem">
+							<header>
+								<Text text="Item"/>
+							</header>
+						</Column>
+						<Column width="3.15rem">
+							<header>
+								<Text text="Material"/>
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Material Description" />
+							</header>
+						</Column>
+						<Column width="4rem">
+							<header>
+								<Text text="Quantity Ordered"/>
+							</header>
+						</Column>
+						<Column width="3.35rem">
+							<header>
+								<Text text="GR Quantity"/>
+							</header>
+						</Column>
+						<Column width="1.8rem">
+							<header>
+								<Text text="Unit"/>
+							</header>
+						</Column>
+						<Column width="3.1rem">
+							<header>
+								<Text text="Amount (AED)"/>
+							</header>
+						</Column>
+						<Column width="4rem">
+							<header>
+								<Text text="Storage Location"/>
+							</header>
+						</Column>
+						<Column width="3.5rem">
+							<header>
+								<Text text="Plant"/>
+							</header>
+						</Column>
+						<Column width="6rem">
+							<header>
+								<Text text="GL Account"/>
+							</header>
+						</Column>
+						<Column width="6rem">
+							<header>
+								<Text text="Cost Center"/>
+							</header>
+						</Column>
+					</columns>
+				</Table>
+			</IconTabFilter>
+			<IconTabFilter
+				text="Invoice">
+				<f:SimpleForm id="Invoice_Info"
+					editable="true"
+					layout="ResponsiveGridLayout"
+					adjustLabelSpan="false"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+					emptySpanXL="2"	emptySpanL="2" emptySpanM="2"  emptySpanS="0"
+					columnsXL="1"	columnsL="1"   columnsM="1"
+					singleContainerFullSize="false" >
+					<f:content>
+						<core:Title text="" />
+						<Label text="Total PO Value"/>
+						<Input/>
+						<ComboBox placeholder="Currency"/>
+						<Label text="Payment Terms"/>
+						<TextArea/>
+						<Label text="Value of disbursed amount (AED)"/>
+						<Input />
+						<Label text="Value of executed services to be disbursed (AED)"/>
+						<Input />
+						<Label text="Vendor Payments"/>
+						<ComboBox placeholder="Select PO line Items"/>
+					</f:content>
+				</f:SimpleForm>
+				<Table>
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="Payment Details" level="H2" />
+							<ToolbarSpacer />
+							<!-- <Button icon="sap-icon://add"    text="Add"     press="handlePCaddButtonPressed" />
+							<Button icon="sap-icon://copy"   text="Copy"    press="handlePCaddButtonPressed" />
+							<Button icon="sap-icon://delete" text="Delete"	press="handlePCaddButtonPressed" /> -->
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="3.15rem">
+							<header>
+								<Text text="Date"/>
+							</header>
+						</Column>
+						<Column width="4rem">
+							<header>
+								<Text text="Amount" />
+							</header>
+						</Column>
+						<Column width="4rem">
+							<header>
+								<Text text="Currency"/>
+							</header>
+						</Column>
+					</columns>
+				</Table>
+				<f:SimpleForm id="Invoice_Posting"
+					editable="true"
+					layout="ResponsiveGridLayout"
+					adjustLabelSpan="false"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+					emptySpanXL="0"	emptySpanL="0" emptySpanM="0"  emptySpanS="0"
+					columnsXL="2"	columnsL="2"   columnsM="2"
+					singleContainerFullSize="false" >
+					<f:content>
+						<core:Title text="" />
+						<Label text="Invoice Value (AED)"/>
+						<Input/>
+						<Label text="Invoice No."/>
+						<Input/>
+						
+						<core:Title text="" />
+						<Label text="Purchase Order No." />
+						<Select/>
+						<Label text="Invoice Date"/>
+						<DatePicker/>
+					</f:content>
+				</f:SimpleForm>
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
+</core:FragmentDefinition>
+
+<!-- Commented on 26th Nov -->
+
+<!-- <core:FragmentDefinition xmlns="sap.m"
+	xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+
+ <f:SimpleForm  editable="true" layout="ResponsiveGridLayout"
+		labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0"
+		emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+		singleContainerFullSize="false">
+			<f:toolbar>
+				<Toolbar >
+					<Title text="Goods Receipt" level="H4" titleStyle="H4"/>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://complete" text="check"/>
+					<Button icon="sap-icon://post" text="post"/>
+				</Toolbar>
+			</f:toolbar>
+		<f:content>
+			<Label text="Document Date" />
+			<Text text="" />
+			<Label text="Posting Date" />
+			<Text text="" />
+		</f:content>
+
+	</f:SimpleForm>
+
+
+	<Table>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Material" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Material/Sercice Description" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Quantity" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="GL Account" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Cost Center" />
+				</header>
+			</Column>
+		</columns>
+			<items>
+			<ColumnListItem>
+				<cells>
+						<Text text="Materail" />
+							<Text text="Material Description" />
+								<Input text="Quantity" />
+									<Text text="Gl Account Number" />
+										<Text text="Cost Center" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition> -->

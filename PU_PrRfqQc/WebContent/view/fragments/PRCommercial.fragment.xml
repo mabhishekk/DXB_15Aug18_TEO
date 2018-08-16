@@ -1,0 +1,158 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="idPRCDialog" title="{i18n>AddComercials}" stretch="true"
+		afterOpen="onOpenDialItem" contentWidth="80%" beforeOpen="onBefDialOpen">
+		<buttons>
+			<Button text="{i18n>Save}" icon="sap-icon://save" press="onItemSave"/>
+			<Button text="{i18n>Reset}" icon="sap-icon://reset" press="onItemReset"/>
+			<Button text="{i18n>Close}" icon="sap-icon://decline" press="onPRCDialogueClose"/>
+		</buttons>
+		<subHeader>
+			<Bar xmlns="sap.m">
+				<contentMiddle>
+					<SegmentedButton xmlns="sap.m" id="itemDialHeader">
+						<items>
+							<SegmentedButtonItem id="mtrl" text="{i18n>Material}" key="1" press="onMaterialSelect" />
+							<SegmentedButtonItem id="srv" text="{i18n>Service}" 	key="2" press="onSelectService" />
+							<SegmentedButtonItem id="othrs" text="{i18n>Others}"	key="3" press="onSelectOthers" />
+						</items>
+					</SegmentedButton>
+				</contentMiddle> <!-- sap.ui.core.Control -->
+			</Bar>
+		</subHeader>
+		<content>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+				labelSpanXL="4" labelSpanL="5" labelSpanM="5" labelSpanS="12"
+				emptySpanXL="0" emptySpanL="1" emptySpanM="0" emptySpanS="0"
+				columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+				singleContainerFullSize="false">
+				<f:content>
+					<core:Title />
+					<Label text="{i18n>MaterialNo}" visible="flase" />
+					<Input id="matrnNo" placeholder="Material No:" visible="flase" />
+					<Label id="matSrvDesc" text="{i18n>MatDesc}" required="true" />
+					<!-- <Input id="matrnDesc" /> -->
+					<Input id="matrnDesc" maxLength="40">
+					</Input>
+					<Label text="{i18n>Quantity}" required="true" />
+					<Input id="matrnQuan" placeholder="{i18n>Quantity}" type="Number" maxLength="8" liveChange="onLiveChgNum"/>
+					<Select id="matrnUnit" selectedKey="EA" items="{/unitsSet}">
+					<core:ListItem 
+							text="{Msehl}" 
+							key="{Msehi}">
+						</core:ListItem>
+					</Select>
+					<Label text="{i18n>Acascat}"  visible='false'/>
+					<Select id="matrnActAsignCat" selectedKey="K" items="{/ACCATEGORYSet}" change="onChangeAssCat"  visible='false'>
+					<core:ListItem 
+							text="{Knttx}" 
+							key="{Knttp}">
+						</core:ListItem>
+					
+					</Select>
+					<Label text="{i18n>PRValue}" required="true"  />
+					<Input id="matrnVal" placeholder="{i18n>Value}" type="Number"   liveChange="onLiveChgNum" maxLength="17" />
+					<Select id="matrnCurr" selectedKey="AED" items="{/currencySet}">
+					<core:ListItem 
+							text="{Waers}" 
+							key="{Waers}">
+						</core:ListItem>
+					
+					</Select>
+					<Label id="id_startDt" text="{i18n>Stdate}" required="true"
+						visible="false" />
+					<DatePicker id="itmStartDate" placeholder="{i18n>Stdate}"
+						visible="false" />
+					<Label id="id_endDt" text="{i18n>Endate}" required="true"
+						visible="false" />
+					<DatePicker id="itmEndDate" placeholder="{i18n>Endate}" change="onStartEndValidation"
+						visible="false" />
+					<Label id="id_DelvDt" text="{i18n>Dedate}" />
+					<DatePicker id="DP1" placeholder="{i18n>Dedate}" />
+					<core:Title />
+					<Label text="{i18n>Disvalue}" />
+					<Input id="matrnDiscVal" placeholder="{i18n>Disvalue}" type="Number" 	liveChange="onLiveChgNum" maxLength="8" />
+					 <Text text="%"/> 
+					<!-- <Select id="matrnDiscType" /> -->
+					<Label text="{i18n>Vval}"  />
+					<!-- <Input id="matrnVAT" placeholder="{i18n>Vval}" type="Number" maxLength="8" liveChange="onLiveChgNum"/> -->
+					<Select id='matrnVAT' >
+						<items>
+							<core:Item text="0 %" key='0'/>
+							<core:Item text="5 %" key='5'/>
+						</items>
+					</Select>
+					<!-- <Text id="matrnVATPerc" text="%"  /> -->
+					<Label id="aseetCodeLabel" text="{i18n>Ascode}" visible="false" />
+					<Select id="aseetCode" items="{/assetcodeSet}" visible="false">
+					<core:ListItem 
+							text="{Anlhtxt}" 
+							key="{Anln1}">
+						</core:ListItem>
+					
+					</Select>
+					<Label text="{i18n>Cocen}" />
+					<Select id="matrnCC" items="{/costcentrelistSet}" selectedKey="60001120" change="onCostCenterChg">
+					<core:ListItem 
+							text="{Ltext}" 
+							key="{Kostl}">
+						</core:ListItem>
+					
+					
+					</Select>
+					<Label text="{i18n>Glcode}"  />
+					<Select id="matrnGLCode" items="{/glaccountSet}" selectedKey="5611100030" >
+					
+					
+					<core:ListItem 
+							text="{Txt20}" 
+							key="{GlAccount}">
+						</core:ListItem>
+					
+					
+					</Select>
+					
+					<Label text="{i18n>Budex}" visible="false" />
+					<CheckBox id="matrnBudExem" visible="false" />
+					<Label text="{i18n>Atfobud}" visible="false" />
+				<!-- 	<u:FileUploader name="myFileUpload" uploadUrl="upload/"
+						visible="false" id="matrnFile" tooltip="Upload your file to the local server"
+						uploadComplete="handleUploadComplete" /> -->
+				</f:content>
+			</f:SimpleForm>
+			
+			<Table xmlns="sap.m" id="id_docMnts" items="{/lSet/navigprtodocs}"
+				mode="Delete" delete="onFileDelete">
+				<headerToolbar>
+					<OverflowToolbar xmlns="sap.m">
+						<ToolbarSpacer />
+
+						<u:FileUploader name="myFileUpload"  style="Emphasized"
+							id="matrnFile" tooltip="Upload your file to the local server" 	typeMissmatch="handleTypeMissmatch"
+							uploadComplete="handleUploadComplete" />
+						<Button xmlns="sap.m" icon="sap-icon://upload" press="onFileUpload" />
+						<!-- <Button xmlns="sap.m" icon="sap-icon://minus" press="onFileDelete" /> -->
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns> <!-- sap.m.Column -->
+					<Column xmlns="sap.m">
+						<Text text="{i18n>FileName}" />
+					</Column>
+					<Column xmlns="sap.m">
+						<Text text="{i18n>FileType}" />
+					</Column>
+				</columns>
+				<ColumnListItem xmlns="sap.m" type="Active">
+
+					<cells>
+						<Text xmlns="sap.m" text="{Docfile}" />
+						<Text xmlns="sap.m" text="{Mimetype}" />
+
+					</cells>
+				</ColumnListItem>
+			</Table>
+			
+			
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

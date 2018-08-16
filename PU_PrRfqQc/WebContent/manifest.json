@@ -1,0 +1,173 @@
+{
+	
+	"sap.app": {
+		"id": "providentia",
+		"type": "application",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/ZPR_APPL_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"defaultBindingMode": "TwoWay"
+				}
+			}
+		}
+		
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+		
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "providentia.pr.view.app",
+			"type": "XML"
+		},
+		"dependencies": {
+			
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {},
+				"sap.ui.unified": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "providentia.pr.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		
+		"routing": {
+			
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "providentia.pr.view",
+				"controlId": "rootControl",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": [
+						"home",
+						"notFound"
+					]
+				}
+			},
+			"routes": [		{
+						"name": "master",
+						"pattern": "",
+						"target": ["master","PRdetailCreate"]
+					},
+					{
+						"name": "mobileMaster",
+						"pattern": "PR-Details/Mobile",
+						"target": "master"
+					},
+					{
+						"name": "mobilePRCreate",
+						"pattern": "PR-Create/Mobile",
+						"target": "PRdetailCreate"
+					},
+					{
+						"name": "mobilePRDisplay",
+						"pattern": "PR-{id}/Display/Mobile",
+						"target": "PRdetailEdit"
+					},
+					{
+						"name": "PR",					
+						"pattern": "PR-{id}/Edit",
+						"target": ["master","PRdetailEdit"]
+					},
+					{
+						"name": "QR",					
+						"pattern": "PR-{id}/quotation",
+						"target": ["master","quotations"]
+					},
+					{
+						"name": "QC",					
+						"pattern": "PR-{id}/quotComparision",
+						"target": ["master","quotComp"]
+					}],
+			"targets": {
+			
+					"master": {
+						"viewName": "Master",
+						"controlAggregation": "masterPages",
+						"viewLevel": 0
+					},
+					"welcome": {
+						"viewName": "welcome",
+						"controlAggregation": "detailPages",
+						"viewLevel": 0
+					},
+					"quotations": {
+						"viewName": "qr",
+						"controlAggregation": "detailPages",
+						"viewLevel": 1
+					},
+					"quotComp":{
+						"viewName": "quot_comparision",
+						"controlAggregation": "detailPages",
+						"viewLevel": 1
+					
+					},
+					"PRdetailEdit":{
+						"viewName": "DetailEdit",
+						"controlAggregation": "detailPages",
+						"viewLevel": 2
+					},
+					"PRdetailCreate":{
+						"viewName": "DetailCreate",
+						"controlAggregation": "detailPages",
+						"viewLevel": 2
+					}
+				
+			
+			}
+		}
+	}
+	
+}

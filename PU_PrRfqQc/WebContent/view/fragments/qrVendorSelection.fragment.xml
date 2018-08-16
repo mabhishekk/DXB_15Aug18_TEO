@@ -1,0 +1,148 @@
+<core:FragmentDefinition xmlns="sap.m"
+xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+<Dialog title="Vendors Selection">
+<!-- <subHeader> <Bar> <contentMiddle> <SearchField placeholder="Search
+Vendor"></SearchField> </contentMiddle> <contentRight> <Radio </contentRight>
+</Bar> </subHeader> -->
+
+
+
+
+
+
+
+<endButton>
+<Button text="Close" press="onPRCDialogueClose">
+
+</Button>
+
+
+</endButton>
+<content>
+
+
+<l:Grid defaultSpan="L7 M12 S12"  id="id_qrReq_grid" visible="false"
+vSpacing="0">
+
+<l:content>
+<HBox width="100%">
+
+<RadioButtonGroup columns="4" width="100%" class="">
+<buttons>
+<RadioButton text="Vendor Name" />
+<RadioButton text="Vendor Number" />
+</buttons>
+</RadioButtonGroup>
+</HBox>
+<HBox width="100%" alignItems="Center">
+<Input placeholder="Search-Vendor Name" width="100%">
+
+</Input>
+
+<layoutData>
+<l:GridData span="L5 M12 S12" />
+</layoutData>
+</HBox>
+<HBox width="100%">
+
+<RadioButtonGroup columns="4" width="100%" class="">
+<buttons>
+<RadioButton text="Ascending Order" />
+<RadioButton text="Descending Order" />
+</buttons>
+</RadioButtonGroup>
+
+</HBox>
+<HBox width="100%">
+<layoutData>
+<l:GridData span="L4 M12 S12" />
+</layoutData>
+<ComboBox xmlns="sap.m" width="100%" placeholder="Sorting">
+
+<items>
+<Item xmlns="sap.ui.core" text="Vendor Name" key="">
+
+</Item>
+<Item xmlns="sap.ui.core" text="Vendor Number" key="">
+
+</Item>
+</items>
+</ComboBox>
+</HBox>
+
+
+
+</l:content>
+
+
+
+</l:Grid>
+
+
+
+
+
+
+
+<Table inset="false" selectionChange="onSelectionChange"
+mode="MultiSelect">
+
+<headerToolbar>
+<OverflowToolbar>
+<Title text="Vendor Selection" />
+<ToolbarSpacer />
+
+<Button icon="sap-icon://action-settings" text="Settings" press="onToggleSetting" />
+
+<!-- <Button tooltip="View Settings" icon="sap-icon://bar-chart" press="graphOpen"
+/> -->
+
+
+</OverflowToolbar>
+
+
+</headerToolbar>
+
+
+<columns>
+<Column>
+
+<Text text="Vendor Name" />
+
+</Column>
+<Column minScreenWidth="Tablet" demandPopin="true">
+<Text text="Vendor Number" />
+</Column>
+<Column minScreenWidth="Tablet" demandPopin="true" hAlign="">
+<Text text="Email" />
+</Column>
+<Column>
+<Text text="Mobile" />
+</Column>
+</columns>
+<items>
+<ColumnListItem>
+<cells>
+
+<Label text="1101110101" />
+<Label text="" />
+<Label text="" />
+<Label text="" />
+</cells>
+</ColumnListItem>
+</items>
+</Table>
+
+
+<MultiInput width="100%" enableMultiLineMode="true"
+placeholder="Enter Product ..." showSuggestion="true" showValueHelp="false"
+suggestionRows=""></MultiInput>
+</content>
+
+
+
+
+</Dialog>
+
+
+</core:FragmentDefinition>
