@@ -1,0 +1,17 @@
+<View xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified"
+	controllerName="z_pettycash_fi.controller.welcome">
+	<Page title="Petty Cash" navButtonPress="onNavBack" showNavButton="{device>/system/phone}">
+		<content>
+		
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button text="Submit" type="Emphasized" press="handlePCsave" />
+				<!-- <Button text="Save and Submit" type="Accept" press="handlePCsaveAndSubmit" /> -->
+				<Button text="Cancel" type="Reject" press="handlePCCancel" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

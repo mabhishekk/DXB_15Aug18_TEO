@@ -1,0 +1,49 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:layout="sap.ui.layout"
+	controllerName="providenta.fi.rewards.controller.Master">
+	<Page title="{i18n>MasterPageTitle}">
+		<subHeader>
+			<Toolbar>
+				<SearchField width="100%" liveChange="onSearchField"/>
+			</Toolbar>
+		</subHeader>
+		<List id="list" items="{ path: '/RewardsSet'}" mode="SingleSelectMaster" selectionChange="onSelectionChange">
+			<items>
+				<!-- <StandardListItem title="{orderName}" type="Active" press="onSelectionChange"/> -->
+				<ObjectListItem title="{Postingnumber}" type="Active"
+					press="onListItemPress"
+					number="{
+						parts:[{path:'Hnetamount'},{path:'Currency'}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {showMeasure: false}
+					}"
+					numberUnit="{Currency}">
+					<firstStatus>
+						<ObjectStatus
+							text= "{ path: 'Flag1' ,formatter:'.formatter.formatStatus'}"
+							state="{ path: 'Flag1', formatter: '.formatter.fStatus' }"  />
+					</firstStatus>
+					<secondStatus>
+						<ObjectStatus
+							text=" {Fullname}" />
+					</secondStatus>
+					<attributes>
+						<ObjectAttribute
+							text="{i18n>DocumentDate} : { path : 'Documentdate',formatter: '.formatter.formatDate' }" />
+						<!-- <ObjectAttribute
+							text="Pos. Dt.: { path : 'Postingdate',formatter: '.formatter.formatDate' }" /> -->
+					</attributes>
+				</ObjectListItem>
+
+			</items>
+		</List>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button icon="sap-icon://add" text="{i18n>Create}" type="Emphasized" press="onAddPettyCash"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>
