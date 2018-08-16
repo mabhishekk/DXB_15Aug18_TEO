@@ -1,0 +1,244 @@
+<core:FragmentDefinition 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	xmlns:f="sap.ui.layout.form" 
+	xmlns:core="sap.ui.core">
+	<ObjectHeader id="idObjh" title="{i18n>prno}: {lModel>/mainSet/Preq_No} "
+		 numberUnit="{lModel>/mainSet/Totcurrency}">
+		<attributes>
+			<!-- <ObjectAttribute text="Quotation No.: {lModel>/mainSet/QrNo}" /> -->
+			<ObjectAttribute text="{i18n>PRGvendor} : {lModel>/mainSet/Vendor} ({lModel>/mainSet/Vendor_Name})" />
+			<ObjectAttribute text="{i18n>POD} : {lModel>/mainSet/PoDesc}" />
+		</attributes>
+	</ObjectHeader>
+<!-- 	<Button id = "idbtnArabic" text="Arabic" icon= "sap-icon://pdf-attachment" press = "onPDFSavePress"/>
+	    <Button id = "idbtnEnglish" text="English" icon= "sap-icon://pdf-attachment" press = "onPDFSavePress"/> -->
+
+		
+<!-- 		
+	<f:SimpleForm id="SimpleFormDisplay1234" editable="true"
+		layout="ResponsiveGridLayout"  labelSpanXL="4"
+		labelSpanL="1" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false"
+		emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+		columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<Label text="{i18n>POD}" required="true"/>
+		<Input id="idPOD" value ="{lModel>/mainSet/PoDesc}" width ="50%" enabled="{lModel>/POEdit}"/>
+		</f:content>
+	</f:SimpleForm> -->
+	
+	<IconTabBar>
+		<items>
+			<IconTabFilter text="{i18n>items}">
+
+				<Table items="{/mainSet/navtoitem/results}" id="idItemTable">
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="{i18n>itemsOV}" />
+							<ToolbarSpacer />
+							<Button icon="sap-icon://add" text="{i18n>Add}" type="Emphasized"  
+								visible="{= ${lModel>/POEdit}? true : false }" press="onPOItemaddPress" />
+							<!-- <Button icon="sap-icon://copy" text="Copy" /> {lModel>/POEdit} -->
+							<!-- <Button icon="sap-icon://edit" text="Edit" /> <Button tooltip="View 
+								Settings" text="Remove" icon="sap-icon://delete" press="" /> -->
+							<!-- <Button tooltip="View Settings" icon="sap-icon://bar-chart" press="graphOpen" 
+								/> -->
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+<!-- 					<Column>
+							<header><Text text="Item No." /></header>
+						</Column> -->
+						<Column>
+							<header><Text text="{i18n>Description}" /></header>
+						</Column>
+						<Column width="80px">
+							<header><Text text="{i18n>Quantity}" /></header>
+						</Column>
+						<Column>
+							<header><Text text="{i18n>costCenter}" /></header>
+						</Column>
+						<!-- <Column width="80px"> <header> <Text text="Value" /> </header> </Column> -->
+						<Column demandPopin="true" minScreenWidth="Medium">
+							<header><Text text="{i18n>StartDate}" /></header>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="Medium">
+							<header><Text text="{i18n>EndDate}" /></header>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="Medium">
+							<header><Text text="{i18n>Dedate}" /></header>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="Medium">
+							<header><Text text="{i18n>Value}"  /></header>
+						</Column>
+						<!-- <Column> <header> <Text text="End Date" /> </header> </Column> -->
+						<!-- <Column> <header> <Text text="Cost Center" /> </header> </Column> -->
+					</columns>
+					<items>
+						<ColumnListItem xmlns="sap.m" type="Active"	press="onPODetailItemPress">
+							<cells>
+								<!-- <TextArea value="{ShortText}" /> <Input value="{Quantity}" /> 
+									<Input value="{PreqPrice}" /> <DatePicker dateValue="{Begda}" /> <DatePicker 
+									dateValue="{Endda}" /> <Text text="{Glaccont}" /> <Text text="{Kostl}" /> -->
+							<!-- 	<Text text="{PoItem}" /> -->
+								<Text text="{Short_Text}" />
+								<Text text="{Quantity} - {Orderunit}" />
+								<Text text="{Costcenter}" />
+								<Text text="{path: 'Begda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+     							<Text text="{path: 'Endda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+ 							    <Text text="{path: 'Delvdate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+								<Text text="{NetPrice} - {Currency}" />
+								<!-- <DatePicker dateValue="{Begda}" /> <DatePicker dateValue="{Endda}" /> -->
+								<!-- <Text text="{Kostl}" /> -->
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+
+			</IconTabFilter>
+
+			<IconTabFilter text="{i18n>deliveryAddress}">
+				<!-- <f:SimpleForm editable="true" layout="ResponsiveGridLayout"> <f:content> 
+					<Label text="Plant" /> <Select id="idPlantSelect" showSecondaryValues="true" 
+					change="onChange" items="{ path: '/results', sorter: { path: 'Plant' } }"> 
+					<core:ListItem key="{Plant}" text="{Plantname}" additionalText="{Plant}" 
+					/> </Select> </f:content> </f:SimpleForm> -->
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+					labelSpanXL="3" columnsXL="2" emptySpanXL="0" labelSpanL="3"
+					columnsL="2" emptySpanL="0" labelSpanM="4" columnsM="2" emptySpanM="0"
+					labelSpanS="12" columnsS="12" emptySpanS="0" adjustLabelSpan="false">
+					<f:content>
+						<core:Title text="" />
+						<Label text="{i18n>Title1}" />
+						<!-- <Input id="idTitle" value="{lModel>/mainSet/Planttitle}"
+							enabled="false" /> -->
+							<Input id="idTitle" value="COMPANY"
+							enabled="false" /> 
+						<Label text="{i18n>Name1}" />
+						<Input id="idName"    value="{lModel>/mainSet/Plantname}"	enabled="false" />
+
+						<Label text="{i18n>StreetHouseNo}" />
+						<Input id="idStreet"  value="{lModel>/mainSet/Plantstreet}"	enabled="false" />
+						<core:Title text="" />
+						<Label text="{i18n>RegionState}" />
+						<Input id="idRegion"  value="{lModel>/mainSet/Plantregion}" enabled="false" />
+						<Label text="{i18n>PINCode}" />
+						<Input id="idPin"     value="{lModel>/mainSet/Plantpostal}"	enabled="false" />
+						<Label text="{i18n>Country}" />
+						<Input id="idCountry" value="{lModel>/mainSet/Plantcountry}" enabled="false" />
+
+					</f:content>
+				</f:SimpleForm>
+			</IconTabFilter>
+			<IconTabFilter text="{i18n>Conditions}">
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+					labelSpanXL="3" columnsXL="2" emptySpanXL="0" labelSpanL="3"
+					columnsL="2" emptySpanL="0" labelSpanM="3" columnsM="2" emptySpanM="0"
+					labelSpanS="12" columnsS="12" emptySpanS="0" adjustLabelSpan="false">
+					<f:content>
+						<core:Title text="" />
+
+
+						<Label text="{i18n>GrossValue}" />
+						<!-- <Input value = "{/headerSet/Totalamt}" placeholder="Amount"/> -->
+						<Input id="idTotalVal"  placeholder="Amount"
+							value="{lModel>/mainSet/Totalamt}" enabled="false" />
+						<!-- <Input placeholder="Currency" /> -->
+						<!-- <Select width="5.75rem" selectedKey = "{/headerSet/Totcurrency}"> -->
+						<Select width="5.75rem" id="idTotalValCurr" selectedKey = "Totcurrency"  enabled="false">
+
+						</Select>
+						<Label text="{i18n>TotalDiscount}" />
+						<!-- <Input value = "{/headerSet/Totdiscount}" placeholder="Amount" 
+							/> -->
+						<Input id="idTotalDisc"  placeholder="Amount"
+							value="{lModel>/mainSet/Totdiscount}" enabled="false" />
+						<!-- <Input placeholder="Currency" /> -->
+						<!-- <Select width="5.75rem" id="idTotalValCurr" selectedKey = "{/headerSet/Discountcurr}"> -->
+						<Select width="5.75rem" id="idTotalDiscCurr" selectedKey = "Discountcurr" enabled="false">
+
+						</Select>
+
+
+						<Label text="{i18n>VatTotal}" />
+						<!-- <Input value = "{/headerSet/Totalamt}" placeholder="Amount"/> -->
+						<Input id="idTotalVatVal" placeholder="Amount"
+							value="{lModel>/mainSet/Vatvalue}" enabled="false" />
+						<!-- <Input placeholder="Currency" /> -->
+						<!-- <Select width="5.75rem" selectedKey = "{/headerSet/Totcurrency}"> -->
+						<Select width="5.75rem" id="idTotalVatValCurr" selectedKey = "Vatvaluecurr" enabled="false">
+
+						</Select>
+
+						<core:Title text="" />
+						<Label text="{i18n>NetValue}" />
+						<!-- <Input value = "{/headerSet/Subtot}" placeholder="Amount" /> -->
+						<Input id="idSubTot"  placeholder="Amount"
+							value="{lModel>/mainSet/Subtot}" enabled="false" />
+						<!-- <Input placeholder="Currency" /> -->
+						<!-- <Select width="5.75rem" id="idTotalValCurr" selectedKey = "{/headerSet/Subtotcurr}"> -->
+						<Select width="5.75rem" id="idSubTotCurr" selectedKey = "Subtotcurr" enabled="false">
+
+						</Select>
+					</f:content>
+				</f:SimpleForm>
+			</IconTabFilter>
+			<IconTabFilter text="{i18n>Splinstr}" visible='false'>
+
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+					<f:content>
+						<Label text="{i18n>Paymentterms}" />
+						<Select id="idPayterms"   enabled="{lModel>/POEdit}"  >
+
+						</Select>
+
+						<Label text="" />
+						<Label text="{i18n>OtherInstructions}" />
+						<!-- <TextArea placeholder="Conditions" width="100%" value = "{/headerSet/Splinstruct}"/> -->
+						<TextArea placeholder="{i18n>OtherInstructions}" width="100%" id="idSplInstrc"
+							value="{lModel>/mainSet/Splinstruct}" enabled="{lModel>/POEdit}" />
+					</f:content>
+				</f:SimpleForm>
+			</IconTabFilter>
+
+		<IconTabFilter text= "{i18n>Attachments}">
+			<Table id="id_docMnts" items="{/lSet1}"	>
+			<!-- mode="Delete" delete="onFileDelete" -->
+			
+				<headerToolbar>
+					<OverflowToolbar xmlns="sap.m">
+						<ToolbarSpacer />
+						<u:FileUploader 
+							name="myFileUpload" 
+							fileType ='jpg,png,pdf' 
+							style="Emphasized"
+							id="matrnFile" 
+							tooltip="Upload your file to the local server" 	
+							typeMissmatch="handleTypeMissmatch"
+							uploadComplete="handleUploadComplete" 
+							enabled="{lModel>/POEdit}"/>
+						<Button icon="sap-icon://upload" press="onFileUpload" enabled="{lModel>/POEdit}"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>FileName}" />
+					</Column>
+					<Column>
+						<Text text="{i18n>FileType}" />
+					</Column>
+				</columns>
+				<ColumnListItem type="Active" enabled="{lModel>/POEdit}" press='onDocSelectionChange'>
+					<cells>
+						<Text text="{Docfile}" />
+						<Text text="{Mimetype}" />
+					</cells>
+				</ColumnListItem>
+			</Table>
+		</IconTabFilter>
+
+		</items>
+	</IconTabBar>
+</core:FragmentDefinition>
+

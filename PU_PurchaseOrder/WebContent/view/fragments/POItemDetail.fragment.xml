@@ -1,0 +1,179 @@
+<core:FragmentDefinition 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified" 
+	xmlns:f="sap.ui.layout.form" 
+	xmlns:core="sap.ui.core">
+	<Dialog 
+		id="idPRCDialog" 
+		title="{i18n>ModItems}" 
+		afterOpen="onOpenPODetailDialItem" 
+		contentWidth="80%"
+		stretch='true'>
+		<buttons>
+			<Button text="{i18n>Save}" icon="sap-icon://save" visible="{lModel>/POEdit}" press="onSaveDetailItem">
+			</Button>
+			<Button text="{i18n>Delete}" icon="sap-icon://delete" visible="{lModel>/POEdit}" press="onItemRemove">
+			</Button>
+<!-- 			<Button text="{i18n>Edit}" icon="sap-icon://edit" visible="{lModel>/POEdit}" press="onEditDetailItem">
+			</Button> -->
+			<Button text="{i18n>Close}" icon="sap-icon://decline" press="onPRCItemDialogueClose">
+			</Button>
+		</buttons>
+		<subHeader>
+			<Bar>
+				<contentMiddle>
+					<SegmentedButton id="itemDialHeader">
+						<items>
+							<SegmentedButtonItem id="mtrl" text="{i18n>Material}" key="1" press="onMaterialSelect" />
+							<SegmentedButtonItem id="srv"  text="{i18n>Service}"  key="2" press="onSelectService" />
+							<SegmentedButtonItem id="othrs" text="{i18n>Others}"  key="3" press="onSelectOthers" />
+						</items>
+					</SegmentedButton>
+				</contentMiddle> <!-- sap.ui.core.Control -->
+			</Bar>
+		</subHeader>
+		<content>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+				labelSpanXL="4" labelSpanL="5" labelSpanM="5" labelSpanS="12"
+				emptySpanXL="0" emptySpanL="1" emptySpanM="0" emptySpanS="0"
+				columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+				singleContainerFullSize="false">
+				<f:content>
+					<core:Title />
+					<Label text="{i18n>Material No.}" visible="false" />
+					<Input id="matrnNo" placeholder="Material No:" visible="false"	value="{Material}" enabled="{lModel>/dEditable}" />
+					<Label id="matSrvDesc" text="{i18n>MatDesc}" required="true" />
+					<Input id="matrnDesc" value="{Short_Text}" enabled="{lModel>/dEditable}" />
+					<Label text="{i18n>Quantity}" />
+					<Input id="matrnQuan" placeholder="{i18n>Quantity}" type="Number" value="{Quantity}" enabled="{lModel>/dEditable}" />
+					<Select id="matrnUnit" selectedKey="{Orderunit}" enabled="{lModel>/dEditable}" />
+					<Label text="{i18n>Value}"  />
+					<Input id="matrnVal" placeholder="Value" type="Number" value="{NetPrice}" enabled="{lModel>/dEditable}" liveChange="netPriceCalc"/>
+					<Select id="matrnCurr" selectedKey="{Currency}" enabled="{lModel>/dEditable}" change="onValueCurrecyChange" />
+					<Label text="{i18n>Disvalue}"  />
+					<Input id="matrnDiscVal" placeholder="Value" type="Number" value="{Discountval}" enabled="{lModel>/dEditable}" liveChange="netPriceCalc"/>
+					<Text text="{i18n>%}"  />
+					<Label text="{i18n>DiscountValue}" />
+					<Input id="matrnDiscount" placeholder="Value" type="Number" liveChange="netPriceCalc"
+						value="{ parts : ['NetPrice', 'Discountval'], formatter: '.formatter.discountValue' }" enabled="{lModel>/dEditable}" />
+					<Text text="{Currency}"/>
+					<Label text='{i18n>SubTotal}'/>
+					<Input id='idSubTotal' type='Number' enabled='false'/>
+					<Select id="idSubTotalCurr" selectedKey="AED"  enabled= "false">
+						<core:ListItem text="{Waers}" key="{Waers}"/>
+					</Select>
+						 
+					<core:Title /> 
+					<Label text="{i18n>Vval}"  />     <!-- change="netPriceCalc" -->
+					<Select id='POitemAddVAT' change="onVatEdited" enabled="{lModel>/dEditable}" selectedKey='{Vatvalue}'>
+						<items>
+							<core:Item text="0 %" key='0.00'/>
+							<core:Item text="5 %" key='5.00'/>
+						</items>
+					</Select>
+					<Input id="matrnVAT" placeholder="{i18n>Vval}" type="Number" value="{Vatvalue}" enabled="{lModel>/dEditable}" liveChange="netPriceCalc" visible='false'/>
+					<!-- <Text text="{i18n>%}" visible='false'/> -->
+					<Label text="{i18n>netValue}"  />
+					<Input id="matrnNetValue" placeholder="{i18n>netValue}" type="Number" enabled= "false"/>
+					<Select id="matrnNVCurr" selectedKey="AED"  enabled= "false">
+						<core:ListItem text="{Waers}" key="{Waers}"/>
+					</Select>
+					<Label id="id_startDt" text="{i18n>Stdate}" required="true"	visible="false" />
+					<DatePicker id="itmStartDate" placeholder="{i18n>Stdate}" visible="false" dateValue="{Begda}" enabled="{lModel>/dEditable}" />
+					<Label id="id_endDt" text="{i18n>Endate}" required="true" visible="false" />
+					<DatePicker id="itmEndDate" placeholder="{i18n>Endate}"	visible="false" dateValue="{Endda}" enabled="{lModel>/dEditable}" />
+					<Label id="id_DelvDt" text="{i18n>Dedate}" />
+					<DatePicker id="DP1" placeholder="{i18n>Dedate}" dateValue="{Delvdate}" enabled="{lModel>/dEditable}" />
+					<!-- <Select id="matrnDiscType" /> -->
+					<Label id="aseetCodeLabel" text="{i18n>Ascode}"  visible="false"/>
+					<Select id="aseetCode" enabled="{lModel>/dEditable}" visible="false">
+					<!-- <core:ListItem 
+							text="{Anlhtxt}" 
+							key="{Anln1}">
+						</core:ListItem> -->
+					</Select>
+					<Label text="{i18n>Cocen}" />
+				<!-- 	<ComboBox id="matrnCC" selectedKey="{Costcenter}" enabled="{lModel>/dEditable}" /> -->
+					<ComboBox id="matrnCC"  enabled="{lModel>/dEditable}" />
+					<Label text="{i18n>Glcode}"  />
+					<ComboBox id="matrnGLCode" selectedKey="{Glaccount}" enabled="{lModel>/dEditable}" />
+					<Label text="{i18n>AccountAssignmentCategory}" visible='false'/>
+					<Select id="matrnActAsignCat" selectedKey="{Acctasscat}" change="onChangeAssCatItem" enabled="{lModel>/dEditable}" visible='false'/>
+					<Label text="{i18n>taxcode}" visible='false'/> 
+					<Input id='POitemAddTaxCode' value='{Tax_Code}' visible='false'/>
+					<Select id="matrnTaxcode" enabled="{lModel>/dEditable}" visible='false'/> 
+					<Label text="{i18n>Budex}" visible="false" />
+					<CheckBox id="matrnBudExem" visible="false" selected="{path:'Excemtion', formatter: '.formatter.Excemtion'}" enabled="{lModel>/dEditable}" />
+					<Label text="{i18n>Attachment}" visible="false" />
+					<u:FileUploader name="myFileUpload" uploadUrl="upload/"
+						visible="false" id="matrnFile" tooltip="Upload your file to the local server"
+						uploadComplete="handleUploadComplete" />
+				</f:content>
+			</f:SimpleForm>
+			<Table id="idServicePaymentTableDisplay" mode="{= ${lModel>/dEditable} === true ? 'Delete' : 'None' }" 
+					delete='handleInstalmentDelete' visible='false'  items="{navServiceOrder}">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>ServiceOrder}"/>
+						<ToolbarSpacer />
+						<Select id='idServiceType' change='onServiceOrderType' selectedKey="{Valueorpercentage}" enabled='false'>
+							<items>
+								<core:Item key='V' text='{i18n>Value}'/>
+								<core:Item key='P' text='{i18n>Percentage}'/>
+							</items>
+						</Select>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<header><Text text="{i18n>Description}"/> </header>
+					</Column>
+					<Column>
+						<header><Text text="{i18n>Gross Price}"/> </header>
+					</Column>
+					<Column minScreenWidth="Tablet"	demandPopin="true">
+						<header> <Text text="{i18n>VatAmount}" /> </header>
+					</Column>
+					<Column minScreenWidth="Tablet"	demandPopin="true">
+						<header> <Text text="{i18n>NetValue}" /> </header>
+					</Column>
+					<Column width="5rem">
+						<header><Text text="{i18n>Percentage}"/> </header>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{ShortText}" />
+							<Text text="{GrPrice}" />
+							<Text text="{Vatamount}" />
+							<Text text="{Netvalue}" />
+							<Text text="{FormVal1}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+			<f:SimpleForm editable='true' layout="ResponsiveGridLayout"
+				labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+				emptySpanXL="0" emptySpanL="1" emptySpanM="0" emptySpanS="0"
+				columnsXL="3" columnsL="3" columnsM="2" adjustLabelSpan="false"
+				singleContainerFullSize="false" visible="{lModel>/dEditable}" id='idNewInstallmentForm'>
+				<f:content>
+					<core:Title text='{i18n>AddInstallment}'/>
+					<Label text="{i18n>Description}" />
+					<Input id='idAddInstalDesc'/>
+					<core:Title />
+					<Label id='idServiceOrderValue' text="{i18n>Value}" />
+					<Input id='idAddInstalValue' type='Number' width='5rem'/>
+					<Text  id='idAddInstalTxt'/>
+					<core:Title />
+					<Label/>
+					<Button id='idAddInstalmentBtn' visible='{lModel>/dEditable}' text='{i18n>AddToList}' type='Accept' press='onAddInstalment' class='sapUiMediumMarginBegin' width='8rem'/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>
+
+

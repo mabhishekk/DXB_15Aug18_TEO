@@ -1,0 +1,133 @@
+<core:FragmentDefinition 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	xmlns:f="sap.ui.layout.form" 
+	xmlns:core="sap.ui.core">
+	<f:SimpleForm 
+		editable="true"
+		layout="ResponsiveGridLayout"
+		title="Purchase Requisition No.:{lModel>/PrDetail/Banfn}"
+		labelSpanXL="4"	labelSpanL="4" labelSpanM="5" labelSpanS="12"
+		emptySpanXL="0"	emptySpanL="0" emptySpanM="0" emptySpanS="0"
+		columnsXL="2"	columnsL="2"   columnsM="2"
+		adjustLabelSpan="false" class="noTitle"
+		singleContainerFullSize="false" >
+		<f:content>
+			<core:Title  />
+			<Label text='PR Requestor'/>
+			<Text text='{lModel>/PrDetail/Zrequestor}'/>
+			<Label id='idLabelQuotation' text='Quotation Number'/>
+			<Select id="idSelectQuotation" items="{lModel>/Quotations}" showSecondaryValues= "true" change ='onQuotationChange'>
+				<core:ListItem text="{lModel>Qrno}" additionalText = "{lModel>Vendorname}"	key="{lModel>Qrno}"/>
+			</Select>
+			<Label text='Vendor Name'/>
+			<Text id='idVendor'/>
+			<Label text='Description'/>
+			<TextArea id='idPoDescription' value='{lModel>/PrDetail/Zrequestbreif}'/>
+			
+			<core:Title/>
+			<Label text='Gross Value'/>
+			<Text id='idGrossValue'/>
+			<Label text='Discount Value'/>
+			<Text id='idDiscount'/>
+			<Label text='VAT Value'/>
+			<Text id='idVatValue'/>
+			<Label text='Net Value'/>
+			<Text id='idNetValue'/>
+			
+		</f:content>
+	</f:SimpleForm>
+	<Table items="{lModel>/PoLineItem}" id="idPoTable">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="{i18n>Item}" level="H2" />
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="10rem"><header> <Text text="{i18n>Description}" /> </header></Column>
+			<Column width="5rem"><header> <Text text="{i18n>Quantity}"     /> </header></Column>
+			<Column width="7rem"><header> <Text text="{i18n>Department}"   /> </header></Column>
+			<Column width="5rem"><header> <Text text="{i18n>StartDate}"    /> </header></Column>
+			<Column width="5rem"><header> <Text text="{i18n>EndDate}"      /> </header></Column>
+			<Column width="5rem"><header> <Text text="{i18n>Delivery Date}"/> </header></Column>
+			<Column width="5rem"><header> <Text text="{i18n>Value}"        /> </header></Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Active" press="onDetailItemPress">
+				<cells>
+					<Text text='{lModel>ShortText}'/>
+					<Text text='{lModel>Quantity} {lModel>Unit}'/>
+					<Text text='{lModel>Costtext}'/>
+					<Text text="{path: 'lModel>Begda'    ,type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+					<Text text="{path: 'lModel>Endda'    ,type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+					<Text text="{path: 'lModel>DelivDate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+					<Text text='{lModel>PreqPrice} {lModel>Currency}'/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" title="Address" visible='false'>
+		<f:content>
+			<Label text="{i18n>Office}" />
+			<Select id="idPlantSelect" selectedKey='6000'
+				showSecondaryValues= "true" change= "onChange"
+				items="{/PLANTSSet}"	>
+				<core:ListItem key="{Plant}" text="{Plantname}" additionalText= "{Plant}" />
+			</Select>
+							
+		</f:content>
+	</f:SimpleForm>
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" visible='false'
+		labelSpanXL="3" columnsXL="2" emptySpanXL="0" labelSpanL="3"
+		columnsL="2" emptySpanL="0" labelSpanM="4" columnsM="2" emptySpanM="0"
+		labelSpanS="12" columnsS="12" emptySpanS="0" adjustLabelSpan="false">
+		<f:content>
+			<core:Title text="" />	
+			<Label text="{i18n>Title1}" />
+			<Input id = "idTitle" placeholder='{i18n>ComPlaceholder}' liveChange="handleLiveInput" maxLength='80' value='Company'/>
+			<Label text="{i18n>Name1}" />
+			<Input id = "idName" placeholder='{i18n>NamPlaceholder}' liveChange="handleLiveInput" maxLength='30' value='{lModel>/PlantDetail/Plantname}'/>
+			<Label text="{i18n>StreetHouseNo}" />
+			<Input id = "idStreet" placeholder='{i18n>NamPlaceholder}' liveChange="handleLiveInput" maxLength='30' value='{lModel>/PlantDetail/Plantstreet}'/>
+			<core:Title text="" />
+			<Label text="{i18n>RegionState}" />
+			<Input id = "idRegion" placeholder='{i18n>AddPlaceholder}' liveChange="handleLiveInput" maxLength='3' value='{lModel>/PlantDetail/Plantregion}'/>
+			<Label text="{i18n>PINCode}" />
+			<Input id = "idPin" placeholder='{i18n>PinPlaceholder}' liveChange="handleLiveInput" maxLength='10' value='{lModel>/PlantDetail/Plantpostal}'/>
+			<Label text="{i18n>Country}" />
+			<Input id = "idCountry" placeholder='{i18n>AddPlaceholder}' liveChange="handleLiveInput" maxLength='3' value='{lModel>/PlantDetail/Plantcountry}'/>
+		</f:content>
+	</f:SimpleForm>
+	<Table 
+		id="id_docMnts" 
+		items="{lModel>/navigdms}"
+		mode="Delete" 
+		delete="onFileDelete">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="{i18n>Attachment}"/>
+				<ToolbarSpacer />
+				<u:FileUploader 
+					name="myFileUpload"  
+					style="Emphasized"
+					id="matrnFile" 
+					tooltip="Upload your file to the local server" 	
+					typeMissmatch="handleTypeMissmatch"
+					uploadComplete="handleUploadComplete" />
+				<Button icon="sap-icon://upload" press="onFileUpload" />
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column><Text text="{i18n>FileType}" /></Column>
+			<Column><Text text="{i18n>FileName}" /></Column>
+		</columns>
+		<ColumnListItem type="Active">
+			<cells>
+				<Text text="{lModel>Docfile}" />
+				<Text text="{lModel>Mimetype}" />
+			</cells>
+		</ColumnListItem>
+	</Table>
+</core:FragmentDefinition>
+

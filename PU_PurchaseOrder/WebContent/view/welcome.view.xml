@@ -1,0 +1,16 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="poApp.controller.welcome">
+		
+		<MessagePage
+		title="{i18n>PurchaseOrder}"
+		text="{i18n>Welcome}"
+		icon="sap-icon://document"
+		id="page"
+		description="">
+		<customDescription>
+			<Link id="link" text="{i18n>CreatePO}" press="onLinkPressed" />
+		</customDescription>
+		</MessagePage>
+	
+</mvc:View>
+
+

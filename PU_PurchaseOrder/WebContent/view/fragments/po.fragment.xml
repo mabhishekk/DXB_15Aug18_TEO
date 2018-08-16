@@ -1,0 +1,440 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<ObjectHeader id="idObjh" title="PR No.:" number="Total Amount"
+		numberUnit="Currency">
+		<attributes>
+			<ObjectAttribute text="Quotation No.:" />
+			<ObjectAttribute text="Vendor :" />
+		</attributes>
+	</ObjectHeader>
+	<IconTabBar>
+		<items>
+			<IconTabFilter text="Delivery/Invoice">
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+					labelSpanXL="3" columnsXL="2" emptySpanXL="0" labelSpanL="3"
+					columnsL="2" emptySpanL="0" labelSpanM="3" columnsM="2" emptySpanM="0"
+					labelSpanS="12" columnsS="12" emptySpanS="0" adjustLabelSpan="false">
+					<f:content>
+						<Label text="Payment terms" />
+						<!-- <Input value = "{/headerSet/Vendor}"/> -->
+						<Input id="idPayterms"/>
+<!-- 						<Label text="Payment in" />
+						<Input>
+							<layoutData>
+								<l:GridData span="XL1 L1 M2 S3" />
+							</layoutData>
+						</Input>
+						<Text text="days">
+							<layoutData>
+								<l:GridData span="XL1 L1 M2 S2" />
+							</layoutData>
+						</Text>
+						<Input>
+							<layoutData>
+								<l:GridData span="XL1 L1 M2 S3" />
+							</layoutData>
+						</Input>
+						<Text text="%">
+							<layoutData>
+								<l:GridData span="XL1 L1 M2 S1" />
+							</layoutData>
+						</Text> -->
+						<!-- <Label text="Payment in" />
+						<Input>
+							<layoutData>
+								<l:GridData span="XL1 L1 M2 S3" />
+							</layoutData>
+						</Input>
+						<Text text="days">
+							<layoutData>
+								<l:GridData span="XL1 L1 M2 S2" />
+							</layoutData>
+						</Text>
+						<Input>
+							<layoutData>
+								<l:GridData span="XL1 L1 M2 S3" />
+							</layoutData>
+						</Input>
+						<Text text="%">
+							<layoutData>
+								<l:GridData span="XL1 L1 M2 S1" />
+							</layoutData>
+						</Text>
+						<Label text="Payment in" />
+						<Input>
+							<layoutData>
+								<l:GridData span="XL1 L1 M2 S3" />
+							</layoutData>
+						</Input>
+						<Text text="days net">
+							<layoutData>
+								<l:GridData span="XL1 L1 M2 S3" />
+							</layoutData>
+						</Text> -->
+<!-- 						<core:Title text="" />
+						<Label text="Currency" />
+						<Input />
+						<Select width="5.75rem">
+							<items>
+								<core:Item text="AED" />
+								<core:Item text="USD" />
+								<core:Item text="INR" />
+							</items>
+						</Select>
+						<Label />
+						<CheckBox text="Exchange rate Fixed" /> -->
+					</f:content>
+				</f:SimpleForm>
+			</IconTabFilter>
+			<IconTabFilter text="Conditions">
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+					labelSpanXL="3" columnsXL="2" emptySpanXL="0" labelSpanL="3"
+					columnsL="2" emptySpanL="0" labelSpanM="3" columnsM="2" emptySpanM="0"
+					labelSpanS="12" columnsS="12" emptySpanS="0" adjustLabelSpan="false">
+					<f:content>
+						<core:Title text="" />
+						
+				
+						
+						
+						<Label text="Total Value" />
+					<!-- 	<Input value = "{/headerSet/Totalamt}" placeholder="Amount"/> -->
+						<Input id="idTotalVal"  required= "true" placeholder="Amount"/>
+					<!-- 	<Input placeholder="Currency" /> -->
+						<!-- <Select width="5.75rem" selectedKey = "{/headerSet/Totcurrency}"> -->
+						<Select width="5.75rem" id="idTotalValCurr" >
+							<items>
+								<core:Item text="AED" />
+								<core:Item text="USD" />
+								<core:Item text="INR" />
+							</items>
+						</Select>
+						<Label text="Total Discount" />
+						<!-- <Input value = "{/headerSet/Totdiscount}" placeholder="Amount" /> -->
+						<Input id="idTotalDisc"  required= "true" placeholder="Amount" />
+						<!-- <Input placeholder="Currency" /> -->
+						<!-- 	<Select width="5.75rem" id="idTotalValCurr" selectedKey = "{/headerSet/Discountcurr}"> -->
+								<Select width="5.75rem" id="idTotalDiscCurr" >
+							<items>
+								<core:Item text="AED" />
+								<core:Item text="USD" />
+								<core:Item text="INR" />
+							</items>
+						</Select>
+						<core:Title text="" />
+						<Label text="Subtotal" />
+						<!-- <Input value = "{/headerSet/Subtot}" placeholder="Amount" /> -->
+						<Input  id="idSubTot" required= "true" placeholder="Amount" />
+					<!-- 	<Input placeholder="Currency" /> -->
+					<!-- 	<Select width="5.75rem" id="idTotalValCurr" selectedKey = "{/headerSet/Subtotcurr}"> -->
+						<Select width="5.75rem" id="idSubTotCurr" >
+							<items>
+								<core:Item text="AED" />
+								<core:Item text="USD" />
+								<core:Item text="INR" />
+							</items>
+						</Select>
+					</f:content>
+				</f:SimpleForm>
+			</IconTabFilter>
+			<IconTabFilter text="Items">
+			
+			
+			
+			
+								<Table items="{/mainSet/navigtoitems/results}" id="idItemTable">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Item Overview" />
+								<ToolbarSpacer />
+								<Button icon="sap-icon://add" text="{i18n>Add}" press="onPRaddPress"
+									/>
+								<!-- <Button icon="sap-icon://copy" text="Copy" /> -->
+								<!-- <Button icon="sap-icon://edit" text="Edit" /> <Button tooltip="View 
+									Settings" text="Remove" icon="sap-icon://delete" press="" /> -->
+								<!-- <Button tooltip="View Settings" icon="sap-icon://bar-chart" 
+									press="graphOpen" /> -->
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+													<Column>
+								<header>
+									<Text text="Item No." />
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="{i18n>Description}" />
+								</header>
+							</Column>
+							<Column width="80px">
+								<header>
+									<Text text="{i18n>Quantity}" />
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="{i18n>costCenter}" />
+								</header>
+							</Column>
+
+							<!-- <Column width="80px"> <header> <Text text="Value" /> </header> 
+								</Column> -->
+							<Column demandPopin="true" minScreenWidth="Medium">
+								<header>
+									<Text text="{i18n>StartDate}" />
+								</header>
+							</Column>
+							<Column demandPopin="true" minScreenWidth="Medium">
+								<header>
+									<Text text="{i18n>EndDate}" />
+								</header>
+							</Column>
+
+							<Column demandPopin="true" minScreenWidth="Medium">
+								<header>
+									<Text text="{i18n>Dedate}" />
+								</header>
+							</Column>
+							<!-- <Column> <header> <Text text="End Date" /> </header> </Column> -->
+
+							<!-- <Column> <header> <Text text="Cost Center" /> </header> </Column> -->
+						</columns>
+						<items>
+							<ColumnListItem xmlns="sap.m" type="Active"
+								press="onDetailItemPress">
+
+								<cells>
+
+									<!-- <TextArea value="{ShortText}" /> <Input value="{Quantity}" 
+										/> <Input value="{PreqPrice}" /> <DatePicker dateValue="{Begda}" /> <DatePicker 
+										dateValue="{Endda}" /> <Text text="{Glaccont}" /> <Text text="{Kostl}" /> -->
+									<Text text="{PreqItem}" />
+									<Text text="{ShortText}" />
+									<Text text="{Quantity} - {Unit}" />
+									<Text text="{Costtext}" />
+
+									<Text
+										text="{path: 'Begda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+
+									<Text
+										text="{path: 'Endda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+
+									<Text
+										text="{path: 'DelivDate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+
+
+									<!-- <DatePicker dateValue="{Begda}" /> <DatePicker dateValue="{Endda}" 
+										/> -->
+
+									<!-- <Text text="{Kostl}" /> -->
+
+
+								</cells>
+							</ColumnListItem>
+
+
+
+
+						</items>
+
+
+					</Table>
+			
+			
+			
+			
+				<!-- <Table id = "idItemTable" headerText="Item Overview" items="{/navigtoitems/results}">
+					<columns>
+						<Column>
+							<header>
+								<Text text="Item" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Account Assignment Category" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Asset Code" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Material" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Material/ Service Description" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Start Date" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="End Date" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Quantity" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Order Unit" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Delivery Date" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Amount" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Currency" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Discount" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="VAT Value" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Cost Center" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="GL Account" />
+							</header>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+
+								<Text text="{PreqItem}" />
+								<Text text="{Acctasscat}" />
+								<Text text="{Assetcode}" />
+								<Text text="{Material}" />
+								<Text text="{MatlGroup}" />
+								<Text text="{Begda}" />
+								<Text text="{Endda}" />
+								<Text text="{Quantity}" />
+								<Text text="{Unit}" />
+								<Text text="{DelivDate}" />
+								<Text text="{PreqPrice}" />
+								<Text text="{Currency}" />
+								<Text text="{Discountvalue}" />
+								<Text text="{Vatvalue}" />
+								<Text text="{Costtext}" />
+								<Text text="{Glaccont}" />
+								
+								<Input value="{PreqItem}" />
+								<Input value="{Acctasscat}" />
+								<Input value="{Assetcode}" />
+								<Input value="{Material}" />
+								<Input value="{MatlGroup}" />
+								<Input value="{Begda}" />
+								<Input value="{Endda}" />
+								<Input value="{Quantity}" />
+								<Input value="{Unit}" />
+								<Input value="{DelivDate}" />
+								<Input value="{PreqPrice}" />
+								<Input value="{Currency}" />
+								<Input value="{Discountvalue}" />
+								<Input value="{Vatvalue}" />
+								<Input value="{Costtext}" />
+								<Input value="{Glaccont}" />
+								
+								
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table> -->
+			</IconTabFilter>
+			<IconTabFilter text="Delivery Address"> 
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+	>
+					<f:content>
+			<Label text="Plant" />
+									<Select id="idPlantSelect"
+						showSecondaryValues= "true" change= "onChange"
+						items="{
+						path: '/results',
+						sorter: { path: 'Plant' }
+								}"
+								>
+						<core:ListItem key="{Plant}" text="{Plantname}" additionalText= "{Plant}" />
+						</Select>
+						
+											</f:content>
+				</f:SimpleForm>
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+					labelSpanXL="3" columnsXL="2" emptySpanXL="0" labelSpanL="3"
+					columnsL="2" emptySpanL="0" labelSpanM="4" columnsM="2" emptySpanM="0"
+					labelSpanS="12" columnsS="12" emptySpanS="0" adjustLabelSpan="false">
+					<f:content>
+						<core:Title text="" />
+
+						
+						<Label text="Title" />
+						<Input id = "idTitle"/>
+						<Label text="Name" />
+						<Input id = "idName"/>
+				
+						<Label text="Street/ House No." />
+						<Input id = "idStreet"/>
+						<core:Title text="" />
+						<Label text="Region/ State" />
+						<Input id = "idRegion"/>
+						<Label text="PIN/ ZIP Code" />
+						<Input id = "idPin"/>
+						<Label text="Country" />
+						<Input id = "idCountry"/>
+						
+<!-- 						<Label text="Title" />
+						<Input value = "{/headerSet/Planttitle}"/>
+						<Label text="Name" />
+						<Input value = "{/headerSet/Plantname}"/>
+				
+						<Label text="Street/ House No." />
+						<Input value = "{/headerSet/Plantstreet}"/>
+						<core:Title text="" />
+						<Label text="Region/ State" />
+						<Input value = "{/headerSet/Plantregion}"/>
+						<Label text="PIN/ ZIP Code" />
+						<Input value = "{/headerSet/Plantpostal}"/>
+						<Label text="Country" />
+						<Input value = "{/headerSet/Plantcountry}"/> -->
+					</f:content>
+				</f:SimpleForm>
+			</IconTabFilter>
+			<IconTabFilter text="Special Instructions">
+				<Panel>
+					<!-- <TextArea placeholder="Conditions" width="100%" value = "{/headerSet/Splinstruct}"/> -->
+					<TextArea placeholder="Conditions" width="100%" id = "idSplInstrc" />
+				</Panel>
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
+</core:FragmentDefinition>
+

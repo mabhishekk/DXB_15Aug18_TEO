@@ -1,0 +1,90 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" displayBlock="true" controllerName="poApp.controller.gr"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<Page title="Purchase Requisition No. : {orderName}"
+		showNavButton="true" navButtonPress="onNavButtonPress"
+		applyContentPadding="false">
+		<content>
+			<!-- IconTab added for General Data, Commercials, Type of Approval Required 
+				& Other Notes -->
+			<!-- <IconTabBar select="handleIconTabBarSelect" class="">
+				<items>
+					<IconTabFilter icon="sap-icon://request" iconColor="Positive"
+						design="Vertical" expanded="false" text="Pur. Req." key="Ok">
+						<content>
+							<core:Fragment fragmentName="poApp.view.fragments.po" type="XML" />
+						</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar> -->
+			
+			<IconTabBar id="id_iconTB" select="handleIconTabBarSelect" 
+				class="">
+				<items>
+					<IconTabFilter icon="sap-icon://request" iconColor="Positive" design="Vertical" key="PR" visible="{lModel>/PR}" expanded="false" text="{i18n>PurReq}"/>
+						
+					
+
+					<IconTabSeparator icon="sap-icon://step" visible="{lModel>/QR}" iconColor="Accept " />
+
+					<IconTabFilter id="qr_req" icon="sap-icon://sales-quote" visible="{lModel>/QR}" iconColor="Negative" design="Vertical" key="QR" text="{i18n>QuotReq}"/>
+
+					
+					<IconTabSeparator icon="sap-icon://step" visible="{lModel>/QC}" iconColor="Accept " />
+
+					<IconTabFilter icon="sap-icon://order-status" iconColor="Negative" design="Vertical" key="QC" visible="{lModel>/QC}" text="{i18n>QuotComp}"/>
+						
+					<IconTabSeparator icon="sap-icon://step" visible="{lModel>/PO}" iconColor="Accept " />
+					<!-- <IconTabFilter icon="sap-icon://request" iconColor="Positive"
+						design="Vertical" expanded="false" text="Pur. Req." key="Ok">
+						<content>
+							<core:Fragment fragmentName="poApp.view.fragments.po" type="XML" />
+						</content>
+					</IconTabFilter> -->
+					
+					
+
+					<IconTabFilter icon="sap-icon://order-status" iconColor="Negative" design="Vertical" key="PO" text="{i18n>PurOrd}" visible="{lModel>/PO}"/>
+					
+						
+					<IconTabSeparator icon="sap-icon://step" visible="{lModel>/PO}" iconColor="Accept " />
+					
+
+					<IconTabFilter icon="sap-icon://order-status" iconColor="Negative" design="Vertical" key="GR" text="{i18n>Gdsrcp}" visible="{lModel>/GR}">
+					
+							<content>
+							<core:Fragment fragmentName="poApp.view.fragments.goodsReceipt" type="XML" />
+						</content>
+					
+					</IconTabFilter>
+					
+					
+					
+
+			
+
+				</items>
+			</IconTabBar>
+			
+			
+			
+			
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button text="Save" />
+				<Button text="Save and Submit" />
+				<Button text="Cancel" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+
+
+
+
+
+</core:View>
+
+

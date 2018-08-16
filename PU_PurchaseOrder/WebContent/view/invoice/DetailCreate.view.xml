@@ -1,0 +1,121 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	controllerName="poApp.controller.invoice.DetailCreate">
+	<Page 
+		title="Create Invoice"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/isPhone}">
+		<content>
+			<f:SimpleForm
+				id="idInvoiceHeader"
+				editable='true'
+				layout="ResponsiveGridLayout"
+				title="{PoNumber}"
+				adjustLabelSpan="false"
+				labelSpanXL="4"	labelSpanL="4"	labelSpanM="5"	labelSpanS="12"
+				emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+				columnsXL="2"	columnsL="2"	columnsM="2"
+				singleContainerFullSize="false" 
+				class="noTitle">
+				<f:content>
+					<core:Title text="" />
+					<Label text="{i18n>Vendor}"/> <Text text='{Vendor}'/>
+					<Label text="{i18n>Posting Date}"/> <DatePicker width='9rem'/>
+					<Label text="{i18n>Payment Term}"/>
+					<Select id="idInvPaymentTerm" items="{/PAYMENTTERMSSet}" showSecondaryValues= "true" 
+						change='onPayTermSelect' width='6rem'>
+						<core:ListItem text="{Zterm}" key="{Zterm}" additionalText= "{Vtext}"/>
+					</Select>
+					<Label />
+					<Text id="idInvPaymentTermText"/>
+					<core:Title text="" />
+					<Label text="{i18n>Total GR Amount}"/> <Text text='{Totalamt}'/>
+					<Label text="{i18n>Invoice Date}"/> <DatePicker width='9rem'/>
+					<Label text="{i18n>Bill No}"/> <Input value=''/>
+					<Label text="{i18n>Invoice Amount}"/> <Input value=''/>
+					<Select id="idInvAmtCurr" items="{fiService>/currencySet}">
+						<core:ListItem text="{Waers}" key="{Waers}"/>
+					</Select>
+				</f:content>
+			</f:SimpleForm>
+			<ScrollContainer horizontal="true">
+				<Table id="id_GR_CreateItems" items="{/navtogritem/results}" inset="false" class='columnBold'>
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="Items" level="H2" />
+							<ToolbarSpacer />
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="2rem" hAlign="Center">
+							<header><Text text="GR Number"/></header>
+						</Column>
+						<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+							<header><Text text="Material/ Service Description"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+							<header><Text text="GR Quantity"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+							<header><Text text="Unit"/></header>
+						</Column>
+						<Column width="3rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+							<header><Text text="GR Amount"/></header>
+						</Column>
+						<Column width="3rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+							<header><Text text="Invoice Quantity"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+							<header><Text text="Tax Code"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+							<header><Text text="Cost Center"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" hAlign="Center">
+							<header><Text text="GL Account"/></header>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+								<Text text=''/>
+								<Text text="{ShortText}"/>
+								<Text text="{Grquantity}"/>
+								<Text text="{Orderunit}"/>
+								<Text text="{ItemAmount}"/>
+								<Input value=''/>
+								<Select items="{path:'/TAXCODESSet/results', templateShareable:'true'}">
+		                            <items>
+		                                <core:ListItem key="{Mwskz}" text="{Text1}" />
+		                            </items>
+		                        </Select>
+								<Text text="{Costcenter}"/>
+								<Text text="{Glaccount}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<!-- <Button text="{i18n>Save}" icon="sap-icon://save" type="Accept" press="handleECsave" /> -->
+				<Button text="{i18n>Submit}" icon="sap-icon://hr-approval" type="Reject" press="handleSubmit" />
+				<Button text="{i18n>Cancel}" icon="sap-icon://sys-cancel" press="handleCancel" />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			</OverflowToolbar>
+			<!-- <OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button  text="{i18n>Submit}" type="Accept" press="handleECsave"/>
+				<Button  text="{i18n>SaveSubmit}" type="Accept"/>
+				<Button  text="{i18n>Cancel}" type="Reject" press="handleECcreateCancel"/>
+			</OverflowToolbar> -->
+		</footer>
+	</Page>
+</View>

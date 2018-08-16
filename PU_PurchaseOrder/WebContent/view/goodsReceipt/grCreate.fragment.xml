@@ -1,0 +1,87 @@
+<core:FragmentDefinition
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified">	
+	<f:SimpleForm
+		id="ExpenseClaim"
+		editable="true"
+		layout="ResponsiveGridLayout"
+		title="{i18n>PO Number}: {lModel>/PoNumber}"
+		labelSpanXL="4"	labelSpanL="4" labelSpanM="5" labelSpanS="12"
+		emptySpanXL="0"	emptySpanL="0" emptySpanM="0" emptySpanS="0"
+		columnsXL="2"	columnsL="2"   columnsM="2"
+		adjustLabelSpan="false"
+		singleContainerFullSize="false" 
+		class="noTitle">
+		<f:content>
+			<core:Title text="" />
+			<Label text="{i18n>Vendor}"/>
+			<Text text="{lModel>/Vendor} {lModel>/Vendor_name}"/>
+			
+			<core:Title text="" />
+			<Label text="{i18n>Business Completion Date}"/>
+			<DatePicker id="idGrCompletionDate" width="9rem" />
+		</f:content>
+	</f:SimpleForm>
+	<ScrollContainer horizontal="true">
+		<Table id="id_GR_CreateItems" items="{/navtogritem/results}" mode="Delete" delete="handleDelete">
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title text="Items" level="H2" />
+					<ToolbarSpacer />
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="2rem">
+					<header><Text text="Item"/></header>
+				</Column>
+				<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true">
+					<header><Text text="Material/ Service Description" class="columnBold" /></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Quantity Ordered"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Quantity Delivered"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Quantity Pending"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="GR Quantity"/></header>
+				</Column>
+				<Column width="3rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Unit"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Value (AED)"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Cost Center"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="GL Account"/></header>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{ path: 'PoItem' ,formatter:'.formatter.precedingZeros'} "/>
+						<Text text="{ShortText}"/>
+						<Text text="{Quantity}"/>
+						<Text text="{Grqtydelivered}"/>
+						<Text text="{Poqtypending}"/>
+						<Input value="{Grquantity}" type='Number' liveChange='onQuantity'/>
+						<Text text="{Orderunit}"/>
+						<Text text="{NetPrice}"/>
+						<Text text="{Costcenter}"/>
+						<Text text="{Glaccount}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</ScrollContainer>
+</core:FragmentDefinition>	

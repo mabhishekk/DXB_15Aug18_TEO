@@ -1,0 +1,85 @@
+<core:FragmentDefinition
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified">
+	<ObjectHeader
+		title="{PoNumber}">
+		<attributes>
+			<ObjectAttribute text="{i18n>Vendor}: {Vendor} {Vendor_Name}" />
+			<ObjectAttribute text="{i18n>Business Completion Date}: {}" />
+		</attributes>
+	</ObjectHeader>
+
+	<!-- <f:SimpleForm
+		id="GoodsReceipt"
+		editable="False"
+		layout="ResponsiveGridLayout"
+		title="{i18n>PO Number}: {PoNumber}"
+		adjustLabelSpan="false"
+		labelSpanXL="4"	labelSpanL="4"	labelSpanM="5"	labelSpanS="12"
+		emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+		columnsXL="2"	columnsL="2"	columnsM="2"
+		singleContainerFullSize="false" >
+		<f:content>
+			<core:Title text="" />
+			<Label text="{i18n>PO Number}"/>
+			<Text text="{PoNumber}"/>
+			<Label text="{i18n>Vendor}"/>
+			<Text text="{Vendor} {Vendor_Name}"/>
+			
+			<core:Title text="" />
+			<Label text="{i18n>Goods Receipt No.}"/>
+			<Select	id='idGoodsReceiptNo' items="{grtoitemdisp}" change="onGRselect">
+				<core:Item key="{Matdocno}-{Matdocitem}" text="{Matdocno}" />
+			</Select>
+		</f:content>
+	</f:SimpleForm> -->
+	<ScrollContainer horizontal="true">
+		<Table id="id_GR_displayItems">
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title text="Items" level="H2" />
+					<ToolbarSpacer />
+					<Label text="{i18n>Goods Receipt No.}"/>
+					<Select	id='idGoodsReceiptNo' items="{grtoitemdisp}" change="onGRselect">
+						<core:Item key="{Matdocno}-{Matdocitem}" text="{Matdocno}" />
+					</Select>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="2rem">
+					<header>
+						<Text text="Item"/>
+					</header>
+				</Column>
+				<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true">
+					<header><Text text="Material/ Service Description"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Quantity Ordered"/></header>
+				</Column>
+				<Column width="3rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Unit"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Value (AED)"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Quantity Delivered"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Quantity Pending"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="Cost Center"/></header>
+				</Column>
+				<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+					<header><Text text="GL Account"/></header>
+				</Column>
+			</columns>
+		</Table>
+	</ScrollContainer>
+</core:FragmentDefinition>

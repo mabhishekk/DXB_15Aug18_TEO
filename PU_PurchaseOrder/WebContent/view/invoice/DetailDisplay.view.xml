@@ -1,0 +1,131 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	controllerName="poApp.controller.invoice.DetailDisplay">
+	<Page
+		title="{i18n>DetailPageTitle}"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/isPhone}">
+		<content>
+			<f:SimpleForm
+				id="invoice"
+				editable="False"
+				layout="ResponsiveGridLayout"
+				title="{i18n>SmartFormTitle}"
+				adjustLabelSpan="false"
+				labelSpanXL="4"	labelSpanL="4"	labelSpanM="5"	labelSpanS="12"
+				emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+				columnsXL="2"	columnsL="2"	columnsM="2"
+				singleContainerFullSize="false" >
+				<f:content>
+					<core:Title text="" />
+					<Label text="{i18n>PO Number}"/>
+					<Text text="{PoNumber}"/>
+					
+					<core:Title text="" />
+					<Label text="{i18n>Document Number}"/>
+					<Select	id='idinvoiceNo' items="{potoinvnodisp}" change="onInvoiceSelect">
+						<core:Item key="{Invno}" text="{Invno}" />
+					</Select>
+				</f:content>
+			</f:SimpleForm>
+			<f:SimpleForm
+				id="idInvoiceHeader"
+				editable="False"
+				layout="ResponsiveGridLayout"
+				title="{i18n>SmartFormTitle}"
+				adjustLabelSpan="false"
+				labelSpanXL="4"	labelSpanL="4"	labelSpanM="5"	labelSpanS="12"
+				emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+				columnsXL="2"	columnsL="2"	columnsM="2"
+				singleContainerFullSize="false" >
+				<f:content>
+					<core:Title text="" />
+					<Label text="{i18n>Invoice Description}"/>
+					<Text text="{Invdesc}"/>
+					<Label text="{i18n>Accounting Doc. Number}"/>
+					<Text text="{Accdocumentno}"/>
+					<Label text="{i18n>Posting Date}" />
+					<Text text="{
+							path: 'Invpostdate',
+							formatter: '.formatter.formatDate'
+						}"/>
+					<Label text="{i18n>Invoice Date}" />
+					<Text text="{
+							path: 'Invdate',
+							formatter: '.formatter.formatDate'
+						}"/>
+					
+					<core:Title text="" />
+					<Label text="{i18n>Vendor}"/>
+					<Text text="{Vendor}"/>
+					<Label text="{i18n>Bill No/ Invoice Number }"/>
+					<Text text=""/>
+					<Label text="{i18n>Tax Code}"/>
+					<Text text="{TaxCode}"/>
+					<Label text="{i18n>Payment Terms }"/>
+					<Text text="{Pmnttrms}"/>
+					<Label text="{i18n>Total Value}"/>
+					<Text text="{Totalamt}"/>
+				</f:content>
+			</f:SimpleForm>
+			<ScrollContainer horizontal="true">
+				<Table id="id_Invoice_displayItems">
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="Items" level="H2" />
+							<ToolbarSpacer />
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="2rem">
+							<header>
+								<Text text="Item"/>
+							</header>
+						</Column>
+						<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true">
+							<header><Text text="Material/ Service Description"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+							<header><Text text="Quantity Ordered"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+							<header><Text text="Quantity Delivered"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+							<header><Text text="Quantity Pending"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+							<header><Text text="GR Quantity"/></header>
+						</Column>
+						<Column width="3rem" minScreenWidth="Tablet"	demandPopin="true" >
+							<header><Text text="Unit"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+							<header><Text text="Value (AED)"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+							<header><Text text="Cost Center"/></header>
+						</Column>
+						<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true" >
+							<header><Text text="GL Account"/></header>
+						</Column>
+					</columns>
+				</Table>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<Button icon="sap-icon://write-new" text="{i18n>Create}" press="handleCreate" />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+					<Button text="Delete" icon="sap-icon://delete" press="handleDelete" />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<Button icon="sap-icon://print" text="{i18n>Print}" press="handleECprint" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

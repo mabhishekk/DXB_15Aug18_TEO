@@ -1,0 +1,71 @@
+<core:View 
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" 
+	displayBlock="true" 
+	controllerName="poApp.controller.poEdit"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page 
+		title="{i18n>PurchaseOrderNo} : {lModel>/mainSet/PoNumber}"
+		showNavButton="{device>/isPhone}" 
+		navButtonPress="onNavButtonPress"
+		applyContentPadding="false">
+		<content>
+			<!-- IconTab added for General Data, Commercials, Type of Approval Required 
+				& Other Notes -->
+			<!-- <IconTabBar select="handleIconTabBarSelect" class="">
+				<items>
+					<IconTabFilter icon="sap-icon://request" iconColor="Positive"
+						design="Vertical" expanded="false" text="Pur. Req." key="Ok">
+						<content>
+							<core:Fragment fragmentName="poApp.view.fragments.po" type="XML" />
+						</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar> -->
+			<IconTabBar id="id_iconTB" select="handleIconTabBarSelect" 	class="">
+				<items>
+					<IconTabFilter                icon="sap-icon://request"      iconColor="Positive" design="Vertical" key="PR"  expanded="false" text="{i18n>PurReq}"/>
+					<!-- <IconTabSeparator             icon="sap-icon://step"         iconColor="Accept " /> -->
+					<IconTabFilter    id="qr_req" icon="sap-icon://sales-quote"  iconColor="Negative" design="Vertical" key="QR" text="{i18n>QuotReq}"  visible="{= ${lModel>/mainSet/Zrequesttype} === '1' }" />
+					<!-- <IconTabSeparator             icon="sap-icon://step"         iconColor="Accept "  visible="{= ${lModel>/mainSet/Zrequesttype} === '1' }"/> -->
+					<IconTabFilter                icon="sap-icon://order-status" iconColor="Negative" design="Vertical" key="QC" text="{i18n>QuotComp}" visible="{= ${lModel>/mainSet/Zrequesttype} === '1' }" />
+					<!-- <IconTabSeparator             icon="sap-icon://step"         iconColor="Accept "  visible="{= ${lModel>/mainSet/Zrequesttype} === '1' }"/> -->
+					<!-- <IconTabFilter icon="sap-icon://request" iconColor="Positive"
+						design="Vertical" expanded="false" text="Pur. Req." key="Ok">
+						<content>
+							<core:Fragment fragmentName="poApp.view.fragments.po" type="XML" />
+						</content>
+					</IconTabFilter> -->
+					<IconTabFilter icon="sap-icon://order-status" iconColor="Negative" design="Vertical" expanded="true" key="PO" text="{i18n>PurOrd}" >
+						<content>
+							<core:Fragment fragmentName="poApp.view.fragments.poEdit" type="XML" />
+						</content>
+					</IconTabFilter>
+					<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/GR}" iconColor="Accept " /> -->
+					<IconTabFilter icon="sap-icon://shipping-status" iconColor="Negative" design="Vertical" key="GR" text="{i18n>Gdsrcp}" visible="{lModel>/GR}"/>
+					<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/IN}" iconColor="Accept " /> -->
+					<IconTabFilter icon="sap-icon://sales-quote" iconColor="Negative" design="Vertical" key="IN" text="{i18n>Invoice}" visible="{lModel>/IN}"/>
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<Button text='{i18n>CreatePO}' press='onCreatePO'/>
+				<ToolbarSpacer />
+				<Button                    text="{i18n>Save}"     visible = "{lModel>/POEdit}"                      press= "confirmDialog"   type='Accept'/>
+				<!-- <Button id = "idEditBtn"   text="{i18n>Edit}"            visible = "{= ${lModel>/mainSet/Posubmit} === 'X'? false : true }"  press= "onPOEdit"        type='Reject'/>
+				<Button id = "idSubmitBtn" text="{i18n>sendapprovl}"     visible = "{= ${lModel>/mainSet/Posubmit} === 'X'? false : true }"  press= "onSubmitPress"   type='Emphasized'/> -->
+				<Button 				   text="Cancel"          visible = "{lModel>/POEdit}"                      press= "onPOEditCancle"  type='Reject'/>
+				<Button id = "idPrintBtn"  text="{i18n>Print}"    visible = "{= ${lModel>/POEdit}? false : true }"  press= "onPDFSavePress"  icon= "sap-icon://print"  />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+
+
+
+
+
+</core:View>
+
+
