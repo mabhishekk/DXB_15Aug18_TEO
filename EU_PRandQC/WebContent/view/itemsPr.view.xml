@@ -1,0 +1,57 @@
+<View
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified" 
+	controllerName="providentia.pr.controller.itemsPr">
+	<!-- 
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+				labelSpanXL="4" labelSpanL="5" labelSpanM="5" labelSpanS="12"
+				emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+				columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="Material No." />
+					<Input id="matrnNo" placeHolder="Material No:"/>
+					<Label text="Material/ Service Description" />
+					<Input id="matrnDesc" />
+					<Label text="Quantity" />
+					<Input id="matrnQuan" value="Quantity" />
+					<Select id="matrnUnit" />
+					<Label text="Account Assignment Category" />
+					<Select id="matrnActAsignCat" />
+					<Label text="Value" />
+					<Input id="matrnVal" value="Value" />
+					<Select id="matrnCurr" />								
+					<Label text="Start Date" />
+					<DatePicker id="itmStartDate" placeholder="Enter Date ..."  />
+					<Label text="End Date" />
+					<DatePicker id="itmEndDate" placeholder="Enter Date ..."  />
+					<Label text="Delivery Date" />
+					<DatePicker id="DP1" placeholder="Enter Date ..."  />
+					<Label text="Discount Value" />
+					<Input id="matrnDiscVal" value="Value" />
+					<Select id="matrnDiscType" />
+					<Label text="VAT Value" />
+					<Input id="matrnVAT" value="VAT Value" />
+					<Text text="%" />
+					<Label text="Cost Center" />
+					<Input id="matrnCC" />
+					<Label text="GL Code" />
+					<Input id="matrnGLCode" />
+					<Label text="TEO Code" /> <Input value="TEO Code"/> <Label text="Budget 
+						Overview" /> <Input id="matrnBudOvr" value="Budget Overview" />
+					<Label text="Budget Exemption" />
+					<CheckBox id="matrnBudExem" />
+					<Label text="Attachment for Budget" />
+					<u:FileUploader name="myFileUpload" uploadUrl="upload/"
+						id="matrnFile" tooltip="Upload your file to the local server"
+						uploadComplete="handleUploadComplete" />
+				</f:content>
+			</f:SimpleForm> -->
+	
+	
+	
+	
+	</View>

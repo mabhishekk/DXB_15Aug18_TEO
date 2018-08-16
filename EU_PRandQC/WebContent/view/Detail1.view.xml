@@ -1,0 +1,101 @@
+<View
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	controllerName="userPr.controller.Detail1">
+	<Page
+		title="Purchase Requisition No. : {orderName}"
+		showNavButton="true"
+		navButtonPress="onNavButtonPress" applyContentPadding="false">
+		<content>
+		    <!-- IconTab added for General Data, Commercials, Type of Approval Required & Other Notes -->
+		    <IconTabBar
+				select="handleIconTabBarSelect"
+				class="">
+				<items>
+					<IconTabFilter
+						icon="sap-icon://request"
+						iconColor="Positive"
+						design="Vertical"
+						
+						expanded="false"
+						text="Pur. Req."
+						key="Ok" >
+						<content>
+							<core:Fragment fragmentName="userPr.view.fragments.PRCreate" type="XML"/>
+						</content>
+					</IconTabFilter>
+					<IconTabSeparator icon="sap-icon://step" iconColor="Accept "/>
+					<!-- <IconTabSeparator icon="sap-icon://alert" />
+					<IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabFilter
+						icon="sap-icon://sales-quote"
+						iconColor="Negative"
+						design="Vertical"
+						
+						text="Quot. Req."
+						key="Heavy" >
+						
+						
+						
+						<core:Fragment
+								fragmentName="userPr.view.fragments.quotRequest"
+								type="XML" /> 
+						
+						</IconTabFilter>
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabSeparator icon="sap-icon://decline" />
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabFilter
+						icon="sap-icon://order-status"
+						iconColor="Negative"
+						design="Vertical"
+						
+						text="Quot. Comp."
+						key="Overweight" >	<content>
+
+							<core:Fragment
+								fragmentName="userPr.view.fragments.quotComaparison"
+								type="XML" />
+
+						</content>
+						</IconTabFilter>
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabSeparator icon="sap-icon://employee-rejections" />
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabFilter
+						icon="sap-icon://sales-order"
+						iconColor="Negative"
+						design="Vertical"
+						
+						text="Pur. Ord."
+						key="Overweight" >
+						<content>
+							<core:Fragment fragmentName="userPr.view.fragments.POCreate" type="XML"/>
+						</content>
+						</IconTabFilter>
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabSeparator icon="sap-icon://employee-rejections" />
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabFilter
+						icon="sap-icon://accounting-document-verification"
+						iconColor="Negative"
+						design="Vertical"
+						
+						text="Comp Cert."
+						key="Overweight"><Title text="Under Development"/></IconTabFilter>
+					<IconTabSeparator icon="sap-icon://employee-rejections" />
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button  text="Save" />
+				<Button  text="Save and Submit" />
+				<Button  text="Cancel" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

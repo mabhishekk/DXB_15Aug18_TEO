@@ -1,0 +1,36 @@
+<core:FragmentDefinition
+xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+xmlns:core="sap.ui.core">
+
+<Dialog title="Reasons for Recommendation" type="sap.m.DialogType.Message">
+<endButton>
+<Button text="Save" press="onVendorRecomendClose">
+
+</Button>
+<Button text="Close" press="onPRCDialogueClose">
+
+</Button>
+
+
+</endButton>
+
+<content>
+
+
+<CheckBox id="RB1-1" text="Delivery"/>
+<CheckBox id="RB1-2" text="Quality"/>
+<CheckBox id="RB1-3" text="Price" />
+<CheckBox id="RB1-4" text="Experience"/>
+<CheckBox id="RB1-5" text="Technical Feedback"/>
+<CheckBox id="RB1-6" text="Others" select="onRecOthersReason"/>
+
+
+<Input id="r_Others" visible="false" placeholder="If others, please enter reason"></Input>
+
+</content>
+
+
+</Dialog>
+
+
+</core:FragmentDefinition>

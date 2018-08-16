@@ -1,0 +1,90 @@
+<View
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	controllerName="userPr.controller.DetailDisplay">
+	<Page
+		id="idPRDeatilDisplay"
+		title="{Banfn}"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/system/phone}" applyContentPadding="false">
+		<content>
+		    <!-- IconTab added for General Data, Commercials, Type of Approval Required & Other Notes -->
+		    <IconTabBar
+				select="handleIconTabBarSelect"
+				class="">
+				<items>
+					<IconTabFilter
+						id="idPR_IT_01"
+						icon="sap-icon://request"
+						iconColor="Positive"
+						design="Vertical"
+						key="PR_IT_01"
+						expanded="false"
+						text="{i18n>PurReq}">
+						<content>
+							<core:Fragment fragmentName="providentia.pr.view.fragments.PRCreateDisplay" type="XML"/>
+						</content>
+					</IconTabFilter>
+					<IconTabSeparator icon="sap-icon://step" iconColor="Accept "/>
+					<!-- <IconTabSeparator icon="sap-icon://alert" />
+					<IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabFilter
+						id="idPR_IT_02"
+						icon="sap-icon://sales-quote"
+						iconColor="Negative"
+						design="Vertical"
+						key="PR_IT_02"
+						text="{i18n>QuotReq}" >
+						<core:Fragment	fragmentName="providentia.pr.view.fragments.quotRequestDisplay"	type="XML" />
+					</IconTabFilter>
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabSeparator icon="sap-icon://decline" />
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabFilter
+						id="idPR_IT_03"
+						icon="sap-icon://order-status"
+						iconColor="Negative"
+						design="Vertical"
+						key="PR_IT_03"
+						text="{i18n>QuotComp}">
+						<core:Fragment	fragmentName="providentia.pr.view.fragments.quotComaparison" type="XML" />
+						</IconTabFilter>
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabSeparator icon="sap-icon://employee-rejections" />
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabFilter
+						id="idPR_IT_04"
+						icon="sap-icon://sales-order"
+						iconColor="Negative"
+						design="Vertical"
+						key="PR_IT_04"
+						text="{i18n>PurOrd}">
+						<core:Fragment fragmentName="providentia.pr.view.fragments.POCreate" type="XML"/>
+						</IconTabFilter>
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabSeparator icon="sap-icon://employee-rejections" />
+					<!-- <IconTabSeparator icon="sap-icon://open-command-field" /> -->
+					<IconTabFilter
+						id="idPR_IT_05"
+						icon="sap-icon://accounting-document-verification"
+						iconColor="Negative"
+						design="Vertical"
+						key="PR_IT_05"
+						text="{i18n>CompCert}">
+						<core:Fragment fragmentName="providentia.pr.view.fragments.CompletionCertificate" type="XML"/>
+						</IconTabFilter>
+					<IconTabSeparator icon="sap-icon://employee-rejections" />
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button   text="Submit" press="onPREdit"/>
+				<!-- <Button  icon="sap-icon://edit" text="Edit" press="onPREdit"/> -->
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

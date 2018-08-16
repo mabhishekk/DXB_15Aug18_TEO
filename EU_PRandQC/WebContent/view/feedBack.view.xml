@@ -1,0 +1,93 @@
+<View
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	controllerName="userPr.controller.DetailEdit">
+	<Page
+		title="PR - {lModel>/mainSet/Banfn}"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/isPhone}" applyContentPadding="false">
+		<content>
+			<IconTabBar id="id_iconTB"
+				select="handleIconTabBarSelect"
+				class="">
+				<items>
+					<IconTabFilter
+						icon="sap-icon://request"
+						iconColor="Positive"
+						design="Vertical"
+						key="PR_IT_01"
+						expanded="false"
+						text="{i18n>PurReq}">
+						<content>
+							<!-- <core:Fragment  fragmentName="userPr.view.fragments.PRCreateEdit" type="XML"/> -->
+						</content>
+					</IconTabFilter>
+					
+					<IconTabFilter
+						icon="sap-icon://request"
+						iconColor="Positive"
+						design="Vertical"
+						key="PR_feedBck"
+						expanded="false"
+						text="{i18n>FeedBack}">
+						<content>
+							
+<f:SimpleForm id="NDA_Information" editable="true" minWidth="1024" maxContainerCols="2" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="1" emptySpanM="1" columnsL="1"
+			columnsM="1">
+			<f:content>
+				<Label text="Product / Service as described by the seller" />
+				
+
+				<RatingIndicator id="id_prdSrv" xmlns="sap.m" class="cl_ratngIdi" />
+
+
+				
+
+				<Label text="Quality of Goods / Services Received" />
+			
+
+				<RatingIndicator  id="id_qualSrv"  xmlns="sap.m" class="cl_ratngIdi" />
+
+				<Label text="Delivery (In Case of Goods Received" />
+			
+				<RatingIndicator id="id_delSrv"  xmlns="sap.m" class="cl_ratngIdi" />
+
+				<Label text="Prompt and courteous service?" />
+				<RatingIndicator id="id_prCour" xmlns="sap.m" class="cl_ratngIdi" />
+				<Label text="Price of Goods / Services" />
+				<RatingIndicator id="id_prGodSrv" xmlns="sap.m" class="cl_ratngIdi" />
+				<Label text="Technical Knowledge" />
+				<RatingIndicator  id="id_techKnow" xmlns="sap.m" class="cl_ratngIdi" />
+
+
+
+
+			</f:content>
+		</f:SimpleForm>
+
+
+							
+							
+							
+							
+						</content>
+					</IconTabFilter>
+					
+				
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				
+					
+			
+				
+				
+				
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

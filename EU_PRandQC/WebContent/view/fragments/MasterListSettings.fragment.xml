@@ -1,0 +1,44 @@
+<core:FragmentDefinition
+xmlns="sap.m"
+xmlns:core="sap.ui.core">
+<ViewSettingsDialog
+confirm="handleConfirm">
+<sortItems>
+<ViewSettingsItem text="Purchase Order" key="Name" selected="true" />
+<ViewSettingsItem text="Purchase Requisition" key="SupplierName" />
+<ViewSettingsItem text="Status" key="WeightMeasure" />
+<ViewSettingsItem text="Cost Center" key="Price" />
+</sortItems>
+<groupItems>
+<ViewSettingsItem text="Status" key="Status" />
+<ViewSettingsItem text="Cost Center" key="CostCenter" />
+</groupItems>
+<filterItems>
+<ViewSettingsFilterItem
+text="Purchase Order"
+key="PurchaseOrder"
+multiSelect="false">
+<items>
+<ViewSettingsItem text="Less than 1000" key="WeightMeasure___LE___1000___X" />
+<ViewSettingsItem text="Between 1000 and 2000" key="WeightMeasure___BT___1000___2000" />
+<ViewSettingsItem text="More Than 2000" key="WeightMeasure___GT___2000___X" />
+</items>
+</ViewSettingsFilterItem>
+<ViewSettingsFilterItem
+text="Purchase Requisition"
+key="PurchaseRequisition"
+multiSelect="false">
+<items>
+<ViewSettingsItem text="Less Than 100" key="Price___LE___100___X" />
+<ViewSettingsItem text="Between 100 and 1000" key="Price___BT___100___1000" />
+<ViewSettingsItem text="More Than 1000" key="Price___GT___1000___X" />
+</items>
+</ViewSettingsFilterItem>
+<ViewSettingsFilterItem
+text="Cost Center"
+key="CostCenter"
+multiSelect="false">
+</ViewSettingsFilterItem>
+</filterItems>
+</ViewSettingsDialog>
+</core:FragmentDefinition>

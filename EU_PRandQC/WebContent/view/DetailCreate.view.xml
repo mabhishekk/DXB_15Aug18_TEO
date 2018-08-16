@@ -1,0 +1,77 @@
+<!-- PR User -->
+
+<View xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+  xmlns:core="sap.ui.core" controllerName="userPr.controller.DetailCreate">
+  <Page title="{i18n>createpr}" applyContentPadding="false"   navButtonPress="onNavBack1" 
+    showNavButton="{device>/system/phone}">
+    <customHeader>
+      <Bar xmlns="sap.m">
+
+        <contentLeft>
+          <Icon xmlns="sap.ui.core" visible="{device>/isPhone}" src="sap-icon://arrow-left"
+            press="onNavBack">
+
+          </Icon>
+
+        </contentLeft> <!-- sap.ui.core.Control -->
+        <contentMiddle>
+          <Title text="{i18n>createpr}" />
+        </contentMiddle> <!-- sap.ui.core.Control -->
+        <contentRight></contentRight> <!-- sap.ui.core.Control -->
+      </Bar>
+
+
+    </customHeader>
+
+
+    <content>
+      <IconTabBar select="handleIconTabBarSelect" class="">
+        <items>
+          <IconTabFilter icon="sap-icon://request" iconColor="Positive"
+            design="Vertical" key="PR_IT_01" expanded="false" text="{i18n>PurReq}">
+            <core:Fragment fragmentName="userPr.view.fragments.PRCreate"
+              type="XML" />
+          </IconTabFilter>
+          <!-- <IconTabSeparator icon="sap-icon://step" iconColor="Accept "/> 
+            <IconTabSeparator icon="sap-icon://alert" PRCreate.fragment/> <IconTabSeparator 
+            icon="sap-icon://open-command-field" /> <IconTabFilter icon="sap-icon://sales-quote" 
+            iconColor="Negative" design="Vertical" key="PR_IT_02" text="Quot. Req." > 
+            <core:Fragment fragmentName="providentia.pr.view.fragments.quotComaparison" 
+            type="XML" /> </IconTabFilter> <IconTabSeparator icon="sap-icon://open-command-field" 
+            /> <IconTabSeparator icon="sap-icon://decline" /> <IconTabSeparator icon="sap-icon://open-command-field" 
+            /> <IconTabFilter icon="sap-icon://order-status" iconColor="Negative" design="Vertical" 
+            key="PR_IT_03" text="Quot. Comp."> <core:Fragment fragmentName="providentia.pr.view.fragments.quotComaparison" 
+            type="XML" /> </IconTabFilter> <IconTabSeparator icon="sap-icon://open-command-field" 
+            /> <IconTabSeparator icon="sap-icon://employee-rejections" /> <IconTabSeparator 
+            icon="sap-icon://open-command-field" /> <IconTabFilter icon="sap-icon://sales-order" 
+            iconColor="Negative" design="Vertical" key="PR_IT_04" text="Pur. Ord."> </IconTabFilter> 
+            <IconTabSeparator icon="sap-icon://open-command-field" /> <IconTabSeparator 
+            icon="sap-icon://employee-rejections" /> <IconTabSeparator icon="sap-icon://open-command-field" 
+            /> <IconTabFilter icon="sap-icon://accounting-document-verification" iconColor="Negative" 
+            design="Vertical" key="PR_IT_05" text="Comp Cert."> <Title text="Under Development"/></IconTabFilter> 
+            <IconTabSeparator icon="sap-icon://employee-rejections" /> -->
+        </items>
+      </IconTabBar>
+    </content>
+    <footer>
+      <OverflowToolbar>
+        <!-- <Button icon="sap-icon://arrow-left" press="onPRBackPress" id="arrLeft" 
+          visible="false" /> -->
+        <!-- <Image xmlns="sap.m" id="arrLeft"  height="100%" press="onPRBackPress" visible="{device>/isNoPhone}"/> -->
+        <Button  press="onPRBackPress" id="arrLeft" visible="false" text="{i18n>Back}" type="Reject"/>
+        <ToolbarSpacer visible="{device>/isNoPhone}" />
+        <Button id="prSave" icon="sap-icon://save" text="{i18n>Save}"
+          type="Accept" press="onSavePr" visible="false" />
+        <Button id="prCancel" icon="sap-icon://sys-cancel" text="{i18n>Cancel}"
+          press="onPRDetailCancel" visible="false" />
+        <Button id="prSaveSubmit" icon="sap-icon://hr-approval" text="{i18n>sendapprovl}"
+          type="Reject" visible="false" press="onSavePrWorkFlow" />
+        <ToolbarSpacer visible="{device>/isNoPhone}" />
+        <!-- <Button press="onPRNextPress" icon="sap-icon://arrow-right" id="arrRght" 
+          visible="{device>/isNoPhone}" /> -->
+        <Button  press="onPRNextPress"  id="arrRght"  text="{i18n>Next}"  type="Reject"/>
+        <!-- <Image xmlns="sap.m" id="arrRght"  height="100%" press="onPRNextPress" visible="{device>/isNoPhone}"/> -->
+      </OverflowToolbar>
+    </footer>
+  </Page>
+</View>

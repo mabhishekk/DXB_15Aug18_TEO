@@ -1,0 +1,93 @@
+<View xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" controllerName="userPr.controller.DetailEdit">
+	<Page title="{i18n>Title} - {lModel>/mainSet/Banfn}"
+		navButtonPress="onNavBack" showNavButton="{device>/isPhone}"
+		applyContentPadding="false">
+		<content>
+			<IconTabBar id="id_iconTB"  select="handleIconTabBarSelect"
+				class="">
+				<items>
+					<IconTabFilter icon="sap-icon://request" iconColor="Positive"
+						design="Vertical" key="PR" expanded="false" text="{i18n>PurReq}">
+						<content>
+							<core:Fragment fragmentName="userPr.view.fragments.PRCreateEdit"
+								type="XML" />
+						</content>
+					</IconTabFilter>
+					
+					<IconTabFilter icon="sap-icon://order-status"
+						iconColor="Negative" design="Vertical" key="QC" visible="{lModel>/QC}"
+						text="{i18n>QuotComp}" />
+
+
+
+					<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/PO}" 
+						iconColor="Accept " /> -->
+
+					<IconTabFilter icon="sap-icon://order-status"
+						iconColor="Negative" design="Vertical" key="PO" text="{i18n>PurOrd}"
+						visible="{lModel>/PO}" />
+
+					<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/GR}" 
+						iconColor="Accept " /> -->
+
+					<IconTabFilter icon="sap-icon://shipping-status"
+						iconColor="Negative" design="Vertical" key="GR" text="{i18n>Gdsrcp}"
+						visible="{lModel>/GR}" />
+
+					<!-- <IconTabSeparator icon="sap-icon://step" visible="{lModel>/IN}" 
+						iconColor="Accept " /> -->
+
+					<IconTabFilter icon="sap-icon://sales-quote"
+						iconColor="Negative" design="Vertical" key="IN" text="{i18n>Invoice}"
+						visible="{lModel>/IN}" />
+
+
+					<!-- <IconTabFilter icon="sap-icon://survey" iconColor="Positive"
+						design="Vertical" key="PR_feedBck" expanded="false" text="{i18n>FeedBck}">
+						<content>
+
+						</content>
+					</IconTabFilter> -->
+
+
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<!-- <Button text="{i18n>Back}" press="onPRBackPress" /> <ToolbarSpacer/> 
+					<Button text="{i18n>Save}" press="onSavePr"/> <Button id="prEdit" text="{i18n>Edit}" 
+					press="onEditPr"/> <Button text="{i18n>sendapprovl}" /> <Button text="{i18n>Cancel}" 
+					press="onPRDetailCancel"/> <ToolbarSpacer/> <Button text="{i18n>Next}" press="onPRNextPress"/> -->
+
+
+				<!-- <Button icon="sap-icon://arrow-left" press="onPRBackPress" visible="{device>/isNoPhone}" /> -->
+				<!-- <Image xmlns="sap.m" id="arrLeft"  height="100%" press="onPRBackPress" visible="{device>/isNoPhone}"/> -->
+				<Button  press="onPRBackPress" id="arrLeft" visible="false" text="{i18n>Back}" type="Reject"/>
+				<ToolbarSpacer visible="{device>/isNoPhone}" />
+				<Button id="prSave" icon="sap-icon://save" text="{i18n>Save}"
+					type="Accept" press="onSavePr" />
+				<Button id="prEdit" icon="sap-icon://edit" text="{i18n>Edit}"
+					press="onEditPr" />
+
+				<Button id="prCancel" icon="sap-icon://sys-cancel" text="{i18n>Cancel}" visible="false"
+					press="onPRDetailCancel" />
+				<Button id="prSaveSubmit" icon="sap-icon://hr-approval" type="Reject"
+					text="{i18n>sendapprovl}" press="onSavePrWorkFlow" />
+				<ToolbarSpacer visible="{device>/isNoPhone}" />
+				<Button id="prPrint" icon="sap-icon://print" text="{i18n>Print}"
+					press="onPrintPR" />
+				<!-- <Button press="onPRNextPress" icon="sap-icon://arrow-right"
+					visible="{device>/isNoPhone}" /> -->
+				<!-- <Image xmlns="sap.m"  id="arrRght"   height="100%" press="onPRNextPress" visible="{device>/isNoPhone}"/> -->	
+					 <Button  press="onPRNextPress"  id="arrRght"  text="{i18n>Next}" type="Reject" />	
+
+
+
+
+
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

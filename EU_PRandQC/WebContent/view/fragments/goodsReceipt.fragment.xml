@@ -1,0 +1,82 @@
+<core:FragmentDefinition xmlns="sap.m"
+xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+
+<f:SimpleForm  editable="true" layout="ResponsiveGridLayout"
+labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0"
+emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+singleContainerFullSize="false">
+<f:toolbar>
+<Toolbar >
+<Title text="Goods Receipt" level="H4" titleStyle="H4"/>
+<ToolbarSpacer />
+<Button icon="sap-icon://complete" text="check"/>
+<Button icon="sap-icon://post" text="post"/>
+</Toolbar>
+</f:toolbar>
+<f:content>
+<Label text="Document Date" />
+<Text text="" />
+<Label text="Posting Date" />
+<Text text="" />
+</f:content>
+
+</f:SimpleForm>
+
+
+<Table>
+<columns>
+<Column>
+<header>
+<Text text="Material" />
+</header>
+</Column>
+<Column>
+<header>
+<Text text="Material/Sercice Description" />
+</header>
+</Column>
+<Column>
+<header>
+<Text text="Quantity" />
+</header>
+</Column>
+<Column>
+<header>
+<Text text="GL Account" />
+</header>
+</Column>
+<Column>
+<header>
+<Text text="Cost Center" />
+</header>
+</Column>
+
+</columns>
+
+
+
+<items>
+<ColumnListItem>
+<cells>
+<Text text="Materail" />
+<Text text="Material Description" />
+<Input text="Quantity" />
+<Text text="Gl Account Number" />
+<Text text="Cost Center" />
+
+</cells>
+</ColumnListItem>
+
+</items>
+
+
+</Table>
+
+
+
+
+
+
+
+</core:FragmentDefinition>

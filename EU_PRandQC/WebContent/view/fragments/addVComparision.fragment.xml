@@ -1,0 +1,116 @@
+<!-- Adding vendor for comparision in quotation comparision -->
+
+<core:FragmentDefinition
+xmlns="sap.m"
+xmlns:l="sap.ui.layout"
+xmlns:u="sap.ui.unified"
+xmlns:f="sap.ui.layout.form"
+xmlns:core="sap.ui.core">
+<Dialog contentWidth="50%" title="Vendor Selection" resizable="true" draggable="true" icon="sap-icon://customer-and-supplier">
+<buttons>
+<Button text="Save" icon="sap-icon://save"  press="onVendorSave">
+
+</Button>
+<Button text="Add New" icon="sap-icon://write-new" press="onVendorAddNew">
+
+</Button>
+<Button text="Reset" icon="sap-icon://reset"  press="onVendorReset">
+
+</Button>
+<Button text="Close" icon="sap-icon://decline" press="onVendorDialogueClose">
+
+</Button>
+
+</buttons>
+
+<content>
+
+<f:SimpleForm
+editable="true"
+layout="ResponsiveGridLayout"
+labelSpanXL="4"
+labelSpanL="3"
+labelSpanM="3"
+labelSpanS="12"
+adjustLabelSpan="false"
+emptySpanXL="0"
+emptySpanL="4"
+emptySpanM="0"
+emptySpanS="0"
+columnsXL="2"
+columnsL="1"
+columnsM="1"
+singleContainerFullSize="false" >
+<f:content>
+<Label text="Vendor Name" />
+<Input value="{SupplierName}" placeholder="Vendor Name" showValueHelp="true">
+
+<suggestionColumns>
+<Column hAlign="Begin" popinDisplay="Inline"
+demandPopin="true">
+<Label text="Vendor Name" />
+</Column>
+
+</suggestionColumns>
+<suggestionRows>
+<ColumnListItem>
+<cells>
+<Label text="{VendorName}" />
+
+</cells>
+</ColumnListItem>
+</suggestionRows>
+
+
+</Input>
+<Label text="Material" />
+<Input placeholder="Please enter Material" showValueHelp="true">
+</Input>
+<Label text="Material Description" />
+<Input placeholder="Please enter Material Description">
+</Input>
+
+<Label text="Quantity" />
+<Input placeholder="Please enter Quantity">
+
+</Input>
+
+<Label text="Price" />
+<Input placeholder="Please enter Price"></Input>
+<Label text="VAT Value" />
+<Input placeholder="Please enter VAT Value"></Input>
+<Label text="Discount Value" />
+<Input  placeholder="Please enter Discount Value"></Input>
+<Label text="Total Value" />
+<Text></Text>
+<Label text="Remarks" />
+<Input placeholder="Please enter remarks"></Input>
+
+<Label text="File Upload" />
+<u:FileUploader
+id="fileUploader"
+name="myFileUpload"
+uploadUrl="upload/"
+width="400px"
+tooltip="Upload your file to the local server"
+uploadComplete="handleUploadComplete"/>
+
+</f:content>
+</f:SimpleForm>
+
+
+
+</content>
+
+
+
+</Dialog>
+
+
+
+
+
+
+
+
+</core:FragmentDefinition>

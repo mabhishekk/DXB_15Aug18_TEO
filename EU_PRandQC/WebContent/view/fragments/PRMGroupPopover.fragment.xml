@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+xmlns="sap.m"
+xmlns:core="sap.ui.core">
+<Popover
+title="Group By:"
+class="sapUiContentPadding"
+placement="Top"
+initialFocus="PRMGclose">
+<footer>
+<Toolbar>
+<ToolbarSpacer/>
+<Button
+id="PRMGclose"
+text="Close"
+press="handleClosePopoverPress" />
+</Toolbar>
+</footer>
+<content>
+<RadioButtonGroup selectedIndex="3">
+<buttons>
+<RadioButton text="Open"/>
+<RadioButton text="Closed"/>
+<RadioButton text="Approved"/>
+<RadioButton text="None"/>
+</buttons>
+</RadioButtonGroup>
+</content>
+</Popover>
+</core:FragmentDefinition>

@@ -1,0 +1,91 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+	
+
+	<f:SimpleForm id="QR_Information" editable="true"
+		layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+		labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+		emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2"
+		columnsM="2" singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="" />
+			<Label text="Quotation Date" />
+			<DatePicker width="9rem" />
+
+			<core:Title text="" />
+			<Label text="Quotation Deadline" />
+			<DatePicker width="9rem" />
+		</f:content>
+	</f:SimpleForm>
+
+	<Table class="cl_vendorComparisionTbl" mode="MultiSelect" items="{/navigtoitems}"
+		showSeparators="true"
+		enableColumnFreeze="true" enableCellFilter="true">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="Items" level="H2" />
+				<ToolbarSpacer />
+				<!--<Button icon="sap-icon://add" text="Add" press="onQRSelectVendor" 
+					/> <Button icon="sap-icon://edit" text="Edit" press="handleaddButtonPressed" 
+					/> <Button tooltip="View Settings" icon="sap-icon://bar-chart" press="graphOpen" 
+					/> -->
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column hAlign="Center">
+				<Text text="Material" />
+			</Column>
+			<Column hAlign="Center" minScreenWidth="Tablet" demandPopin="true"
+				popinDisplay="Inline">
+				<Text text="Quotation Quantity" />
+			</Column>
+			<Column hAlign="Center">
+				<Text text="Unit" />
+			</Column>
+			<Column hAlign="Center" minScreenWidth="Tablet" popinDisplay="Inline"
+				TextAlign="Center" demandPopin="true">
+				<Text text="Delievery Date" />
+			</Column>
+
+
+
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+					<!-- <HBox class="cl_padding" width="100%" justifyContent="Center"> 
+						<Text text="0000100000" class="sapUiTinyMarginEnd"/> <core:Icon color="red" 
+						src="sap-icon://message-information" press="onVendorInformaiton"></core:Icon> 
+						</HBox> <Text text="Advertisement and Promotion Expenses Subsciption " /> 
+						<Input value="10" /> <Text text="12345" /> <Text text="121%" /> <Text text="121%" 
+						/> <Text text="121%" /> <Input value="10" /> <Input value="12" /> <Input 
+						value="10" /> <Text text="1231" /> <RatingIndicator maxValue="5" value="2" 
+						tooltip="Rating Tooltip" enabled="false" /> -->
+
+					<Text></Text>
+					<Text></Text>
+					<Text></Text>
+					<Text></Text>
+
+				</cells>
+			</ColumnListItem>
+				</items>
+	</Table>
+
+	<Panel class="sapUiLargeMarginTop">
+		<headerToolbar>
+			<Toolbar>
+				<Label text=" Select Vendor" />
+				<Select name="Vendor" width="15rem" />
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<!-- TODO Display Vendor Details - Name -->
+			<!-- TODO Display Vendor Details - Address -->
+			<!-- TODO Display Vendor Details - eMail -->
+			<!-- TODO Display Vendor Details - Additional Information -->
+		</content>
+	</Panel>
+
+
+</core:FragmentDefinition>
