@@ -1,0 +1,62 @@
+<mvc:View
+	controllerName="z_nda.controller.Worklist"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic">
+	<semantic:FullscreenPage
+		id="page"
+		title="{i18n>PageTitle}">
+		<semantic:content>
+			<f:SimpleForm id="NDA_Information"
+				editable="true"
+				layout="ResponsiveGridLayout"
+				labelSpanXL="4"
+				labelSpanL="4"
+				labelSpanM="12"
+				labelSpanS="12"
+				adjustLabelSpan="false"
+				emptySpanXL="0"
+				emptySpanL="0"
+				emptySpanM="0"
+				emptySpanS="0"
+				columnsXL="2"
+				columnsL="2"
+				columnsM="2"
+				singleContainerFullSize="false" >
+				<f:content>
+					<core:Title text="{i18n>Information}" />
+					<Label text="{i18n>Vendor}"/>
+					<Input value="{lModel>/vendor_name}"/>
+					<Label text="{i18n>Services}"/>
+					<Input value = "{lModel>/tos}"/>
+					<Label text="{i18n>Registration}"/>
+					<Input value="{lModel>/regNo}"/>
+					
+					<core:Title text="{i18n>Address}" />
+					<Label text="{i18n>Country}" />
+					<Select id="idNDA_country" showSecondaryValues="true" items="{path: '/CountrySet'}" selectedKey="AE" change='onCountrySelection'>
+							<core:ListItem key="{Land1}" text="{Landx50}"/>
+					</Select>
+					<!-- <Input value="{lModel>/Country}" /> -->
+					<Label text="{i18n>Region}" />
+					<Select showSecondaryValues="true"  id="idNDA_region" items="{path: '/RegionSet'}" >
+							<core:ListItem key="{Bland}" text="{Bezei}"/>
+					</Select>
+					<!-- <Input value="{lModel>/rsp}"/> -->
+					<Label text="{i18n>POzip}" />
+					<Input value="{lModel>/zip}" />
+				</f:content>
+			</f:SimpleForm>
+		</semantic:content>
+		<semantic:printAction>
+			<semantic:PrintAction press="onPrint"/>
+		</semantic:printAction>
+		<semantic:cancelAction>
+			<semantic:CancelAction/>
+		</semantic:cancelAction>
+	</semantic:FullscreenPage>
+</mvc:View>
