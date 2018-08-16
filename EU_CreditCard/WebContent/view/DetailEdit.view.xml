@@ -1,0 +1,165 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	controllerName="z_cc.controller.DetailEdit">
+	<Page
+		id="page"
+		title="{i18n>EditPageTitle}: {lModel>/Postingnumber}"
+		navButtonPress="onNavBack" 
+		showNavButton="{device>/isPhone}">
+		<content>
+			<f:SimpleForm id="idCreditCard_form1"
+				editable="true"
+				title="{i18n>GenInfo}"
+				layout="ResponsiveGridLayout"
+				labelSpanXL="3"	labelSpanL="3"	labelSpanM="5"	labelSpanS="12"
+				emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+				columnsXL="2"	columnsL="2"	columnsM="2"
+				adjustLabelSpan="false" class="noTitle"
+				singleContainerFullSize="false" >
+				<f:content>
+					<core:Title text="" />
+					<Label text="{i18n>CardName}"/>
+					<Select id="ideCCusrList" items="{/cardholderlistSet}" value="{lModel>/Pernr}">
+						<core:ListItem text="{Holdername}" key="{Cardno}"/>
+					</Select>
+					<Label text="{i18n>CreateDeptProj}"/>
+					<Select showSecondaryValues="true"  id="ideCC_dept" value="{lModel>/Kostl}"/>
+					
+					<core:Title text="" />
+					<Label text="{i18n>Date}"/>
+					<DatePicker id="ideCCdate" width="9rem" dateValue="{lModel>/Documentdate}" change='onDateChange'/>
+					<Label text="{i18n>Tamt}" />
+					<Text id="ideCCnetAmnt" text="{lModel>/Hnetamount} {lModel>/Currency}"/>
+				</f:content>
+			</f:SimpleForm>
+			<ScrollContainer horizontal="true">
+			<Table items="{/navtocredit/results}" id="idEditCreditTable">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>TableTitle}" level="H2" />
+						<ToolbarSpacer />
+						<Button icon="sap-icon://add" text="{i18n>Add}" type="Reject"
+							press="handleCCaddButtonPressed" />
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="5rem">
+						<header> <Text text="{i18n>PurDt}" /> </header>
+					</Column>
+					<Column minScreenWidth="Tablet"	demandPopin="true" width="10rem">
+						<header> <Text text="{i18n>ExpTy}" /> </header>
+					</Column>
+					<Column minScreenWidth="Tablet"	demandPopin="true" width="10rem">
+						<header> <Text text="{i18n>Item}" /> </header>
+					</Column>
+					<Column minScreenWidth="Tablet"	demandPopin="true" width="10rem">
+						<header> <Text text="{i18n>VenSup}" /> </header>
+					</Column>
+					<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true">
+						<header><Text text="{i18n>AmtinFC}"/></header>
+					</Column>
+					<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true">
+						<header><Text text="{i18n>ExchRate}"/></header>
+					</Column>
+					<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true">
+						<header><Text text="{i18n>VAT}"/></header>
+					</Column>
+					<Column minScreenWidth="Tablet"	demandPopin="true" width="5rem">
+						<header> <Text text="{i18n>AmtAED}" /> </header>
+					</Column>
+					<Column minScreenWidth="Tablet"	demandPopin="true" width="20rem">
+						<header> <Text text="{i18n>JustPur}" /> </header>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Active"	press="onSelection">
+						<cells>
+							<Text text="{
+								path: 'Purchdate',
+								formatter: '.formatter.formatDate'
+								}"></Text>
+							<ObjectIdentifier title="{Glaccount}" text="{Ltext}" />					
+							<Text text="{Positiontext}" />
+							<Text text="{Vendor}" />
+							<Text text="{Fgnamount} {Currency}"/>
+							<Text text="{Exrate}"/>
+							<Text text="{Taxvalue} %"/>
+							<Text text="{Ppayments} AED" />
+							<Text text="{Justification}" />
+						</cells> 
+					</ColumnListItem>
+				</items>
+			</Table>
+			</ScrollContainer>
+			<Table 
+				id="idEditPettyCashDoc" 
+				items="{/navigcredittodocuments}"
+				mode="Delete" 
+				delete="onFileDelete">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>Attachment}"/>
+						<ToolbarSpacer />
+						<u:FileUploader 
+							name="myFileUpload" 
+							style="Emphasized"
+							id="matrnFile" 
+							tooltip="Upload your file to the local server" 	
+							typeMissmatch="handleTypeMissmatch"
+							uploadComplete="handleUploadComplete" />
+						<Button icon="sap-icon://upload" press="onFileUpload" />
+					</OverflowToolbar>
+				</headerToolbar>
+				<infoToolbar class='infoToolBarColor'>
+					<OverflowToolbar>
+						<Label text="{i18n>AttachSupplierReceipts}" />
+						<ToolbarSpacer visible="{device>/isNoPhone}"/>
+						<Label text='{i18n>SelectFileUpload}'/>
+					</OverflowToolbar>
+				</infoToolbar>
+				<columns> <!-- sap.m.Column -->
+					<Column><Text text="File Name" /></Column>
+					<Column><Text text="File Type" /></Column>
+				</columns>
+				<ColumnListItem type="Active">
+					<cells>
+						<Text text="{Docfile}" />
+						<Text text="{Mimetype}" />
+					</cells>
+				</ColumnListItem>
+			</Table>
+			<!-- <f:SimpleForm id="idCreditCard_form2"
+				editable="true"
+				layout="ResponsiveGridLayout"
+				labelSpanXL="1"	labelSpanL="2"	labelSpanM="3"	labelSpanS="12"
+				emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+				columnsXL="1"	columnsL="1"	columnsM="1"
+				adjustLabelSpan="false"
+				singleContainerFullSize="false" >
+				<f:content>
+					<core:Title text="" />
+					<Label text="{i18n>JustPur}"/>
+					<TextArea id="idCCjustification"/>
+				</f:content>
+			</f:SimpleForm> -->
+		</content>
+		<footer>
+			<OverflowToolbar>
+			<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			<Button text="{i18n>Save}" icon="sap-icon://save" type="Accept" press="handleCreditCardSave" />
+			<Button text="{i18n>Cancel}" icon="sap-icon://sys-cancel" press="handleCreditCancel" />
+			<Button text="{i18n>SaveSubmit}" icon="sap-icon://hr-approval" type="Reject" press="handleCCSaveAndSubmit" />
+			<ToolbarSpacer visible="{device>/isNoPhone}"/>
+		
+			<!-- <Button text="{i18n>Submit}" type="Emphasized" press="handleCreditCardSave"/>
+			<Button text="Save and Submit" type="Accept" press="handleRewardsSaveAndSubmit"/>
+			<Button text="{i18n>Cancel}" type="Reject" press="handleCreditCancel"/> -->
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

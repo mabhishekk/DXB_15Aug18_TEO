@@ -1,0 +1,20 @@
+.noTitle .sapUiFormTitleH5 {
+  display: none
+}
+
+.columnBold{
+	font-weight: bold;
+}
+
+.sapMTB-Info-CTX.sapMTB{
+	background: #ffffff;
+}
+
+.sapMTB-Info-CTX .sapMLabel.sapMLabelTBHeader {
+    color: black;
+}
+
+.sapMIBar-CTX .sapMTitle {
+    color: #000000;
+    font-size: large;
+}

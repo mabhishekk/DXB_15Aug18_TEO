@@ -1,0 +1,68 @@
+<core:FragmentDefinition
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified" 
+	xmlns:f="sap.ui.layout.form" 
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="idECitemsDialog" 
+		title="{i18n>CreditDetails}" 
+		stretchOnPhone="true"
+		afterOpen="onCCdialog"
+		draggable="true">
+		<buttons>
+			<Button text="{i18n>Save}" icon="sap-icon://save" press="onECitemsSave"/>
+			<Button text="{i18n>Close}" icon="sap-icon://decline" press="onECitemsClose"/>
+		</buttons>
+		<content>
+		<f:SimpleForm  
+			editable="true"
+			layout="ResponsiveGridLayout" 
+			labelSpanXL="4" labelSpanL="4"	labelSpanM="4" labelSpanS="12" 
+			emptySpanXL="0" emptySpanL="0"  emptySpanM="0" emptySpanS="0" 
+			columnsXL="2"   columnsL="2"    columnsM="1" 
+			adjustLabelSpan="true" 
+			singleContainerFullSize="false">
+			<f:content>
+				<Label text="{i18n>PurDt}"/>
+				<DatePicker id="idCCpurchaseDate" width='9rem' change='onDateChange'/>
+				<Label text="{i18n>ExpTy}" />
+				<Select 
+					id="idCCexpSet" 
+					items="{/ExpensetypeSet}" 
+					showSecondaryValues= "true">
+					<core:ListItem 
+						text="{Txt50}" 
+						additionalText = "{GlAccount}"
+						key="{GlAccount}">
+					</core:ListItem>
+				</Select>
+				<Label text="{i18n>Item}" />
+				<Input id="idCCitem" placeholder='{i18n>VenPlaceholder}' liveChange="handleLiveInput" maxLength='50'/>
+				<Label text="{i18n>VenSup}" />
+				<Input id="idCCvendor" placeholder='{i18n>VenPlaceholder}' liveChange="handleLiveInput" maxLength='50'/>
+				<Label text="{i18n>AmtinFC}" />
+				<Input id="idCCamt" type="Number" liveChange="onCurrencyInput"/>
+				<Select showSecondaryValues="true" id="id_Fcurr" width='7rem'
+					items="{path: '/currencySet'}" selectedKey="AED" change="onCurrencySelection">
+					<core:ListItem key="{Waers}" text="{Waers}"	additionalText="{Landx50}" />
+				</Select>
+				<Label id='idCCexchRateLabel' text="{i18n>ExchRate}" visible='false'/>
+				<Input id="id_CCexch" type="Number" liveChange="onCurrencyInput" value="1" visible='false' width='13rem'/>
+				<Label id='idCCvatLabel' text='{i18n>VAT}'/>
+				<Select id='id_ccVATno' change='onExVatVal' width='7rem'>
+					<items>
+						<core:Item text="0 %" key='0'/>
+						<core:Item text="5 %" key='5'/>
+					</items>
+				</Select>
+				<Label text="{i18n>AmtAED}" />
+				<Input id="id_AEDamt" type="Number" liveChange="onCurrencyInput" editable="false"/>
+				<Label text="{i18n>JustPur}" />
+				<TextArea id="idCCJustPur" placeholder='{i18n>JusPlaceholder}' liveChange="handleLiveInput" maxLength='1000'/>
+			</f:content>
+		</f:SimpleForm>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>
+
