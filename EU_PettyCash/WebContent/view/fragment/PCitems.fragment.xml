@@ -1,0 +1,63 @@
+<core:FragmentDefinition
+	xmlns     ="sap.m" 
+	xmlns:l   ="sap.ui.layout"
+	xmlns:u   ="sap.ui.unified" 
+	xmlns:f   ="sap.ui.layout.form" 
+	xmlns:core="sap.ui.core">
+	<Dialog id="idPCitemsDialog" 
+		title         ="{i18n>DialogueTitle}"
+		stretchOnPhone="true"
+		afterOpen     ="onPCdialog">
+		<buttons>
+			<Button text="{i18n>Save}"    icon="sap-icon://save"      press="onPCitemsSave"/>
+			<!-- <Button text="Add New" icon="sap-icon://write-new" press="onPCitemsAddNew"/>
+			<Button text="Reset"   icon="sap-icon://reset"     press="onPCitemsReset"/> -->
+			<Button text="{i18n>Close}"   icon="sap-icon://decline"   press="onPCitemsClose"/>
+		</buttons>
+		<content>
+			<f:SimpleForm 
+				editable="true" 
+				layout="ResponsiveGridLayout"
+				labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+				emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+				columnsXL="2"   columnsL="1"   columnsM="1" 
+				adjustLabelSpan="false"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="{i18n>GL}" />
+					<Select 
+						id="id_expSet" 
+						items="{/ExpensetypeSet}" 
+						showSecondaryValues= "true">
+						<core:ListItem 
+							text="{Txt50}" 
+							additionalText = "Gl code - {GlAccount}"
+							key="{GlAccount}">
+						</core:ListItem>
+					</Select>
+					<Label text="{i18n>Desc}" />
+					<Input id="id_desc" placeholder='{i18n>DecPlaceholder}' liveChange="handleLiveInput" maxLength='50'/>
+					<Label text="{i18n>VenSup}" />
+					<Input id="id_vendor" placeholder='{i18n>DecPlaceholder}' liveChange="handleLiveInput" maxLength='50'/>
+					<Label text="{i18n>InvRef}" />
+					<Input id="id_eiRno" placeholder='{i18n>InvPlaceholder}' liveChange="handleLiveInput" maxLength='16'/>
+					<Label text="{i18n>AmtAED}" />
+					<Input id="id_enAmnt" placeHolder="Enter Amount" type="Number" liveChange="onExVatVal" width='13rem'/>
+					<Label text="{i18n>VATval}" />
+					<Select id='id_eVATno' change='onExVatVal' width='7rem'>
+						<items>
+							<core:Item text="0 %" key='0'/>
+							<core:Item text="5 %" key='5'/>
+						</items>
+					</Select>
+					<!-- <Input id="id_eVATno" placeHolder="Enter VAT" type="Number" liveChange="onExVatVal"/> -->
+					<Label text="{i18n>NetValue}" />
+					<Input id="id_netValue" placeHolder="Enter Amount" type="Number" editable="false"/>
+					<Label text="{i18n>Justification}" />
+					<TextArea id="id_justification" placeholder='{i18n>JusPlaceholder}' liveChange="handleLiveInput" maxLength='1000'/>
+				</f:content>
+			</f:SimpleForm> 
+		</content>
+	</Dialog>
+</core:FragmentDefinition>
+

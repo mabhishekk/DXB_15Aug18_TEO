@@ -1,0 +1,103 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	controllerName="z_pettycash_fi.controller.DetailCreate">
+	<Page 
+		title="{i18n>CreateDetailTitle}" 
+		navButtonPress="onNavBack" 
+		showNavButton="{device>/system/phone}">
+		<content>
+			<f:SimpleForm 
+				id="VR_CreateGeneralInformation" 
+				editable="true"
+				layout="ResponsiveGridLayout" 
+				title="{i18n>GenInfo}"
+				adjustLabelSpan="false" 
+				labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+				emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" 
+				columnsXL="2"   columnsL="2"   columnsM="2"
+				singleContainerFullSize="false">
+				<f:content>
+					<core:Title text="" />
+					<Label text="{i18n>Name}" />
+					<ComboBox id="usr_List" items="{/USERLISTSet}">
+						<core:ListItem text="{NameText}" key="{Bname}">
+						</core:ListItem>
+					</ComboBox>
+					<Label text="{i18n>DeptProj}" />
+					<ComboBox value="" showSecondaryValues="true" id="ccDP">
+					</ComboBox>
+					
+					<core:Title text="" />
+					<Label text="{i18n>Date}" />
+					<DatePicker id="dtPick"  width="9rem" change='onDateChange'/>
+					<Label text="{i18n>tamt}" />
+					<Input id="eAmnt" placeholder="Enter Amount" type="Number" />
+					<!-- <Input placeholder="Currency" /> -->
+					<ComboBox id="curr" value="{Currency}" showSecondaryValues="true"
+						items="{path: '/currencySet'}">
+						<core:ListItem key="{Waers}" text="{Waers}"
+							additionalText="{Landx50}" />
+					</ComboBox>
+
+				</f:content>
+			</f:SimpleForm>
+			
+			<Table items="{cashnavig}" id="id_CreateExpTbl">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>TableTitle}" level="H2" />
+						<ToolbarSpacer />
+						<Button icon="sap-icon://add" text="Add"
+							press="handlePCaddButtonPressed" />
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<header>
+							<Text text="{i18n>GL}" />
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet"	demandPopin="true">
+						<header>
+							<Text text="{i18n>Desc}" />
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet"	demandPopin="true" width="15%">
+						<header>
+							<Text text="{i18n>InvRef}" />
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet"	demandPopin="true" width="12%">
+						<header>
+							<Text text="{i18n>AmtAED}" />
+						</header>
+					</Column>
+				</columns>
+					<items>
+				<ColumnListItem xmlns="sap.m">
+					<cells>
+						<Input value="{GlAccount}"/>
+						<Input value="{PositionText}"/>
+						<Input value="{{Matnr}}"/>
+						<Input value="{PPayments}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+			</Table>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<!-- <Button text="Save" type="Emphasized" press="handlePCsave" />
+				<Button text="Save and Submit" type="Accept" press="handlePCsaveAndSubmit" /> -->
+				<Button text="Submit" type="Accept" press="handlePCsaveAndSubmit"/>
+				<Button text="Cancel" type="Reject" press="handlePCCancel" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

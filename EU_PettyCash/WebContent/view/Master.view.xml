@@ -1,0 +1,52 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:layout="sap.ui.layout"
+	controllerName="z_pettycash_fi.controller.Master">
+	<Page title="{i18n>masterTitle}">
+		<subHeader>
+			<Toolbar>
+				<SearchField width="100%" liveChange="onSearchField"/>
+			</Toolbar>
+		</subHeader>
+		<List id="list" items="{ path: '/pcashlistSet'}" mode="SingleSelectMaster" selectionChange="onSelectionChange">
+			<items>
+				<ObjectListItem title="{PostingNumber}" type="Active"
+					press="onListItemPress"
+					number="{
+						parts:[{path:'HPayments'},{path:'Currency'}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {showMeasure: false}
+					}"
+					numberUnit="{Currency}">
+					<firstStatus>
+						<ObjectStatus
+							text= "{ path: 'DocumentStatus' ,formatter:'.formatter.formatStatus'}"
+							state="{ path: 'DocumentStatus', formatter: '.formatter.fStatus' }"  />
+					</firstStatus>
+					<secondStatus>
+						<!-- <ObjectStatus
+							text=" {Accountant}" /> -->
+						<ObjectStatus
+							text=" {Fullname}" />
+					</secondStatus>
+					<attributes>
+						<ObjectAttribute
+							text="{i18n>Date}: { path : 'DocumentDate',formatter: '.formatter.formatDate' }" />
+						<!-- <ObjectAttribute
+							text="{i18n>PostingDate} { path : 'PostingDate',formatter: '.formatter.formatDate' }" /> -->
+					</attributes>
+				</ObjectListItem>
+
+
+
+			</items>
+		</List>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button icon="sap-icon://add" type="Emphasized" text="{i18n>Create}" press="onAddPettyCash"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

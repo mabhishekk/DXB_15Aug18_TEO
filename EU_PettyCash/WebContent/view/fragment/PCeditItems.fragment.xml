@@ -1,0 +1,53 @@
+<core:FragmentDefinition
+	xmlns     ="sap.m" 
+	xmlns:l   ="sap.ui.layout"
+	xmlns:u   ="sap.ui.unified" 
+	xmlns:f   ="sap.ui.layout.form" 
+	xmlns:core="sap.ui.core">
+	<Dialog id        ="idECeditItemsDialog" 
+		title         ="{i18n>PcEditFragmentTitle}"
+		afterOpen     ="onOpenDetailDialItem"
+		stretchOnPhone="true">
+		<buttons>
+			<Button text="{i18n>Save}" icon="sap-icon://save" press="onPCeditItemsSave"/>
+			<Button text="{i18n>Delete}" icon="sap-icon://delete" press="onPCeditItemsReset"/>
+			<Button text="{i18n>Close}" icon="sap-icon://decline" press="onPCitemsClose"/>
+		</buttons>
+		<content>
+			<f:SimpleForm 
+				editable="true" 
+				layout="ResponsiveGridLayout"
+				labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+				emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+				columnsXL="2"   columnsL="1"   columnsM="1" 
+				adjustLabelSpan="false"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="{i18n>GL}" />
+					<Select id="id_editexpSet" value="{GlAccount}" />
+					<Label text="{i18n>Desc}" />
+					<Input id="id_editdesc" value="{Positiontext}" placeholder='{i18n>DecPlaceholder}' liveChange="handleLiveInput" maxLength='50'/>
+					<Label text="{i18n>VenSup}" />
+					<Input id="id_editVendor" value="{Vendor}" placeholder='{i18n>DecPlaceholder}' liveChange="handleLiveInput" maxLength='50'/>
+					<Label text="{i18n>InvRef}" />
+					<Input id="id_editeiRno" value="{Matnr}" placeholder='{i18n>InvPlaceholder}' liveChange="handleLiveInput" maxLength='16'/>
+					<Label text="{i18n>AmtAED}" />
+					<Input id="id_editenAmnt" placeHolder="Enter Amount" type="Number" value="{Ppayments}" liveChange="onEditVal" width='13rem'/>
+					<Label text="{i18n>VATval}" />
+					<Select id='id_enAmntVAT' selectedKey='{Taxvalue}' change='onEditVal' width='7rem'>
+						<items>
+							<core:Item text="0 %" key='0'/>
+							<core:Item text="5 %" key='5'/>
+						</items>
+					</Select>
+					<!-- <Input id="id_enAmntVAT" placeHolder="Enter Amount" type="Number" value="{Exrate}"/> -->
+					<Label text="{i18n>NetValue}" />
+					<Input id="id_editNetValue" editable="false" type="Number" value="{Netvalue}" liveChange="onEditVal"/>
+					<Label text="{i18n>Justification}" />
+					<TextArea id="id_editJustification" value="{Justification}" placeholder='{i18n>JusPlaceholder}' liveChange="handleLiveInput" maxLength='1000'/>
+				</f:content>
+			</f:SimpleForm> 
+		</content>
+	</Dialog>
+</core:FragmentDefinition>
+
