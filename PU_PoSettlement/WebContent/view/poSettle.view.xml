@@ -1,0 +1,31 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" displayBlock="true" controllerName="poSettleApp.controller.poSettle"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<Page title="{i18n>Settlement4PO}  : {lModel>/mainSet/PoNumber}"
+		navButtonPress="onNavBack" showNavButton="{device>/isPhone}" applyContentPadding="false">
+		<content>
+		
+			<IconTabBar id="id_iconTB" select="handleIconTabBarSelect" 
+				class="">
+				<items>
+					<IconTabFilter icon="sap-icon://approvals" iconColor="Positive"
+						design="Vertical" expanded="false" text="{i18n>Settlement}" key="Ok">
+						<core:Fragment fragmentName="poSettleApp.view.fragments.Settlement"
+							type="XML" />
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button id="idbtnCV" text="{i18n>CheckValues}" visible = "false" press= "onCheckValues"  />
+				<Button id="idbtnSave" text="{i18n>Save}" visible = "false" press= "checkValidation"  />
+				<Button id = "idPrintBtn" text="{i18n>Print}" icon= "sap-icon://print"  press = "onPDFSavePress"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>
+
+

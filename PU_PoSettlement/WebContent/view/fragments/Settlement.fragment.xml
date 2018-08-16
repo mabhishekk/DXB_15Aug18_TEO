@@ -1,0 +1,256 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<f:SimpleForm id="" editable="true"
+		layout="ResponsiveGridLayout"  labelSpanXL="4"
+		labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false"
+		emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+		columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<Label text="{i18n>CNO}" />
+			<Text text="{lModel>/mainSet/PoNumber}" />
+			<Label text="{i18n>Vendor}" />
+			<Text text="{lModel>/mainSet/Vendor} ({lModel>/mainSet/VendorName})" />
+<!-- 			<Label text="Vendor Name" />
+			<Text text="{lModel>/mainSet/VendorName}"/> -->
+			<Label text="{i18n>DOA}" />
+			<DatePicker id="DP1"  width="9rem" enabled="false"/>
+			<Label text="{i18n>OCV}" />
+			<Input id = "idOCV1" value="{lModel>/mainSet/Totalamt}"  width="9rem" enabled="false" />
+		</f:content>
+	</f:SimpleForm>
+	
+				<Table items="{/mainSet/navtoposettleitem/results}" id="idItemTable">
+			<headerToolbar>
+			<OverflowToolbar>
+				<Title text="{i18n>OCD}" />
+				<ToolbarSpacer />
+	
+			</OverflowToolbar>
+		</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>Description}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>StartDate} " />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>EndDate}" />
+					</Column>
+					<Column>
+						<Text text="{i18n>Quantity}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Price}" />
+					</Column >
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>VATpercent}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Discountpercent}" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Input value = "{ShortText}" enabled="false" />
+							<DatePicker  dateValue="{Begda}" enabled="false"/>
+							<DatePicker  dateValue="{Endda}" enabled="false" />
+							<Input value = "{Quantity}" enabled="false" />
+							<Input value = "{NetPrice}" enabled="false" />
+							<Input value = "{Vatvalue}" enabled="false" />
+							<Input value = "{Discountval}" enabled="false" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+	
+	<Panel id="id_RAContract_can" expanded="false" expandable="true" class="cl_RAContract">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="{i18n>Request4SoPO}" />
+				<ToolbarSpacer />
+	<!-- 			<Switch xmlns="sap.m" type="AcceptReject" state="false" change="onRAmendContract_can"/> -->
+				<CheckBox select="onRAmendContract_can"/>
+		
+			</Toolbar>
+		</headerToolbar>
+	<content>	
+			<Table items="{/mainSet1/navtoposettleitem/results}" id="idItemTable1" >
+				<columns>
+					<Column>
+						<Text text="{i18n>Description}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>StartDate}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>EndDate}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Quantity}" demandPopin="true" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Price}" demandPopin="true"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>VATpercent}" demandPopin="true"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Discountpercent}" demandPopin="true"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Input value = "{ShortText}" enabled="false"/>
+							<DatePicker  dateValue="{Begda}" enabled="false"/>
+							<DatePicker  dateValue="{Endda}"  />
+							<Input value = "{Quantity}" enabled="false"/>
+							<Input value = "{NetPrice}" enabled="false" />
+							<Input value = "{Vatvalue}"  enabled="false"/>
+							<Input value = "{Discountval}" enabled="false"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+	
+	
+	
+		<f:SimpleForm  editable="true"
+		layout="ResponsiveGridLayout"  labelSpanXL="4"
+		labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false"
+		emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+		columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<Label text="{i18n>SCV}" />
+			<Input id = "idOCV" />
+			<Label text="{i18n>VOP}" />
+			<Input id = "idOPV" />
+			<Label text="{i18n>AmountDue}" />
+			<Input id = "idOAD" />
+			<Label text="{i18n>J4S}" required= "true"/>
+			<TextArea placeholder="{i18n>EJ4S}" width="100%" id="idJ4Stlmnt"/>
+		</f:content>
+	</f:SimpleForm>
+	
+	
+	</content>
+	
+	
+	
+	
+</Panel>
+
+<Panel expandable="true" headerText="{i18n>splAppr}">
+							<Table id="id_splAprl" >
+						<columns>
+							<Column width="30px" vAlign="Center">
+								<header>
+									<!-- <Text text="{i18n>TypeofApproval}" /> -->
+								</header>
+							</Column>
+
+
+							<Column vAlign="Middle">
+								<header>
+									<Text text="{i18n>TypeofApproval}" />
+								</header>
+							</Column>
+							<Column vAlign="Middle">
+								<header>
+									<Text text="{i18n>Reason}" />
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem xmlns="sap.m">
+
+								<cells>
+									<CheckBox xmlns="sap.m"
+										selected="{lModel>/lSet/0/Boolean}" />
+									<Text text="{i18n>Name}" />
+
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/0/Reason}"
+										maxLength="100"></Input>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox  selected="{lModel>/lSet/1/Boolean}" />
+									<Text text="{i18n>Requestexemption}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/1/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox selected="{lModel>/lSet/2/Boolean}" />
+									<Text text="{i18n>Requestadvancepayemnt}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/2/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox xmlns="sap.m" selected="{lModel>/lSet/3/Boolean}" />
+									<Text text="{i18n>Request10%}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/3/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox  selected="{lModel>/lSet/4/Boolean}" />
+									<Text text="{i18n>Requestexpert}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/4/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox  selected="{lModel>/lSet/5/Boolean}" />
+									<Text text="{i18n>RequestAdopt}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/5/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox xmlns="sap.m" selected="{lModel>/lSet/6/Boolean}" />
+									<Text text="{i18n>RequestRecom}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/6/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+
+
+							</Panel>
+
+
+<!-- 	<Panel id="id_ORTermination_can" expanded="false" expandable="true" class="cl_RAContract">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="Request for Termination of Contract" />
+				<ToolbarSpacer />
+				<Switch xmlns="sap.m" type="AcceptReject" state="false" change="onORTermination_can">
+				</Switch>
+			</Toolbar>
+		</headerToolbar>
+	<content>
+	<f:SimpleForm  editable="true"
+		layout="ResponsiveGridLayout"  labelSpanXL="4"
+		labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false"
+		emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+		columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<Label text="Original Contract Value" />
+			<Input id = "idOCV" />
+			<Label text="Value of Payment" />
+			<Input id = "idOPV" text="" />
+			<Label text="Amount Due" />
+			<Input id = "idOAD" text="" />
+		</f:content>
+	</f:SimpleForm>
+	</content>
+	</Panel> -->
+	
+	
+	
+	</core:FragmentDefinition>

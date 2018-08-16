@@ -1,0 +1,222 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	
+	<f:SimpleForm id="" editable="true"
+		layout="ResponsiveGridLayout" title="Request for settlement of Contract" labelSpanXL="4"
+		labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false"
+		emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+		columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<Label text="Contracter/Vendor Number" />
+			<Input text="{SupplierName}" />
+			<Label text="Contract number" />
+			<Text text="{Street} {HouseNumber}" />
+			<Label text="Date of Application" />
+			<Text text="{ZIPCode} {City}" />
+
+
+
+		</f:content>
+	</f:SimpleForm>
+
+
+	<Panel id="id_RAContract_can" expanded="false" expandable="true" class="cl_RAContract">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="Request to amend the contract period" />
+				<ToolbarSpacer />
+				<Switch xmlns="sap.m" type="AcceptReject" state="false" change="onRAmendContract_can">
+
+
+				</Switch>
+			</Toolbar>
+		</headerToolbar>
+
+	<content>
+	
+	<f:SimpleForm  editable="true"
+		layout="ResponsiveGridLayout"  labelSpanXL="4"
+		labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false"
+		emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+		columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+		<Label text="Contract value" />
+			<Input text="" />
+			<Label text="Original Contract duration " />
+			<Text text="" />
+			<Label text="Duration required for extension" />
+			<Input text="" />
+			<Label text="Duration required to decrease" />
+			<Text text="" />
+		</f:content>
+	</f:SimpleForm>
+	
+	
+<Table>
+
+		<columns>
+			<Column>
+				<Text text="PO Item" />
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Start Date" />
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<Text text="End Date" />
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Price" />
+			</Column>
+			<Column>
+				<Text text="Value" />
+			</Column>
+
+
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+
+					<Text text="{VendorName}" />
+					<Text text="{VendorName}" />
+					<Text text="{VendorName}" />
+					<Text text="{VendorName}" />
+
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+
+
+
+
+
+	</content>
+
+
+	</Panel>
+
+<!-- <Panel id="id_RAService_can" expanded="false" expandable="true" class="cl_RAContract">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="Request for additional service" />
+				<ToolbarSpacer />
+				<Switch xmlns="sap.m" type="AcceptReject" state="false" change="onRAmendService_can">
+
+
+				</Switch>
+			</Toolbar>
+		</headerToolbar>
+
+	<content>
+	
+	<f:SimpleForm  editable="true"
+		layout="ResponsiveGridLayout"  labelSpanXL="4"
+		labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false"
+		emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+		columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<Label text="Descritption for the services" />
+			<Text text="" />
+			<Label text="Duration required for extension" />
+			<Input text="" />
+			<Label text="Duration required to decrease" />
+			<Text text="" />
+		</f:content>
+	</f:SimpleForm>
+	
+	
+<Table>
+
+		<columns>
+			<Column>
+				<Text text="PO Item" />
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Start Date" />
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<Text text="End Date" />
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Price" />
+			</Column>
+			<Column>
+				<Text text="Value" />
+			</Column>
+
+
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+
+					<Text text="{VendorName}" />
+					<Text text="{VendorName}" />
+					<Text text="{VendorName}" />
+					<Text text="{VendorName}" />
+
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+
+
+
+
+
+	</content>
+
+
+	</Panel> -->
+	
+
+<Panel id="id_ORTermination_can" expanded="false" expandable="true" class="cl_RAContract">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="Request for Termination of Contract" />
+				<ToolbarSpacer />
+				<Switch xmlns="sap.m" type="AcceptReject" state="false" change="onORTermination_can">
+
+
+				</Switch>
+			</Toolbar>
+		</headerToolbar>
+
+	<content>
+	
+	<f:SimpleForm  editable="true"
+		layout="ResponsiveGridLayout"  labelSpanXL="4"
+		labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false"
+		emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+		columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<Label text="Details" />
+			<Text text="" />
+			<Label text="Original Contract Value" />
+			<Input text="" />
+			<Label text="Value of Payment" />
+			<Input text="" />
+			<Label text="Amount Due" />
+			<Input text="" />
+			<Label text="Value of the Supplement" />
+			<Input text="" />
+			<Label text="Amount Paid" />
+			<Input text="" />
+			<Label text="Amount Due" />
+			<Input text="" />
+		</f:content>
+	</f:SimpleForm>
+	
+	</content>
+
+
+	</Panel>
+	
+	
+	
+	
+	
+	
+	
+	</core:FragmentDefinition>

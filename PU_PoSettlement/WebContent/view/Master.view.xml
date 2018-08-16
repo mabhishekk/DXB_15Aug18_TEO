@@ -1,0 +1,55 @@
+<!-- User Master page --> 
+
+<View 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:layout="sap.ui.layout"
+	controllerName="poSettleApp.controller.Master">
+	<Page 
+		title="{i18n>Title}" 
+		
+		navButtonPress="onNavBack">
+		<subHeader>
+			<Toolbar id="idPRMasterSearchBar">
+				<SearchField
+					id="idPRMastersearchField"
+					liveChange="onSearchField"
+					placeholder="{i18n>homeSearchPlaceholder}"
+					tooltip="{i18n>homeSearchTooltip}"
+					width="100%">
+				</SearchField>
+			</Toolbar>
+		</subHeader>
+
+		<List 
+			id="list" 
+			items="{/POHEADSETTLESet}"
+			includeItemInSelection = "false" 
+			mode="SingleSelectMaster"
+			selectionChange="onNavigateAwayValidation">
+
+			<items>
+				<ObjectListItem 
+					title="{PoNumber}" 
+					type="Active"
+					press="onSelectionChange" >
+					<firstStatus>
+						<ObjectStatus 
+							text="{PoStatus}"
+							/>
+					</firstStatus> 
+					<attributes >										
+						<ObjectAttribute  text="{path: 'PoDesc',formatter:'.formatter.PODescText'}" />
+						<ObjectAttribute title="{i18n>Createdon}" text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}"/>
+					</attributes>
+					
+				</ObjectListItem>
+			</items>
+		</List>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>
