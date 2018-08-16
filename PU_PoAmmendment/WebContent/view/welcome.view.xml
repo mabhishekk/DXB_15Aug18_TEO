@@ -1,0 +1,22 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" displayBlock="true"
+		controllerName="poAmendApp.controller.welcome" xmlns:html="http://www.w3.org/1999/xhtml">
+		
+		<Page
+		title="{i18n>Welcome}" navButtonPress="onNavBack" showNavButton="{device>/isPhone}" applyContentPadding="false"
+		>
+		<!-- <customHeader>
+			<Toolbar><Button icon="sap-icon://menu2" press="onShowPR"/>
+			</Toolbar>
+		</customHeader> -->
+				<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+
+			</OverflowToolbar>
+		</footer>
+		
+		</Page>
+	
+</core:View>
+
+

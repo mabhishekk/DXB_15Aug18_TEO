@@ -1,0 +1,67 @@
+<!-- User Master page --> 
+
+<View 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:layout="sap.ui.layout"
+	controllerName="poAmendApp.controller.Master">
+	<Page 
+		title="{i18n>Title}" 
+		
+		navButtonPress="onNavBack">
+		<!-- <Panel> <content> <Label text="Search by" labelFor="L4"/> <RadioButtonGroup 
+			id="L4" columns="3" select="onRequestType"> <buttons> <RadioButton text="PR 
+			Number"/> <RadioButton text="PO Number"/> </buttons> </RadioButtonGroup> 
+			<SearchField width="100%" /> </content> </Panel> -->
+
+		<subHeader>
+			<Toolbar id="idPRMasterSearchBar">
+				<SearchField
+					id="idPRMastersearchField"
+					liveChange="onSearchField"
+					placeholder="{i18n>homeSearchPlaceholder}"
+					tooltip="{i18n>homeSearchTooltip}"
+					width="100%">
+				</SearchField>
+			</Toolbar>
+		</subHeader>
+
+		<List 
+			id="list" 
+			items="{/POHEADAMENDSet}"
+			includeItemInSelection = "false" 
+			mode="SingleSelectMaster"
+			selectionChange="onSelectionChange">
+			<items>
+				<ObjectListItem 
+					title="PO: {PoNumber}" 
+					type="Active"
+					press="onSelectionChange" 
+					number="{
+						parts:[{path:'Totalamt'},{path:''}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {showMeasure: false}
+					}"
+					numberUnit='{Currency}'>
+					<firstStatus>
+						<ObjectStatus text="GR: {Noofgr}"/>
+					</firstStatus> 
+					<secondStatus><ObjectStatus text="INV: {Noofinv}"/></secondStatus>
+					<attributes >
+						<ObjectAttribute  text="PR: {Preq_no}" />	
+						<ObjectAttribute  text="{PoDesc}" />
+						<ObjectAttribute  text="{CreatedByname}" />
+						<ObjectAttribute title="{i18n>Createdon}" text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}"/>
+					</attributes>
+					
+				</ObjectListItem>
+			</items>
+		</List>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

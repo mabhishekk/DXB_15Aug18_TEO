@@ -1,0 +1,482 @@
+
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+
+	<f:SimpleForm id="SimpleFormDisplay354" editable="true"
+		layout="ResponsiveGridLayout"  adjustLabelSpan="false" 
+		labelSpanXL="4"  labelSpanL="4" labelSpanM="5" labelSpanS="12"
+		emptySpanXL="0"  emptySpanL="0" emptySpanM="0" emptySpanS="0"
+		columnsXL="2"    columnsL="2"   columnsM="2" 
+		singleContainerFullSize="false"
+		class="noTitle">
+		<f:content>
+			<core:Title text="" />
+			<Label text="{i18n>CNO}" />
+			<Text text="{lModel>/mainSet/PoNumber}" />
+			
+			<Label text="{i18n>Vendor}" />
+			<Text text="{lModel>/mainSet/Vendor} ( {lModel>/mainSet/VendorName} )" />
+<!-- 	
+			<Label text="Vendor Name" />
+			<Text text="{lModel>/mainSet/VendorName}"/> -->
+			<core:Title text="" />
+			<Label text="{i18n>DOA}" />
+			<DatePicker id="DP1"  width="9rem" enabled="true"/>
+			<Label text="{i18n>OCV}" />
+			<Input id="idTotAmt" width="9rem"  enabled = "false"/>
+		</f:content>
+	</f:SimpleForm>
+
+
+	<Panel id="id_oContract" expanded="false" expandable="true"
+		class="cl_RAContract">
+		<headerToolbar>
+			<Toolbar height="3rem" >
+				<Title text="{i18n>R4ID}" />
+				<ToolbarSpacer />
+			<!-- 	<Switch id="idsw1" xmlns="sap.m" type="AcceptReject" state="false"	change="onOContract"/> -->
+				<CheckBox id="idsw1" select="onOContract"/>
+			</Toolbar>
+		</headerToolbar>
+
+		<content>
+
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" 
+				labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+				emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" 
+				columnsXL="2"   columnsL="2"   columnsM="2"
+				singleContainerFullSize="false"
+				class="noTitle">
+				<f:content>
+					<core:Title text="" />
+					<Label id="idTotAmt2" text="{i18n>CCV}"  />
+					<Input id="idTotAmt1" placeholder ="{i18n>TOC}" enabled = "false" />
+					<Label text="{i18n>VOI}" />
+					<Input id="idVOI" placeholder ="{i18n>TOC}" enabled = "false"/>
+					
+					<core:Title text="" />
+					<Label text="{i18n>VOR}" />
+					<Input id="idVOD" placeholder ="{i18n>TOC}" enabled = "false"/>
+					<Label text="{i18n>J4A}" required="true"/>
+					<TextArea placeholder="{i18n>EJ4A}" width="100%" id="idJ4AD"/>
+				</f:content>
+			</f:SimpleForm>
+			<Table items="{/mainSet/navtopoamenditem/results}" id="idItemTable">
+				<headerToolbar>
+						<OverflowToolbar>
+							<Title text="{i18n>OCD}" />
+							<ToolbarSpacer />
+							<!-- <Button icon="sap-icon://add" text="Add Additional Service" visible="{lModel>/POEdit}" press="onPOItemaddPress" /> -->
+						</OverflowToolbar>
+					</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>Description}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>StartDate}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>EndDate}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Quantity}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Price}" />
+					</Column >
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>VATpercent}" />
+					</Column>
+										<Column>
+						<Text text="{i18n>Discountpercent}" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text = "{ShortText}"/>
+							<Text text="{path: 'Begda', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}"/>
+							<Text text="{path: 'Endda', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}"/>
+							<Text text = "{Quantity}" />
+							<Text text = "{NetPrice}" />
+							<Text text = "{Vatvalue}" />
+							<Text text = "{Discountval}" />
+							<!-- <Input value = "{ShortText}" enabled="false" />
+							<DatePicker  dateValue="{Begda}" enabled="false"/>
+							<DatePicker  dateValue="{Endda}" enabled="false" />
+							<Input value = "{Quantity}" enabled="false" />
+							<Input value = "{NetPrice}" enabled="false" />
+							<Input value = "{Vatvalue}" enabled="false" />
+							<Input value = "{Discountval}" enabled="false" /> -->
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+			
+		</content>
+
+
+	<Panel id="id_RAContract" expanded="true" expandable="true"
+		class="cl_RAContract">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="{i18n>R4AC}"  />
+				<ToolbarSpacer />
+	<!-- 			<Switch id="idsw2" xmlns="sap.m" type="AcceptReject" state="false"	change="onRAmendContract"/> -->
+
+				<CheckBox id="idsw2" select="onRAmendContract"/>
+			
+			</Toolbar>
+		</headerToolbar>
+
+		<content>
+	
+<Table items="{/mainSet2/navtopoamenditem/results}" id="idItemTable1" visible="false">
+				<columns>
+					<Column>
+						<Text text="Descrp" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>StartDate}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>EndDate}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Quantity}" />
+					</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Price}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>VATpercent}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Discountpercent}" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Input value = "{ShortText}" enabled="false"/>
+							<DatePicker  dateValue="{Begda}" />
+							<DatePicker  dateValue="{Endda}"  />
+							<Input value = "{Quantity}" />
+							<Input value = "{NetPrice}" />
+							<Input value = "{Vatvalue}"  />
+							<Input value = "{Discountval}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+				<Button id= "idbtnCV" type="Emphasized" text="{i18n>CheckValues}"  visible="false" press="conditionfill" />
+			
+<!-- 			<Panel>
+			<headerToolbar>
+						<OverflowToolbar>
+							<Title text="Change Duration" />
+							<ToolbarSpacer />
+				<Switch id="idsw2" xmlns="sap.m" type="AcceptReject" state="false"	change="onIncreasePress"/>
+				</OverflowToolbar>
+					</headerToolbar>
+			</Panel> -->
+		
+			
+		</content>
+
+
+	</Panel>
+
+	<Panel id="id_RAService" expanded="true" expandable="true"
+		class="cl_RAContract">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="{i18n>R4AS}"  />
+				<ToolbarSpacer />
+<!-- 				<Switch id="idsw3" xmlns="sap.m" type="AcceptReject" state="false"	change="onRAmendService"/> -->
+
+		<CheckBox id="idsw3" select="onRAmendService"/>
+			
+			</Toolbar>
+		</headerToolbar>
+
+		<content>
+
+<!-- 			<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+				labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0"
+				emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="Descritption for the services" />
+					<Text text="" />
+					<Label text="Duration required for extension" />
+					<Input text="" />
+					<Label text="Duration required to decrease" />
+					<Text text="" />
+				</f:content>
+			</f:SimpleForm>
+ -->
+
+				<Table items="{/mainSet/navtopoamenditem/results}" id="idItemTable3" visible="false">
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="{i18n>ES}"  />
+							<ToolbarSpacer />
+							<Button type="Emphasized" icon="sap-icon://add" text="{i18n>AAS}"  press="onPOItemaddPress" />
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+<!-- 						<Column>
+							<header>
+								<Text text="Item No." />
+							</header>
+						</Column> -->
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<header>
+								<Text text="{i18n>Description}" />
+							</header>
+						</Column>
+
+
+						<Column demandPopin="true" minScreenWidth="Tablet">
+							<header>
+								<Text text="{i18n>StartDate}" />
+							</header>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="Tablet">
+							<header>
+								<Text text="{i18n>EndDate}" />
+							</header>
+						</Column>
+
+<!-- 						<Column demandPopin="true" minScreenWidth="Tablet">
+							<header>
+								<Text text="{i18n>Dedate}" />
+							</header>
+						</Column> -->
+												<Column minScreenWidth="Tablet" demandPopin="true">
+							<header>
+								<Text text="{i18n>Quantity}" />
+							</header>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="Tablet">
+								<header>
+									<Text text="{i18n>Price}"  />
+								</header>
+							</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>VATpercent}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Discountpercent}" />
+					</Column>
+					</columns>
+					<items>
+					<!-- 	<ColumnListItem xmlns="sap.m" type="Active"
+							press="onPODetailItemPress"> -->
+					<ColumnListItem xmlns="sap.m" >
+							<cells>
+<!-- 								<Text text="{PoItem}" /> -->
+								<Text text="{ShortText}" />
+								
+				
+
+								<Text
+									text="{path: 'Begda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+
+								<Text
+									text="{path: 'Endda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+
+<!-- 								<Text
+									text="{path: 'Delvdate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" /> -->
+								<Text text="{Quantity}" />
+								<Text text="{NetPrice}" />
+								<Text text = "{Vatvalue}"  />
+								<Text text = "{Discountval}" />
+							</cells>
+						</ColumnListItem>
+					</items>
+
+
+				</Table>
+
+
+				<Table items="{/mainSet1}" id="idItemTable4" visible = "false">
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="{i18n>ASR}"  />
+							<ToolbarSpacer />
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+<!-- 						<Column>
+							<header>
+								<Text text="Item No." />
+							</header>
+						</Column> -->
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<header>
+								<Text text="{i18n>Description}" />
+							</header>
+						</Column>
+
+
+						<Column demandPopin="true" minScreenWidth="Tablet">
+							<header>
+								<Text text="{i18n>StartDate}" />
+							</header>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="Tablet">
+							<header>
+								<Text text="{i18n>EndDate}" />
+							</header>
+						</Column>
+
+<!-- 						<Column demandPopin="true" minScreenWidth="Tablet">
+							<header>
+								<Text text="{i18n>Dedate}" />
+							</header>
+						</Column> -->
+												<Column minScreenWidth="Tablet" demandPopin="true">
+							<header>
+								<Text text="{i18n>Quantity}" />
+							</header>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="Tablet">
+								<header>
+									<Text text="{i18n>Price}"  />
+								</header>
+							</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>VATpercent}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>Discountpercent}" />
+					</Column>
+					</columns>
+					<items>
+					<!-- 	<ColumnListItem xmlns="sap.m" type="Active"
+							press="onPODetailItemPress"> -->
+					<ColumnListItem xmlns="sap.m" >
+							<cells>
+<!-- 								<Text text="{PoItem}" /> -->
+								<Text text="{ShortText}" />
+							
+								<Text
+									text="{path: 'Begda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+
+								<Text
+									text="{path: 'Endda',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" />
+
+<!-- 								<Text
+									text="{path: 'Delvdate',type: 'sap.ui.model.type.Date',formatOptions: {style: 'medium'}}" /> -->
+									<Text text="{Quantity}" />
+								<Text text="{NetPrice}" />
+								<Text text = "{Vatvalue}"  />
+								<Text text = "{Discountval}" />
+							</cells>
+						</ColumnListItem>
+					</items>
+
+
+				</Table>
+				
+				
+
+		</content>
+
+
+	</Panel>
+
+
+
+
+
+	</Panel>
+	
+	
+	<Panel expandable="true" headerText="{i18n>splAppr}">
+							<Table id="id_splAprl" >
+						<columns>
+							<Column width="30px" vAlign="Center">
+								<header>
+									<!-- <Text text="{i18n>TypeofApproval}" /> -->
+								</header>
+							</Column>
+
+
+							<Column vAlign="Middle">
+								<header>
+									<Text text="{i18n>TypeofApproval}" />
+								</header>
+							</Column>
+							<Column vAlign="Middle">
+								<header>
+									<Text text="{i18n>Reason}" />
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem xmlns="sap.m">
+
+								<cells>
+									<CheckBox xmlns="sap.m"
+										selected="{lModel>/lSet/0/Boolean}" />
+									<Text text="{i18n>Name}" />
+
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/0/Reason}"
+										maxLength="100"></Input>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox  selected="{lModel>/lSet/1/Boolean}" />
+									<Text text="{i18n>Requestexemption}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/1/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox selected="{lModel>/lSet/2/Boolean}" />
+									<Text text="{i18n>Requestadvancepayemnt}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/2/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox xmlns="sap.m" selected="{lModel>/lSet/3/Boolean}" />
+									<Text text="{i18n>Request10%}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/3/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox  selected="{lModel>/lSet/4/Boolean}" />
+									<Text text="{i18n>Requestexpert}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/4/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox  selected="{lModel>/lSet/5/Boolean}" />
+									<Text text="{i18n>RequestAdopt}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/5/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox xmlns="sap.m" selected="{lModel>/lSet/6/Boolean}" />
+									<Text text="{i18n>RequestRecom}" />
+									<Input placeholder="{i18n>Reason}" value="{lModel>/lSet/6/Reason}" maxLength="100"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+
+
+							</Panel>
+
+
+</core:FragmentDefinition>
