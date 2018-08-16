@@ -1,0 +1,183 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic">
+
+	<VBox class="sapUiSmallMargin">
+
+		<Panel id="VR_DisplayGeneralInformation" expandable="true"
+			expanded="true" headerText="{i18n>GeneralInformation}" width="auto"
+			class="sapUiResponsiveMargin" expand="onVRgeneralPanel">
+			<content>
+				<f:SimpleForm editable="false" layout="ResponsiveGridLayout"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+					emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+					columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="" />
+						<Label text="{i18n>Name}" />
+						<Text text="{Salutation1} {NameOrg1}" />
+						<Label text="{i18n>NameinArabic}" required="true" />
+						<Text text="{FirstNameArabic}" />
+						<!-- <Label text="{i18n>LastNamear}" required="true" />
+						<Text text="{LastNameArabic}" /> -->
+						<Label text="{i18n>BussActivity}" />
+						<Text text="{BusinessActivity}" />
+
+						<core:Title text="" />
+						<Label text="{i18n>EstabDate}" />
+						<Text text=" {path: 'Zdate',type: 'sap.ui.model.type.Date'}" />
+						<Label text="{i18n>PayTerm}" />
+						<Text text="{PaymentTerms}" />
+						<Label text="{i18n>ReconAct}" />
+						<Text text="{Akont}" />
+					</f:content>
+				</f:SimpleForm>
+			</content>
+		</Panel>
+
+		<Panel id="VR_DisplayAddress" expandable="true" expanded="false"
+			headerText="{i18n>ContactInfor}" width="auto" class="sapUiResponsiveMargin"
+			expand="onVRaddressPanel">
+			<content>
+				<f:SimpleForm editable="false" layout="ResponsiveGridLayout"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+					emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+					columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="" />
+						<Label text="{i18n>TelNo}" />
+						<Text text="{TelAreaCode} {TelNumber}" />
+						<Label text="{i18n>FaxNo}" />
+						<Text text="{FaxNumber}" />
+						<Label text="{i18n>MobileNo}" />
+						<Text text="+{MobAreaCode} {MobNumber}" />
+						<Label text="{i18n>Country}" />
+						<Text text="{CountryName}" />
+						<Label text="{i18n>RSP}" />
+						<Text text="{RegionName}" />
+
+						<core:Title text="" />
+						<Label text="{i18n>PoZip}" />
+						<Text text="{PoBox}" />
+						<Label text="{i18n>eMail}" />
+						<Text text="{Email}" />
+						<Label text="{i18n>ContactPerson}" />
+						<Text text="{Salutation2} {NameOrg3}" />
+						<Label text="{i18n>Website}" />
+						<Text text="{Website}" />
+					</f:content>
+				</f:SimpleForm>
+			</content>
+		</Panel>
+
+		<Panel id="VR_DisplayLicenseDetail" expandable="true" expanded="false"
+			headerText="{i18n>LicenseDetail}" width="auto" class="sapUiResponsiveMargin"
+			expand="onVRlicensePanel">
+			<content>
+				<f:SimpleForm editable="false" layout="ResponsiveGridLayout"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+					emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+					columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="" />
+						<Label text="{i18n>LicenseNumber}" />
+						<Text text="{LicenseNumber}" />
+						<core:Icon src="sap-icon://attachment" />
+						<Label text="{i18n>LicenseExpiryDate}" />
+						<Text text="{LicenseNumber}" />
+						<core:Title text="" />
+						<Label text="{i18n>CompanyProfile}" />
+						<Text />
+						<core:Icon src="sap-icon://attachment" />
+						<Label text="{i18n>VATno}" />
+						<Text />
+						<core:Icon src="sap-icon://attachment" />
+					</f:content>
+				</f:SimpleForm>
+			</content>
+		</Panel>
+
+		<f:SimpleForm id="VR_DisplayFreelancer" editable="false"
+			visible="false" layout="ResponsiveGridLayout" title="{i18n>GeneralInformation}"
+			labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+			emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+			columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+			singleContainerFullSize="false">
+			<f:content>
+				<core:Title text="" />
+				<Label text="{i18n>Name}" />
+				<Text />
+				<Label text="{i18n>FirstNamear}" required="true" />
+						<Text text="{FirstNameArabic}" />
+						<Label text="{i18n>LastNamear}" required="true" />
+						<Text text="{LastNameArabic}" />
+				<!-- <Label text="{i18n>CompanyCode}" />
+				<Text />
+				<Label text="{i18n>PurchaseOrganization}" />
+				<Text /> -->
+				<Label text="{i18n>TelNo}" />
+				<Text text="{TelAreaCode} {TelNumber}" />
+				<Label text="{i18n>eMail}" />
+				<Text text="{Email}"/>
+
+				<core:Title text="" />
+				<Label text="{i18n>Nationality}" />
+				<Text />
+				<Label text="{i18n>Country}" />
+				<Text text="{CountryName}"/>
+				<Label text="{i18n>PassportNumber}" />
+				<Text />
+				<core:Icon src="sap-icon://attachment" />
+				<Label text="{i18n>VisaNumber}" />
+				<Text />
+				<core:Icon src="sap-icon://attachment" />
+				<Label text="{i18n>EmiratesID}" />
+				<Text />
+				<core:Icon src="sap-icon://attachment" />
+			</f:content>
+		</f:SimpleForm>
+
+		<Panel id="VR_ChangeBankInformation" expandable="true" expanded="false"
+			headerText="{i18n>BankInfo}" width="auto" class="sapUiResponsiveMargin"
+			expand="onVRbankInfoPanel">
+			<content>
+				<f:SimpleForm editable="false" layout="ResponsiveGridLayout"
+					labelSpanXL="3" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+					emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+					columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="" />
+						<Label text="{i18n>Country}" />
+						<Text text="{BankCountryName}" />
+						<!-- <Label text="{i18n>BankKey}" />
+						<Text text="{BankKey}" /> -->
+						<Label text="{i18n>BankName}" />
+						<Text text="{BankName}" />
+						<Label text="{i18n>BankAcc}" />
+						<Text text="{BankAccount}" />
+						<Label text="{i18n>Branch}" />
+						<Text text="{Branch}" />
+
+						<core:Title text="" />
+						<Label text="{i18n>SwiftCode}" />
+						<Text text="{SwiftCode}" />
+						<Label text="{i18n>City}" />
+						<Text text="{City}" />
+						<Label text="{i18n>IBAN}" />
+						<Text text="{IbanNo}" />
+						<Label text="{i18n>Branch}" />
+						<Text text="{Branch}" />
+						<Label text="{i18n>Valid}" />
+						<Text text="{BankValidFrom}" />
+						<Text text="{BankValidTo}" />
+					</f:content>
+				</f:SimpleForm>
+			</content>
+		</Panel>
+
+	</VBox>
+</core:FragmentDefinition>

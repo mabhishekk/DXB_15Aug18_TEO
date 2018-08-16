@@ -1,0 +1,51 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:layout="sap.ui.layout"
+	controllerName="z_vrandnda.controller.Master">
+	<Page
+		title="{i18n>MasterTitle}">
+		<subHeader>
+			<Toolbar>
+				<SearchField width="100%" />
+			</Toolbar>
+		</subHeader>
+		<List 
+			id="orders" 
+			items="{/zvendr_LFA1Set}"
+			mode="SingleSelectMaster"
+			growing ="true"
+			selectionChange="onSelectionChange">
+			<items>
+				<!-- <StandardListItem 
+					title="{Name1}-{Lifnr}"
+					type="Active"
+					press="onSelectionChange"/> -->
+					
+			<ObjectListItem 
+					title="{Name1}" 
+					type="Active"
+					press="onSelectionChange" >
+					<firstStatus>
+						<ObjectStatus 
+							text="{ path: 'Anred'}"
+							
+							/>
+					</firstStatus>
+					<attributes >
+						<ObjectAttribute  text="{Lifnr}" />
+						
+					</attributes>
+				</ObjectListItem>		
+					
+					
+			</items>
+		</List>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button  icon="sap-icon://create" press="onCreate" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

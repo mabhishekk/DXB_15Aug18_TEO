@@ -1,0 +1,143 @@
+{
+	
+	"sap.app": {
+		"id": "z_vrandnda",
+		"type": "application",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/ZVM_APPL_SRV_01",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+					
+				}
+			}
+		}
+		
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+		
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "z_vrandnda.view.app",
+			"type": "XML"
+		},
+		"dependencies": {
+			
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {},
+				"sap.ui.unified": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "z_vrandnda.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "z_vrandnda.view",
+				"controlId": "rootControl",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": [
+						"home",
+						"notFound"
+					]
+				}
+			},
+			"routes": [	{
+						"name": "master",
+						"pattern": "",
+						"target": ["master","CompanyCreate"]
+					},
+					{
+						"name": "masterFreelancr",					
+						"pattern": "/Freelancer",
+						"target": ["master","FreelancerCreate"]
+					},
+					{
+						"name": "VendorDisplay",					
+						"pattern": "VendorDisplay/{id}/{vType}",
+						"target": ["master","CompanyDisplay"]
+					}],
+			"targets": {
+			
+			
+					"master": {
+						"viewName": "Master",
+						"controlAggregation": "masterPages",
+						"viewLevel": 0
+					},
+					"CompanyCreate": {
+						"viewName": "CompanyCreate",
+						"controlAggregation": "detailPages",
+						"viewLevel": 0
+					},
+					"FreelancerCreate": {
+						"viewName": "FreelancerCreate",
+						"controlAggregation": "detailPages",
+						"viewLevel": 0
+					},
+					"CompanyDisplay": {
+						"viewName": "CompanyDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel": 0
+					}
+				
+			
+			}
+		}
+		
+	}
+	
+}

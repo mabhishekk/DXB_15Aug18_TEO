@@ -1,0 +1,36 @@
+<mvc:View
+	controllerName="z_vrandnda.controller.CompanyDisplay"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic">
+	<semantic:SemanticPage 
+		title="{i18n>DetailDisplayTitle}"
+		id="idVendorPage">
+		
+		<semantic:subHeader>
+			<Bar>
+				<contentMiddle>
+					<SegmentedButton id="segmntBtn" selectedKey="{VendorOrCompany}">
+						<items>
+							<SegmentedButtonItem text="{i18n>Company}" key="VC" press="onVRcompany"/>
+							<SegmentedButtonItem text="{i18n>Freelancer}" key="VF" press="onVRfreelancer"/>
+						</items>
+					</SegmentedButton>
+				</contentMiddle>
+			</Bar>
+		</semantic:subHeader>
+		<semantic:content>
+		<core:Fragment fragmentName="z_vrandnda.view.fragments.Display" type="XML" />
+</semantic:content>
+		<semantic:customFooterContent>
+			<!-- <Button id="VendorEdit" text="Edit" press="handleEditPress" />
+			<Button id="VendorSave" text="Save" type="Emphasized" visible="false" press="handleSavePress" />
+			<Button id="VendorCancel" text="Cancel" visible="false" press="handleCancelPress" /> -->
+			<Button  icon="sap-icon://print" text="{i18n>Print}" press="handlePrint"/>
+		</semantic:customFooterContent>
+	</semantic:SemanticPage>
+</mvc:View>

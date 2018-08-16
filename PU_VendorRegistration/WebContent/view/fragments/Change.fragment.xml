@@ -1,0 +1,228 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic">
+
+	<VBox class="sapUiSmallMargin">
+
+		<Panel id="VR_ChangeGeneralInformation" expandable="true"
+			expanded="true" headerText="{i18n>GeneralInformation}" width="auto"
+			class="sapUiResponsiveMargin" expand="onVRgeneralPanel">
+			<content>
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+					emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+					columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="" />
+						<Label text="{i18n>Name}" required="true" />
+						<Input value="{lModel>/NameOrg1}" />
+						<!-- <Label text="{i18n>NameinArabic}" required="true" />
+						<Input value="{lModel>/FirstNameArabic}" /> -->
+					<!-- 	<Label text="{i18n>LastNamear}" required="true" />
+						<Input value="{lModel>/LastNameArabic}" /> -->
+						<Label text="{i18n>BussActivity}" required="true" />
+						<Input value="{lModel>/BusinessActivity}" />
+
+						<core:Title text="" />
+						<Label text="{i18n>EstabDate}" />
+						<DatePicker  dateValue="{lModel>Zdate}"/>
+						<Label text="{i18n>PayTerm}" />
+						<!-- <ComboBox value="" /> -->
+						<Input value="" />
+						<!-- <Label text="{i18n>ReconAct}" required="true" />
+						<Input value="{lModel>/Akont}" /> -->
+						<!-- <ComboBox value=""> <layoutData> <l:GridData span="XL1 L2 M3 S6"
+							/> </layoutData> </ComboBox> -->
+					</f:content>
+				</f:SimpleForm>
+			</content>
+		</Panel>
+
+		<Panel id="VR_ChangeAddress" expandable="true" expanded="false"
+			headerText="{i18n>ContactInfor}" width="auto" class="sapUiResponsiveMargin"
+			expand="onVRaddressPanel">
+			<content>
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+					emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+					columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="" />
+						<Label text="{i18n>TelNo}" required="true" />
+						<!-- <ComboBox value="{lModel>/TelAreaCode}">
+							<layoutData>
+								<l:GridData span="XL1 L2 M3 S5" />
+							</layoutData>
+						</ComboBox> -->
+						<Input value="{lModel>/TeleNumber}" />
+						<Label text="{i18n>FaxNo}" />
+						<Input value="{lModel>/FaxNumber}" />
+						<Label text="{i18n>MobileNo}" />
+						<!-- <ComboBox value="{lModel>/MobAreaCode}">
+							<layoutData>
+								<l:GridData span="XL1 L2 M3 S5" />
+							</layoutData>
+						</ComboBox> -->
+						<Input value="{lModel>/MobNumber}" />
+						<Label text="{i18n>Country}" />
+						<ComboBox value="{lModel>/CountryName}"
+							items="{
+					path: '/Country_codeSet',
+					sorter: { path: 'Land1' }
+				}">
+							<core:Item key="{Land1}" text="{Land1}" />
+						</ComboBox>
+						<Label text="{i18n>RSP}" />
+						<Input value="{lModel>/Region}" />
+						<core:Title text="" />
+						<Label text="{i18n>PoZip}" />
+						<Input value="{lModel>/PoBox}" />
+						<Label text="{i18n>eMail}" required="true" />
+						<Input value="{lModel>/Email}" />
+						<Label text="{i18n>ContactPerson}" />
+
+						<Input value="{lModel>/NameOrg3}" />
+						<Label text="{i18n>Website}" />
+						<Input value="{lModel>/Website}" />
+					</f:content>
+				</f:SimpleForm>
+			</content>
+		</Panel>
+
+		<Panel id="VR_ChangeLicenseDetail" expandable="true" expanded="false"
+			headerText="{i18n>LicenseDetail}" width="auto" class="sapUiResponsiveMargin"
+			expand="onVRlicensePanel">
+			<content>
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+					emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+					columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="" />
+						<Label text="{i18n>LicenseNumber}" />
+						<u:FileUploader visible="true"
+					tooltip="Upload your file to the local server" iconOnly="true"
+					icon="sap-icon://attachment" uploadComplete="handleUploadComplete" />
+
+
+							
+						<!-- <Button icon="sap-icon://attachment" width="1px" press="handleLicense"/> -->
+						<Label text="{i18n>LicenseExpiryDate}" />
+						<DatePicker dateValue="{lModel>/ValidDateTo}"/>
+						<core:Title text="" />
+						<Label text="{i18n>CompanyProfile}" />
+
+						<u:FileUploader visible="true"
+							tooltip="Upload your file to the local server" iconOnly="true"
+							icon="sap-icon://attachment" uploadComplete="handleUploadComplete" />
+						<!-- <Button icon="sap-icon://attachment" width="1px" press="handleCompanyProfile"/> -->
+						<Label text="{i18n>VATno}" />
+						<u:FileUploader visible="true"
+					tooltip="Upload your file to the local server" iconOnly="true"
+					icon="sap-icon://attachment" uploadComplete="handleUploadComplete" />
+						<!-- <Button icon="sap-icon://attachment" width="1px" press="handleVAT"/> -->
+					</f:content>
+				</f:SimpleForm>
+			</content>
+		</Panel>
+
+		<f:SimpleForm id="VR_ChangeFreelancer" editable="true"
+			visible="false" layout="ResponsiveGridLayout" title="{i18n>GeneralInformation}"
+			labelSpanXL="4" labelSpanL="4" labelSpanM="5" labelSpanS="12"
+			emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+			columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+			singleContainerFullSize="false">
+			<f:content>
+				<core:Title text="" />
+				<Label text="{i18n>Name}" required="true" />
+				<Input value="{lModel>/NameOrg1}" />
+				<!-- <Label text="{i18n>FirstNamear}" required="true" />
+				<Input value="{lModel>/FirstNameArabic}" />
+				<Label text="{i18n>LastNamear}" required="true" />
+				<Input value="{lModel>/LastNameArabic}" /> -->
+				<Label text="{i18n>TelNo}" required="true" />
+				<ComboBox value="">
+					<layoutData>
+						<l:GridData span="XL1 L2 M3 S5" />
+					</layoutData>
+				</ComboBox>
+				<Input value="{lModel>/TeleNumber}" />
+				<Label text="{i18n>eMail}" required="true" />
+				<Input value="{lModel>/Email}" />
+				<Label text="{i18n>Nationality}" />
+				<Input value="" />
+				
+				<core:Title text="" />
+				<Label text="{i18n>Country}" />
+				<ComboBox
+							items="{
+					path: '/Country_codeSet',
+					sorter: { path: 'Land1' }
+				}">
+					<core:Item key="{Land1}" text="{Land1}" />
+				</ComboBox>
+				<Label text="{i18n>PassportNumber}" />
+				<u:FileUploader visible="true"
+					tooltip="Upload your file to the local server" iconOnly="true"
+					icon="sap-icon://attachment" uploadComplete="handleUploadComplete" />
+				<!-- <Input value=""/> <Button icon="sap-icon://attachment" width="1px"
+					press="handlePassport"/> -->
+				<Label text="{i18n>VisaNumber}" />
+				<u:FileUploader visible="true"
+					tooltip="Upload your file to the local server" iconOnly="true"
+					icon="sap-icon://attachment" uploadComplete="handleUploadComplete" />
+				<Label text="{i18n>EmiratesID}" />
+				<!-- <Input value="" /> <Button icon="sap-icon://attachment" width="1px"
+					press="handleEmiratesID"/> -->
+				<u:FileUploader visible="true"
+					tooltip="Upload your file to the local server" iconOnly="true"
+					icon="sap-icon://attachment" uploadComplete="handleUploadComplete" />
+			</f:content>
+		</f:SimpleForm>
+
+		<Panel id="VR_ChangeBankInformation_chg" expandable="true"
+			expanded="false" headerText="{i18n>BankInfo}" width="auto"
+			class="sapUiResponsiveMargin" expand="onVRbankInfoPanel">
+			<content>
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+					labelSpanXL="3" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+					emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+					columnsXL="2" columnsL="2" columnsM="2" adjustLabelSpan="false"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="" />
+						<Label text="{i18n>Country}" />
+						<Input value="{lModel>/BankCountryName}" />
+						<!-- <Label text="{i18n>BankKey}" /> <Input value="" /> -->
+						<Label text="{i18n>BankName}" />
+						<Input value="{lModel>/BankName}" />
+						<Label text="{i18n>BankAcc}" />
+						<Input value="{lModel>/BankAccount}" />
+						<Label text="{i18n>Branch}" />
+						<Input value="{lModel>/Branch}" />
+
+						<core:Title text="" />
+						<Label text="{i18n>SwiftCode}" />
+						<Input value="{lModel>/SwiftCode}" />
+						<Label text="{i18n>City}" />
+						<Input value="{lModel>/City}" />
+						<Label text="{i18n>IBAN}" />
+						<Input value="{lModel>/IbanNo}" />
+						<Label text="{i18n>Valid}" />
+						<DatePicker dateValue="{lModel>/BankValidFrom}" placeholder="{i18n>From}" displayFormat="short" />
+						<DatePicker dateValue="{lModel>/BankValidTo}" placeholder="{i18n>To}" displayFormat="short" />
+						<Label text="{i18n>BankLetter}" />
+						<u:FileUploader visible="true"
+						tooltip="Upload your file to the local server" iconOnly="true"
+						icon="sap-icon://attachment" uploadComplete="handleUploadComplete" />
+							
+					</f:content>
+				</f:SimpleForm>
+			</content>
+		</Panel>
+
+	</VBox>
+</core:FragmentDefinition>

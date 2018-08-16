@@ -1,0 +1,198 @@
+<mvc:View
+	controllerName="z_vrandnda.controller.welcome"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic">
+	<semantic:SemanticPage title="{i18n>DetailDisplayTitle}">
+		<semantic:subHeader>
+			<Bar>
+				<contentMiddle>
+					<SegmentedButton selectedKey="company">
+						<items>
+							<SegmentedButtonItem text="{i18n>Company}" key="company" press="onVRcompany"/>
+							<SegmentedButtonItem text="{i18n>Freelancer}" key="freelancer" press="onVRfreelancer"/>
+						</items>
+					</SegmentedButton>
+				</contentMiddle>
+			</Bar>
+		</semantic:subHeader>
+		<semantic:content>
+			<Panel id="VR_GeneralInformation" expandable="true" expanded="true" headerText="{i18n>GeneralInformation}" width="auto" class="sapUiResponsiveMargin" expand="onVRgeneralPanel">
+				<content>
+					<f:SimpleForm 
+						editable="true"
+						layout="ResponsiveGridLayout"
+						labelSpanXL="4"	labelSpanL="4"	labelSpanM="5"	labelSpanS="12"
+						emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+						columnsXL="2"	columnsL="2"	columnsM="2"
+						adjustLabelSpan="false"
+						singleContainerFullSize="false" >
+						<f:content>
+							<core:Title text="" />
+							<Label text="{i18n>Name}" required ="true"/>
+							<Input value="" />
+							<!-- <Label text="{i18n>CompanyCode}" />
+							<Input value=""/>
+							<Label text="{i18n>PurchaseOrganization}" />
+							<Input value="" /> -->
+							<Label text="{i18n>BussActivity}"  required ="true"/>
+							<Input value=""/>
+							
+							<core:Title text="" />
+							<Label text="{i18n>EstabDate}" />
+							<DatePicker width="9rem"/>
+							<Label text="{i18n>PayTerm}"  required ="true"/>
+							<ComboBox value=""/>
+							<Label text="{i18n>ReconAct}" />
+							<Input value=""/>
+							<ComboBox value="">
+								<layoutData>
+										<l:GridData span="XL1 L2 M3 S6" />
+								</layoutData>
+							</ComboBox>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+			</Panel>
+			
+			<Panel id="VR_Address" expandable="true" expanded="false" headerText="{i18n>ContactInfor}" width="auto" class="sapUiResponsiveMargin" expand="onVRaddressPanel">
+				<content>
+					<f:SimpleForm 
+						editable="true"
+						layout="ResponsiveGridLayout"
+						labelSpanXL="4"	labelSpanL="4"	labelSpanM="5"	labelSpanS="12"
+						emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+						columnsXL="2"	columnsL="2"    columnsM="2"
+						adjustLabelSpan="false"
+						singleContainerFullSize="false" >
+						<f:content>
+							<core:Title text="" />
+							<Label text="{i18n>TelNo}" required ="true"/>
+							<ComboBox value="">
+								<layoutData>
+										<l:GridData span="XL1 L2 M3 S5" />
+								</layoutData>
+							</ComboBox >
+							<Input value="" />
+							<Input value="" />
+							<Label text="{i18n>FaxNo}" />
+							<ComboBox value="">
+								<layoutData>
+										<l:GridData span="XL1 L2 M3 S5" />
+								</layoutData>
+							</ComboBox >
+							<Input value="" />
+							<Input value="" />
+							<Label text="{i18n>MobileNo}" />
+							<ComboBox value="">
+								<layoutData>
+										<l:GridData span="XL1 L2 M3 S5" />
+								</layoutData>
+							</ComboBox >
+							<Input value="" />
+							<Label text="{i18n>Country}" />
+							<ComboBox value="" />
+							<Label text="{i18n>RSP}" />
+							<ComboBox value="" />
+							<core:Title text="" />
+							<Label text="{i18n>PoZip}" />
+							<Input value="" />
+							<Label text="{i18n>eMail}" required ="true"/>
+							<Input value=""/>
+							<Label text="{i18n>ContactPerson}" />
+							<ComboBox value="" />
+							<Input value="" />
+							<Input value="" />
+							<Label text="{i18n>Website}" />
+							<Input value=""/>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+			</Panel>
+			
+			<Panel id="VR_LicenseDetail" expandable="true" expanded="false" headerText="{i18n>LicenseDetail}" width="auto" class="sapUiResponsiveMargin" expand="onVRlicensePanel">
+				<content>
+					<f:SimpleForm 
+						editable="true"
+						layout="ResponsiveGridLayout"
+						labelSpanXL="4"	labelSpanL="4"	labelSpanM="5"	labelSpanS="12"
+						emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+						columnsXL="2"	columnsL="2"    columnsM="2"
+						adjustLabelSpan="false"
+						singleContainerFullSize="false" >
+						<f:content>
+							<core:Title text="" />
+							<Label text="{i18n>LicenseNumber}" />
+							<Input value="" />
+							<Button icon="sap-icon://attachment" width="1px" press="handleLicense"/>
+							<Label text="{i18n>LicenseExpiryDate}" />
+							<DatePicker width="9rem"/>
+							<core:Title text="" />
+							<Label text="{i18n>CompanyProfile}" />
+							<Input value="" />
+							<Button icon="sap-icon://attachment" width="1px" press="handleCompanyProfile"/>
+							<Label text="{i18n>VATno}" />
+							<Input value=""/>
+							<Button icon="sap-icon://attachment" width="1px" press="handleVAT"/>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+			</Panel>
+			<f:SimpleForm id="VR_Freelancer"
+				editable="true"
+				visible="false"
+				layout="ResponsiveGridLayout"
+				title="{i18n>GeneralInformation}"
+				labelSpanXL="4"	labelSpanL="4"	labelSpanM="5"	labelSpanS="12"
+				emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"  emptySpanS="0"
+				columnsXL="2"	columnsL="2"	columnsM="2"
+				adjustLabelSpan="false"
+				singleContainerFullSize="false" >
+				<f:content>
+					<core:Title text="" />
+					<Label text="{i18n>Name}" />
+					<Input value="" />
+					<Label text="{i18n>CompanyCode}" />
+					<Input value=""/>
+					<Label text="{i18n>PurchaseOrganization}" />
+					<Input value="" />
+					<Label text="{i18n>TelNo}" />
+					<ComboBox value="">
+						<layoutData>
+								<l:GridData span="XL1 L2 M3 S5" />
+						</layoutData>
+					</ComboBox >
+					<Input value="" />
+					<Input value="" />
+					<Label text="{i18n>eMail}" />
+					<Input value=""/>
+					
+					<core:Title text="" />
+					<Label text="{i18n>Nationality}" />
+					<Input value="" />
+					<Label text="{i18n>Country}" />
+					<Input value="" />
+					<Label text="{i18n>PassportNumber}" />
+					<Input value=""/>
+					<Button icon="sap-icon://attachment" width="1px" press="handlePassport"/>
+					<Label text="{i18n>VisaNumber}" />
+					<Input value="" />
+					<Button icon="sap-icon://attachment" width="1px" press="handleVisa"/>
+					<Label text="{i18n>EmiratesID}" />
+					<Input value="" />
+					<Button icon="sap-icon://attachment" width="1px" press="handleEmiratesID"/>
+				</f:content>
+			</f:SimpleForm>
+		</semantic:content>
+		<semantic:customFooterContent>
+			<Button text="{i18n>NDA}" icon="sap-icon://attachment" press="handleNDA"/>
+			<Button text="{i18n>Save}" type="Emphasized" press="handleVRsave"/>
+			<Button text="{i18n>SaveSubmit}" type="Accept" press="handleVRsaveAndSubmit"/>
+			<Button text="{i18n>Cancel}" type="Reject" press="handleVRCancel"/>
+		</semantic:customFooterContent>
+	</semantic:SemanticPage>
+</mvc:View>
