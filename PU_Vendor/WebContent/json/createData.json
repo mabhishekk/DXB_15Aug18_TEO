@@ -1,0 +1,46 @@
+{
+		"zvm_identificationSet":[{
+			"Type"          :"",
+			"Text"          :"",
+			"Idnumber"      :"",
+			"Institute"     :"",
+			"EntryDate"     :null,
+			"ValidDateFrom" :null,
+			"ValidDateTo"   :null,
+			"Country"       :"",
+			"Region"        :""
+		}],
+		"bankDetails"         :[{
+			"id"            :"",
+			"BankCtry"       :"",
+			"BankKey"       :"",
+			"BankAcct"   :"",
+			"CtrlKey"    :"",
+			"Iban"          :"",
+			"RefDetail"     :"",
+			"ExtrnId"       :"",
+			"AccountHolder" :"",
+			"AccountName"   :"",
+			"ValidFrom"     :"",
+			"ValidTo"       :"",
+			"FincInst"      :""
+		}],
+		"FreelancerTitle"     :[
+			{"key" :"0002",  "text" :"Mr."    },
+			{"key" :"0001",  "text" :"Ms."    },
+			{"key" :"0004",  "text" :""       }
+		],
+		"CompanyTitle"        :[
+			{"key" :"0003",  "text" :"Company"}
+		],
+		"FreelancerIdentification":[
+			{"Type":"TEOPP" , "Text" :"Passport"   },
+			{"Type":"TEOEM" , "Text" :"Emirates ID"},
+			{"Type":"TEOVIS", "Text" :"Visa Number"}
+		],
+		"CompanyIdentification"   :[
+			{"Type":"TEOLIC", "Text" :"License Number"}
+		],
+		"Company"             : false,
+		"Freelancer"          : false
+}
