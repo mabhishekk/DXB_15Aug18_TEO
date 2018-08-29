@@ -4,7 +4,8 @@
 	xmlns:semantic="sap.m.semantic"
 	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
-	xmlns="sap.m">
+	xmlns="sap.m"
+	xmlns:customselect="z_vr.control">
 	<semantic:FullscreenPage
 		id="page"
 		title="{i18n>addPageTitle}"
@@ -155,15 +156,14 @@
 								<DatePicker dateValue='{tempModel>ValidDateFrom}'/>
 								<DatePicker dateValue='{tempModel>ValidDateTo}'/>
 								<Select
-									forceSelection="false"
 									selectedKey="{tempModel>Country}"
 									change='onSelectTableCountry'
 									items="{path:'/zcountry_nameSet', templateShareable:'true'}">
 									<core:Item key="{Land1}" text="{Landx50}"/>
 								</Select>
 								<Select
-									forceSelection="false"
 									selectedKey="{tempModel>Region}"
+									open='onOpen'
 									items="{path:'/ZRegionSet', templateShareable:'true'}">
 									<core:Item key="{Bland}" text="{Bezei}"/>
 								</Select>
@@ -190,12 +190,9 @@
 					</infoToolbar> -->
 					<columns>
 						<Column>
-							<Text text="ID Type" />
-						</Column>
-						<Column	minScreenWidth="Tablet" demandPopin="true">
 							<Text text="Country" />
 						</Column>
-						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+						<Column	inScreenWidth="Tablet" demandPopin="true">
 							<Text text="Bank Key (Branch Number)" />
 						</Column>
 						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
@@ -223,16 +220,20 @@
 					<items>
 						<ColumnListItem>
 							<cells>
-								<Input value='{tempModel>id}'/>
-								<Input value='{tempModel>Country}'/>
+								<Select
+									forceSelection="false"
+									selectedKey="{tempModel>BankCtry}"
+									items="{path:'/zcountry_nameSet', templateShareable:'true'}">
+									<core:Item key="{Land1}" text="{Landx50}"/>
+								</Select>
 								<Input value='{tempModel>BankKey}'/>
-								<Input value='{tempModel>BankAccount}'/>
+								<Input value='{tempModel>BankAcct}'/>
 								<Input value='{tempModel>Iban}'/>
-								<Input value='{tempModel>ExtrnId}'/>
-								<Input value='{tempModel>AccountHolder}'/>
-								<Input value='{tempModel>FincInst}'/>
-								<Input value='{tempModel>ValidFrom}'/>
-								<Input value='{tempModel>ValidTo}'/>
+								<Input value='{tempModel>SwiftCode}'/>
+								<Input value='{tempModel>Accountholder}'/>
+								<Input value='{tempModel>BankName}'/>
+								<DatePicker dateValue='{tempModel>Bankdetailvalidfrom}'/>
+								<DatePicker dateValue='{tempModel>Bankdetailvalidto}'/>
 							</cells>
 						</ColumnListItem>
 					</items>

@@ -35,53 +35,7 @@ sap.ui.define([
 		
 		_onMetadataLoaded: function () {
 			// create default properties
-			var tdata   = {
-					"zvm_identificationSet":[{
-						"Type"          :"",
-						"Text"          :"",
-						"Idnumber"      :"",
-						"Institute"     :"",
-						"EntryDate"     :new Date(),
-						"ValidDateFrom" :new Date(),
-						"ValidDateTo"   :new Date(),
-						"Country"       :"",
-						"Region"        :""
-					}],
-					"bankDetails"         :[{
-						"id"            :"",
-						"BankCtry"       :"",
-						"BankKey"       :"",
-						"BankAcct"   :"",
-						"CtrlKey"    :"",
-						"Iban"          :"",
-						"RefDetail"     :"",
-						"ExtrnId"       :"",
-						"AccountHolder" :"",
-						"AccountName"   :"",
-						"ValidFrom"     :"",
-						"ValidTo"       :"",
-						"FincInst"      :""
-					}],
-					"FreelancerTitle"     :[
-						{"key" :"0002",  "text" :"Mr."    },
-						{"key" :"0001",  "text" :"Ms."    },
-						{"key" :"0004",  "text" :""       }
-					],
-					"CompanyTitle"        :[
-						{"key" :"0003",  "text" :"Company"}
-					],
-					"FreelancerIdentification":[
-						{"Type":"TEOPP" , "Text" :"Passport"   },
-						{"Type":"TEOEM" , "Text" :"Emirates ID"},
-						{"Type":"TEOVIS", "Text" :"Visa Number"}
-					],
-					"CompanyIdentification"   :[
-						{"Type":"TEOLIC", "Text" :"License Number"}
-					],
-					"Company"             : false,
-					"Freelancer"          : false
-			};
-			this.tempModel = new sap.ui.model.json.JSONModel(tdata);
+			this.tempModel = new sap.ui.model.json.JSONModel("./json/createData.json");
 			this.getView().setModel(this.tempModel,'tempModel');
 		},
 		
@@ -185,8 +139,8 @@ sap.ui.define([
 		
 		onSelectTableCountry: function(oEvent){
 			var aSelectedCell   = oEvent.getSource().getParent().getCells();
-			var SelectedCountry = aSelectedCell[7].getSelectedKey();
-			var oBinding        = oEvent.getSource().getParent().getCells()[8].getBinding('items');
+			var SelectedCountry = aSelectedCell[6].getSelectedKey();
+			var oBinding        = oEvent.getSource().getParent().getCells()[7].getBinding('items');
 			oBinding.filter([ new Filter([
 				new Filter({
 					path: 'Bland',
@@ -205,17 +159,7 @@ sap.ui.define([
 		
 		handleIdentifyAdd: function(oEvent){
 			var aIdentifyData = this.tempModel.getProperty('/zvm_identificationSet');
-			var pData         = {
-					"Type"          :"",
-					"Text"          :"",
-					"Idnumber"      :"",
-					"Institute"     :"",
-					"EntryDate"     :new Date(),
-					"ValidDateFrom" :new Date(),
-					"ValidDateTo"   :new Date(),
-					"Country"       :"",
-					"Region"        :""
-			};
+			var pData         = jQuery.extend(true, {}, this.tempModel.getProperty('/addIndentification'));
 			aIdentifyData.push(pData);  
 			this.tempModel.setProperty('/zvm_identificationSet',aIdentifyData);
 		},
@@ -228,12 +172,16 @@ sap.ui.define([
 			this.tempModel.setProperty('/zvm_identificationSet',aIndentifyData);
 		},
 		
+		onOpen: function(oEvent){
+			alert('Hello');
+		},
 		onSave: function(oEvent){
 //			this.getView().setBusy(true);
-			var oModel    = this.getOwnerComponent().getModel();
-			var inputData = jQuery.extend(true, {}, this.tempModel.getProperty('/headerData'));
-//			inputData.partner_bank = this.tempModel.getProperty('/bankDetails');
-			inputData.partner_identity=this.tempModel.getProperty('/zvm_identificationSet');
+			var oModel                 = this.getOwnerComponent().getModel();
+			var that				   = this;
+			var inputData              = jQuery.extend(true, {}, this.tempModel.getProperty('/headerData'));
+			inputData.partner_bank     = this.tempModel.getProperty('/bankDetails');
+			inputData.partner_identity = this.tempModel.getProperty('/zvm_identificationSet');
 			debugger;
 			oModel.create("/ZVENDOR_COMPANYSet",inputData,{
 				success:function(oEvnt){
