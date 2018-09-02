@@ -172,9 +172,6 @@ sap.ui.define([
 			this.tempModel.setProperty('/zvm_identificationSet',aIndentifyData);
 		},
 		
-		onOpen: function(oEvent){
-			alert('Hello');
-		},
 		onSave: function(oEvent){
 //			this.getView().setBusy(true);
 			var oModel                 = this.getOwnerComponent().getModel();

@@ -5,7 +5,7 @@
 	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m"
-	xmlns:customselect="z_vr.control">
+	xmlns:customSelect="z_vr.control">
 	<semantic:FullscreenPage
 		id="page"
 		title="{i18n>addPageTitle}"
@@ -38,9 +38,10 @@
 						<Label text="GL Account" />
 						<Select
 							forceSelection="false"
+							showSecondaryValues= "true"
 							selectedKey="{tempModel>/headerData/Akont}"
 							items="{/zrec_accountSet}">
-							<core:Item key="{Saknr}" text="{Saknr}" />
+							<core:ListItem key="{Saknr}" text="{Txt50}" additionalText= "{Saknr}"/>
 						</Select>
 						<Label text="Currency" />
 						<Select id='idCurrency'

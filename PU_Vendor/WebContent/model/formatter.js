@@ -4,17 +4,12 @@ sap.ui.define([
 
 		return {
 
-			/**
-			 * Rounds the number unit value to 2 digits
-			 * @public
-			 * @param {string} sValue the number string to be rounded
-			 * @returns {string} sValue with 2 digits rounded
-			 */
-			numberUnit : function (sValue) {
-				if (!sValue) {
-					return "";
+			VendorType : function (sValue) {
+				if (sValue === '2')
+					return 'Company';
+				else if (sValue === '1'){
+					return 'Freelancer';
 				}
-				return parseFloat(sValue).toFixed(2);
 			},
 
 

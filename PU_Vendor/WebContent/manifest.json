@@ -115,6 +115,11 @@
 					"pattern" : "AddVendor",
 					"name" : "add",
 					"target" : "add"
+				},
+				{
+					"pattern" : "EditVendor/{objectId}",
+					"name" : "edit",
+					"target" : "edit"
 				}
 			],
 			"targets": {
@@ -131,6 +136,11 @@
 				"add": {
 					"viewName": "Add",
 					"viewId": "add",
+					"viewLevel": 3
+				},
+				"edit": {
+					"viewName": "Edit",
+					"viewId": "edit",
 					"viewLevel": 3
 				},
 				"objectNotFound": {
