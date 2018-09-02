@@ -72,7 +72,7 @@ sap.ui.define([
 				this.getView().bindElement({
 					path: sObjectPath,
 					parameters: {
-						expand: "partner_identity"
+						expand: "partner_identity,partner_bank"
 					},
 					events: {
 						change: this._onBindingChange.bind(this),

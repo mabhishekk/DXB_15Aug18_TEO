@@ -40,14 +40,8 @@ sap.ui.define([
 		},
 		
 		onAfterRendering: function(){
-			var oBinding        = this.getView().byId("idRegion").getBinding("items");
-			oBinding.filter([ new Filter([
-				new Filter({
-					path: 'Bland',
-			        operator: FilterOperator.EQ,
-			        value1: 'AE'
-				})
-			])]);
+			var sCountry = 'AE';
+			this._bindRegion(sCountry);
 		},
 		/**
 		 * Event handler for the cancel action
@@ -90,51 +84,12 @@ sap.ui.define([
 		},
 		onVendorType: function(oEvent){
 			var oSelectedIndex          = oEvent.getParameter("selectedIndex");
-			var oItemTemplate           = new sap.ui.core.ListItem({
-				key           : "{tempModel>key}",
-				text          : "{tempModel>text}",
-				additionalText: "{tempModel>key}"
-			});
-			var oIdentificationTemplate = new sap.ui.core.ListItem({
-				key           : "{tempModel>Type}",
-				text          : "{tempModel>Type}",
-				additionalText: "{tempModel>Text}"
-			});
-			if(oSelectedIndex === 0){
-				this.tempModel.setProperty('/headerData/VendorOrCompany','VC');
-				this.tempModel.setProperty('/Company', true);
-				this.tempModel.setProperty('/Freelancer', false);
-				this.getView().byId('idFirstName').setText('Name');
-				this.getView().byId('idTitle').bindItems({
-					path    : "tempModel>/CompanyTitle",
-					template: oItemTemplate
-				});
-				var aCompanyIdentify = this.tempModel.getProperty('/CompanyIdentification');
-				this.tempModel.setProperty('/Identification', aCompanyIdentify);
-			}else{
-				this.tempModel.setProperty('/headerData/VendorOrCompany','VF');
-				this.tempModel.setProperty('/Company', false);
-				this.tempModel.setProperty('/Freelancer', true);
-				this.getView().byId('idFirstName').setText('First Name');
-				this.getView().byId('idTitle').bindItems({
-					path: "tempModel>/FreelancerTitle",
-					template: oItemTemplate
-				});
-				var aFreelancerIndentify = this.tempModel.getProperty('/FreelancerIdentification');
-				this.tempModel.setProperty('/Identification', aFreelancerIndentify);
-			}
+			this._OnCompanyOrFreelancer(oSelectedIndex);
 		},
 		
 		onSelectCountry: function(oEvent){
-			var SelectedCountry = oEvent.getSource().getSelectedKey();
-			var oBinding        = this.getView().byId("idRegion").getBinding("items");
-			oBinding.filter([ new Filter([
-				new Filter({
-					path: 'Bland',
-			        operator: FilterOperator.EQ,
-			        value1: SelectedCountry
-				})
-			])]);
+			var sCountry = oEvent.getSource().getSelectedKey();
+			this._bindRegion(sCountry);
 		},
 		
 		onSelectTableCountry: function(oEvent){
@@ -150,18 +105,30 @@ sap.ui.define([
 			])]);
 		},
 		
+		onSelectBankCountry: function(oEvent){
+			var aSelectedCell   = oEvent.getSource().getParent().getCells();
+			var SelectedCountry = aSelectedCell[0].getSelectedKey();
+			var oBinding        = oEvent.getSource().getParent().getCells()[1].getBinding('items');
+			oBinding.filter([ new Filter([
+				new Filter({
+					path: 'Banks',
+			        operator: FilterOperator.EQ,
+			        value1: SelectedCountry
+				})
+			])]);
+		},
+		
+		onSelectBankKey: function(oEvent){
+			var aSelectedCell   = oEvent.getSource().getParent().getCells();
+			var sBank           = oEvent.oSource.getSelectedItem().getBindingContext().getObject().Banka;
+			aSelectedCell[4].setValue(sBank);
+		},
+		
 		onSelectTableType: function(oEvent){
 //			debugger;
 //			var aSelectedCell   = oEvent.getSource().getParent().getCells();
 //			var sText           = aSelectedCell[0].getSelectedItem().getBindingContext().getObject().Text;
 //			aSelectedCell[1].setText(sText);
-		},
-		
-		handleIdentifyAdd: function(oEvent){
-			var aIdentifyData = this.tempModel.getProperty('/zvm_identificationSet');
-			var pData         = jQuery.extend(true, {}, this.tempModel.getProperty('/addIndentification'));
-			aIdentifyData.push(pData);  
-			this.tempModel.setProperty('/zvm_identificationSet',aIdentifyData);
 		},
 		
 		handleDelete: function(oEvent){
@@ -173,10 +140,16 @@ sap.ui.define([
 		},
 		
 		onSave: function(oEvent){
-//			this.getView().setBusy(true);
+			this.getView().setBusy(true);
 			var oModel                 = this.getOwnerComponent().getModel();
 			var that				   = this;
 			var inputData              = jQuery.extend(true, {}, this.tempModel.getProperty('/headerData'));
+			if(inputData.Category === 0){
+				inputData.Category = '2';
+			}else if(inputData.Category === 1){
+				inputData.Category = '1';
+			}
+			inputData.SalKey2          = 'C';
 			inputData.partner_bank     = this.tempModel.getProperty('/bankDetails');
 			inputData.partner_identity = this.tempModel.getProperty('/zvm_identificationSet');
 			debugger;
@@ -186,10 +159,13 @@ sap.ui.define([
 					that.getView().setBusy(false);
 					that.getView().getModel().refresh();
 					var sText = that.getResourceBundle().getText("vendrCret")+ oEvnt.Partner;
-					MessageBox.success(sText, {
-						title : that.getResourceBundle().getText("Success")
+					MessageBox.success(oEvnt.Partner, {
+						onClose: function(){
+							that.getRouter().navTo("object", {
+								objectId: oEvnt.Partner
+							});
+						}
 					});
-					that.lModel.setData(tData);
 				},
 				error:function(oEvnt){
 					debugger;

@@ -138,6 +138,45 @@
 						</ColumnListItem>
 					</items>
 				</Table>
+				<Table id="idPaymentTable"
+					inset="false"
+					items="{partner_bank}">
+					<headerToolbar>
+						<OverflowToolbar>
+								<Title text="Payment Transactions" level="H2"/>
+								<ToolbarSpacer />
+								<Button icon="sap-icon://add" text="{i18n>Add}" type="Accept" press="handlePaymentAdd" />
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column>
+							<Text text="Country" />
+						</Column>
+						<Column	inScreenWidth="Tablet" demandPopin="true">
+							<Text text="Bank Key (Branch Number)" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Bank Account" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Account Holder" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Name of Bank" />
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{BankCtry}"/>
+								<Text text="{BankKey}"/>
+								<Text text="{BankAcct}"/>
+								<Text text="{Accountholder}"/>
+								<Text text="{BankName}"/>							
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
 		</semantic:content>
 		<semantic:customFooterContent>
 			<Button text='Edit' icon="sap-icon://edit" press='onEditButtonPress'/>

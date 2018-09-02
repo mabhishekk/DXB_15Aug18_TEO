@@ -53,7 +53,7 @@
 							<core:ListItem key="{Waers}" text="{Waers}" additionalText= "{Ktext}"/>
 						</Select>
 						<Label text="VAT Number" visible='{tempModel>/Company}'/>
-						<Input value="{tempModel>/headerData/NameOrg3}" visible='{tempModel>/Company}'/>
+						<Input value="{tempModel>/headerData/NameOrg3}" visible='{tempModel>/Company}' type='Number' maxLength='15'/>
 						<core:Title text="Address" />
 						<Label text="Street / House No." />
 						<Input value="{tempModel>/headerData/Street}" />
@@ -200,22 +200,10 @@
 							<Text text="Bank Account" />
 						</Column>
 						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
-							<Text text="IBAN" />
-						</Column>
-						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
-							<Text text="Swift No." />
-						</Column>
-						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
 							<Text text="Account Holder" />
 						</Column>
 						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
 							<Text text="Name of Bank" />
-						</Column>
-						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
-							<Text text="Valid From" />
-						</Column>
-						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
-							<Text text="Valid To" />
 						</Column>
 					</columns>
 					<items>
@@ -224,17 +212,21 @@
 								<Select
 									forceSelection="false"
 									selectedKey="{tempModel>BankCtry}"
+									change='onSelectBankCountry'
 									items="{path:'/zcountry_nameSet', templateShareable:'true'}">
 									<core:Item key="{Land1}" text="{Landx50}"/>
 								</Select>
-								<Input value='{tempModel>BankKey}'/>
+								<Select
+									forceSelection="false"
+									selectedKey="{tempModel>BankKey}"
+									showSecondaryValues= "true"
+									change='onSelectBankKey'
+									items="{path:'/BankMasterSet', templateShareable:'true'}">
+									<core:ListItem key="{Bankl}" text="{Bankl}" additionalText= "{Banka}-{Ort01}"/>
+								</Select>
 								<Input value='{tempModel>BankAcct}'/>
-								<Input value='{tempModel>Iban}'/>
-								<Input value='{tempModel>SwiftCode}'/>
 								<Input value='{tempModel>Accountholder}'/>
-								<Input value='{tempModel>BankName}'/>
-								<DatePicker dateValue='{tempModel>Bankdetailvalidfrom}'/>
-								<DatePicker dateValue='{tempModel>Bankdetailvalidto}'/>
+								<Input value='{tempModel>BankName}' editable='false'/>
 							</cells>
 						</ColumnListItem>
 					</items>

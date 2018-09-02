@@ -12,7 +12,13 @@ sap.ui.define([
 				}
 			},
 
-
+			VendorIndex: function (sValue) {
+				if (sValue === '2')
+					return 0;
+				else if (sValue === '1'){
+					return 1;
+				}
+			}
 		};
 
 	}

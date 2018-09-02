@@ -17,9 +17,7 @@
 			"Iban"               :"",
 			"SwiftCode"          :"",
 			"Accountholder"      :"",
-			"BankName"           :"",
-			"Bankdetailvalidfrom":null,
-			"Bankdetailvalidto"  :null
+			"BankName"           :""
 		}],
 		"headerData"           :{
 			"Category"           :"",
@@ -79,8 +77,6 @@
 			"Iban"               :"",
 			"SwiftCode"          :"",
 			"AccountHolder"      :"",
-			"BankName"           :"",
-			"Bankdetailvalidfrom":null,
-			"Bankdetailvalidto"  :null
+			"BankName"           :""
 		}
 }
