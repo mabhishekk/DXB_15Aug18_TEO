@@ -1,0 +1,238 @@
+<mvc:View
+	controllerName="z_vr.controller.Edit"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic">
+
+	<semantic:FullscreenPage
+		id="page"
+		navButtonPress="onNavBack"
+		showNavButton="true"
+		title="{i18n>EditTitle}"
+		busy="{EditView>/busy}"
+		busyIndicatorDelay="{EditView>/delay}">
+		<semantic:content>
+				<f:SimpleForm id="SimpleFormChangeColumn_threeGroups234"
+					editable="true"
+					layout="ResponsiveGridLayout"
+					labelSpanXL="4"	labelSpanL="4"	labelSpanM="4"	labelSpanS="12"
+					emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+					columnsXL="3"	columnsL="3"	columnsM="3"
+					adjustLabelSpan="false"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="Name" />
+						<Label text="Type" />
+						<RadioButtonGroup columns="2" valueState="Error" editable='false'
+						selectedIndex="{path: 'tempModel>/headerData/Category',  formatter: '.formatter.VendorIndex'}" select='onVendorType'>
+							<buttons>
+								<RadioButton id="VC" text="Company"/>
+								<RadioButton id="VF" text="Freelancer"/>
+							</buttons>
+						</RadioButtonGroup>
+						<Label text="Title" />
+						<Select id="idTitle" width="7rem" selectedKey="{tempModel>/headerData/Salutation1}"/>
+						<Label id='idFirstName' text="Name" />
+						<Input value="{tempModel>/headerData/NameOrg1}" editable='false'/>
+						<Label text="Last Name" visible='{tempModel>/Freelancer}'/>
+						<Input value="{tempModel>/headerData/NameOrg3}" visible='{tempModel>/Freelancer}'/>
+						<Label text="GL Account" />
+						<Select
+							forceSelection="false" enabled='false'
+							showSecondaryValues= "true"
+							selectedKey="{tempModel>/headerData/Akont}"
+							items="{/zrec_accountSet}">
+							<core:ListItem key="{Saknr}" text="{Txt50}" additionalText= "{Saknr}"/>
+						</Select>
+						<Label text="Currency" />
+						<Select id='idCurrency'
+							forceSelection="false"
+							showSecondaryValues= "true"
+							selectedKey="{tempModel>/headerData/Waers}"
+							items="{/zcurrencySet}"
+							change='onSelectCurrency'>
+							<core:ListItem key="{Waers}" text="{Waers}" additionalText= "{Ktext}"/>
+						</Select>
+						<Label text="VAT Number" visible='{tempModel>/Company}'/>
+						<Input value="{tempModel>/headerData/NameOrg3}" visible='{tempModel>/Company}'/>
+						<core:Title text="Address" />
+						<Label text="Street / House No." />
+						<Input value="{tempModel>/headerData/Street}" />
+						<Label text="Street 2" />
+						<Input value="{tempModel>/headerData/StrSuppl1}" />
+						<Label text="Street 3" />
+						<Input value="{tempModel>/headerData/StrSuppl2}" />
+						<Label text="City" />
+						<Input value="{tempModel>/headerData/City}" />
+						<Label text="Postal Code" />
+						<Input value="{tempModel>/headerData/PostlCod1}" />
+						<Label text="PO Box" />
+						<Input value="{tempModel>/headerData/PoBox}" />
+						<Label text="Region" />
+						<Select id='idRegion'
+							forceSelection="false"
+							selectedKey ='{tempModel>/headerData/Region}'
+							items="{/ZRegionSet}"
+							change='onSelectRegion'>
+							<core:Item key="{Bland}" text="{Bezei}" />
+						</Select>
+						<Label text="Country" />
+						<Select id='idCountry'
+							forceSelection="false"
+							selectedKey ='{tempModel>/headerData/Country}'
+							items="{/zcountry_nameSet}"
+							change='onSelectCountry'>
+							<core:Item key="{Land1}" text="{Landx50}" />
+						</Select>
+						<core:Title text="Communication" />
+						<Label text='Contact Person'/>
+						<Input value="{tempModel>/headerData/NameOrg4}"/>
+						<Label text="Telephone" />
+						<Input value="{tempModel>/headerData/TelNumber}" type="Tel"/>
+						<Label text="Mobile" />
+						<Input value="{tempModel>/headerData/MobNumber}" type="Tel"/>
+						<Label text="Fax" />
+						<Input value="{tempModel>/headerData/FaxNumber}" type="Tel"/>
+						<Label text="Email" />
+						<Input value="{tempModel>/headerData/Email}" type="Email"/>
+						<Label text="Website" />
+						<Input value="{tempModel>/headerData/Website}"/>
+					</f:content>
+				</f:SimpleForm>
+				<Table id="idIndentificationTable"
+					inset="false"
+					items="{tempModel>/zvm_identificationSet}"
+					mode="Delete"
+					delete="handleDelete">
+					<headerToolbar>
+						<OverflowToolbar>
+								<Title text="Identification" level="H2"/>
+								<ToolbarSpacer />
+								<Button icon="sap-icon://add" text="{i18n>Add}" type="Accept" press="handleIdentifyAdd" />
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column	>
+							<Text text="ID Type" hAlign="Center"/>
+						</Column>
+						<Column	minScreenWidth="Tablet" demandPopin="true"  hAlign="Center">
+							<Text text="ID Number" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Responsible Instituition" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Entry Date" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Valid From" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Valid To" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Country" />
+						</Column>
+						<Column	hAlign="Center">
+							<Text text="Region" />
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Select id='idIndentifyId'
+									forceSelection="false"
+									selectedKey="{tempModel>Type}"
+									change='onSelectTableType'
+									items="{path:'tempModel>/Identification', templateShareable:'true'}">
+									<core:ListItem key="{tempModel>Type}" text="{tempModel>Text}"/>
+								</Select>
+								<Input      value='{tempModel>Idnumber}'/>
+								<Input      value='{tempModel>Institute}'/>
+								<DatePicker dateValue='{tempModel>EntryDate}'/>
+								<DatePicker dateValue='{tempModel>ValidDateFrom}'/>
+								<DatePicker dateValue='{tempModel>ValidDateTo}'/>
+								<Select
+									selectedKey="{tempModel>Country}"
+									change='onSelectTableCountry'
+									items="{path:'/zcountry_nameSet', templateShareable:'true'}">
+									<core:Item key="{Land1}" text="{Landx50}"/>
+								</Select>
+								<Select
+									selectedKey="{tempModel>Region}"
+									open='onOpen'
+									items="{path:'/ZRegionSet', templateShareable:'true'}">
+									<core:Item key="{Bland}" text="{Bezei}"/>
+								</Select>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				<Table id="idPaymentTable"
+					inset="false"
+					items="{tempModel>/bankDetails}"
+					mode="Delete"
+					delete="handleDelete">
+					<headerToolbar>
+						<OverflowToolbar>
+								<Title text="Payment Transactions" level="H2"/>
+								<ToolbarSpacer />
+								<Button icon="sap-icon://add" text="{i18n>Add}" type="Accept" press="handlePaymentAdd" />
+						</OverflowToolbar>
+					</headerToolbar>
+					<!-- <infoToolbar>
+						<Toolbar active="ture">
+							<Label text="Bank Deatils"/>
+						</Toolbar>
+					</infoToolbar> -->
+					<columns>
+						<Column>
+							<Text text="Country" />
+						</Column>
+						<Column	inScreenWidth="Tablet" demandPopin="true">
+							<Text text="Bank Key (Branch Number)" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Bank Account" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Account Holder" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Name of Bank" />
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Select
+									forceSelection="false"
+									selectedKey="{tempModel>BankCtry}"
+									change='onSelectBankCountry'
+									items="{path:'/zcountry_nameSet', templateShareable:'true'}">
+									<core:Item key="{Land1}" text="{Landx50}"/>
+								</Select>
+								<Select
+									forceSelection="false"
+									selectedKey="{tempModel>BankKey}"
+									showSecondaryValues= "true"
+									change='onSelectBankKey'
+									items="{path:'/BankMasterSet', templateShareable:'true'}">
+									<core:ListItem key="{Bankl}" text="{Bankl}" additionalText= "{Banka}-{Ort01}"/>
+								</Select>
+								<Input value='{tempModel>BankAcct}'/>
+								<Input value='{tempModel>Accountholder}'/>
+								<Input value='{tempModel>BankName}' editable='false'/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+		</semantic:content>
+		<semantic:customFooterContent>
+			<Button text='Save' icon="sap-icon://save" press='onSave'/>
+		</semantic:customFooterContent>
+	</semantic:FullscreenPage>
+
+</mvc:View>
