@@ -1108,8 +1108,8 @@ sap.ui.define([
 					"z_inbox.view.fragments.Approve",
 					this);
 			this.getView().addDependent(this.pressDialog);
-			this.getView().byId('l5approve').setVisible(false);
-			this.getView().byId('l5usr_List').setVisible(false);
+//			this.getView().byId('l5approve').setVisible(false);
+//			this.getView().byId('l5usr_List').setVisible(false);
 		}
 		this.pressDialog.open();				
 	},
@@ -1120,6 +1120,7 @@ sap.ui.define([
 		var Level3Approver = this.getView().byId("l3usr_List");
 		var Level4Approver = this.getView().byId("l4usr_List");
 		var Level5Approver = this.getView().byId("l5usr_List");
+		this.getView().byId('l5approve').setText("Procurement");
 		var oModel         = this.getView().getModel();
 		
 		var aFilters = [];
@@ -1161,7 +1162,7 @@ sap.ui.define([
 			template : oTemplate
 		});
 		
-		eFilters.push( new sap.ui.model.Filter("Levelid", "EQ", '5') );
+		eFilters.push( new sap.ui.model.Filter("Levelid", "EQ", '7') );
 		Level5Approver.bindItems({
 			path : "/mgtapprovalSet",
 			filters: new sap.ui.model.Filter(eFilters, true),
@@ -1174,42 +1175,48 @@ sap.ui.define([
 	},
 	
 	handleApproveSave : function(oEvent) {
-		this.onApproveClose(oEvent);
-		var that   = this;
-		var level1 = this.getView().byId("l1usr_List").getSelectedKey();
-		var level2 = this.getView().byId("l2usr_List").getSelectedKey();
-		var level3 = this.getView().byId("l3usr_List").getSelectedKey();
-		var level4 = this.getView().byId("l4usr_List").getSelectedKey();
 		var level5 = this.getView().byId("l5usr_List").getSelectedKey();
 		
-		var approver         = {};
-		approver.Wiid        = this.instId;
-		approver.Level1      = level1;
-		approver.Level2      = level2;
-		approver.Level3      = level3;
-		approver.Level4      = level4;
-		approver.Level5      = level5;
-//											approver.navigwitowiuser = [];
-		var oModel = this.getOwnerComponent().getModel("fiService");
-		oModel.create("/wfmgtuserselectSet", approver,{
+		if(level5 != "0"){
+			this.onApproveClose(oEvent);
+			var that   = this;
+			var level1 = this.getView().byId("l1usr_List").getSelectedKey();
+			var level2 = this.getView().byId("l2usr_List").getSelectedKey();
+			var level3 = this.getView().byId("l3usr_List").getSelectedKey();
+			var level4 = this.getView().byId("l4usr_List").getSelectedKey();
+			var level5 = this.getView().byId("l5usr_List").getSelectedKey();
 			
-			success:function(oData){
-				var sPostingNumber = oData.Postingnumber;
-				var msg = "Request has been forwarded for approvals.";
-				jQuery.sap.require("sap.m.MessageBox");
-				sap.m.MessageBox.success(msg);
-				that.getOwnerComponent().getModel().refresh()
-				that.getOwnerComponent().getRouter().navTo("welcome",true);
+			var approver         = {};
+			approver.Wiid        = this.instId;
+			approver.Level1      = level1;
+			approver.Level2      = level2;
+			approver.Level3      = level3;
+			approver.Level4      = level4;
+			approver.Level7      = level5;
+	//											approver.navigwitowiuser = [];
+			var oModel = this.getOwnerComponent().getModel("fiService");
+			oModel.create("/wfmgtuserselectSet", approver,{
 				
-			},
-			error:function(oData){
-				var emsg= $(oData.responseText).find("message").first().text();
-				var bCompact = !!that.getView().$().closest(".sapUiSizeCompact").length;
-				jQuery.sap.require("sap.m.MessageBox");
-				sap.m.MessageBox.error(emsg	);
-				debugger;	
-			}
-		})
+				success:function(oData){
+					var sPostingNumber = oData.Postingnumber;
+					var msg = "Request has been forwarded for approvals.";
+					jQuery.sap.require("sap.m.MessageBox");
+					sap.m.MessageBox.success(msg);
+					that.getOwnerComponent().getModel().refresh()
+					that.getOwnerComponent().getRouter().navTo("welcome",true);
+					
+				},
+				error:function(oData){
+					var emsg= $(oData.responseText).find("message").first().text();
+					var bCompact = !!that.getView().$().closest(".sapUiSizeCompact").length;
+					jQuery.sap.require("sap.m.MessageBox");
+					sap.m.MessageBox.error(emsg	);
+					debugger;	
+				}
+			})
+		}else{
+			sap.m.MessageBox.error(this.getResourceBundle().getText("pfmf"));
+		}
 	}
 
 });

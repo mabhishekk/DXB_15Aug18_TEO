@@ -215,6 +215,16 @@
 						"name"   : "GRdisplay",
 						"pattern": "GR-{id}/{instId}",
 						"target" : ["master", "GRdisplay"]
+					},
+					{
+						"name"   : "poAmmendment",
+						"pattern": "PoAmmend-{id}/{instId}",
+						"target" : ["master", "poAmmendment"]
+					},
+					{
+						"name"   : "poItemDetail",
+						"pattern": "PoItem/{id}/{index}/{item}",
+						"target" : ["master", "poItemDetail"]
 					}
 					],
 			"targets": {
@@ -317,6 +327,16 @@
 						"viewName"          : "displayPRcycle.goodsReceipt",
 						"controlAggregation": "detailPages",
 						"viewLevel"         : 4
+					},
+					"poAmmendment":{
+						"viewName"          : "poAmmend.PoDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 2
+					},
+					"poItemDetail":{
+						"viewName"          : "poAmmend.PoItem",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 3
 					}
 			}
 		}

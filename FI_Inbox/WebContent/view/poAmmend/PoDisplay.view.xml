@@ -1,0 +1,98 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:core="sap.ui.core" 
+	xmlns:f="sap.ui.layout.form"
+	controllerName="z_inbox.controller.poAmmend.PoDisplay">
+	<Page 
+		title="{i18n>PoAmmendment}" 
+		navButtonPress="onNavBack" 
+		showNavButton="{device>/isPhone}">
+		<f:SimpleForm 
+			editable="false"
+			layout="ResponsiveGridLayout"
+			adjustLabelSpan="false"
+			labelSpanXL="4" labelSpanL="4"	labelSpanM="6" labelSpanS="12"
+			emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+			columnsXL="2"	columnsL="2"	columnsM="2"
+			singleContainerFullSize="false" 
+			class="noTitle">
+			<f:content>
+				<core:Title />
+				<Label text="Created Date" />
+				<Text text="{path: 'tempModel>/headerData/Creat_Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+				<Label text="Purchase Requisition" />
+				<Text text="{tempModel>/headerData/Preq_No}" />
+				<Label text="Vendor Number" />
+				<Text text="{tempModel>/headerData/Vendor}"/>
+				<Label text="Vendor Name" />
+				<Text text="{tempModel>/headerData/Vendor_Name}"/>
+				<core:Title />
+				<Label text="Gross Value" />
+				<Text text="{tempModel>/headerData/Subtot} {tempModel>/headerData/Totcurrency}"/>
+				<Label text="Discount Value" />
+				<Text text="{tempModel>/headerData/Totdiscount} {tempModel>/headerData/Totcurrency}"/>
+				<Label text="VAT Value" />
+				<Text text="{tempModel>/headerData/Vatvalue} {tempModel>/headerData/Totcurrency}"/>
+				<Label text="Final Value" />
+				<Text text="{tempModel>/headerData/Totalamt} {tempModel>/headerData/Totcurrency}"/>
+			</f:content>
+		</f:SimpleForm>
+		<Table
+			inset="false"
+			items="{tempModel>/headerData/navtoitem/results}">
+			<headerToolbar>
+				<OverflowToolbar>
+						<Title text="Items" level="H2"/>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column>
+					<Text text="Description" />
+				</Column>
+				<Column	inScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+				<Text text="Quantity" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Value" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Start Date" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="End Date" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Delivery Date" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Cost Center" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Active" press="onSelection">
+					<cells>
+						<Text text="{tempModel>Short_Text}" />
+						<Text text="{tempModel>Quantity} {tempModel>Orderunit}" />
+						<Text text="{tempModel>NetPrice} {tempModel>Currency}" />
+						<Text text="{path: 'tempModel>Begda',type: 'sap.ui.model.type.Date',formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+ 						<Text text="{path: 'tempModel>Endda',type: 'sap.ui.model.type.Date',formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+					    <Text text="{path: 'tempModel>Delvdate',type: 'sap.ui.model.type.Date',formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+					    <Text text="{tempModel>Costcenter}" />
+						<!-- <ObjectIdentifier title="{tempModel>Costcenter}" text="{tempModel>CCDesc}" /> -->
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<Button text="{i18n>PCApprove}" icon="sap-icon://paid-leave"   press="handleApprove" type="Accept" />
+				<!-- <Button text="{i18n>PCEdit}"    icon="sap-icon://edit"         press="handlePCEdit" /> -->
+				<Button text="{i18n>PCReject}"  icon="sap-icon://unpaid-leave" press="handleReject" type="Reject" />
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<Button icon="sap-icon://print" text="{i18n>PCPrint}" press="handlePCPrint" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

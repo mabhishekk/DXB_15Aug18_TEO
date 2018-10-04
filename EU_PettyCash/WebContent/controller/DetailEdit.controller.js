@@ -189,7 +189,7 @@ sap.ui.define([
 				tablObj.Vendor       = this.getView().byId("id_vendor").getValue();
 				tablObj.Matnr        = this.getView().byId("id_eiRno").getValue();
 				tablObj.Taxvalue     = this.getView().byId("id_eVATno").getSelectedKey();
-				tablObj.Ppayments    = Math.round(this.getView().byId("id_enAmnt").getValue()* 100) / 100;
+				tablObj.Ppayments    = (Math.round(this.getView().byId("id_enAmnt").getValue()* 100) / 100).toString();
 				tablObj.Netvalue     = this.getView().byId("id_netValue").getValue();
 				tablObj.Justification= this.getView().byId("id_justification").getValue();
 				

@@ -149,7 +149,7 @@ sap.ui.define([
 			var sVatPercent = sap.ui.getCore().byId("id_ecVATno").getSelectedKey();
 			var taxableAmt  = Math.round(sFCamount*sExhRate*100) / 100;
 			var VatAmount   = taxableAmt * sVatPercent/100;
-			var NetAmt      = taxableAmt + VatAmount;
+			var NetAmt      = (taxableAmt + VatAmount).toFixed(2);
 			sap.ui.getCore().byId("id_AEDamt").setValue(NetAmt);
 		},
 		
@@ -158,7 +158,7 @@ sap.ui.define([
 		},
 		
 		onECitemsSave: function(oEvent) {
-			var sForeignAmount = sap.ui.getCore().byId("id_ECamt").getValue();
+			var sForeignAmount = Number(sap.ui.getCore().byId("id_ECamt").getValue()).toFixed(2);
 			if( sForeignAmount === ""){
 				sap.ui.getCore().byId("id_ECamt").setValueState(sap.ui.core.ValueState.Error);
 				sap.ui.getCore().byId("id_AEDamt").setValueState(sap.ui.core.ValueState.Error);

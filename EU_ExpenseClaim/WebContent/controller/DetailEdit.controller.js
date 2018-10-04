@@ -315,7 +315,7 @@ sap.ui.define([
 		},
 		
 		onECitemsSave : function(oEvent) {
-			var sForeignAmount = this.getView().byId("id_ECamt").getValue();
+			var sForeignAmount = Number(this.getView().byId("id_ECamt").getValue()).toFixed(2);
 			if( sForeignAmount === ""){
 				this.getView().byId("id_ECamt").setValueState(sap.ui.core.ValueState.Error);
 				this.getView().byId("id_AEDamt").setValueState(sap.ui.core.ValueState.Error);

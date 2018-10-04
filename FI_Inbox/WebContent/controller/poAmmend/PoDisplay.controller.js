@@ -10,61 +10,69 @@ sap.ui.define([
 		"sap/ui/Device", 
 		'sap/m/MessageBox',
 		'sap/ui/model/Filter',
-		"z_inbox/model/formatter" 
-	], function(Button, Dialog, Label, MessageToast, Text, TextArea,
-			Controller, History, Device, MessageBox, Filter, formatter){
+		"z_inbox/model/formatter" ,
+		'sap/ui/model/json/JSONModel'
+	], function(Button, Dialog, Label, MessageToast, Text, TextArea, 
+			Controller, History, Device, MessageBox, Filter, formatter, JSONModel){
 		"use strict";
 		
-		var PageController = Controller.extend("z_inbox.controller.expenseClaim.expenseClaimDisplay",{
+		var PageController = Controller.extend("z_inbox.controller.poAmmend.PoDisplay",{
 			formatter : formatter,
 			
 			getResourceBundle: function () {
 				return this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			},
 			
-			/**
-			 * Called when a controller is instantiated and its View
-			 * controls (if available) are already created. Can be used
-			 * to modify the View before it is displayed, to bind event
-			 * handlers and do other one-time initialization.
-			 * 
-			 * @memberOf z_pr.app
-			 */
 			onInit : function() {
-				this.getOwnerComponent().getRouter().getRoute("ExpenseClaim").attachPatternMatched(this._onRouteMatched, this);
+				this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
+				var oComponent = this.getOwnerComponent();
+				this._router = oComponent.getRouter();
+				this._router.getRoute("poAmmendment").attachMatched(this._loadPoDetail, this);
 			},
 			
-			_onRouteMatched: function(oEvent) {
-				this.getView().setModel(this.getView().getModel("fiService"));
-				this._sWorkItemId= oEvent.getParameter("arguments").instId;
-				this._ECNumber   = oEvent.getParameter("arguments").id;
-				this._sId = "/claimHeaderSet('"+  oEvent.getParameter("arguments").id +  "')";
-				this.getView().bindElement(this._sId);
-				this.getOwnerComponent().getModel().refresh();
-				
-				var sExpenseClaimNumber = this._ECNumber;
-				this._DocList(sExpenseClaimNumber);
+			_loadPoDetail: function (oEvent) {
+				this.getView().setBusy(true);
+				this._sWorkItemId = oEvent.getParameter("arguments").instId;
+				this._poNumber    = oEvent.getParameter("arguments").id;
+				var sPath  = "/POHEADERSet('"+ this._poNumber + "')";
+				var oModel = this.getOwnerComponent().getModel("poService");
+				this.tempModel = new JSONModel();
+				this.getView().setModel(this.tempModel,'tempModel');
+				oModel.read(sPath,{
+					success : function(oData) {
+						this.tempModel.setProperty('/headerData', oData);
+						this.getView().setBusy(false);
+					}.bind(this),
+					error : function(oError) {
+						this.getView().setBusy(false);
+						var err = new window.DOMParser().parseFromString( oError.responseText, "text/xml")
+						var sErr = err.getElementsByTagName("message")[0].innerHTML
+						MessageBox.error(sErr, {
+							title : "Error",
+						});
+					}.bind(this),
+					urlParameters : {
+						"$expand" : "navtoitem"
+					}
+				});
 			},
-							
+			
 			onAfterRendering : function() {
+//				this.getOwnerComponent().getModel().refresh();
+//				var sUserName = this.getView().byId("idPRname");
+//				sUserName.bindElement("/loginuserSet('')");
 				this.getView().getModel().refresh();
 			},
 			
-			_DocList: function(sExpenseClaimNumber) {
-				var oElement = this.getView().byId("idExpenseClaimDoc");
-				var oTemplate = new sap.m.StandardListItem({
-					title: "{Docfile}"
-				});
-				var aFilter =[];
-				aFilter.push(new Filter("Postingnumber", "EQ", sExpenseClaimNumber) );
-				oElement.bindItems({
-					path : "/FilelistSet",
-					filters: new Filter(aFilter, true),
-					template : oTemplate
-				});
-				
+			onSelection: function(oEvent){
+				var oBindContext = oEvent.getSource().getBindingContext('tempModel');
+				var oModel  = oBindContext.getModel('tempModel');
+				var sPath   = oBindContext.getPath();
+				var sPoId   = oModel.getData(sPath).headerData.PoNumber;
+				var sPoItem = oBindContext.getObject().PoItem;
+				var sItemIndex = sPath.split("/")[4];
+				this._router.navTo("poItemDetail", {id: sPoId, index: sItemIndex, item: sPoItem}, false);
 			},
-			
 		/**
 		 * Called when the Controller is destroyed. Use this one to
 		 * free resources and finalize activities.
@@ -76,53 +84,13 @@ sap.ui.define([
 		// }
 			
 			handleApprove: function(oEvent) {
-				var sTrnsts = this.getView().byId("idTrnstnSts").getText();
-				if (sTrnsts === "None"){
-					if (!this.TransDialog) {
-						this.TransDialog = new sap.m.Dialog({
-									title : this.getResourceBundle().getText("MtdofTran"),
-									type : 'Message',
-									draggable : true,
-									content : new sap.m.Text({
-												text : this.getResourceBundle().getText("MtdofTranMsg")
-											}),
-									beginButton : new sap.m.Button({
-										text : this.getResourceBundle().getText("Select"),
-										type : "Accept",
-										press : function() {
-//											sap.m.MessageToast.show("Submitted");
-											this.TransDialog.close();
-											this._ApproveYes(oEvent);
-										}.bind(this)
-									}),
-									endButton : new sap.m.Button({
-										text : this.getResourceBundle().getText("ECCancel"),
-										type : "Reject",
-										press : function() {
-											this.TransDialog.close();
-										}.bind(this)
-									})
-								});
-
-						// to get access to the global model
-						this.getView().addDependent(this.TransDialog);
-					}
-					this.TransDialog.open();
-				}else {
-					if (!this.pressDialog) {
-						this.pressDialog = sap.ui.xmlfragment(this.getView().getId(),
-								"z_inbox.view.fragments.Approve",
-								this);
-						this.getView().addDependent(this.pressDialog);
-					}
-					this.pressDialog.open();	
+				if (!this.pressDialog) {
+					this.pressDialog = sap.ui.xmlfragment(this.getView().getId(),
+							"z_inbox.view.fragments.Approve",
+							this);
+					this.getView().addDependent(this.pressDialog);
 				}
-			},
-			_ApproveYes : function (oEvent) {
-				var sWiId          = this._sWorkItemId;
-				var sBindingCntxt  = oEvent.getSource().getBindingContext();
-				var sPostingNumber = sBindingCntxt.getModel().getData(sBindingCntxt.sPath).Postingnumber;
-				this.getOwnerComponent().getRouter().navTo("ExpenseClaimEdit", {id: sPostingNumber, instId:sWiId },	!Device.system.phone);
+				this.pressDialog.open();				
 			},
 			
 			onOpenApprove: function(oEvent) {
@@ -130,17 +98,10 @@ sap.ui.define([
 				var Level2Approver = this.getView().byId("l2usr_List");
 				var Level3Approver = this.getView().byId("l3usr_List");
 				var Level4Approver = this.getView().byId("l4usr_List");
-				var sTrnsts = this.getView().byId("idTrnstnSts").getText();
-				if(sTrnsts === "Bank"){
-					var Level5Text     = this.getView().byId("l5approve").setText(this.getResourceBundle().getText("Finance"));
-					var LevelFilter    = "6";
-				}else{
-					var Level5Text     = this.getView().byId("l5approve").setText(this.getResourceBundle().getText("Level5"));
-					var LevelFilter    = "5";
-				}
-				
 				var Level5Approver = this.getView().byId("l5usr_List");
 				var oModel         = this.getView().getModel();
+				this.getView().byId("l5approve").setVisible(false);
+				Level5Approver.setVisible(false);
 				
 				var aFilters = [];
 				var bFilters = [];
@@ -181,7 +142,7 @@ sap.ui.define([
 					template : oTemplate
 				});
 				
-				eFilters.push( new sap.ui.model.Filter("Levelid", "EQ", LevelFilter) );
+				eFilters.push( new sap.ui.model.Filter("Levelid", "EQ", '5') );
 				Level5Approver.bindItems({
 					path : "/mgtapprovalSet",
 					filters: new sap.ui.model.Filter(eFilters, true),
@@ -195,13 +156,14 @@ sap.ui.define([
 			
 			handleApproveSave : function(oEvent) {
 				var level5 = this.getView().byId("l5usr_List").getSelectedKey();
-				if(level5 != "0"){	
+			
+				this.onApproveClose(oEvent);
 				var that   = this;
 				var level1 = this.getView().byId("l1usr_List").getSelectedKey();
 				var level2 = this.getView().byId("l2usr_List").getSelectedKey();
 				var level3 = this.getView().byId("l3usr_List").getSelectedKey();
 				var level4 = this.getView().byId("l4usr_List").getSelectedKey();
-				var level5 = this.getView().byId("l5usr_List").getSelectedKey();
+				level5 = this.getView().byId("l5usr_List").getSelectedKey();
 				
 				var approver         = {};
 				approver.Wiid        = this._sWorkItemId;
@@ -215,44 +177,38 @@ sap.ui.define([
 				oModel.create("/wfmgtuserselectSet", approver,{
 					
 					success:function(oData){
-						var sPostingNumber = oData.Postingnumber;
 						var msg = that.getResourceBundle().getText("ApproveSuccess");
 						jQuery.sap.require("sap.m.MessageBox");
 						sap.m.MessageBox.success(msg);
-						that.getOwnerComponent().getModel().refresh()
+						that.getOwnerComponent().getModel().refresh();
 						that.getOwnerComponent().getRouter().navTo("welcome",true);
+						
 					},
 					error:function(oData){
 						var emsg= $(oData.responseText).find("message").first().text();
 						var bCompact = !!that.getView().$().closest(".sapUiSizeCompact").length;
 						jQuery.sap.require("sap.m.MessageBox");
 						sap.m.MessageBox.error(emsg	);
-						debugger;	
+							
 					}
-				})
-				}else{
-					
-					sap.m.MessageBox.error(this.getResourceBundle().getText("pfmf"));
-					
-					
-				}
+				});
 			},
 			
-			handleEdit: function (oEvent) {
+			handlePCEdit: function (oEvent) {
 				var sWiId          = this._sWorkItemId;
-				var sPostingNumber = oEvent.getSource().getBindingContext().getModel().getData(oEvent.getSource().getBindingContext().sPath).Postingnumber;
+				var sPostingNumber = this._postingId;
 				this.getOwnerComponent().getRouter()
-					.navTo("ExpenseClaimEdit", 
+					.navTo("pettyCashDetailsEdit", 
 						{id: sPostingNumber, instId:sWiId },
 						!Device.system.phone);
 			},
 			
-			handleECprint: function (oEvent) {
+			handlePCPrint: function (oEvent) {
 				var sBindingContext = oEvent.getSource().getBindingContext();
 				var sPath           = sBindingContext.sPath;
 				var sPostingNumber  = sBindingContext.getModel().getData(sPath).Postingnumber;
 				var lang            = sap.ui.getCore().getConfiguration().getLanguage();
-				var sPrintPath      = "/sap/opu/odata/sap/ZPR_APPL_SRV/FORM_TO_PDFSet(apptype='EC',appno='" +sPostingNumber+"',lang='"+lang+"',ndavalue='')/$value";
+				var sPrintPath      = "/sap/opu/odata/sap/ZPR_APPL_SRV/FORM_TO_PDFSet(apptype='PC',appno='" +sPostingNumber+"',lang='"+lang+"',ndavalue='')/$value";
 				window.open(sPrintPath,true); 
 			},
 			
@@ -268,6 +224,7 @@ sap.ui.define([
 					this.getOwnerComponent().getRouter().navTo("master", {},true);
 				}
 			},
+			
 			
 			handleReject: function () {
 				var that = this;
@@ -315,7 +272,7 @@ sap.ui.define([
 				var oFilter = "WiAagent eq '' and Wiid eq '"+this._sWorkItemId+"'and Decision eq 'R' and Rejectionreason eq '"+sText+"'";
 				that.getOwnerComponent().getModel().read(sPath,{
 					success:function(oData){
-						that.getView().getModel().refresh();
+						this.getOwnerComponent().getModel().refresh();
 //						MessageBox.success("PR has been Rejected", {title : "Success"});
 						that.getOwnerComponent().getRouter().navTo("welcome");
 					}.bind(this),
@@ -325,15 +282,67 @@ sap.ui.define([
 				});
 			},
 			
-			onDocSelectionChange: function (oEvent) {
-				var oBindContext= oEvent.getSource().getSelectedItem().getBindingContext();
-				var oModel      = oBindContext.getModel();
-				var sPath       = oBindContext.getPath();
-				var sDoknr      = oModel.getData(sPath).Doknr;
-				var sSerialno   = oModel.getData(sPath).Serialno;
-				var sDocPath    = "/sap/opu/odata/sap/ZPR_APPL_SRV/FORM_TO_PDFSet(apptype='DMS',appno='" +sDoknr+"',lang='',ndavalue='" +sSerialno+ "')/$value ";
-				window.open(sDocPath,true); 
+			PRReject : function(oEvent) {
+				if (!this.CancelDialog) {
+					this.CancelDialog = new sap.m.Dialog({
+								title : this.getResourceBundle().getText("Reject"),
+								type : 'Message',
+								draggable : true,
+								content : new sap.m.Text({
+											text : this.getResourceBundle().getText("RejectMsg")
+										}),
+								beginButton : new sap.m.Button({
+									text : this.getResourceBundle().getText("PCYes"),
+									type : "Accept",
+									press : function() {
+//										sap.m.MessageToast.show("Submitted");
+										this.CancelDialog.close();
+										this._CancelYes(oEvent);
+									}.bind(this)
+								}),
+								endButton : new sap.m.Button({
+									text : this.getResourceBundle().getText("PCNo"),
+									type : "Reject",
+									press : function() {
+										this.CancelDialog.close();
+									}.bind(this)
+								})
+							});
+
+					// to get access to the global model
+					this.getView().addDependent(this.CancelDialog);
+				}
+
+				this.CancelDialog.open();
 			},
+			
+			_CancelYes: function(oEvent) {
+				var that             = this;
+				var approver         = {};
+				approver.Wiid        = this._sWorkItemId;
+				approver.Decision    = "N";
+				var oModel = this.getOwnerComponent().getModel("fiService");
+				oModel.create("/wf_uiapproval", approver,{
+					
+					success:function(oData){
+						var sPostingNumber = oData.Postingnumber;
+						var msg = that.getResourceBundle().getText("RejectSuccess");
+						jQuery.sap.require("sap.m.MessageBox");
+						sap.m.MessageBox.success(msg);
+						that.getOwnerComponent().getModel().refresh()
+						that.getOwnerComponent().getRouter().navTo("welcome",true);
+						
+					},
+					error:function(oData){
+						var emsg= $(oData.responseText).find("message").first().text();
+						var bCompact = !!that.getView().$().closest(".sapUiSizeCompact").length;
+						jQuery.sap.require("sap.m.MessageBox");
+						sap.m.MessageBox.error(emsg	);
+						debugger;	
+					}
+				})
+			},
+			
 		});
 		return PageController;
 });

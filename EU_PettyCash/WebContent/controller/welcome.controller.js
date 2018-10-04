@@ -77,10 +77,12 @@ sap.ui.define([
 				var value = parseFloat(sap.ui.getCore().byId("id_enAmnt").getValue());
 				var Vat   = (value * sVat)/100;
 				sap.ui.getCore().byId("id_netValue").setValue( (Vat + value).toFixed(2));
-				var n     = parseFloat(oEvent.getSource().getValue());
-				if(n === +n && n !== (n|0)){
-					if (oEvent.getSource().getValue().split('.')[1].length > 2) {
-						oEvent.getSource().setValue(parseFloat(oEvent.getSource().getValue()).toFixed(2));
+				if (oEvent.getSource().getId() === 'id_enAmnt'){
+					var n     = parseFloat(oEvent.getSource().getValue());
+					if(n === +n && n !== (n|0)){
+						if (oEvent.getSource().getValue().split('.')[1].length > 2) {
+							oEvent.getSource().setValue(parseFloat(oEvent.getSource().getValue()).toFixed(2));
+						}
 					}
 				}
 			},
@@ -106,7 +108,7 @@ sap.ui.define([
 				tablObj.Taxvalue     = sap.ui.getCore().byId("id_eVATno").getSelectedKey();
 				tablObj.Vendor       = sap.ui.getCore().byId("id_vendor").getValue();
 				tablObj.Currency     ='AED';
-				tablObj.Ppayments    = Math.round(sap.ui.getCore().byId("id_enAmnt").getValue()* 100) / 100;
+				tablObj.Ppayments    = (Math.round(sap.ui.getCore().byId("id_enAmnt").getValue()* 100) / 100).toString();
 				tablObj.Netvalue     = sap.ui.getCore().byId("id_netValue").getValue();
 				tablObj.Justification= sap.ui.getCore().byId("id_justification").getValue();
 				
