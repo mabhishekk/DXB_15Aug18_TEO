@@ -1,0 +1,169 @@
+<mvc:View
+	controllerName="z_master_fi.controller.Requestlist"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+
+	<semantic:FullscreenPage
+		id="page"
+		navButtonPress="onNavBack"
+		showNavButton="true"
+		title="{i18n>worklistViewTitle}">
+		<fb:FilterBar  id="filterBar" reset="onReset" search="onSearch" clear="onClear" showRestoreButton="true" showClearButton="true">
+			<fb:filterItems>
+				<fb:FilterItem name="A0" label="Request Number">
+					<fb:control>
+						<SearchField
+							id='idRnSearch'
+							tooltip="{i18n>worklistSearchTooltip}"
+							search="onSearch"
+							width="auto">
+						</SearchField>
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="B0" label="Request Date From">
+					<fb:control>
+						<DatePicker
+							id="idDfSearch"
+							change="onSearch"/>
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="C0" label="Request Date To">
+					<fb:control>
+						<DatePicker
+							id="idDtSearch"
+							change="onSearch"/>
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="D0" label="Cost Center">
+					<fb:control>
+						<SearchField
+							id='idCcSearch'
+							tooltip="{i18n>worklistSearchTooltip}"
+							search="onSearch"
+							width="auto">
+						</SearchField>
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="E0" label="Cost Center Desc." visibleInFilterBar ="false">
+					<fb:control>
+						<SearchField
+							id='idCdSearch'
+							tooltip="{i18n>worklistSearchTooltip}"
+							search="onSearch"
+							width="auto">
+						</SearchField>
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="F0" label="Vendor Name">
+					<fb:control>
+						<SearchField
+							id='idVnSearch'
+							tooltip="{i18n>worklistSearchTooltip}"
+							search="onSearch"
+							width="auto">
+						</SearchField>
+					</fb:control>				
+				</fb:FilterItem>
+				
+			</fb:filterItems>
+		</fb:FilterBar>
+		<semantic:content>
+			<Table
+				id="table"
+				width="auto"
+				class="sapUiResponsiveMargin"
+				items="{
+					path: 'cds>/ZPR_CDS_FINANCE_ALL',
+					sorter: {
+						path: 'cds>postingnumber',
+						descending: false
+					}
+				}"
+				noDataText="{worklistView>/tableNoDataText}"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+				growing="true"
+				growingScrollToLoad="true"
+				updateFinished="onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
+						<ToolbarSpacer />
+						<SearchField
+							visible='false'
+							id="searchField"
+							tooltip="{i18n>worklistSearchTooltip}"
+							search="onSearch"
+							width="auto">
+						</SearchField>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="nameColumn1">
+						<Text text="{i18n>tableNameColumnTitle1}" id="nameColumnTitle1"/>
+					</Column>
+					<!--<Column id="nameColumn2">
+						<Text text="{i18n>tableNameColumnTitle2}" id="nameColumnTitle2"/>
+					</Column>-->
+					<Column id="nameColumn3">
+						<Text text="{i18n>tableNameColumnTitle3}" id="nameColumnTitle3"/>
+					</Column>
+					<Column id="nameColumn4">
+						<Text text="{i18n>tableNameColumnTitle4}" id="nameColumnTitle4"/>
+					</Column>
+					<Column id="nameColumn5">
+						<Text text="{i18n>tableNameColumnTitle5}" id="nameColumnTitle5"/>
+					</Column>
+					<Column id="nameColumn6">
+						<Text text="{i18n>tableNameColumnTitle6}" id="nameColumnTitle6"/>
+					</Column>
+					<Column id="unitNumberColumn7" hAlign="Right">
+						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem
+						type="Navigation"
+						press="onPress">
+						<cells>
+							<ObjectIdentifier
+								title="{cds>postingnumber}"/>
+							<!--<Text
+								text="{firstName} {lastName}"/>-->
+							<Text
+								text="{
+									path: 'cds>documentdate',
+									type: 'sap.ui.model.type.Date',
+									formatOptions: {
+										pattern: 'dd-MMM-YYYY'
+									}
+								}"/>
+							<ObjectNumber
+								number="{cds>kostl}"/>
+							<Text
+								text="{cds>ltext}"/>
+							<Text
+								text="{cds>name1}"/>								
+							<ObjectNumber
+								number="{
+									path: 'cds>hnetamount',
+									formatter: '.formatter.numberUnit'
+								}"
+								unit="{cds>currency}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

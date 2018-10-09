@@ -1,0 +1,187 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "z_master_fi",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "proxy/sap/opu/odata/sap/ZPETTYCASH_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"cds": {
+				"uri": "proxy/sap/opu/odata/sap/ZPR_CDS_FINANCE_ALL_CDS/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "sap.ui.ui5-template-ntt.vendor",
+			"version": "1.36.1"
+		}
+	},
+	"sap.ui": {
+		"_version": "1.2.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://task",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.2.0",
+		"rootView": {
+			"viewName": "z_master_fi.view.App",
+			"type": "XML",
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.36.0",
+			"libs": {
+				"sap.ui.core": {
+					"minVersion": "1.36.0"
+				},
+				"sap.m": {
+					"minVersion": "1.36.0"
+				},
+				"sap.ui.layout": {
+					"minVersion": "1.36.0"
+				}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "z_master_fi.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"settings": {
+					"defaultBindingMode": "TwoWay",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					}
+				}
+			},
+			"cds": {
+				"dataSource": "cds",
+				"preload": true
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "z_master_fi.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": "notFound"
+				},
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "requestlist",
+					"target": "requestlist"
+				},
+				{
+					"pattern": "Petty_Cash/{objectId}",
+					"name": "petty",
+					"target": "petty"
+				},
+				{
+					"pattern": "Expense_Claim/{objectId}",
+					"name": "expense",
+					"target": "expense"
+				},
+				{
+					"pattern": "Credit_Card/{objectId}",
+					"name": "credit",
+					"target": "credit"
+				},
+				{
+					"pattern": "Exception_Request/{objectId}",
+					"name": "exception",
+					"target": "exception"
+				}
+			],
+			"targets": {
+				"requestlist": {
+					"viewName": "Requestlist",
+					"viewId": "requestlist",
+					"viewLevel": 1
+				},
+				"object": {
+					"viewName": "Object",
+					"viewId": "object",
+					"viewLevel": 2
+				},
+				"petty": {
+					"viewName": "Petty",
+					"viewId": "petty",
+					"viewLevel": 2
+				},
+				"expense": {
+					"viewName": "Expense",
+					"viewId": "expense",
+					"viewLevel": 2
+				},
+				"credit": {
+					"viewName": "Credit",
+					"viewId": "credit",
+					"viewLevel": 2
+				},
+				"exception": {
+					"viewName": "Exception",
+					"viewId": "exception",
+					"viewLevel": 2
+				},
+				"objectNotFound": {
+					"viewName": "ObjectNotFound",
+					"viewId": "objectNotFound"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewId": "notFound"
+				}
+			}
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	}
+}
