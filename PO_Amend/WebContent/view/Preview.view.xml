@@ -1,0 +1,223 @@
+<mvc:View
+	controllerName="poChangeApp.controller.Preview"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:u="sap.ui.unified"
+	xmlns:table="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		id="page"
+		title="Purchase Order: {editModel>/editData/PoNumber} Preview"
+		showNavButton="{device>/system/phone}"
+		navButtonPress="onNavButtonPress" >
+		<f:SimpleForm 
+			editable="false"
+			layout="ResponsiveGridLayout"
+			adjustLabelSpan="false"
+			labelSpanXL="4" labelSpanL="4"	labelSpanM="6" labelSpanS="12"
+			emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+			columnsXL="2"	columnsL="2"	columnsM="2"
+			singleContainerFullSize="false" 
+			class="noTitle">
+			<f:content>
+				<core:Title />
+				<Label text="Created Date" />
+				<Text text="{path: 'editModel>/editData/Creat_Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+				<Label text="Purchase Requisition" />
+				<Text text="{editModel>/editData/Preq_No}" />
+				<Label text="Vendor Number" />
+				<Text text="{editModel>/editData/Vendor}"/>
+				<Label text="Vendor Name" />
+				<Text text="{editModel>/editData/Vendor_Name}"/>
+				<core:Title />
+				<Label text="Gross Value" />
+				<Text text="{editModel>/editData/Subtot} {editModel>/editData/Totcurrency}"/>
+				<Label text="Discount Value" />
+				<Text text="{editModel>/editData/Totdiscount} {editModel>/editData/Totcurrency}"/>
+				<Label text="VAT Value" />
+				<Text text="{editModel>/editData/Vatvalue} {editModel>/editData/Totcurrency}"/>
+				<Label text="Final Value" />
+				<Text text="{editModel>/editData/Totalamt} {editModel>/editData/Totcurrency}"/>
+			</f:content>
+		</f:SimpleForm>
+		<IconTabBar
+			expanded="{device>/isNoPhone}"
+			class="sapUiResponsiveContentPadding">
+			<items>
+				<IconTabFilter
+					text="Items">
+					<table:TreeTable
+			               id="TreeTableBasic"
+			               rows="{
+				            	path:'editModel>/editData/navtoitem/results',
+				            	sorter: {
+									path: 'PoItem',
+									descending: false
+								},
+				            	parameters: {arrayNames:['navServiceOrder']}
+			            	}"
+			               selectionMode="Single"
+			               ariaLabelledBy="title">
+		<!-- 	           <table:toolbar>
+			               <Toolbar>
+			                   <Title id="title" text="Clothing"/>
+			               </Toolbar>
+			           </table:toolbar> -->
+			           <table:columns>
+			               <table:Column>
+			                   <Label text="Description"/>
+			                   <table:template>
+			                   	   <Text text="{= ${editModel>Short_Text}? ${editModel>Short_Text} : ${editModel>ShortText} }" wrapping="false" />
+			                   </table:template>
+			               </table:Column>
+			               <table:Column visible="{=${editModel>/editData/Type} === '1'}">
+			                   <Label text="Quantity"/>
+			                   <table:template>
+			                   		<Text text="{editModel>Quantity} {editModel>Orderunit}" />
+			                   </table:template>
+			               </table:Column>
+			               <table:Column width='10rem'>
+			                   <Label text="Value"/>
+			                   <table:template>
+			                   		 <Text text="{= ${editModel>NetValue}? ${editModel>NetValue} : ${editModel>Netvalue} } {editModel>Currency}" wrapping="false" />
+			                   		<!-- <Text text="{editModel>NetPrice} {editModel>Currency}" /> -->
+			                   </table:template>
+			               </table:Column>
+			               <table:Column visible="{=${editModel>/editData/Type} !== '1'}">
+			                   <Label text="Start Date"/>
+			                   <table:template>
+			                   		<Text text="{path: 'editModel>Begda',type: 'sap.ui.model.type.Date',formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+			                   </table:template>
+			               </table:Column>
+			               <table:Column visible="{=${editModel>/editData/Type} !== '1'}">
+			                   <Label text="End Date"/>
+			                   <table:template>
+			                   		<Text text="{path: 'editModel>Endda',type: 'sap.ui.model.type.Date',formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+			                   </table:template>
+			               </table:Column>
+			               <table:Column visible="{=${editModel>/editData/Type} === '1'}">
+			                   <Label text="Delivery Date"/>
+			                   <table:template>
+			                   		<Text text="{path: 'editModel>Delvdate',type: 'sap.ui.model.type.Date',formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+			                   </table:template>
+			               </table:Column>
+			           </table:columns>
+			       </table:TreeTable>
+				</IconTabFilter>
+				<IconTabFilter
+					text="Special Approval">
+					<Table >
+						<columns>
+							<Column width="30px" vAlign="Center">
+							</Column>
+							<Column vAlign="Middle">
+								<header>
+									<Text text="{i18n>TypeofApproval}" />
+								</header>
+							</Column>
+							<Column vAlign="Middle">
+								<header>
+									<Text text="{i18n>Reason}" />
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox selected="{editModel>/lSet/0/Boolean}" />
+									<Text text="{i18n>RequestOffer}" />
+									<Input  value="{editModel>/lSet/0/Reason}"	maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"></Input>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox  selected="{editModel>/lSet/1/Boolean}" />
+									<Text text="{i18n>Requestexemption}" />
+									<Input value="{editModel>/lSet/1/Reason}"  maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox selected="{editModel>/lSet/2/Boolean}" />
+									<Text text="{i18n>Requestadvancepayemnt}" />
+									<Input value="{editModel>/lSet/2/Reason}"  maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox xmlns="sap.m" selected="{editModel>/lSet/3/Boolean}" />
+									<Text text="{i18n>Request10%}" />
+									<Input value="{editModel>/lSet/3/Reason}" maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox  selected="{editModel>/lSet/4/Boolean}" />
+									<Text text="{i18n>Requestexpert}" />
+									<Input value="{editModel>/lSet/4/Reason}" maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox  selected="{editModel>/lSet/5/Boolean}" />
+									<Text text="{i18n>RequestAdopt}" />
+									<Input value="{editModel>/lSet/5/Reason}" maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem xmlns="sap.m">
+								<cells>
+									<CheckBox xmlns="sap.m" selected="{editModel>/lSet/6/Boolean}" />
+									<Text text="{i18n>RequestRecom}" />
+									<Input value="{editModel>/lSet/6/Reason}" maxLength="1000" liveChange="handleLiveInput" placeholder="{i18n>ReasonPlaceholder}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</IconTabFilter>
+				<IconTabFilter
+					text="Attachment">
+					<Table 
+						id="id_docMnts" 
+						items="{editModel>/documents}"
+						mode="Delete" 
+						delete="onFileDelete">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="{i18n>Attachment}"/>
+								<ToolbarSpacer />
+								<u:FileUploader 
+									name="myFileUpload"  
+									style="Emphasized"
+									id="matrnFile" 
+									tooltip="Upload your file to the local server" 	
+									typeMissmatch="handleTypeMissmatch"
+									uploadComplete="handleUploadComplete" />
+								<Button icon="sap-icon://upload" text='Upload File' press="onFileUpload" />
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column><Text text="{i18n>FileType}" /></Column>
+							<Column><Text text="{i18n>FileName}" /></Column>
+						</columns>
+						<ColumnListItem type="Active">
+							<cells>
+								<Text text="{editModel>Docfile}" />
+								<Text text="{editModel>Mimetype}" />
+							</cells>
+						</ColumnListItem>
+					</Table>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+		<footer>
+			<OverflowToolbar>
+			<Button text='Back' press='onPreviewBackPress'/>
+			<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			<Button text="Cancel" icon="sap-icon://delete" type="Reject" press="onCancel" />
+			<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			<Button text="Submit" icon="sap-icon://save" type="Accept" press="onSave" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

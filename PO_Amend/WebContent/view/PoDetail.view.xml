@@ -1,0 +1,107 @@
+<mvc:View
+	controllerName="poChangeApp.controller.PoDetail"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		id="page"
+		title="Purchase Order: {tempModel>/headerData/PoNumber}"
+		showNavButton="{device>/system/phone}"
+		navButtonPress="onNavButtonPress" >
+		<f:SimpleForm 
+			editable="false"
+			layout="ResponsiveGridLayout"
+			adjustLabelSpan="false"
+			labelSpanXL="4" labelSpanL="4"	labelSpanM="6" labelSpanS="12"
+			emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+			columnsXL="2"	columnsL="2"	columnsM="2"
+			singleContainerFullSize="false" 
+			class="noTitle">
+			<f:content>
+				<core:Title />
+				<Label text="Created Date" />
+				<Text text="{path: 'tempModel>/headerData/Creat_Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+				<Label text="Purchase Requisition" />
+				<Link  text='{tempModel>/headerData/Preq_No}' press='onPRnumber'/>
+				<Label text="Vendor Number" />
+				<Text text="{tempModel>/headerData/Vendor}"/>
+				<Label text="Vendor Name" />
+				<Text text="{tempModel>/headerData/Vendor_Name}"/>
+				<core:Title />
+				<Label text="Gross Value" />
+				<Text text="{tempModel>/headerData/Subtot} {tempModel>/headerData/Totcurrency}"/>
+				<Label text="Discount Value" />
+				<Text text="{tempModel>/headerData/Totdiscount} {tempModel>/headerData/Totcurrency}"/>
+				<Label text="VAT Value" />
+				<Text text="{tempModel>/headerData/Vatvalue} {tempModel>/headerData/Totcurrency}"/>
+				<Label text="Final Value" />
+				<Text text="{tempModel>/headerData/Totalamt} {tempModel>/headerData/Totcurrency}"/>
+			</f:content>
+		</f:SimpleForm>
+		<Table
+			inset="false"
+			items="{
+					path: 'tempModel>/headerData/navtoitem/results',
+					sorter: {
+						path: 'PoItem',
+						descending: false
+					}
+				}"
+			>
+			<headerToolbar>
+				<OverflowToolbar>
+						<Title text="Items" level="H2"/>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column>
+					<Text text="Description" />
+				</Column>
+				<Column	inScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+				<Text text="Quantity" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Value" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Start Date" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="End Date" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Delivery Date" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Cost Center" />
+				</Column>
+				<Column width='5rem' demandPopin="true"	hAlign="Center">
+					<Text text="Add" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Active" press="onSelection">
+					<cells>
+						<Text text="{tempModel>Short_Text}" />
+						<Text text="{tempModel>Quantity} {tempModel>Orderunit}" />
+						<Text text="{tempModel>NetPrice} {tempModel>Currency}" />
+						<Text text="{path: 'tempModel>Begda',type: 'sap.ui.model.type.Date',formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+ 						<Text text="{path: 'tempModel>Endda',type: 'sap.ui.model.type.Date',formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+					    <Text text="{path: 'tempModel>Delvdate',type: 'sap.ui.model.type.Date',formatOptions: { pattern: 'dd-MMM-YYYY'}}" />
+					    <Text text="{tempModel>Costcenter}" />
+					    <core:Icon src="sap-icon://add"    press="onItemAdd"/>
+						<!-- <ObjectIdentifier title="{tempModel>Costcenter}" text="{tempModel>CCDesc}" /> -->
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<footer>
+			<OverflowToolbar>
+			<Button text='Original PO' icon="sap-icon://print" type="Accept" press='onOriginalPO'/>
+			<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			<Button text="Amended PO" icon="sap-icon://print" type="Accept" press="onAmendedPO" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

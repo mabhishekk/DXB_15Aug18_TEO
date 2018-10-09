@@ -1,0 +1,159 @@
+<mvc:View
+	controllerName="poChangeApp.controller.EditItem"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:table="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		id="page"
+		title="Purchase Order: {editModel>/editData/PoNumber} Edit"
+		showNavButton="{device>/system/phone}"
+		navButtonPress="onNavButtonPress" >
+		<f:SimpleForm 
+			editable="true"
+			layout="ResponsiveGridLayout"
+			adjustLabelSpan="false"
+			labelSpanXL="4" labelSpanL="4"	labelSpanM="5" labelSpanS="12"
+			emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+			columnsXL="2"	columnsL="2"	columnsM="2"
+			singleContainerFullSize="false" class="noTitle">
+			<f:content>
+				<core:Title />
+				<Label text="Gross Value" />
+				<Input id='idGV' value="{editModel>/editData/Subtot}" editable='false'/><Text text="{editModel>/editData/Totcurrency}"/>
+				<Label text="Discount Value" />
+				<Input id='idDV' value="{editModel>/editData/Totdiscount}" editable='false'/><Text text="{editModel>/editData/Totcurrency}"/>
+				<core:Title />
+				<Label text="VAT Value" />
+				<Input id='idVV' value="{editModel>/editData/Vatvalue}" editable='false'/><Text text="{editModel>/editData/Totcurrency}"/>
+				<Label text="Final Value" />
+				<Input id='idFV' value="{editModel>/editData/Totalamt}" editable='false'/><Text text="{editModel>/editData/Totcurrency}"/>
+			</f:content>
+		</f:SimpleForm>
+		<OverflowToolbar>
+			<Title text='Items'/>
+			<ToolbarSpacer/>
+			<Label text='Purchase Order Item'/>
+			<Select id='idPoItem'
+				change='onItemSelect'
+				items="{
+					path: 'editModel>/editData/navtoitem/results',
+					sorter: {
+						path: 'PoItem',
+						descending: false
+					}
+				}">
+				<core:Item key="{editModel>PoItem}" text=" {editModel>PoItem}	{editModel>Short_Text}" />
+			</Select>
+		</OverflowToolbar>
+		<f:SimpleForm id='idItemsForm'
+			editable="true"
+			layout="ResponsiveGridLayout"
+			adjustLabelSpan="false"
+			labelSpanXL="4" labelSpanL="4"	labelSpanM="5" labelSpanS="12"
+			emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+			columnsXL="2"	columnsL="2"	columnsM="2"
+			singleContainerFullSize="false" class="noTitle">
+			<f:content>
+				<core:Title />
+				<Label text="Description" />
+				<Input value="{editModel>Short_Text}" editable="{=${editModel>DelCompInd} === false}"/>
+				<Label text="Start Date" visible="{=${editModel>Requestmat} !== '1'}"/>
+				<DatePicker dateValue="{editModel>Begda}" width='9rem' visible="{=${editModel>Requestmat} !== '1'}" editable='false'/>
+				<Label text="End Date" visible="{=${editModel>Requestmat} !== '1'}"/>
+				<DatePicker dateValue="{editModel>Endda}" width='9rem' visible="{=${editModel>Requestmat} !== '1'}" editable="{=${editModel>DelCompInd} === false}"/>
+				<Label text="Delivery Date" visible="{=${editModel>Requestmat} === '1'}"/>
+				<DatePicker dateValue="{editModel>Delvdate}" width='9rem' visible="{=${editModel>Requestmat} === '1'}" editable="{=${editModel>DelCompInd} === false}"/>
+				<Label text="Cost Center" />
+				<!-- <Select selectedKey="{editModel>Costcenter}" items="{prm>/costcentrelistSet}">
+					<core:ListItem 
+						text="{prm>Ltext}" 
+						key="{prm>Kostl}">
+					</core:ListItem>
+				</Select> -->
+				<Input value="{editModel>Costcenter} {editModel>CCDesc}" editable='false'/>
+				<Label text="GL Code" />
+				<Input value="{editModel>Glaccount} {editModel>GLDesc}" editable='false'/>
+				<Label text="Short Close" />
+				<CheckBox selected="{editModel>DelCompInd}" editable='{=${editModel>DelCompInd} === false}'/>
+				
+				<core:Title />
+				<Label text="Quantity"/>
+				<Input id='idItemQuantity' value="{editModel>Quantity}" submit='onItemQuan' visible="{=${editModel>Requestmat} === '1'}" editable='{=${editModel>DelCompInd} === false}'/> 
+				<Text text="{editModel>Orderunit}" visible="{=${editModel>Requestmat} === '1'}"/>
+				<Label text="Value / Unit" />
+				<Input id='idUnitPrice' value="{editModel>NetPrice}" submit='onItemVal' editable='{=${editModel>DelCompInd} === false}'/> <Text text="{editModel>Currency}"/>
+				<Label text="Discount" />
+				<Input id='idDiscPer' value="{editModel>Discountval}" submit='onItemDisPer' liveChange='onLiveDisPer' editable='false'/> <Text text="%"/>
+				<Label text="Discount Value / Unit" />
+				<Input id='idDiscVal' value="{editModel>Discount}" submit='onItemDisVal' liveChange='onLiveDisVal' editable='false'/> <Text text="{editModel>Currency}"/>
+				<Label text="Price After Discount" />
+				<Input id='idPriceAfterDisc' value="{editModel>ValAfDis}" editable='false'/> <Text text="{editModel>Currency}"/>
+				<Label text="VAT" />
+				<Select id='idVAT' change="onItemVat" selectedKey='{editModel>Vatvalue}' enabled='{=${editModel>DelCompInd} === false}'>
+					<items>
+						<core:Item text="0 %" key='0.00'/>
+						<core:Item text="5 %" key='5.00'/>
+					</items>
+				</Select><Input visible='false'/>
+				<Label text="Net Value" />
+				<Input id='idFinalPrice' value="{editModel>NetValue}" submit='onItemNet' editable='false'/> <Text text="{editModel>Currency}"/>
+			</f:content>
+		</f:SimpleForm>
+		<Table id='idSOtable' visible="{=${editModel>/editData/Type} !== '1'}"
+			inset="false"
+			items="{editModel>/dummy}">
+			<headerToolbar>
+				<OverflowToolbar>
+						<Title text="Payment Terms" level="H2"/>
+						<ToolbarSpacer/>
+						<Button id="idSoAdd" text="Add" icon="sap-icon://add" type="Accept" press="onSoAdd" />
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column>
+					<Text text="Description" />
+				</Column>
+				<Column	inScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+					<Text text="Gross Value" />
+				</Column>
+				<Column	inScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+					<Text text="Value after Discount" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="VAT Amount" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Net Value" />
+				</Column>
+				<!-- <Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Percentage" />
+				</Column> -->
+			</columns>
+			<items>
+				<ColumnListItem type="Active" press="onSelection">
+					<cells>
+						<Input value="{editModel>ShortText}"  editable="{=${editModel>DelCompInd} === false}"/>
+						<Input value="{editModel>costPrice}" submit='onInstalCp' editable="{=${editModel>DelCompInd} === false}"/>
+						<Text text="{editModel>GrPrice}"/>
+						<Text text="{editModel>Vatamount}" />
+						<Text text="{editModel>Netvalue}" />
+ 						<!-- <Input value="{editModel>FormVal1}" /> -->
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<footer>
+			<OverflowToolbar>
+			<Button text='Reset' icon="sap-icon://reset" type="Reject" press='onResetPress'/>
+			<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			<Button text="New PO Item" icon="sap-icon://add" type="Accept" press="onAdd" />
+			<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			<Button id='idPoItemDelete' text="Delete" icon="sap-icon://delete" type="Reject" press="onItemDelete" visible="{=${editModel>Packno} === ''}"/>
+			<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			<Button text="Preview" icon="sap-icon://sys-prev-page" type="Accept" press="onPreview" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

@@ -1,0 +1,141 @@
+<mvc:View
+	controllerName="poChangeApp.controller.AddItem"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:table="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		id="page"
+		title="Purchase Order: {editModel>/editData/PoNumber} Add"
+		showNavButton="{device>/system/phone}"
+		navButtonPress="onNavButtonPress" >
+		<f:SimpleForm 
+			editable="true"
+			layout="ResponsiveGridLayout"
+			adjustLabelSpan="false"
+			labelSpanXL="4" labelSpanL="4"	labelSpanM="5" labelSpanS="12"
+			emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+			columnsXL="2"	columnsL="2"	columnsM="2"
+			singleContainerFullSize="false" class="noTitle">
+			<f:content>
+				<core:Title />
+				<Label text="Gross Value" />
+				<Input id='idGV' value="{editModel>/editData/Subtot}" editable='false'/><Text text="{editModel>/editData/Totcurrency}"/>
+				<Label text="Discount Value" />
+				<Input id='idDV' value="{editModel>/editData/Totdiscount}" editable='false'/><Text text="{editModel>/editData/Totcurrency}"/>
+				<core:Title />
+				<Label text="VAT Value" />
+				<Input id='idVV' value="{editModel>/editData/Vatvalue}" editable='false'/><Text text="{editModel>/editData/Totcurrency}"/>
+				<Label text="Final Value" />
+				<Input id='idFV' value="{editModel>/editData/Totalamt}" editable='false'/><Text text="{editModel>/editData/Totcurrency}"/>
+			</f:content>
+		</f:SimpleForm>
+		<OverflowToolbar>
+			<Title text='New Item'/>
+		</OverflowToolbar>
+		<f:SimpleForm id='idItemsForm'
+			editable="true"
+			layout="ResponsiveGridLayout"
+			adjustLabelSpan="false"
+			labelSpanXL="4" labelSpanL="4"	labelSpanM="5" labelSpanS="12"
+			emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+			columnsXL="2"	columnsL="2"	columnsM="2"
+			singleContainerFullSize="false" class="noTitle">
+			<f:content>
+				<core:Title />
+				<Label text="Description" required="true"/>
+				<Input value="{editModel>Short_Text}" />
+				<Label text="Start Date" visible="{=${editModel>Requestmat} !== '1'}" required="true"/>
+				<DatePicker dateValue="{editModel>Begda}" width='9rem' visible="{=${editModel>Requestmat} !== '1'}"/>
+				<Label text="End Date" visible="{=${editModel>Requestmat} !== '1'}" required="true"/>
+				<DatePicker dateValue="{editModel>Endda}" width='9rem' visible="{=${editModel>Requestmat} !== '1'}"/>
+				<Label text="Delivery Date" visible="{=${editModel>Requestmat} === '1'}" required="true"/>
+				<DatePicker dateValue="{editModel>Delvdate}" width='9rem' visible="{=${editModel>Requestmat} === '1'}"/>
+				<Label text="Cost Center" required="true"/>
+				<Select id='idAddItemCC' selectedKey="{editModel>Costcenter}" items="{prm>/costcentrelistSet}" change='onCostCenterChg'>
+					<core:ListItem 
+						text="{prm>Ltext}" 
+						key="{prm>Kostl}">
+					</core:ListItem>
+				</Select>
+				<!-- <Input value="{editModel>Costcenter} {editModel>CCDesc}" editable='false'/> -->
+				<Label text="GL Code" required="true"/>
+				<Select id='idAddItemGl' selectedKey="{editModel>Glaccount}" />
+				<!-- <Input value="{editModel>Glaccount} {editModel>GLDesc}" editable='false'/> -->
+				
+				<core:Title />
+				<Label text="Quantity" required="true"/>
+				<Input id='idItemQuantity' value="{editModel>Quantity}" submit='onItemQuan' visible="{=${editModel>Requestmat} === '1'}"/> 
+				<Text text="{editModel>Orderunit}" visible="{=${editModel>Requestmat} === '1'}"/>
+				<Label text="Value / Unit" required="true"/>
+				<Input id='idUnitPrice' value="{editModel>NetPrice}" submit='onItemVal'/> <Text text="{editModel>Currency}"/>
+				<Label text="Discount" />
+				<Input id='idDiscPer' value="{editModel>Discountval}" submit='onItemVal'/> <Text text="%"/>
+				<Label text="Discount Value / Unit" />
+				<Input id='idDiscVal' value="{editModel>Discount}" submit='onItemDisVal'/> <Text text="{editModel>Currency}"/>
+				<Label text="Price After Discount" />
+				<Input id='idPriceAfterDisc' value="{editModel>ValAfDis}" editable='false'/> <Text text="{editModel>Currency}"/>
+				<Label text="VAT" />
+				<Select id='idVAT' change="onItemVat" selectedKey='{editModel>Vatvalue}'>
+					<items>
+						<core:Item text="0 %" key='0.00'/>
+						<core:Item text="5 %" key='5.00'/>
+					</items>
+				</Select><Input visible='false'/>
+				<Label text="Net Value" />
+				<Input id='idFinalPrice' value="{editModel>NetValue}" submit='onItemNet' editable='false'/> <Text text="{editModel>Currency}"/>
+			</f:content>
+		</f:SimpleForm>
+		<Table id='idSOtable' visible="{=${editModel>/editData/Type} !== '1'}"
+			inset="false"
+			items="{editModel>/dummy}">
+			<headerToolbar>
+				<OverflowToolbar>
+						<Title text="Service Order" level="H2"/>
+						<ToolbarSpacer/>
+						<Button text="Add" icon="sap-icon://add" type="Accept" press="onSoAdd" />
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column>
+					<Text text="Description" />
+				</Column>
+				<Column	inScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+					<Text text="Gross Value" />
+				</Column>
+				<Column	inScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+					<Text text="Value after Discount" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="VAT Amount" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Net Value" />
+				</Column>
+				<!-- <Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Percentage" />
+				</Column> -->
+			</columns>
+			<items>
+				<ColumnListItem type="Active" press="onSelection">
+					<cells>
+						<Input value="{editModel>ShortText}" />
+						<Input value="{editModel>costPrice}" submit='onInstalCp'/>
+						<Text text="{editModel>GrPrice}"/>
+						<Text text="{editModel>Vatamount}" />
+						<Text text="{editModel>Netvalue}" />
+ 						<!-- <Input value="{editModel>FormVal1}" /> -->
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<footer>
+			<OverflowToolbar>
+			<Button text='Back' press='onNavButtonPress'/>
+			<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			<Button text="Preview" icon="sap-icon://sys-prev-page" type="Accept" press="onPreview" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

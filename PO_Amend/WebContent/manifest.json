@@ -1,0 +1,275 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "poChangeApp",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/ZPO_APPLC_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"prService": {
+				"uri": "/sap/opu/odata/sap/ZPR_APPL_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+			"poCds": {
+				"uri": "/sap/opu/odata/sap/ZPR_CDS_PO_LIST_CDS/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"defaultBindingMode": "TwoWay"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "sap.ui.ui5-template-ntt-teo.poammend",
+			"version": "1.36.1"
+		}
+	},
+	"sap.ui": {
+		"_version": "1.2.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://task",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.2.0",
+		"rootView": {
+			"viewName": "poChangeApp.view.App",
+			"type": "XML",
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.36.0",
+			"libs": {
+				"sap.ui.core": {
+					"minVersion": "1.36.0"
+				},
+				"sap.m": {
+					"minVersion": "1.36.0"
+				},
+				"sap.ui.layout": {
+					"minVersion": "1.36.0"
+				}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "poChangeApp.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"settings": {
+					"defaultBindingMode": "TwoWay",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					}
+				}
+			},
+			"prm": {
+				"dataSource": "prService",
+				"preload": true
+			},
+			"poCds": {
+				"dataSource": "poCds",
+				"preload": true
+			},
+			"globalModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "poChangeApp.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": "notFound"
+				},
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "home",
+					"target": [
+						"home",
+						"welcome"
+					]
+				},
+				{
+					"pattern": "PO/{id}",
+					"name": "poDetail",
+					"target": [
+						"home",
+						"poDetailView"
+					],
+					"titleTarget": "poDetailView"
+				},
+				{
+					"pattern": "PO",
+					"name": "PoMaster",
+					"target": [
+						"homeSlide"
+					]
+				},
+				{
+					"pattern": "Poitem/{id}/{index}/{item}",
+					"name": "poItem",
+					"target": [
+						"home",
+						"poItemView"
+					]
+				},
+				{
+					"pattern": "Change/{id}/{index}/{item}",
+					"name": "editItem",
+					"target": [
+						"home",
+						"editItemView"
+					]
+				},
+				{
+					"pattern": "Preview/{id}",
+					"name": "preview",
+					"target": [
+						"home",
+						"preview"
+					]
+				},
+				{
+					"pattern": "Po/{id}/Add/{index}",
+					"name": "addItem",
+					"target": [
+						"home",
+						"addItemView"
+					]
+				}
+			],
+			"targets": {
+				"splitscreenTarget": {
+					"viewName": "SplitScreen",
+					"viewId": "splitView"
+				},
+				"home": {
+					"viewName": "Home",
+					"viewLevel": 1,
+					"parent": "splitscreenTarget",
+					"controlId": "splitContainer",
+					"controlAggregation": "masterPages",
+					"viewId": "homeView",
+					"title": "{i18n>appTitle}"
+				},
+				"welcome": {
+					"viewName": "Welcome",
+					"viewLevel": 0,
+					"parent": "splitscreenTarget",
+					"controlId": "splitContainer",
+					"viewId": "welcomeView",
+					"controlAggregation": "detailPages"
+				},
+				"poDetailView": {
+					"viewName": "PoDetail",
+					"viewLevel": 3,
+					"parent": "splitscreenTarget",
+					"controlId": "splitContainer",
+					"viewId": "poDetailView",
+					"controlAggregation": "detailPages",
+					"title": "{Name}"
+				},
+				"homeSlide": {
+					"viewName": "Home",
+					"viewLevel": -1,
+					"parent": "splitscreenTarget",
+					"controlId": "splitContainer",
+					"controlAggregation": "masterPages"
+				},
+				"poItemView": {
+					"viewName": "PoItem",
+					"viewLevel": 3,
+					"parent": "splitscreenTarget",
+					"controlId": "splitContainer",
+					"controlAggregation": "detailPages",
+					"viewId": "poItemView"
+				},
+				"editItemView": {
+					"viewName": "EditItem",
+					"viewLevel": 4,
+					"parent": "splitscreenTarget",
+					"controlId": "splitContainer",
+					"controlAggregation": "detailPages",
+					"viewId": "editItemView"
+				},
+				"preview": {
+					"viewName": "Preview",
+					"viewLevel": 5,
+					"parent": "splitscreenTarget",
+					"controlId": "splitContainer",
+					"controlAggregation": "detailPages",
+					"viewId": "previewView"
+				},
+				"addItemView": {
+					"viewName": "AddItem",
+					"viewLevel": 5,
+					"parent": "splitscreenTarget",
+					"controlId": "splitContainer",
+					"controlAggregation": "detailPages",
+					"viewId": "addItemView"
+				}
+			}
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zpochange/webcontent",
+		"_version": "1.1.0"
+	}
+}
