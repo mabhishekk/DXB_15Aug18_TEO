@@ -1,11 +1,12 @@
 {
-	
+	"_version": "1.1.0",
 	"sap.app": {
+		"_version": "1.1.0",
 		"id": "z_vrandnda",
 		"type": "application",
+		"i18n": "i18n/i18n.properties",
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
-		"i18n": "i18n/i18n.properties",
 		"applicationVersion": {
 			"version": "1.0.0"
 		},
@@ -14,17 +15,35 @@
 				"uri": "/sap/opu/odata/sap/ZVM_APPL_SRV_01",
 				"type": "OData",
 				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"cds": {
+				"uri": "/sap/opu/odata/sap/ZPR_CDS_VENDOR_MASTER_CDS/",
+				"type": "OData",
+				"settings": {
 					"odataVersion": "2.0"
-					
+				}
+			},
+			"vendorId": {
+				"uri": "/sap/opu/odata/sap/ZPR_CDS_VENDOR_ID_CDS/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
 				}
 			}
+		},
+		"sourceTemplate": {
+			"id": "sap.ui.ui5-template-ntt.vendor",
+			"version": "1.36.1"
 		}
-		
 	},
 	"sap.ui": {
+		"_version": "1.2.0",
 		"technology": "UI5",
 		"icons": {
-			"icon": "",
+			"icon": "sap-icon://task",
 			"favIcon": "",
 			"phone": "",
 			"phone@2": "",
@@ -35,25 +54,31 @@
 			"desktop": true,
 			"tablet": true,
 			"phone": true
-		}
-		
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal"
+		]
 	},
 	"sap.ui5": {
+		"_version": "1.2.0",
 		"rootView": {
-			"viewName": "z_vrandnda.view.app",
-			"type": "XML"
+			"viewName": "z_vrandnda.view.FullApp",
+			"type": "XML",
+			"id": "app"
 		},
 		"dependencies": {
-			
+			"minUI5Version": "1.36.0",
 			"libs": {
-				"sap.ui.core": {},
-				"sap.m": {},
-				"sap.ui.layout": {},
-				"sap.ushell": {},
-				"sap.collaboration": {},
-				"sap.ui.comp": {},
-				"sap.uxap": {},
-				"sap.ui.unified": {}
+				"sap.ui.core": {
+					"minVersion": "1.36.0"
+				},
+				"sap.m": {
+					"minVersion": "1.36.0"
+				},
+				"sap.ui.layout": {
+					"minVersion": "1.36.0"
+				}
 			}
 		},
 		"contentDensities": {
@@ -69,75 +94,90 @@
 			},
 			"": {
 				"dataSource": "mainService",
+				"settings": {
+					"defaultBindingMode": "TwoWay",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					}
+				}
+			},
+			"cds": {
+				"dataSource": "cds",
+				"preload": true
+			},
+			"vendorId": {
+				"dataSource": "vendorId",
 				"preload": true
 			}
 		},
-		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			]
-		},
-		
 		"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",
 				"viewType": "XML",
 				"viewPath": "z_vrandnda.view",
-				"controlId": "rootControl",
+				"controlId": "app",
 				"controlAggregation": "pages",
-				"transition": "slide",
 				"bypassed": {
-					"target": [
-						"home",
-						"notFound"
-					]
-				}
+					"target": "notFound"
+				},
+				"async": true
 			},
-			"routes": [	{
-						"name": "master",
-						"pattern": "",
-						"target": ["master","CompanyCreate"]
-					},
-					{
-						"name": "masterFreelancr",					
-						"pattern": "/Freelancer",
-						"target": ["master","FreelancerCreate"]
-					},
-					{
-						"name": "VendorDisplay",					
-						"pattern": "VendorDisplay/{id}/{vType}",
-						"target": ["master","CompanyDisplay"]
-					}],
+			"routes": [
+				{
+					"pattern": "",
+					"name": "vendorlist",
+					"target": "vendorlist"
+				},
+				{
+					"pattern": "VendorSet/{objectId}",
+					"name": "object",
+					"target": "object"
+				},
+				{
+					"pattern" : "AddVendor",
+					"name" : "add",
+					"target" : "add"
+				},
+				{
+					"pattern" : "EditVendor/{objectId}",
+					"name" : "edit",
+					"target" : "edit"
+				}
+			],
 			"targets": {
-			
-			
-					"master": {
-						"viewName": "Master",
-						"controlAggregation": "masterPages",
-						"viewLevel": 0
-					},
-					"CompanyCreate": {
-						"viewName": "CompanyCreate",
-						"controlAggregation": "detailPages",
-						"viewLevel": 0
-					},
-					"FreelancerCreate": {
-						"viewName": "FreelancerCreate",
-						"controlAggregation": "detailPages",
-						"viewLevel": 0
-					},
-					"CompanyDisplay": {
-						"viewName": "CompanyDisplay",
-						"controlAggregation": "detailPages",
-						"viewLevel": 0
-					}
-				
-			
+				"vendorlist": {
+					"viewName": "Vendorlist",
+					"viewId": "vendorlist",
+					"viewLevel": 1
+				},
+				"object": {
+					"viewName": "Object",
+					"viewId": "object",
+					"viewLevel": 2
+				},
+				"add": {
+					"viewName": "Add",
+					"viewId": "add",
+					"viewLevel": 3
+				},
+				"edit": {
+					"viewName": "Edit",
+					"viewId": "edit",
+					"viewLevel": 3
+				},
+				"objectNotFound": {
+					"viewName": "ObjectNotFound",
+					"viewId": "objectNotFound"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewId": "notFound"
+				}
 			}
 		}
-		
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
 	}
-	
 }

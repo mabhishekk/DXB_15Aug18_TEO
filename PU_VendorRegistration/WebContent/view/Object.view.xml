@@ -1,0 +1,188 @@
+<mvc:View
+	controllerName="z_vrandnda.controller.Object"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic">
+
+	<semantic:FullscreenPage
+		id="page"
+		navButtonPress="onNavBack"
+		showNavButton="true"
+		title="Vendor No. : {Partner}"
+		busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}">
+		<semantic:content>
+				<f:SimpleForm 
+					editable="false"
+					layout="ResponsiveGridLayout"
+					labelSpanXL="4"	labelSpanL="4"	labelSpanM="4"	labelSpanS="12"
+					emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+					columnsXL="3"	columnsL="3"	columnsM="3"
+					adjustLabelSpan="false"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="Name" />
+						<Label text="Type" />
+						<Text text="{path:'Category', formatter: '.formatter.VendorType'}"/>
+						<Label text="Title" />
+						<Text text="{Salutation1}"/>
+						<Label text="{path:'Category', formatter: '.formatter.FirstName'}"/>
+						<Text text="{NameOrg1}"/>
+						<Label text="{path:'Category', formatter: '.formatter.SecondName'}"/>
+						<Text text="{NameOrg2}"/>
+						<!-- <Label text="Name" visible="{= ${Category} === '2' }"/>
+						<Text text="{NameOrg1}" visible="{= ${Category} === '2' }"/>
+						<Label id='idFirstName'/>
+						<Text text="{NameOrg1}" visible="{= ${Category} === '1' }"/>
+						<Label id='idSecondName'/>
+						<Text text="{NameOrg2}" /> -->
+						<Label text="GL Account" />
+						<Text text='{Akont} {VisaNumber}'/>
+						<Label text="Currency" />
+						<Text text='{Waers}'/>
+						<Label text="UAE VAT Number" visible="{= ${Category} === '2' }"/>
+						<Text text="{Taxnum}" visible="{= ${Category} === '2' }"/>
+						<core:Title text="Address" />
+						<Label text="Street / House No." />
+						<Text text="{Street}" />
+						<Label text="Street 2" />
+						<Text text="{StrSuppl1}" />
+						<Label text="Street 3" />
+						<Text text="{StrSuppl2}" />
+						<Label text="City" />
+						<Text text="{City}" />
+						<Label text="Postal Code" />
+						<Text text="{PostlCod1}" />
+						<Label text="PO Box" />
+						<Text text="{PoBox}" />
+						<Label text="Region" />
+						<Text text='{RegionName}'/>
+						<Label text="Country" />
+						<Text text='{CountryName}'/>
+						<core:Title text="Communication" />
+						<Label text='Contact Person'/>
+						<Text text="{NameOrg4}"/>
+						<Label text="Telephone" />
+						<Text text="{TelNumber}" />
+						<Label text="Mobile" />
+						<Text text="{MobNumber}"/>
+						<Label text="Fax" />
+						<Text text="{FaxNumber}"/>
+						<Label text="Email" />
+						<Text text="{Email}"/>
+						<Label text="Website" />
+						<Text text="{Website}"/>
+					</f:content>
+				</f:SimpleForm>
+				<Table id="idIndentificationTable"
+					inset="false"
+					items="{partner_identity}">
+					<headerToolbar>
+						<OverflowToolbar>
+								<Title text="Identification" level="H2"/>
+						</OverflowToolbar>
+					</headerToolbar>
+					<!-- <infoToolbar>
+						<Toolbar active="ture">
+							<Label text="Identification Numbers"/>
+						</Toolbar>
+					</infoToolbar> -->
+					<columns>
+						<Column	>
+							<Text text="ID Type" hAlign="Center"/>
+						</Column>
+						<Column	minScreenWidth="Tablet" demandPopin="true"  hAlign="Center">
+							<Text text="ID Number" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Responsible Instituition" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Entry Date" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Valid From" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Valid To" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Country" />
+						</Column>
+						<Column	hAlign="Center">
+							<Text text="Region" />
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Text}"/>
+								<Text text="{Idnumber}"/>
+								<Text text="{Institute}"/>
+								<Text text="{
+									path: 'EntryDate', 
+									type: 'sap.ui.model.type.Date',
+									formatOptions: { style: 'medium', strictParsing: true, relative: true }
+								}"/>
+								<Text text="{
+									path: 'ValidDateFrom', 
+									type: 'sap.ui.model.type.Date',
+									formatOptions: { style: 'medium', strictParsing: true, relative: true }
+								}"/>
+								<Text text="{
+									path: 'ValidDateTo', 
+									type: 'sap.ui.model.type.Date',
+									formatOptions: { style: 'medium', strictParsing: true, relative: true }
+								}"/>
+								<Text text="{Country}"/>
+								<Text text="{Region}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				<Table id="idPaymentTable"
+					inset="false"
+					items="{partner_bank}">
+					<headerToolbar>
+						<OverflowToolbar>
+								<Title text="Payment Transactions" level="H2"/>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column>
+							<Text text="Country" />
+						</Column>
+						<Column	inScreenWidth="Tablet" demandPopin="true">
+							<Text text="Bank Key (Branch Number)" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Bank Account" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Account Holder" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+							<Text text="Name of Bank" />
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{BankCtry}"/>
+								<Text text="{BankKey}"/>
+								<Text text="{BankAcct}"/>
+								<Text text="{Accountholder}"/>
+								<Text text="{BankName}"/>							
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+		</semantic:content>
+		<semantic:customFooterContent>
+			<Button text='Edit' icon="sap-icon://edit" press='onEditButtonPress'/>
+		</semantic:customFooterContent>
+	</semantic:FullscreenPage>
+
+</mvc:View>

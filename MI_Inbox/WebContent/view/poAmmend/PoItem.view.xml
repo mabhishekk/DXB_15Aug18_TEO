@@ -1,0 +1,134 @@
+<mvc:View
+	controllerName="z_manager_inbox.controller.poAmmend.PoItem"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		id="page"
+		title="Purchase Order: {tempModel>/headerData/PoNumber} Details"
+		showNavButton="{device>/system/phone}"
+		navButtonPress="onNavButtonPress" >
+		<f:SimpleForm 
+			editable="false"
+			layout="ResponsiveGridLayout"
+			adjustLabelSpan="false"
+			labelSpanXL="4" labelSpanL="4"	labelSpanM="5" labelSpanS="12"
+			emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+			columnsXL="4"	columnsL="4"	columnsM="4"
+			singleContainerFullSize="false" class="noTitle">
+			<f:content>
+				<core:Title />
+				<Label text="Gross Value" />
+				<Text text="{tempModel>/headerData/Subtot} {tempModel>/headerData/Totcurrency}"/>
+				<core:Title />
+				<Label text="Discount Value" />
+				<Text text="{tempModel>/headerData/Totdiscount} {tempModel>/headerData/Totcurrency}"/>
+				<core:Title />
+				<Label text="VAT Value" />
+				<Text text="{tempModel>/headerData/Vatvalue} {tempModel>/headerData/Totcurrency}"/>
+				<core:Title />
+				<Label text="Final Value" />
+				<Text text="{tempModel>/headerData/Totalamt} {tempModel>/headerData/Totcurrency}"/>
+			</f:content>
+		</f:SimpleForm>
+		<OverflowToolbar>
+			<Title text='Items'/>
+			<ToolbarSpacer/>
+			<Label text='Purchase Order Item'/>
+			<Select id='idPoItem'
+				change='onItemSelect'
+				items="{tempModel>/headerData/navtoitem/results}">
+				<core:Item key="{tempModel>PoItem}" text=" {tempModel>PoItem}	{tempModel>Short_Text}" />
+			</Select>
+		</OverflowToolbar>
+		<f:SimpleForm id='idItemsForm'
+			editable="false"
+			layout="ResponsiveGridLayout"
+			adjustLabelSpan="false"
+			labelSpanXL="4" labelSpanL="4"	labelSpanM="5" labelSpanS="12"
+			emptySpanXL="0"	emptySpanL="0"	emptySpanM="0"	emptySpanS="0"
+			columnsXL="2"	columnsL="2"	columnsM="2"
+			singleContainerFullSize="false" class="noTitle">
+			<f:content>
+				<core:Title />
+				<Label text="Description" />
+				<Text text="{tempModel>Short_Text}" />
+				<Label text="Start Date" visible="{=${tempModel>Requestmat} !== '1'}"/>
+				<Text text="{path: 'tempModel>Begda', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}"  visible="{=${tempModel>Requestmat} !== '1'}"/>
+				<Label text="End Date" visible="{=${tempModel>Requestmat} !== '1'}"/>
+				<Text text="{path: 'tempModel>Endda', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}" visible="{=${tempModel>Requestmat} !== '1'}"/>
+				<Label text="Delivery Date" visible="{=${tempModel>Requestmat} === '1'}"/>
+				<Text text="{path: 'tempModel>Delvdate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd-MMM-YYYY'}}" visible="{=${tempModel>Requestmat} === '1'}"/>
+				<Label text="Cost Center" />
+				<Text text="{tempModel>Costcenter} {tempModel>CCDesc}" />
+				<Label text="GL Code" />
+				<Text text="{tempModel>Glaccount} {tempModel>GLDesc}" />
+				
+				<core:Title />
+				<Label text="Quantity" />
+				<Text text="{tempModel>Quantity} {tempModel>Orderunit}" />
+				<Label text="Value / Unit" />
+				<Text text="{tempModel>NetPrice} {tempModel>Currency}" />
+				<Label text="Discount" />
+				<Text text="{tempModel>Discountval} %" />
+				<Label text="Discount Value / Unit" />
+				<Text text="{tempModel>Discount} {tempModel>Currency}" />
+				<Label text="Price After Discount" />
+				<Text text="{tempModel>ValAfDis} {tempModel>Currency}" />
+				<Label text="VAT" />
+				<Text text="{tempModel>Vatvalue} %" />
+				<Label text="Net Value" />
+				<Text text="{tempModel>NetValue} {tempModel>Currency}" />
+			</f:content>
+		</f:SimpleForm>
+		<Table id='idSOtable'  visible="{=${tempModel>/headerData/Type} !== '1'}"
+			inset="false"
+			items="{tempModel>/dummy}">
+			<headerToolbar>
+				<OverflowToolbar>
+						<Title text="Service Order" level="H2"/>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column>
+					<Text text="Description" />
+				</Column>
+				<Column	inScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+					<Text text="Gross Value" />
+				</Column>
+				<Column	inScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+					<Text text="Value after Discount" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="VAT Amount" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Net Value" />
+				</Column>
+				<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Center">
+					<Text text="Percentage" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Active" press="onSelection">
+					<cells>
+						<Text text="{tempModel>ShortText}" />
+						<Text text="{tempModel>costPrice}"/>
+						<Text text="{tempModel>GrPrice}"/>
+						<Text text="{tempModel>Vatamount}" />
+						<Text text="{tempModel>Netvalue}" />
+ 						<Text text="{tempModel>FormVal1}" />
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<footer>
+			<OverflowToolbar>
+			<Button text='Back' press='onNavButtonPress'/>
+			<ToolbarSpacer visible="{device>/isNoPhone}"/>
+			<!-- <Button text="Edit" icon="sap-icon://edit" type="Accept" press="onEdit" /> -->
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

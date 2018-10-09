@@ -165,6 +165,16 @@
 						"name"   : "Invoice",
 						"pattern": "Invoice-{id}/{instId}",
 						"target" : ["master", "Invoice"]
+					},
+					{
+						"name"   : "poAmmendment",
+						"pattern": "PoAmmend-{id}/{instId}",
+						"target" : ["master", "poAmmendment"]
+					},
+					{
+						"name"   : "poItemDetail",
+						"pattern": "PoItem/{id}/{index}/{item}",
+						"target" : ["master", "poItemDetail"]
 					}
 					],
 			"targets": {
@@ -216,6 +226,16 @@
 						"viewName"          : "invoiceDisplay",
 						"controlAggregation": "detailPages",
 						"viewLevel"         : 2
+					},
+					"poAmmendment":{
+						"viewName"          : "poAmmend.PoDisplay",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 2
+					},
+					"poItemDetail":{
+						"viewName"          : "poAmmend.PoItem",
+						"controlAggregation": "detailPages",
+						"viewLevel"         : 3
 					}
 			}
 		}

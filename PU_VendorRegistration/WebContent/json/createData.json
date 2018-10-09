@@ -1,0 +1,99 @@
+{
+		"zvm_identificationSet":[],
+		"Commented_zvm_identificationSet":[{
+			"Type"          :"",
+			"Text"          :"",
+			"Idnumber"      :"",
+			"Institute"     :"",
+			"EntryDate"     :null,
+			"ValidDateFrom" :null,
+			"ValidDateTo"   :null,
+			"Country"       :"",
+			"Region"        :"",
+			"DelInd"        :"",
+			"AddInd"        :"",
+			"CountryName"   :"AE",
+			"RegionDesc"    :""
+		}],
+		"bankDetails"       :[],
+		"Commented_bankDetails"         :[{
+			"BankCtry"           :"",
+			"BankKey"            :"",
+			"BankAcct"           :"",
+			"Iban"               :"",
+			"SwiftCode"          :"",
+			"Accountholder"      :"",
+			"BankName"           :""
+		}],
+		"headerData"           :{
+			"Category"           :0,
+			"Salutation1"        :"",
+			"NameOrg1"           :"",
+			"NameOrg2"           :"",
+			"NameOrg3"           :"",
+			"Akont"              :"",
+			"Waers"              :"",
+			"Street"			 :"",
+			"StrSuppl1"          :"",
+			"StrSuppl2"          :"",
+			"City"               :"",
+			"PostlCod1"          :"",
+			"PoBox"              :"",
+			"Region"             :"",
+			"Country"            :"",
+			"NameOrg4"           :"",
+			"TelNumber"          :"",
+			"MobNumber"          :"",
+			"FaxNumber"          :"",
+			"Email"              :"",
+			"Website"            :"",
+			"Taxnum"             :""
+ 		},
+		"FreelancerTitle"     :[
+			{"key" :"0002",  "text" :"Mr."    },
+			{"key" :"0001",  "text" :"Ms."    },
+			{"key" :"0004",  "text" :""       }
+		],
+		"CompanyTitle"        :[
+			{"key" :"0003",  "text" :"Company"}
+		],
+		"FreelancerIdentification":[
+			{"Type":"TEOPP" , "Text" :"Passport"   },
+			{"Type":"TEOEM" , "Text" :"Emirates ID"},
+			{"Type":"TEOVIS", "Text" :"Visa Number"}
+		],
+		"CompanyIdentification"   :[
+			{"Type":"TEOLIC", "Text" :"License Number"}
+		],
+		"Identification"          :[
+			{"Type":"TEOLIC", "Text" :"License Number"}
+		],
+		"Company"             : true,
+		"Freelancer"          : false,
+		"addIndentification"      :{
+			"Type"          :"",
+			"Text"          :"",
+			"Idnumber"      :"",
+			"Institute"     :"",
+			"EntryDate"     :null,
+			"ValidDateFrom" :null,
+			"ValidDateTo"   :null,
+			"Country"       :"",
+			"Region"        :"",
+			"DelInd"        :"",
+			"AddInd"        :"",
+			"CountryName"   :"AE",
+			"RegionDesc"    :""
+		},
+		"addBankDetails"           :{
+			"BankCtry"           :"",
+			"BankKey"            :"",
+			"BankAcct"           :"",
+			"Iban"               :"",
+			"SwiftCode"          :"",
+			"Accountholder"      :"",
+			"BankName"           :""
+		},
+		"IdentifyDeletedItem"      :[],
+		"BankDeletedItem"          :[]
+}

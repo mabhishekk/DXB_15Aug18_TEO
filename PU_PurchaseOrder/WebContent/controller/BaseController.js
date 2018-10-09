@@ -707,7 +707,7 @@ sap.ui.define([
 				var x, remainingInstallment, installmentAmount = 0;
 				if( installmentItem != null ){
 					for ( x = 0; x < installmentItem.length; x++){
-						installmentAmount += Number(installmentItem[x].GrPrice);
+						installmentAmount = Math.round((installmentAmount + Number(installmentItem[x].GrPrice))*100)/100;
 					}
 				}
 				remainingInstallment = Number(netValue) - installmentAmount;

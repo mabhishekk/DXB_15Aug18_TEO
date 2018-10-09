@@ -54,8 +54,8 @@
 				<Button text='{i18n>CreatePO}' press='onCreatePO'/>
 				<ToolbarSpacer />
 				<Button                    text="{i18n>Save}"     visible = "{lModel>/POEdit}"                      press= "confirmDialog"   type='Accept'/>
-				<!-- <Button id = "idEditBtn"   text="{i18n>Edit}"            visible = "{= ${lModel>/mainSet/Posubmit} === 'X'? false : true }"  press= "onPOEdit"        type='Reject'/>
-				<Button id = "idSubmitBtn" text="{i18n>sendapprovl}"     visible = "{= ${lModel>/mainSet/Posubmit} === 'X'? false : true }"  press= "onSubmitPress"   type='Emphasized'/> -->
+				<Button id = "idEditBtn"   text="{i18n>Edit}"            visible = "{= ${lModel>/mainSet/Posubmit} === 'X'? false : true }"  press= "onPOEdit"        type='Reject'/>
+				<Button id = "idSubmitBtn" text="{i18n>sendapprovl}"     visible = "{= ${lModel>/mainSet/Posubmit} === 'X'? false : true }"  press= "onSubmitPress"   type='Emphasized'/>
 				<Button 				   text="Cancel"          visible = "{lModel>/POEdit}"                      press= "onPOEditCancle"  type='Reject'/>
 				<Button id = "idPrintBtn"  text="{i18n>Print}"    visible = "{= ${lModel>/POEdit}? false : true }"  press= "onPDFSavePress"  icon= "sap-icon://print"  />
 			</OverflowToolbar>

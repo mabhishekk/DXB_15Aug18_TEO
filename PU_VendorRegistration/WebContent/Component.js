@@ -1,62 +1,71 @@
 sap.ui.define([
-	"sap/ui/core/UIComponent",
-	'sap/ui/model/json/JSONModel',
-	"sap/ui/Device"	
-], function(UIComponent, JSONModel,Device) {
-	"use strict";
+		"sap/ui/core/UIComponent",
+		"sap/ui/Device",
+		"z_vrandnda/model/models",
+		"z_vrandnda/controller/ErrorHandler"
+	], function (UIComponent, Device, models, ErrorHandler) {
+		"use strict";
 
-	return UIComponent.extend("z_vrandnda.Component", {
-		metadata: {
-			
-			manifest: "json"
-		},
-		
+		return UIComponent.extend("z_vrandnda.Component", {
 
-		
-		init: function () {
-			// call overwritten init (calls createContent)
-			UIComponent.prototype.init.apply(this, arguments);
-//			var oModel = new JSONModel("mock/data.json");
-//			this.setModel(oModel);
-			this.setModel(this.createDeviceModel(), "device");
+			metadata : {
+				manifest: "json"
+			},
 
-			UIComponent.prototype.init.apply(this, arguments);
+			/**
+			 * The component is initialized by UI5 automatically during the startup of the app and calls the init method once.
+			 * In this function, the device models are set and the router is initialized.
+			 * @public
+			 * @override
+			 */
+			init : function () {
+				// call the base component's init function
+				UIComponent.prototype.init.apply(this, arguments);
 
-			// Parse the current url and display the targets of the route that matches the hash
-			this.getRouter().initialize();
+				// initialize the error handler with the component
+				this._oErrorHandler = new ErrorHandler(this);
 
-			
-		},
-		createDeviceModel : function () {
-			
-			var oDeviceModel = new JSONModel({
-				// feature toggle for a save for later functionality in the Cart.view.xml
-				isTouch: sap.ui.Device.support.touch,
-				isNoTouch: !sap.ui.Device.support.touch,
-				isPhone: sap.ui.Device.system.phone,
-				isNoPhone: !sap.ui.Device.system.phone,
-				listMode: (sap.ui.Device.system.phone) ? "None" : "SingleSelectMaster",
-				listItemType: (sap.ui.Device.system.phone) ? "Active" : "Inactive"
-			});
-			oDeviceModel.setDefaultBindingMode("OneWay");
-//			this.setModel(oDeviceModel, "device");
-			return oDeviceModel;
-			
-		},
-		
-		
-		
-		myNavBack: function () {
-			var oHistory = sap.ui.core.routing.History.getInstance();
-			var oPrevHash = oHistory.getPreviousHash();
-			if (oPrevHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				this._oRouter.navTo("home", {}, true);
+				// set the device model
+				this.setModel(models.createDeviceModel(), "device");
+				this.getModel().iSizeLimit      = 3000;
+				// create the views based on the url/hash
+				this.getRouter().initialize();
+			},
+
+			/**
+			 * The component is destroyed by UI5 automatically.
+			 * In this method, the ErrorHandler is destroyed.
+			 * @public
+			 * @override
+			 */
+			destroy : function () {
+				this._oErrorHandler.destroy();
+				// call the base component's destroy function
+				UIComponent.prototype.destroy.apply(this, arguments);
+			},
+
+			/**
+			 * This method can be called to determine whether the sapUiSizeCompact or sapUiSizeCozy
+			 * design mode class should be set, which influences the size appearance of some controls.
+			 * @public
+			 * @return {string} css class, either 'sapUiSizeCompact' or 'sapUiSizeCozy' - or an empty string if no css class should be set
+			 */
+			getContentDensityClass : function() {
+				if (this._sContentDensityClass === undefined) {
+					// check whether FLP has already set the content density class; do nothing in this case
+					if (jQuery(document.body).hasClass("sapUiSizeCozy") || jQuery(document.body).hasClass("sapUiSizeCompact")) {
+						this._sContentDensityClass = "";
+					} else if (!Device.support.touch) { // apply "compact" mode if touch is not supported
+						this._sContentDensityClass = "sapUiSizeCompact";
+					} else {
+						// "cozy" in case of touch support; default for most sap.m controls, but needed for desktop-first controls like sap.ui.table.Table
+						this._sContentDensityClass = "sapUiSizeCozy";
+					}
+				}
+				return this._sContentDensityClass;
 			}
-		}
 
-		
-		
-	});
-	});
+		});
+
+	}
+);

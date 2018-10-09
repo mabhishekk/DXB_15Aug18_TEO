@@ -1,0 +1,137 @@
+<mvc:View
+	controllerName="z_vrandnda.controller.Vendorlist"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+
+	<semantic:FullscreenPage
+		id="page"
+		navButtonPress="onNavBack"
+		showNavButton="true"
+		title="{i18n>worklistViewTitle}">
+		<semantic:content>
+			<fb:FilterBar  id="filterBar" reset="onReset" search="onSearch" clear="onClear" showRestoreButton="true" showClearButton="true" showGoButton='fasle'>
+				<fb:filterItems>
+					<fb:FilterItem name="A0" label="{i18n>worklistSearchLabel1}">
+						<fb:control>
+							<SearchField
+								tooltip="{i18n>worklistSearchTooltip1}"
+								search="onVendorNumberSearch"
+								width="auto">
+							</SearchField>
+						</fb:control>				
+					</fb:FilterItem>
+					
+					<fb:FilterItem name="B0" label="{i18n>worklistSearchLabel2}">
+						<fb:control>
+							<SearchField
+								tooltip="{i18n>worklistSearchTooltip2}"
+								enableSuggestions="true"
+								search="onTypeSearch"
+								suggest="onSuggest"
+								width="auto">
+								<suggestionItems>
+									<SuggestionItem text="Vendor" key="TEO1"/>
+									<SuggestionItem text="Freelancer"    key="TEO2"/>
+									<SuggestionItem text="Employee"   key="TEO3"/>
+								</suggestionItems>
+							</SearchField>
+						</fb:control>				
+					</fb:FilterItem>
+					
+					<fb:FilterItem name="C0" label="{i18n>worklistSearchLabel3}">
+						<fb:control>
+							<SearchField
+								tooltip="{i18n>worklistSearchTooltip3}"
+								search="onVendorNameSearch"
+								width="auto">
+							</SearchField>
+						</fb:control>				
+					</fb:FilterItem>
+					
+					<fb:FilterItem name="D0" label="{i18n>worklistSearchLabel4}">
+						<fb:control>
+							<SearchField
+								tooltip="{i18n>worklistSearchTooltip4}"
+								search="onCountrySearch"
+								width="auto">
+							</SearchField>
+						</fb:control>				
+					</fb:FilterItem>
+				</fb:filterItems>
+			</fb:FilterBar>
+			<Table
+				id="table"
+				width="auto"
+				class="sapUiResponsiveMargin"
+				items="{
+					path: 'cds>/ZPR_CDS_VENDOR_MASTER',
+					sorter: {
+						path: 'lifnr',
+						descending: false
+					}
+				}"
+				noDataText="{worklistView>/tableNoDataText}"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+				growing="true"
+				growingScrollToLoad="true"
+				updateFinished="onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
+						<ToolbarSpacer />
+						<SearchField
+							visible='false'
+							id="searchField"
+							tooltip="{i18n>worklistSearchTooltip}"
+							search="onSearch"
+							width="auto">
+						</SearchField>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="vendorColumn">
+						<Text text="{i18n>tableName1ColumnTitle}" id="vendorColumnTitle"/>
+					</Column>
+					<Column id="typeColumn">
+						<Text text="{i18n>tableName2ColumnTitle}" id="typeColumnTitle"/>
+					</Column>
+					<Column id="nameColumn">
+						<Text text="{i18n>tableName3ColumnTitle}" id="nameColumnTitle"/>
+					</Column>
+					<Column id="unitNumberColumn">
+						<Text text="{i18n>tableName4ColumnTitle}" id="unitNumberColumnTitle"/>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem
+						type="Navigation"
+						press="onPress">
+						<cells>
+							<ObjectIdentifier
+								title="{cds>lifnr}"/>
+							<Text
+								text="{path:'cds>ktokk', formatter: '.formatter.type'}"/>
+							<ObjectIdentifier
+								title="{cds>name1}"/>
+							<Text
+								text="{cds>landx50}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+		
+		<semantic:customFooterContent>
+			<Button text='{i18n>footerButtonText}' icon="sap-icon://add" press='onAddButtonPress' type='Accept'/>
+		</semantic:customFooterContent>
+
+	</semantic:FullscreenPage>
+
+</mvc:View>

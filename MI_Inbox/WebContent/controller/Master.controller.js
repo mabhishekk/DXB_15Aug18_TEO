@@ -52,6 +52,8 @@ sap.ui.define( [
 				this.getRouter().navTo("QR",           {id : uId,instId : wiid});	
 			}else if(appType == "IV"){
 				this.getRouter().navTo("Invoice",      {id : uId,instId : wiid});	
+			}else if(appType == "PO"){
+				this.getRouter().navTo("poAmmendment", {id : uId,instId : wiid});	
 			}
 			
 			

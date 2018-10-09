@@ -309,8 +309,8 @@ sap.ui.define([
 			      for (var x = 0, len = itemsData.length; x < len; x++) {
 					itemsData[x].MatlGroup = "01";
 					itemsData[x].PoNumber = "1217TEO152";
-					//itemsData[x].PoItem = Number(x*10);
-					itemsData[x].PoItem = "000"+((x+1)*10).toString();
+					itemsData[x].PoItem = ((x+1)*10).toString();
+//					itemsData[x].PoItem = "000"+((x+1)*10).toString();
 				    itemsData[x].Short_Text = itemsData[x].ShortText;      delete itemsData[x].ShortText;			
 				    itemsData[x].Preq_No = itemsData[x].Banfn;             delete itemsData[x].Banfn;
 				    itemsData[x].Costcenter = itemsData[x].Kostl;          delete itemsData[x].Kostl;
@@ -351,6 +351,11 @@ sap.ui.define([
 			      };
 			      var aPlantData = this.lModel.getProperty('/PlantDetail');
 			      var aPrDetail  = this.lModel.getProperty('/PrDetail');
+			      var InstallmentData = this.lModel.getProperty("/poServices");
+			      var saveInstallData = jQuery.extend(true, [], InstallmentData);
+			      for(x=0; x<saveInstallData.length; x++){
+						delete saveInstallData[x].PrAfteDis;
+			      }
 			      var  headerData = {
 			    	  PoNumber     : "1217TEO103",
 			    	  Flag         : "C",
@@ -376,7 +381,7 @@ sap.ui.define([
 	    			  Vendor       : this._Vendor,
 	    			  Zrequesttype : this._PrRequestType,
 			    	  navtoitem            : itemsData,
-		    		  navigpoheadtoservices: this.lModel.getProperty("/poServices"),
+		    		  navigpoheadtoservices: saveInstallData,
 		    		  navigpotodms         : this.lModel.getProperty("/navigdms")//get data of Service Order Payment
 					};
 			      	var that             = this;
@@ -460,19 +465,21 @@ sap.ui.define([
 					  var tablObj = {};
 					  
 					  if(sServiceType === 'V'){
+						  tablObj.PrAfteDis = (sValue * (1 - oDiscount/100)).toFixed(2);
 						  tablObj.GrPrice   = sValue;
 						  tablObj.BaseUom   = "GRO";
 						  tablObj.Formula   = "VOL01";
 						  tablObj.FormVal1  = "0";
-						  tablObj.VatAmount = (sValue*oVatPercent/100).toString();
-						  tablObj.NetValue  = Number(sValue) + (sValue*oVatPercent/100);
+						  tablObj.VatAmount = ((sValue * (1 - oDiscount/100))*oVatPercent/100).toFixed(2);
+						  tablObj.NetValue  = ((sValue * (1 - oDiscount/100)) + ((sValue * (1 - oDiscount/100))*oVatPercent/100)).toFixed(2);
 					  }else if(sServiceType === 'P'){
-						  tablObj.GrPrice   = (currentValue*sValue/100).toString();
+						  tablObj.PrAfteDis = ((currentValue*sValue/100) * (1 - oDiscount/100)).toFixed(2);
+						  tablObj.GrPrice   = (currentValue*sValue/100).toFixed(2);
 						  tablObj.BaseUom   ="%";
 						  tablObj.Formula   ="PERCENT";
 						  tablObj.FormVal1  =sValue;
-						  tablObj.VatAmount = ((currentValue*sValue/100)*oVatPercent/100).toString();
-						  tablObj.NetValue  = (currentValue*sValue/100)*(1 + oVatPercent/100) ;
+						  tablObj.VatAmount = (((currentValue*sValue/100) * (1 - oDiscount/100))*oVatPercent/100).toFixed(2);
+						  tablObj.NetValue  = (((currentValue*sValue/100) * (1 - oDiscount/100))*(1 + oVatPercent/100)).toFixed(2) ;
 					  }
 					  tablObj.Quantity  = "1";
 					  tablObj.ShortText = sDescription;

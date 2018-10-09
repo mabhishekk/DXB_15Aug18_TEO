@@ -39,6 +39,7 @@ sap.ui.define([
 			this.getView().bindElement(this._sId);
 			
 			var oMdl = this.getOwnerComponent().getModel();
+			oMdl.refresh();
 			oMdl.read(this._sId,{
 				success : function(oData) {
 					this.lModel.setData(oData);
@@ -322,8 +323,24 @@ sap.ui.define([
 			var oServiceTemplate = new sap.m.ColumnListItem({
 				cells:[
 					new sap.m.Text({ text: "{ShortText}"}),
-					new sap.m.Input({ value: "{GrPrice}"}),
-					new sap.m.Text({ text: "{FormVal1}%"}),
+					new sap.m.Input({ value: "{GrPrice}", editable:{ 
+						path: "FormVal1", formatter: function(s){
+							if(s === "0.00"){
+								return true;
+							}else{
+								return false;
+							}
+						}}
+					}),
+					new sap.m.Input({ value: "{FormVal1}", editable:{ 
+						path: "FormVal1", formatter: function(s){
+							if(s === "0.00"){
+								return false;
+							}else{
+								return true;
+							}
+						}}
+					}),
 				]
 			});
 			

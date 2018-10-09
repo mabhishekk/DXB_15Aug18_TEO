@@ -441,15 +441,12 @@ sap.ui.define([
 		var TargetQty      = rowCells[1].getLiveValue();       //Quantity from Row
 		var perUnitPrice   = rowCells[3].getLiveValue();       //Per Unit Price form Row
 		var totalQuanVal   = TargetQty * perUnitPrice;
-//		var sDiscountValue = ((Number(perUnitPrice) * Number(discPerc)/100)).toFixed(2);
 		var iDiscountValue = (Number(perUnitPrice) * Number(discPerc)/100);
 		var subTotal       = Number(TargetQty) * (Number(perUnitPrice) - iDiscountValue);
-//		var subTotal       = totalQuanVal-((discPerc * totalQuanVal)/100);
 		var TotalVatValue  = ((subTotal*rowCells[7].getSelectedKey())/100);
 		var gTotal         = subTotal + TotalVatValue;
 		gTotal             = parseFloat(gTotal).toFixed(2);
 		subTotal           = parseFloat(subTotal).toFixed(2);
-		var sDiscountValue = parseFloat(iDiscountValue).toFixed(2);
 		rowCells[6].setText(subTotal);
 		rowCells[8].setText(gTotal);
 		if (parseFloat(discPerc) > 100 ){
