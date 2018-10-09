@@ -1,0 +1,100 @@
+<View 
+	xmlns="sap.m" 
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:u="sap.ui.unified"
+	controllerName="z_master_fi.controller.Credit">
+	<Page
+		id="page"
+		showNavButton="true"
+		title="{i18n>CCDetailPageTitle}"
+		navButtonPress="onNavBack">
+		<content>
+			<ObjectHeader
+				title="{Postingnumber}"
+				number="{
+					parts:[{path:'Hnetamount'},{path:'Currency'}],
+					type: 'sap.ui.model.type.Currency',
+					formatOptions: {showMeasure: false}
+				}"
+				numberUnit="AED">
+				<statuses>
+					<ObjectStatus text= "{ path: 'Flag1' ,formatter:'.formatter.formatStatus'}"
+								  state="{ path: 'Flag1', formatter: '.formatter.fStatus' }"  />
+				</statuses>
+				<attributes>
+					<ObjectAttribute text="{i18n>CCCardholderName}: {Pernrfullname}" />
+					<ObjectAttribute text="{i18n>CCCreatedBy}: {Fullname}" />
+					<ObjectAttribute text="{i18n>CCDeptProj}: {Kostl} {Ltext} " />
+				</attributes>
+			</ObjectHeader>
+			<ScrollContainer horizontal="true">
+			<Table items="{navtocredit}" >
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>CCTableTitle}" level="H2" />
+						<ToolbarSpacer />
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="5rem">
+						<header><Text text="{i18n>CCPurDt}"/></header>
+					</Column>
+					<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true" >
+						<header><Text text="{i18n>CCExpTy}"/></header>
+					</Column>
+					<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true">
+						<header><Text text="{i18n>CCItem}"/></header>
+					</Column>
+					<Column width="10rem" minScreenWidth="Tablet"	demandPopin="true">
+						<header><Text text="{i18n>CCVenSup}"/></header>
+					</Column>
+					<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true">
+						<header><Text text="{i18n>ECAmtinFC}"/></header>
+					</Column>
+					<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true">
+						<header><Text text="{i18n>ECExchRate}"/></header>
+					</Column>
+					<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true">
+						<header><Text text="{i18n>PCVATval}"/></header>
+					</Column>
+					<Column width="5rem" minScreenWidth="Tablet"	demandPopin="true">
+						<header><Text text="{i18n>ECAmtAED}"/></header>
+					</Column>
+					<Column minScreenWidth="Tablet"	demandPopin="true" width="10rem">
+						<header> <Text text="{i18n>CCJustPur}" /> </header>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{
+								path: 'Purchdate',
+								formatter: '.formatter.formatDate'
+								}"/>
+							<ObjectIdentifier title="{Glaccount}" text="{Ltext}" />
+							<Text text="{Positiontext}"/>
+							<Text text="{Vendor}"/>
+							<Text text="{Fgnamount} {Currency}"/>
+							<Text text="{Exrate}"/>
+							<Text text="{Taxvalue} %"/>
+							<Text text="{Ppayments} AED"/>
+							<Text text="{Justification}" />
+						</cells> 
+					</ColumnListItem>
+				</items>
+			</Table>
+			</ScrollContainer>
+			<List id ="idCreditCardDoc" mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" selectionChange="onDocSelectionChange" headerText="Attachment">
+			</List>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer visible="{device>/isNoPhone}"/>
+				<Button icon="sap-icon://print" text="{i18n>PCPrint}" press="handleCCPrint" />
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</View>

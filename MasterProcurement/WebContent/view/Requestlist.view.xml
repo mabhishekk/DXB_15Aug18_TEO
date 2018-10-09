@@ -1,0 +1,153 @@
+<mvc:View
+	controllerName="z_master_mm.controller.Requestlist"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+
+	<semantic:FullscreenPage
+		id="page"
+		navButtonPress="onNavBack"
+		showNavButton="true">
+		<semantic:content>
+			<fb:FilterBar  id="filterBar" reset="onReset" search="ondataSearch" clear="onClear" showRestoreButton="true" showClearButton="true">
+				<fb:filterItems>
+					<fb:FilterItem name="A0" label="Purchase Requisition">
+						<fb:control>
+							<SearchField
+								id='idPRSearch'
+								tooltip="{i18n>worklistSearchTooltip}"
+								search="ondataSearch"
+								width="auto">
+							</SearchField>
+						</fb:control>				
+					</fb:FilterItem>
+					
+					<fb:FilterItem name="B0" label="Purchase Order">
+						<fb:control>
+							<SearchField
+								id='idPoSearch'
+								tooltip="{i18n>worklistSearchTooltip}"
+								search="ondataSearch"
+								width="auto">
+							</SearchField>
+						</fb:control>				
+					</fb:FilterItem>
+					
+					<fb:FilterItem name="C0" label="Vendor Number" visible='false'>
+						<fb:control>
+							<SearchField
+								id='idVeSearch'
+								tooltip="{i18n>worklistSearchTooltip}"
+								search="ondataSearch"
+								width="auto">
+							</SearchField>
+						</fb:control>				
+					</fb:FilterItem>
+					
+					<fb:FilterItem name="D0" label="Vendor Name">
+						<fb:control>
+							<SearchField
+								id='idVnSearch'
+								tooltip="{i18n>worklistSearchTooltip}"
+								search="ondataSearch"
+								width="auto">
+							</SearchField>
+						</fb:control>				
+					</fb:FilterItem>
+					
+					<fb:FilterItem name="E0" label="Vendor Invoice">
+						<fb:control>
+							<SearchField
+								id='idViSearch'
+								tooltip="{i18n>worklistSearchTooltip}"
+								search="ondataSearch"
+								width="auto">
+							</SearchField>
+						</fb:control>				
+					</fb:FilterItem>
+					
+				</fb:filterItems>
+			</fb:FilterBar>
+			<Table
+				id="table"
+				width="auto"
+				class="sapUiResponsiveMargin"
+				items="{
+					path: 'cds>/ZPR_CDS_PR_MASTER',
+					sorter: {
+						path: 'cds>banfn',
+						descending: false
+					}
+				}"
+				noDataText="{worklistView>/tableNoDataText}"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+				growing="true"
+				growingScrollToLoad="true"
+				updateFinished="onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
+						<ToolbarSpacer />
+						<SearchField
+							visible='false'
+							id="searchField"
+							tooltip="{i18n>worklistSearchTooltip}"
+							search="onSearch"
+							width="auto">
+						</SearchField>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="nameColumn">
+						<Text text="{i18n>tableNameColumn1Title}" id="nameColumnTitle"/>
+					</Column>
+					<Column id="unitNumberColumn">
+						<Text text="{i18n>tableNameColumn2Title}" id="poColumnTitle"/>
+					</Column>
+					<Column id="poLineColumn">
+						<Text text="{i18n>tableNameColumn7Title}" id="poItemColumnTitle"/>
+					</Column>
+					<Column id="lifnrColumn">
+						<Text text="{i18n>tableNameColumn3Title}" id="lifnrColumnTitle"/>
+					</Column>
+					<Column id="vendornameColumn">
+						<Text text="{i18n>tableNameColumn4Title}" id="vendorColumnTitle"/>
+					</Column>
+					<Column id="invoiceColumn">
+						<Text text="{i18n>tableNameColumn5Title}" id="invoiceColumnTitle"/>
+					</Column>
+					<Column id="vendorColumn">
+						<Text text="{i18n>tableNameColumn6Title}" id="vendorInvoiceColumnTitle"/>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem
+						type="Navigation"
+						press="onPress">
+						<cells>
+							<ObjectIdentifier
+								title="{cds>banfn}"/>
+							<ObjectNumber
+								unit="{cds>ebeln}"/>
+							<ObjectNumber
+								unit="{cds>ebelp}"/>
+							<ObjectNumber
+								unit="{cds>lifnr}"/>
+							<Text
+								text="{cds>vendor}"/>
+							<ObjectNumber
+								unit="{cds>belnr}"/>
+							<ObjectNumber
+								unit="{cds>xblnr}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>
